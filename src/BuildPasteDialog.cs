@@ -24,12 +24,17 @@ public class BuildPasteDialog : GuiDialog
 
     private void Compose()
     {
-        ElementBounds textBounds = ElementBounds.Fixed(0, 34, 540, 320);
-        ElementBounds runBounds = ElementBounds.Fixed(0, 364, 120, 28);
-        ElementBounds cancelBounds = ElementBounds.Fixed(140, 364, 120, 28);
+        ElementBounds textBounds = ElementBounds.Fixed(0, 40, 540, 320);
+        ElementBounds runBounds = ElementBounds.Fixed(0, 372, 120, 30);
+        ElementBounds cancelBounds = ElementBounds.Fixed(140, 372, 120, 30);
 
+        // The background must be told about its children so FitToChildren
+        // actually sizes to cover the text area and both buttons. Without
+        // this the buttons render outside the interactive dialog box and
+        // never receive clicks.
         ElementBounds bgBounds = ElementBounds.Fill.WithFixedPadding(GuiStyle.ElementToDialogPadding);
         bgBounds.BothSizing = ElementSizing.FitToChildren;
+        bgBounds.WithChildren(textBounds, runBounds, cancelBounds);
 
         ElementBounds dialogBounds = ElementStdBounds
             .AutosizedMainDialog
@@ -38,10 +43,10 @@ public class BuildPasteDialog : GuiDialog
         SingleComposer = capi.Gui.CreateCompo("buildingcommands-paste", dialogBounds)
             .AddShadedDialogBG(bgBounds)
             .AddDialogTitleBar("Paste build commands, then Run", () => TryClose())
-            .BeginChildElements(bgBounds)
+            .BeginChildElements()
                 .AddTextArea(textBounds, null, CairoFont.WhiteSmallText(), "cmds")
-                .AddSmallButton("Run", OnRun, runBounds)
-                .AddSmallButton("Cancel", OnCancel, cancelBounds)
+                .AddButton("Run", OnRun, runBounds, CairoFont.WhiteSmallText())
+                .AddButton("Cancel", OnCancel, cancelBounds, CairoFont.WhiteSmallText())
             .EndChildElements()
             .Compose();
     }
