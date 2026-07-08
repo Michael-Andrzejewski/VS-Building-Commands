@@ -1,0 +1,29 @@
+# Simple rectangular dungeon.
+# Stand where you want the CENTER of the room, then run:  /build dungeon
+# Every ~ is measured from where you are standing. Lines starting with # are comments.
+
+# Hollow stone shell: 11 wide x 15 long, 6-tall interior
+fill ~-5 ~-1 ~-7 ~5 ~6 ~7 game:stonebricks-granite hollow
+
+# Cobblestone floor over the interior
+fill ~-4 ~-1 ~-6 ~4 ~-1 ~6 game:cobblestone-granite
+
+# Doorway in the front (-Z) wall, 3 wide x 3 tall
+fill ~-1 ~0 ~-7 ~1 ~2 ~-7 air
+
+# Four corner pillars from floor to ceiling
+fill ~-3 ~0 ~-5 ~-3 ~4 ~-5 game:stonebricks-granite
+fill ~3 ~0 ~-5 ~3 ~4 ~-5 game:stonebricks-granite
+fill ~-3 ~0 ~5 ~-3 ~4 ~5 game:stonebricks-granite
+fill ~3 ~0 ~5 ~3 ~4 ~5 game:stonebricks-granite
+
+# Neon-green glow lights on the pillar tops and the center ceiling
+fill ~-3 ~5 ~-5 ~-3 ~5 ~-5 game:creativelight-43
+fill ~3 ~5 ~-5 ~3 ~5 ~-5 game:creativelight-43
+fill ~-3 ~5 ~5 ~-3 ~5 ~5 game:creativelight-43
+fill ~3 ~5 ~5 ~3 ~5 ~5 game:creativelight-43
+fill ~0 ~5 ~0 ~0 ~5 ~0 game:creativelight-43
+
+# Two ruin loot vessels on the floor (they roll loot when broken)
+fill ~-3 ~0 ~0 ~-3 ~0 ~0 game:lootvessel-tool
+fill ~3 ~0 ~0 ~3 ~0 ~0 game:lootvessel-ore

@@ -23,6 +23,9 @@ Copies the source cuboid so its minimum corner lands at `dx dy dz`. Modes: `repl
 ### `/blockcode <search>`
 Lists up to 50 registered block codes containing the search term, so you can find the exact code to build with. Example: `/blockcode stonebrick` returns `game:stonebricks-granite, game:stonebricks-andesite, ...`.
 
+### `/build <name>`
+Runs an entire script of commands at once, so you never paste hundreds of lines by hand. Put a plain-text `<name>.txt` file in the scripts folder (see Batch building below) and run `/build <name>`. Tilde coordinates are measured from where you stand when you run it, so a whole structure lands around you. `/build list` shows the available scripts.
+
 ## Coordinates
 
 Each coordinate is either **absolute** (`100 64 -30`) or **tilde-relative** to the caller (`~ ~2 ~-4`), exactly like Minecraft. Tilde coordinates need a player caller; absolute coordinates also work from the server console.
@@ -30,6 +33,21 @@ Each coordinate is either **absolute** (`100 64 -30`) or **tilde-relative** to t
 ## Block codes
 
 Codes default to the vanilla `game:` domain, so `stonebricks-granite` resolves to `game:stonebricks-granite`. Include a domain for modded blocks (`somemod:theirblock`). `air` clears a block. Use `/blockcode` to discover exact variant codes.
+
+## Batch building with /build
+
+For anything past a few lines, write the commands to a `.txt` file and run them all with one command. The mod prints the exact folder path in the log on load; by default it is:
+
+`%APPDATA%\VintagestoryData\BuildingCommands\`
+
+Drop a file like `dungeon.txt` there, then run `/build dungeon`. In the file:
+
+- One command per line; the leading `/` is optional (`fill ...` or `/fill ...`).
+- Only this mod's commands run (`fill`, `setblock`, `clone`, `blockcode`).
+- Blank lines and lines starting with `#` or `//` are ignored, so you can comment your build.
+- Tilde coordinates are all measured from where you stand when you run `/build`, so a whole structure lands around you.
+
+A ready-to-run `dungeon.txt` is in `examples/`. `/build list` lists the scripts you have.
 
 ## Limits
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -18,11 +19,16 @@ namespace BuildingCommands;
 ///   /setblock x y z &lt;block&gt; [replace|keep|destroy]
 ///   /clone x1 y1 z1 x2 y2 z2 dx dy dz [replace|masked]
 ///   /blockcode &lt;search&gt;
+///   /build &lt;name&gt;   run every command in a script file at once
 ///
 /// Each coordinate may be absolute (100 64 -30) or tilde-relative to the
 /// caller (~ ~2 ~-4), matching Minecraft. Block codes take the vanilla
 /// game: domain by default, so "stonebricks-granite" resolves to
 /// game:stonebricks-granite; "air" clears a block.
+///
+/// The core of each command lives in a Do* method that takes a plain token
+/// list, so both the chat handlers and the /build script runner share the
+/// exact same logic.
 /// </summary>
 public class BuildingCommandsModSystem : ModSystem
 {
@@ -39,9 +45,15 @@ public class BuildingCommandsModSystem : ModSystem
     // rejected but absolute coordinates still work (e.g. from the console).
     private bool originAvailable;
 
+    // Folder where /build reads .txt command scripts from.
+    private string scriptFolder;
+
     public override void StartServerSide(ICoreServerAPI api)
     {
         sapi = api;
+
+        scriptFolder = Path.Combine(GamePaths.DataPath, "BuildingCommands");
+        try { Directory.CreateDirectory(scriptFolder); } catch { /* best effort */ }
 
         var p = api.ChatCommands.Parsers;
 
@@ -87,6 +99,15 @@ public class BuildingCommandsModSystem : ModSystem
                 .RequiresPrivilege(Privilege.controlserver)
                 .WithArgs(p.Word("search"))
                 .HandleWith(OnBlockcode));
+
+        RegisterCmd(api, "build", name =>
+            api.ChatCommands.Create(name)
+                .WithDescription("Run every fill/setblock/clone/blockcode line from a .txt script in the BuildingCommands data folder. ~relative coords are measured from where you stand. Use /build list to see available scripts.")
+                .RequiresPrivilege(Privilege.controlserver)
+                .WithArgs(p.Word("name"))
+                .HandleWith(OnBuild));
+
+        api.Logger.Notification($"[buildingcommands] Ready. Put /build scripts (.txt) in: {scriptFolder}");
     }
 
     /// <summary>
@@ -115,24 +136,120 @@ public class BuildingCommandsModSystem : ModSystem
     }
 
     // ─────────────────────────────────────────────────────────────────────
+    //  Chat handlers — thin wrappers over the shared Do* core.
+    // ─────────────────────────────────────────────────────────────────────
+    private TextCommandResult OnFill(TextCommandCallingArgs args) => DoFill(ArgList(args, 9), args.Caller);
+    private TextCommandResult OnSetblock(TextCommandCallingArgs args) => DoSetblock(ArgList(args, 5), args.Caller);
+    private TextCommandResult OnClone(TextCommandCallingArgs args) => DoClone(ArgList(args, 10), args.Caller);
+    private TextCommandResult OnBlockcode(TextCommandCallingArgs args) => DoBlockcode(ArgList(args, 1), args.Caller);
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  /build — run a whole script file of commands at once
+    // ─────────────────────────────────────────────────────────────────────
+    private TextCommandResult OnBuild(TextCommandCallingArgs args)
+    {
+        string name = args.Parsers[0].GetValue() as string;
+        if (string.Equals(name, "list", StringComparison.OrdinalIgnoreCase)) return ListScripts();
+        return RunScript(name, args.Caller);
+    }
+
+    private TextCommandResult ListScripts()
+    {
+        try
+        {
+            if (!Directory.Exists(scriptFolder)) return TextCommandResult.Success($"No scripts folder yet: {scriptFolder}");
+            string[] files = Directory.GetFiles(scriptFolder, "*.txt");
+            if (files.Length == 0) return TextCommandResult.Success($"No .txt scripts in {scriptFolder}");
+            var names = new List<string>(files.Length);
+            foreach (string f in files) names.Add(Path.GetFileNameWithoutExtension(f));
+            return TextCommandResult.Success($"Scripts in {scriptFolder}: {string.Join(", ", names)}");
+        }
+        catch (Exception e)
+        {
+            return TextCommandResult.Error(e.Message);
+        }
+    }
+
+    private TextCommandResult RunScript(string name, Caller caller)
+    {
+        // Only allow a plain file name; no path separators, so scripts can
+        // only come from the BuildingCommands folder.
+        if (name.IndexOfAny(new[] { '/', '\\', ':' }) >= 0)
+            return TextCommandResult.Error("Script name must be a plain file name, no folders.");
+
+        string file = name.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) ? name : name + ".txt";
+        string path = Path.Combine(scriptFolder, file);
+        if (!File.Exists(path))
+            return TextCommandResult.Error($"No script '{file}' in {scriptFolder}. Drop a .txt file of commands there, or use /build list.");
+
+        string[] lines;
+        try { lines = File.ReadAllLines(path); }
+        catch (Exception e) { return TextCommandResult.Error($"Could not read {file}: {e.Message}"); }
+
+        int ran = 0, errors = 0, lineNo = 0;
+        string firstError = null;
+
+        foreach (string raw in lines)
+        {
+            lineNo++;
+            string line = raw.Trim();
+            if (line.Length == 0 || line.StartsWith("#") || line.StartsWith("//")) continue;
+            if (line[0] == '/') line = line.Substring(1);
+
+            string[] tok = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+            if (tok.Length == 0) continue;
+
+            string cmd = tok[0].ToLowerInvariant();
+            var a = new List<string>(tok.Length - 1);
+            for (int i = 1; i < tok.Length; i++) a.Add(tok[i]);
+
+            TextCommandResult r;
+            switch (cmd)
+            {
+                case "fill": r = DoFill(a, caller); break;
+                case "setblock":
+                case "cbsetblock": r = DoSetblock(a, caller); break;
+                case "clone": r = DoClone(a, caller); break;
+                case "blockcode": r = DoBlockcode(a, caller); break;
+                default: r = TextCommandResult.Error($"unknown command '{cmd}' (only fill, setblock, clone, blockcode are run by /build)"); break;
+            }
+
+            if (r.Status == EnumCommandStatus.Success)
+            {
+                ran++;
+            }
+            else
+            {
+                errors++;
+                if (firstError == null) firstError = $"line {lineNo}: {r.StatusMessage}";
+            }
+        }
+
+        string summary = $"Ran {ran} command(s) from {file}";
+        if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
+        summary += ".";
+        return TextCommandResult.Success(summary);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
     //  /fill
     // ─────────────────────────────────────────────────────────────────────
-    private TextCommandResult OnFill(TextCommandCallingArgs args)
+    private TextCommandResult DoFill(IList<string> a, Caller caller)
     {
-        GetOrigin(args, out int ox, out int oy, out int oz, out int dim);
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
 
-        if (!ParseCoord(Str(args, 0), ox, out int x1, out string e0)) return TextCommandResult.Error(e0);
-        if (!ParseCoord(Str(args, 1), oy, out int y1, out string e1)) return TextCommandResult.Error(e1);
-        if (!ParseCoord(Str(args, 2), oz, out int z1, out string e2)) return TextCommandResult.Error(e2);
-        if (!ParseCoord(Str(args, 3), ox, out int x2, out string e3)) return TextCommandResult.Error(e3);
-        if (!ParseCoord(Str(args, 4), oy, out int y2, out string e4)) return TextCommandResult.Error(e4);
-        if (!ParseCoord(Str(args, 5), oz, out int z2, out string e5)) return TextCommandResult.Error(e5);
+        if (!ParseCoord(A(a, 0), ox, out int x1, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y1, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z1, out string e2)) return TextCommandResult.Error(e2);
+        if (!ParseCoord(A(a, 3), ox, out int x2, out string e3)) return TextCommandResult.Error(e3);
+        if (!ParseCoord(A(a, 4), oy, out int y2, out string e4)) return TextCommandResult.Error(e4);
+        if (!ParseCoord(A(a, 5), oz, out int z2, out string e5)) return TextCommandResult.Error(e5);
 
-        Block block = ResolveBlock(Str(args, 6), out string berr);
+        Block block = ResolveBlock(A(a, 6), out string berr);
         if (block == null) return TextCommandResult.Error(berr);
 
-        string mode = (Str(args, 7) ?? "replace").ToLowerInvariant();
-        string filterCode = Str(args, 8);
+        string mode = (A(a, 7) ?? "replace").ToLowerInvariant();
+        string filterCode = A(a, 8);
         Block filter = null;
         if (!string.IsNullOrEmpty(filterCode))
         {
@@ -200,18 +317,18 @@ public class BuildingCommandsModSystem : ModSystem
     // ─────────────────────────────────────────────────────────────────────
     //  /setblock
     // ─────────────────────────────────────────────────────────────────────
-    private TextCommandResult OnSetblock(TextCommandCallingArgs args)
+    private TextCommandResult DoSetblock(IList<string> a, Caller caller)
     {
-        GetOrigin(args, out int ox, out int oy, out int oz, out int dim);
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
 
-        if (!ParseCoord(Str(args, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
-        if (!ParseCoord(Str(args, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
-        if (!ParseCoord(Str(args, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+        if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
 
-        Block block = ResolveBlock(Str(args, 3), out string berr);
+        Block block = ResolveBlock(A(a, 3), out string berr);
         if (block == null) return TextCommandResult.Error(berr);
 
-        string mode = (Str(args, 4) ?? "replace").ToLowerInvariant();
+        string mode = (A(a, 4) ?? "replace").ToLowerInvariant();
         if (mode != "replace" && mode != "keep" && mode != "destroy")
             return TextCommandResult.Error($"Unknown mode '{mode}'. Use replace, keep, or destroy.");
 
@@ -233,21 +350,21 @@ public class BuildingCommandsModSystem : ModSystem
     // ─────────────────────────────────────────────────────────────────────
     //  /clone
     // ─────────────────────────────────────────────────────────────────────
-    private TextCommandResult OnClone(TextCommandCallingArgs args)
+    private TextCommandResult DoClone(IList<string> a, Caller caller)
     {
-        GetOrigin(args, out int ox, out int oy, out int oz, out int dim);
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
 
-        if (!ParseCoord(Str(args, 0), ox, out int x1, out string e0)) return TextCommandResult.Error(e0);
-        if (!ParseCoord(Str(args, 1), oy, out int y1, out string e1)) return TextCommandResult.Error(e1);
-        if (!ParseCoord(Str(args, 2), oz, out int z1, out string e2)) return TextCommandResult.Error(e2);
-        if (!ParseCoord(Str(args, 3), ox, out int x2, out string e3)) return TextCommandResult.Error(e3);
-        if (!ParseCoord(Str(args, 4), oy, out int y2, out string e4)) return TextCommandResult.Error(e4);
-        if (!ParseCoord(Str(args, 5), oz, out int z2, out string e5)) return TextCommandResult.Error(e5);
-        if (!ParseCoord(Str(args, 6), ox, out int dx, out string e6)) return TextCommandResult.Error(e6);
-        if (!ParseCoord(Str(args, 7), oy, out int dy, out string e7)) return TextCommandResult.Error(e7);
-        if (!ParseCoord(Str(args, 8), oz, out int dz, out string e8)) return TextCommandResult.Error(e8);
+        if (!ParseCoord(A(a, 0), ox, out int x1, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y1, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z1, out string e2)) return TextCommandResult.Error(e2);
+        if (!ParseCoord(A(a, 3), ox, out int x2, out string e3)) return TextCommandResult.Error(e3);
+        if (!ParseCoord(A(a, 4), oy, out int y2, out string e4)) return TextCommandResult.Error(e4);
+        if (!ParseCoord(A(a, 5), oz, out int z2, out string e5)) return TextCommandResult.Error(e5);
+        if (!ParseCoord(A(a, 6), ox, out int dx, out string e6)) return TextCommandResult.Error(e6);
+        if (!ParseCoord(A(a, 7), oy, out int dy, out string e7)) return TextCommandResult.Error(e7);
+        if (!ParseCoord(A(a, 8), oz, out int dz, out string e8)) return TextCommandResult.Error(e8);
 
-        string mode = (Str(args, 9) ?? "replace").ToLowerInvariant();
+        string mode = (A(a, 9) ?? "replace").ToLowerInvariant();
         if (mode != "replace" && mode != "masked")
             return TextCommandResult.Error($"Unknown mode '{mode}'. Use replace or masked.");
 
@@ -297,9 +414,9 @@ public class BuildingCommandsModSystem : ModSystem
     // ─────────────────────────────────────────────────────────────────────
     //  /blockcode
     // ─────────────────────────────────────────────────────────────────────
-    private TextCommandResult OnBlockcode(TextCommandCallingArgs args)
+    private TextCommandResult DoBlockcode(IList<string> a, Caller caller)
     {
-        string q = (Str(args, 0) ?? "").ToLowerInvariant();
+        string q = (A(a, 0) ?? "").ToLowerInvariant();
         if (q.Length == 0) return TextCommandResult.Error("Give a search term, e.g. /blockcode stonebrick");
 
         var matches = new List<string>();
@@ -326,8 +443,14 @@ public class BuildingCommandsModSystem : ModSystem
     // ─────────────────────────────────────────────────────────────────────
     //  Helpers
     // ─────────────────────────────────────────────────────────────────────
-    private static string Str(TextCommandCallingArgs args, int index)
-        => args.Parsers[index].GetValue() as string;
+    private static List<string> ArgList(TextCommandCallingArgs args, int count)
+    {
+        var list = new List<string>(count);
+        for (int i = 0; i < count; i++) list.Add(args.Parsers[i].GetValue() as string);
+        return list;
+    }
+
+    private static string A(IList<string> a, int i) => i >= 0 && i < a.Count ? a[i] : null;
 
     /// <summary>
     /// Caller's block position, used as the origin for ~relative coords, and
@@ -335,9 +458,9 @@ public class BuildingCommandsModSystem : ModSystem
     /// console) the origin is 0 and originAvailable is set false, so ~ tokens
     /// are rejected but absolute coordinates still work.
     /// </summary>
-    private void GetOrigin(TextCommandCallingArgs args, out int ox, out int oy, out int oz, out int dim)
+    private void GetOrigin(Caller caller, out int ox, out int oy, out int oz, out int dim)
     {
-        var entity = args.Caller?.Entity;
+        var entity = caller?.Entity;
         if (entity == null)
         {
             ox = oy = oz = dim = 0;
