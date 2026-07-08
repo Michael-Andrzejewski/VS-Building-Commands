@@ -1,0 +1,12 @@
+{
+    "type": "code",
+    "modid": "buildingcommands",
+    "name": "Building Commands",
+    "authors": ["Soareverix"],
+    "description": "Minecraft-style building commands for scripted and AI world editing: fill, setblock, clone, and blockcode lookup, with absolute or tilde-relative coordinates.",
+    "version": "0.1.0",
+    "side": "Universal",
+    "dependencies": {
+        "game": "1.22.0"
+    }
+}
