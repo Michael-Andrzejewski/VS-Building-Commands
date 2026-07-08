@@ -23,8 +23,14 @@ Copies the source cuboid so its minimum corner lands at `dx dy dz`. Modes: `repl
 ### `/blockcode <search>`
 Lists up to 50 registered block codes containing the search term, so you can find the exact code to build with. Example: `/blockcode stonebrick` returns `game:stonebricks-granite, game:stonebricks-andesite, ...`.
 
-### `/build <name>`
-Runs an entire script of commands at once, so you never paste hundreds of lines by hand. Put a plain-text `<name>.txt` file in the scripts folder (see Batch building below) and run `/build <name>`. Tilde coordinates are measured from where you stand when you run it, so a whole structure lands around you. `/build list` shows the available scripts.
+### `/build <name>` and `/build` (paste window)
+Runs an entire script of commands at once, so you never paste hundreds of lines by hand.
+
+- `/build <name>` runs a plain-text `<name>.txt` file from the scripts folder (see Batch building below).
+- `/build` with no name opens an in-game window where you paste a command list and press Run. Handy when the commands come from somewhere you cannot save to a file.
+- `/build list` shows the available scripts.
+
+Either way, tilde coordinates are measured from where you stand when you run it, so the whole structure lands around you.
 
 ## Coordinates
 

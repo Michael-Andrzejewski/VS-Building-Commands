@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
@@ -37,7 +38,11 @@ public class BuildingCommandsModSystem : ModSystem
     // and stall the server. 512 x 512 x 2 worth of blocks.
     private const long MaxVolume = 524288;
 
+    private const string ChannelName = "buildingcommands";
+
     private ICoreServerAPI sapi;
+    private ICoreClientAPI capi;
+    private IServerNetworkChannel serverChannel;
 
     // Whether the current command's caller has an entity, so ~relative
     // coordinates have an origin. Set per command in GetOrigin; commands are
@@ -54,6 +59,11 @@ public class BuildingCommandsModSystem : ModSystem
 
         scriptFolder = Path.Combine(GamePaths.DataPath, "BuildingCommands");
         try { Directory.CreateDirectory(scriptFolder); } catch { /* best effort */ }
+
+        serverChannel = api.Network.RegisterChannel(ChannelName)
+            .RegisterMessageType<OpenPasteDialogPacket>()
+            .RegisterMessageType<RunPastedTextPacket>()
+            .SetMessageHandler<RunPastedTextPacket>(OnRunPastedText);
 
         var p = api.ChatCommands.Parsers;
 
@@ -102,12 +112,28 @@ public class BuildingCommandsModSystem : ModSystem
 
         RegisterCmd(api, "build", name =>
             api.ChatCommands.Create(name)
-                .WithDescription("Run every fill/setblock/clone/blockcode line from a .txt script in the BuildingCommands data folder. ~relative coords are measured from where you stand. Use /build list to see available scripts.")
+                .WithDescription("With a name, runs that .txt script from the BuildingCommands folder. With no name, opens a window to paste commands into. ~relative coords are measured from where you stand. /build list shows available scripts.")
                 .RequiresPrivilege(Privilege.controlserver)
-                .WithArgs(p.Word("name"))
+                .WithArgs(p.OptionalWord("name"))
                 .HandleWith(OnBuild));
 
         api.Logger.Notification($"[buildingcommands] Ready. Put /build scripts (.txt) in: {scriptFolder}");
+    }
+
+    public override void StartClientSide(ICoreClientAPI api)
+    {
+        capi = api;
+        api.Network.RegisterChannel(ChannelName)
+            .RegisterMessageType<OpenPasteDialogPacket>()
+            .RegisterMessageType<RunPastedTextPacket>()
+            .SetMessageHandler<OpenPasteDialogPacket>(OnOpenPasteDialog);
+    }
+
+    private void OnOpenPasteDialog(OpenPasteDialogPacket packet)
+    {
+        var dialog = new BuildPasteDialog(capi, text =>
+            capi.Network.GetChannel(ChannelName).SendPacket(new RunPastedTextPacket { Text = text }));
+        dialog.TryOpen();
     }
 
     /// <summary>
@@ -149,8 +175,47 @@ public class BuildingCommandsModSystem : ModSystem
     private TextCommandResult OnBuild(TextCommandCallingArgs args)
     {
         string name = args.Parsers[0].GetValue() as string;
+
+        // No name: open the in-game paste window on the calling client.
+        if (string.IsNullOrEmpty(name))
+        {
+            if (args.Caller.Player is IServerPlayer sp)
+            {
+                serverChannel.SendPacket(new OpenPasteDialogPacket(), sp);
+                return TextCommandResult.Success("Opening the paste window. Paste your commands and press Run.");
+            }
+            return TextCommandResult.Error("Run /build with no name from in game to open the paste window, or /build <name> to run a script file.");
+        }
+
         if (string.Equals(name, "list", StringComparison.OrdinalIgnoreCase)) return ListScripts();
         return RunScript(name, args.Caller);
+    }
+
+    // Client -> server: run the pasted text as commands for that player.
+    private void OnRunPastedText(IServerPlayer fromPlayer, RunPastedTextPacket packet)
+    {
+        if (fromPlayer?.Entity == null) return;
+        if (!fromPlayer.HasPrivilege(Privilege.controlserver))
+        {
+            fromPlayer.SendMessage(GlobalConstants.GeneralChatGroup, "You need the controlserver privilege to run build commands.", EnumChatType.CommandError);
+            return;
+        }
+
+        var caller = new Caller
+        {
+            Player = fromPlayer,
+            Entity = fromPlayer.Entity,
+            Type = EnumCallerType.Player
+        };
+
+        string text = packet?.Text ?? "";
+        string[] lines = text.Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
+        (int ran, int errors, string firstError) = RunLines(lines, caller);
+
+        string summary = $"Ran {ran} command(s) from paste";
+        if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
+        summary += ".";
+        fromPlayer.SendMessage(GlobalConstants.GeneralChatGroup, summary, EnumChatType.Notification);
     }
 
     private TextCommandResult ListScripts()
@@ -186,13 +251,30 @@ public class BuildingCommandsModSystem : ModSystem
         try { lines = File.ReadAllLines(path); }
         catch (Exception e) { return TextCommandResult.Error($"Could not read {file}: {e.Message}"); }
 
+        (int ran, int errors, string firstError) = RunLines(lines, caller);
+
+        string summary = $"Ran {ran} command(s) from {file}";
+        if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
+        summary += ".";
+        return TextCommandResult.Success(summary);
+    }
+
+    /// <summary>
+    /// Runs each line as one of this mod's commands, using the caller as the
+    /// origin for tilde coordinates. Shared by the /build script runner and
+    /// the paste window. Returns how many ran, how many errored, and the
+    /// first error text. Blank lines and lines starting with # or // are
+    /// skipped; a leading / is optional.
+    /// </summary>
+    private (int ran, int errors, string firstError) RunLines(IEnumerable<string> lines, Caller caller)
+    {
         int ran = 0, errors = 0, lineNo = 0;
         string firstError = null;
 
         foreach (string raw in lines)
         {
             lineNo++;
-            string line = raw.Trim();
+            string line = (raw ?? "").Trim();
             if (line.Length == 0 || line.StartsWith("#") || line.StartsWith("//")) continue;
             if (line[0] == '/') line = line.Substring(1);
 
@@ -211,7 +293,7 @@ public class BuildingCommandsModSystem : ModSystem
                 case "cbsetblock": r = DoSetblock(a, caller); break;
                 case "clone": r = DoClone(a, caller); break;
                 case "blockcode": r = DoBlockcode(a, caller); break;
-                default: r = TextCommandResult.Error($"unknown command '{cmd}' (only fill, setblock, clone, blockcode are run by /build)"); break;
+                default: r = TextCommandResult.Error($"unknown command '{cmd}' (only fill, setblock, clone, blockcode are run here)"); break;
             }
 
             if (r.Status == EnumCommandStatus.Success)
@@ -225,10 +307,7 @@ public class BuildingCommandsModSystem : ModSystem
             }
         }
 
-        string summary = $"Ran {ran} command(s) from {file}";
-        if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
-        summary += ".";
-        return TextCommandResult.Success(summary);
+        return (ran, errors, firstError);
     }
 
     // ─────────────────────────────────────────────────────────────────────
