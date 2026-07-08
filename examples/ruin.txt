@@ -1,0 +1,35 @@
+# Sunken underwater ruin with collapsed loot chests.
+# Stand where you want the CENTER, then:  /build ruin   (or /preview ruin to place it by eye)
+# Every ~ is measured from where you stand.
+
+# Hollow stone hall, 13 wide x 17 long, ~6-tall interior
+fill ~-6 ~-1 ~-8 ~6 ~5 ~8 game:stonebricks-granite hollow
+
+# Cobblestone floor over the interior
+fill ~-5 ~-1 ~-7 ~5 ~-1 ~7 game:cobblestone-granite
+
+# Break open parts of the roof and walls so it reads as a ruin
+fill ~-6 ~5 ~-8 ~-2 ~5 ~-3 air
+fill ~2 ~5 ~3 ~6 ~5 ~8 air
+fill ~6 ~2 ~-2 ~6 ~5 ~2 air
+fill ~-6 ~3 ~4 ~-6 ~5 ~7 air
+
+# Doorway in the south (-Z) wall
+fill ~-1 ~0 ~-8 ~1 ~2 ~-8 air
+
+# Neon-green glow so it shows through the water
+fill ~-4 ~4 ~-6 ~-4 ~4 ~-6 game:creativelight-43
+fill ~4 ~4 ~-6 ~4 ~4 ~-6 game:creativelight-43
+fill ~-4 ~4 ~6 ~-4 ~4 ~6 game:creativelight-43
+fill ~4 ~4 ~6 ~4 ~4 ~6 game:creativelight-43
+fill ~0 ~4 ~0 ~0 ~4 ~0 game:creativelight-43
+
+# Collapsed loot chests, stocked with randomized ruin loot
+lootchest ~-4 ~0 ~-5 2 north
+lootchest ~4 ~0 ~5 3 south
+lootchest ~-3 ~0 ~6 1 north
+lootchest ~4 ~0 ~-4 4 west
+
+# A couple of cracked loot vessels for variety
+fill ~2 ~0 ~-3 ~2 ~0 ~-3 game:lootvessel-tool
+fill ~-2 ~0 ~3 ~-2 ~0 ~3 game:lootvessel-ore

@@ -394,6 +394,7 @@ public class BuildingCommandsModSystem : ModSystem
             string cmd = tok[0].ToLowerInvariant();
             if (cmd == "fill") AddFillCells(tok, map, ref capped);
             else if (cmd == "setblock" || cmd == "cbsetblock") AddSetblockCells(tok, map, ref capped);
+            else if (cmd == "lootchest") AddLootChestCell(tok, map, ref capped);
 
             if (capped) break;
         }
@@ -549,8 +550,9 @@ public class BuildingCommandsModSystem : ModSystem
                 case "setblock":
                 case "cbsetblock": r = DoSetblock(a, caller); break;
                 case "clone": r = DoClone(a, caller); break;
+                case "lootchest": r = DoLootChest(a, caller); break;
                 case "blockcode": r = DoBlockcode(a, caller); break;
-                default: r = TextCommandResult.Error($"unknown command '{cmd}' (only fill, setblock, clone, blockcode are run here)"); break;
+                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, blockcode)"); break;
             }
 
             if (r.Status == EnumCommandStatus.Success)
@@ -774,6 +776,93 @@ public class BuildingCommandsModSystem : ModSystem
         sb.Append(matches.Count >= limit ? $"First {limit} matches for '{q}': " : $"{matches.Count} match(es) for '{q}': ");
         sb.Append(string.Join(", ", matches));
         return TextCommandResult.Success(sb.ToString());
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  /lootchest  — a collapsed ruin chest stocked like a lore location
+    // ─────────────────────────────────────────────────────────────────────
+    // Ruin-appropriate stackrandomizer loot pools (see game stackrandomizer).
+    private static readonly string[] RuinLootTypes =
+    {
+        "gear", "resource", "ruinedweapon", "coppertool", "ingot", "ore",
+        "cloth-lowstatus", "accessory-lowstatus", "lantern", "lore-research",
+        "lore-diaries", "tuningcylinder"
+    };
+
+    // lootchest x y z [1-4] [north|east|south|west]
+    // Places a collapsed ruin chest and fills its first few slots with loot,
+    // the same way Vintage Story stocks lore-location chests: drop
+    // stackrandomizer tokens into the slots and resolve them into real loot.
+    private TextCommandResult DoLootChest(IList<string> a, Caller caller)
+    {
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
+
+        if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+
+        var rnd = sapi.World.Rand;
+        int variant;
+        string typeArg = A(a, 3);
+        if (typeArg != null && int.TryParse(typeArg, out int t) && t >= 1 && t <= 4) variant = t;
+        else variant = 1 + rnd.Next(4);
+        string collapsedType = "collapsed" + variant;
+
+        string side = (A(a, 4) ?? "north").ToLowerInvariant();
+        if (side != "north" && side != "east" && side != "south" && side != "west") side = "north";
+
+        Block chest = sapi.World.GetBlock(new AssetLocation("game", "chest-" + side));
+        if (chest == null) return TextCommandResult.Error($"Chest block game:chest-{side} not found.");
+
+        var pos = new BlockPos(x, y, z, dim);
+        var accessor = sapi.World.BlockAccessor;
+
+        // Place the chest AS a collapsed ruin chest: the block entity reads
+        // its type from the placing item stack's attributes.
+        var chestStack = new ItemStack(chest);
+        chestStack.Attributes.SetString("type", collapsedType);
+        accessor.SetBlock(chest.BlockId, pos, chestStack);
+        accessor.MarkBlockDirty(pos);
+
+        int lootSlots = 0;
+        if (accessor.GetBlockEntity(pos) is IBlockEntityContainer bec && bec.Inventory != null)
+        {
+            IInventory inv = bec.Inventory;
+            int slotCount = inv.Count;
+            int toFill = Math.Min(slotCount, 3 + rnd.Next(4));
+            for (int idx = 0; idx < toFill; idx++)
+            {
+                string lootType = RuinLootTypes[rnd.Next(RuinLootTypes.Length)];
+                Item randomizer = sapi.World.GetItem(new AssetLocation("game", "stackrandomizer-" + lootType));
+                if (randomizer == null) continue;
+
+                ItemSlot slot = inv[idx];
+                slot.Itemstack = new ItemStack(randomizer, 1);
+                if (randomizer is IResolvableCollectible resolvable)
+                    resolvable.Resolve(slot, sapi.World); // becomes real loot (or empty if the roll misses)
+                slot.MarkDirty();
+                if (slot.Itemstack != null) lootSlots++;
+            }
+            (accessor.GetBlockEntity(pos))?.MarkDirty(true);
+        }
+
+        return TextCommandResult.Success($"Placed a {collapsedType} chest at ({x},{y},{z}) with loot in {lootSlots} slot(s).");
+    }
+
+    private void AddLootChestCell(string[] tok, Dictionary<long, int> map, ref bool capped)
+    {
+        if (tok.Length < 4) return;
+        if (!ParseCoord(tok[1], 0, out int x, out _)) return;
+        if (!ParseCoord(tok[2], 0, out int y, out _)) return;
+        if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+
+        string side = tok.Length > 5 ? tok[5].ToLowerInvariant() : "north";
+        if (side != "north" && side != "east" && side != "south" && side != "west") side = "north";
+
+        Block chest = sapi.World.GetBlock(new AssetLocation("game", "chest-" + side));
+        if (chest == null) return;
+        map[Pack(x, y, z)] = chest.BlockId;
+        if (map.Count >= MaxPreviewCells) capped = true;
     }
 
     // ─────────────────────────────────────────────────────────────────────

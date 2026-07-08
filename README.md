@@ -61,7 +61,13 @@ Drop a file like `dungeon.txt` there, then run `/build dungeon`. In the file:
 - Blank lines and lines starting with `#` or `//` are ignored, so you can comment your build.
 - Tilde coordinates are all measured from where you stand when you run `/build`, so a whole structure lands around you.
 
-A ready-to-run `dungeon.txt` is in `examples/`. `/build list` lists the scripts you have.
+Ready-to-run `dungeon.txt` and `ruin.txt` scripts are in `examples/`. `/build list` lists the scripts you have.
+
+Besides the chat commands, scripts (and the paste window) also accept a `lootchest` directive:
+
+    lootchest x y z [1-4] [north|east|south|west]
+
+It places a collapsed ruin chest and stocks it with randomized loot the same way the game fills its lore-location chests: it drops `stackrandomizer` loot tokens into the slots and resolves them into real items (gears, ruined weapons, copper tools, ingots, ore, worn clothing, lanterns, lore scrolls, and the occasional temporal treasure). The optional `1-4` picks which collapsed shape; the side is the facing.
 
 ## Limits
 
