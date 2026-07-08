@@ -32,6 +32,14 @@ Runs an entire script of commands at once, so you never paste hundreds of lines 
 
 Either way, tilde coordinates are measured from where you stand when you run it, so the whole structure lands around you.
 
+### `/preview <name>`, `/confirm`, `/cancel`
+Place a build naturally by seeing it first. `/preview <name>` (or the **Preview** button in the paste window) projects the build as a translucent ghost at the block your crosshair is on, and the ghost follows your look. Aim it where you want, then:
+
+- `/confirm` places it for real at that spot.
+- `/cancel` discards it.
+
+Nothing is written to the world until you confirm. The ghost shows fill and setblock blocks (air is invisible); clone lines still place on confirm but are not drawn in the ghost. Large builds cap the ghost at 60000 blocks, but the full build still places.
+
 ## Coordinates
 
 Each coordinate is either **absolute** (`100 64 -30`) or **tilde-relative** to the caller (`~ ~2 ~-4`), exactly like Minecraft. Tilde coordinates need a player caller; absolute coordinates also work from the server console.

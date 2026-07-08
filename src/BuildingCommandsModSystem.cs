@@ -38,11 +38,32 @@ public class BuildingCommandsModSystem : ModSystem
     // and stall the server. 512 x 512 x 2 worth of blocks.
     private const long MaxVolume = 524288;
 
+    // How many ghost cells a preview will draw at most, so a giant build
+    // doesn't produce a giant mesh/packet. The full build still places on
+    // confirm; only the ghost is capped.
+    private const int MaxPreviewCells = 60000;
+
     private const string ChannelName = "buildingcommands";
 
     private ICoreServerAPI sapi;
     private ICoreClientAPI capi;
     private IServerNetworkChannel serverChannel;
+    private IClientNetworkChannel clientChannel;
+    private GhostRenderer ghostRenderer;
+
+    // Per-player pending preview: the build's command lines plus the anchor
+    // block the client is currently aiming at (streamed from the client).
+    private readonly Dictionary<string, PendingPreview> pending = new();
+
+    // When set, GetOrigin uses this instead of the caller's feet, so /confirm
+    // places the build at the ghost's anchor rather than where the player stands.
+    private BlockPos originOverride;
+
+    private class PendingPreview
+    {
+        public List<string> Lines;
+        public BlockPos Anchor;
+    }
 
     // Whether the current command's caller has an entity, so ~relative
     // coordinates have an origin. Set per command in GetOrigin; commands are
@@ -63,7 +84,13 @@ public class BuildingCommandsModSystem : ModSystem
         serverChannel = api.Network.RegisterChannel(ChannelName)
             .RegisterMessageType<OpenPasteDialogPacket>()
             .RegisterMessageType<RunPastedTextPacket>()
-            .SetMessageHandler<RunPastedTextPacket>(OnRunPastedText);
+            .RegisterMessageType<PreviewPastedTextPacket>()
+            .RegisterMessageType<PreviewCellsPacket>()
+            .RegisterMessageType<PreviewStopPacket>()
+            .RegisterMessageType<PreviewAnchorPacket>()
+            .SetMessageHandler<RunPastedTextPacket>(OnRunPastedText)
+            .SetMessageHandler<PreviewPastedTextPacket>(OnPreviewPastedText)
+            .SetMessageHandler<PreviewAnchorPacket>(OnPreviewAnchor);
 
         var p = api.ChatCommands.Parsers;
 
@@ -117,24 +144,59 @@ public class BuildingCommandsModSystem : ModSystem
                 .WithArgs(p.OptionalWord("name"))
                 .HandleWith(OnBuild));
 
+        RegisterCmd(api, "preview", name =>
+            api.ChatCommands.Create(name)
+                .WithDescription("Show a build as a translucent ghost at your crosshair without placing it. /preview <script name>, then aim where you want it and /confirm (or /cancel).")
+                .RequiresPrivilege(Privilege.controlserver)
+                .WithArgs(p.OptionalWord("name"))
+                .HandleWith(OnPreview));
+
+        RegisterCmd(api, "confirm", name =>
+            api.ChatCommands.Create(name)
+                .WithDescription("Place the previewed build for real at the ghost's current spot.")
+                .RequiresPrivilege(Privilege.controlserver)
+                .HandleWith(OnConfirm));
+
+        RegisterCmd(api, "cancel", name =>
+            api.ChatCommands.Create(name)
+                .WithDescription("Discard the current build preview.")
+                .RequiresPrivilege(Privilege.controlserver)
+                .HandleWith(OnCancel));
+
         api.Logger.Notification($"[buildingcommands] Ready. Put /build scripts (.txt) in: {scriptFolder}");
     }
 
     public override void StartClientSide(ICoreClientAPI api)
     {
         capi = api;
-        api.Network.RegisterChannel(ChannelName)
+        clientChannel = api.Network.RegisterChannel(ChannelName)
             .RegisterMessageType<OpenPasteDialogPacket>()
             .RegisterMessageType<RunPastedTextPacket>()
-            .SetMessageHandler<OpenPasteDialogPacket>(OnOpenPasteDialog);
+            .RegisterMessageType<PreviewPastedTextPacket>()
+            .RegisterMessageType<PreviewCellsPacket>()
+            .RegisterMessageType<PreviewStopPacket>()
+            .RegisterMessageType<PreviewAnchorPacket>()
+            .SetMessageHandler<OpenPasteDialogPacket>(OnOpenPasteDialog)
+            .SetMessageHandler<PreviewCellsPacket>(OnPreviewCells)
+            .SetMessageHandler<PreviewStopPacket>(OnPreviewStop);
+
+        ghostRenderer = new GhostRenderer(api, clientChannel);
+        api.Event.RegisterRenderer(ghostRenderer, EnumRenderStage.Opaque, "buildingcommands-ghost");
     }
 
     private void OnOpenPasteDialog(OpenPasteDialogPacket packet)
     {
-        var dialog = new BuildPasteDialog(capi, text =>
-            capi.Network.GetChannel(ChannelName).SendPacket(new RunPastedTextPacket { Text = text }));
+        var dialog = new BuildPasteDialog(capi,
+            text => clientChannel.SendPacket(new RunPastedTextPacket { Text = text }),
+            text => clientChannel.SendPacket(new PreviewPastedTextPacket { Text = text }));
         dialog.TryOpen();
     }
+
+    private void OnPreviewCells(PreviewCellsPacket packet)
+        => ghostRenderer?.SetCells(packet.X, packet.Y, packet.Z, packet.Ids);
+
+    private void OnPreviewStop(PreviewStopPacket packet)
+        => ghostRenderer?.Clear();
 
     /// <summary>
     /// Register a command under its bare name, or under "cb" + name if the
@@ -216,6 +278,201 @@ public class BuildingCommandsModSystem : ModSystem
         if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
         summary += ".";
         fromPlayer.SendMessage(GlobalConstants.GeneralChatGroup, summary, EnumChatType.Notification);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  Preview / confirm / cancel
+    // ─────────────────────────────────────────────────────────────────────
+    private TextCommandResult OnPreview(TextCommandCallingArgs args)
+    {
+        if (args.Caller.Player is not IServerPlayer sp) return TextCommandResult.Error("Players only.");
+
+        string name = args.Parsers[0].GetValue() as string;
+        if (string.IsNullOrEmpty(name))
+            return TextCommandResult.Error("Usage: /preview <script name>. Or press Preview in /build's paste window.");
+        if (name.IndexOfAny(new[] { '/', '\\', ':' }) >= 0)
+            return TextCommandResult.Error("Script name must be a plain file name.");
+
+        string file = name.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) ? name : name + ".txt";
+        string path = Path.Combine(scriptFolder, file);
+        if (!File.Exists(path))
+            return TextCommandResult.Error($"No script '{file}' in {scriptFolder}. Use /build list to see scripts.");
+
+        string[] lines;
+        try { lines = File.ReadAllLines(path); }
+        catch (Exception e) { return TextCommandResult.Error($"Could not read {file}: {e.Message}"); }
+
+        return StartPreview(sp, lines, file);
+    }
+
+    private TextCommandResult OnConfirm(TextCommandCallingArgs args)
+    {
+        if (args.Caller.Player is not IServerPlayer sp) return TextCommandResult.Error("Players only.");
+        if (!pending.TryGetValue(sp.PlayerUID, out PendingPreview pend))
+            return TextCommandResult.Error("No preview to confirm. Start one with /preview <name> or the Preview button.");
+        if (pend.Anchor == null)
+            return TextCommandResult.Error("Aim at a block so the ghost has a spot, then /confirm.");
+
+        originOverride = pend.Anchor;
+        (int ran, int errors, string firstError) = RunLines(pend.Lines, args.Caller);
+        originOverride = null;
+
+        pending.Remove(sp.PlayerUID);
+        serverChannel.SendPacket(new PreviewStopPacket(), sp);
+
+        string summary = $"Placed {ran} command(s) at {pend.Anchor.X},{pend.Anchor.Y},{pend.Anchor.Z}";
+        if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
+        summary += ".";
+        return TextCommandResult.Success(summary);
+    }
+
+    private TextCommandResult OnCancel(TextCommandCallingArgs args)
+    {
+        if (args.Caller.Player is not IServerPlayer sp) return TextCommandResult.Error("Players only.");
+        if (!pending.Remove(sp.PlayerUID)) return TextCommandResult.Error("No preview to cancel.");
+        serverChannel.SendPacket(new PreviewStopPacket(), sp);
+        return TextCommandResult.Success("Preview cancelled.");
+    }
+
+    private void OnPreviewPastedText(IServerPlayer fromPlayer, PreviewPastedTextPacket packet)
+    {
+        if (fromPlayer?.Entity == null) return;
+        if (!fromPlayer.HasPrivilege(Privilege.controlserver))
+        {
+            fromPlayer.SendMessage(GlobalConstants.GeneralChatGroup, "You need the controlserver privilege to preview builds.", EnumChatType.CommandError);
+            return;
+        }
+
+        string text = packet?.Text ?? "";
+        string[] lines = text.Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
+        TextCommandResult r = StartPreview(fromPlayer, lines, "paste");
+        fromPlayer.SendMessage(GlobalConstants.GeneralChatGroup, r.StatusMessage,
+            r.Status == EnumCommandStatus.Success ? EnumChatType.Notification : EnumChatType.CommandError);
+    }
+
+    private void OnPreviewAnchor(IServerPlayer fromPlayer, PreviewAnchorPacket packet)
+    {
+        if (pending.TryGetValue(fromPlayer.PlayerUID, out PendingPreview pend))
+            pend.Anchor = new BlockPos(packet.X, packet.Y, packet.Z, packet.Dim);
+    }
+
+    private TextCommandResult StartPreview(IServerPlayer sp, string[] lines, string sourceLabel)
+    {
+        ComputePlan(lines, out int[] xs, out int[] ys, out int[] zs, out int[] ids, out bool capped);
+        if (xs.Length == 0)
+            return TextCommandResult.Error("That build has no visible blocks to preview (nothing but air, or only clone/blockcode lines).");
+
+        pending[sp.PlayerUID] = new PendingPreview { Lines = new List<string>(lines), Anchor = null };
+        serverChannel.SendPacket(new PreviewCellsPacket { X = xs, Y = ys, Z = zs, Ids = ids }, sp);
+
+        string msg = $"Previewing {xs.Length} block(s) from {sourceLabel}. Aim where you want it, then /confirm (or /cancel).";
+        if (capped) msg += $" Preview capped at {MaxPreviewCells} blocks; the full build still places on confirm.";
+        return TextCommandResult.Success(msg);
+    }
+
+    // Dry-run the fill/setblock lines against an origin of (0,0,0) to get the
+    // set of blocks the build would place, as offsets for the ghost. keep and
+    // replace-filter are shown as plain replace (their result depends on the
+    // world at the final spot, which is not known until confirm); clone and
+    // blockcode are skipped.
+    private void ComputePlan(IEnumerable<string> lines, out int[] xs, out int[] ys, out int[] zs, out int[] ids, out bool capped)
+    {
+        var map = new Dictionary<long, int>();
+        capped = false;
+        bool prevAvail = originAvailable;
+        originAvailable = true;
+
+        foreach (string raw in lines)
+        {
+            string line = (raw ?? "").Trim();
+            if (line.Length == 0 || line.StartsWith("#") || line.StartsWith("//")) continue;
+            if (line[0] == '/') line = line.Substring(1);
+
+            string[] tok = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+            if (tok.Length == 0) continue;
+
+            string cmd = tok[0].ToLowerInvariant();
+            if (cmd == "fill") AddFillCells(tok, map, ref capped);
+            else if (cmd == "setblock" || cmd == "cbsetblock") AddSetblockCells(tok, map, ref capped);
+
+            if (capped) break;
+        }
+
+        originAvailable = prevAvail;
+
+        int n = map.Count;
+        xs = new int[n]; ys = new int[n]; zs = new int[n]; ids = new int[n];
+        int i = 0;
+        foreach (var kv in map)
+        {
+            UnpackPos(kv.Key, out int x, out int y, out int z);
+            xs[i] = x; ys[i] = y; zs[i] = z; ids[i] = kv.Value; i++;
+        }
+    }
+
+    private void AddFillCells(string[] tok, Dictionary<long, int> map, ref bool capped)
+    {
+        if (tok.Length < 8) return;
+        if (!ParseCoord(tok[1], 0, out int x1, out _)) return;
+        if (!ParseCoord(tok[2], 0, out int y1, out _)) return;
+        if (!ParseCoord(tok[3], 0, out int z1, out _)) return;
+        if (!ParseCoord(tok[4], 0, out int x2, out _)) return;
+        if (!ParseCoord(tok[5], 0, out int y2, out _)) return;
+        if (!ParseCoord(tok[6], 0, out int z2, out _)) return;
+
+        Block block = ResolveBlock(tok[7], out _);
+        if (block == null) return;
+        int bid = block.BlockId;
+        string mode = tok.Length > 8 ? tok[8].ToLowerInvariant() : "replace";
+
+        int minX = Math.Min(x1, x2), maxX = Math.Max(x1, x2);
+        int minY = Math.Min(y1, y2), maxY = Math.Max(y1, y2);
+        int minZ = Math.Min(z1, z2), maxZ = Math.Max(z1, z2);
+
+        for (int x = minX; x <= maxX; x++)
+            for (int y = minY; y <= maxY; y++)
+                for (int z = minZ; z <= maxZ; z++)
+                {
+                    bool shell = x == minX || x == maxX || y == minY || y == maxY || z == minZ || z == maxZ;
+                    int cellId;
+                    if (mode == "hollow") cellId = shell ? bid : 0;
+                    else if (mode == "outline") { if (!shell) continue; cellId = bid; }
+                    else cellId = bid;
+
+                    if (cellId == 0) continue; // air is invisible in the ghost
+                    map[Pack(x, y, z)] = cellId;
+                    if (map.Count >= MaxPreviewCells) { capped = true; return; }
+                }
+    }
+
+    private void AddSetblockCells(string[] tok, Dictionary<long, int> map, ref bool capped)
+    {
+        if (tok.Length < 5) return;
+        if (!ParseCoord(tok[1], 0, out int x, out _)) return;
+        if (!ParseCoord(tok[2], 0, out int y, out _)) return;
+        if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+
+        Block block = ResolveBlock(tok[4], out _);
+        if (block == null || block.BlockId == 0) return;
+
+        map[Pack(x, y, z)] = block.BlockId;
+        if (map.Count >= MaxPreviewCells) capped = true;
+    }
+
+    // Pack a small signed offset (roughly +-1,000,000) into a long key.
+    private static long Pack(int x, int y, int z)
+    {
+        long ux = (long)(x + 1048576) & 0x1FFFFF;
+        long uy = (long)(y + 1048576) & 0x1FFFFF;
+        long uz = (long)(z + 1048576) & 0x1FFFFF;
+        return (ux << 42) | (uy << 21) | uz;
+    }
+
+    private static void UnpackPos(long key, out int x, out int y, out int z)
+    {
+        x = (int)((key >> 42) & 0x1FFFFF) - 1048576;
+        y = (int)((key >> 21) & 0x1FFFFF) - 1048576;
+        z = (int)(key & 0x1FFFFF) - 1048576;
     }
 
     private TextCommandResult ListScripts()
@@ -539,6 +796,17 @@ public class BuildingCommandsModSystem : ModSystem
     /// </summary>
     private void GetOrigin(Caller caller, out int ox, out int oy, out int oz, out int dim)
     {
+        // /confirm places the build at the ghost's anchor, not the player's feet.
+        if (originOverride != null)
+        {
+            ox = originOverride.X;
+            oy = originOverride.Y;
+            oz = originOverride.Z;
+            dim = originOverride.dimension;
+            originAvailable = true;
+            return;
+        }
+
         var entity = caller?.Entity;
         if (entity == null)
         {
