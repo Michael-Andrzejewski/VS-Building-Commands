@@ -46,9 +46,14 @@ const CH = (x, y, z, _variant, side) => {
   L(`lootchest ${T(x)} ${T(y)} ${T(z)} ${pick([2, 3])} ${side}`);
 };
 // creature spawner spot (Underwater Horrors). The mod's runner rolls the
-// serpent / kraken chance at build time. Grounded with a support block.
-const SPAWN = (x, y, z) => {
-  S(x, y - 1, z, 'game:cobblestone-granite');
+// serpent / kraken chance at build time. Raised on a pillar (pillarFrom up
+// to just below the spawner) so the creature spawns in open water above
+// the structure instead of embedded in its floor; without pillarFrom it
+// just gets a single support block beneath.
+const SPAWN = (x, y, z, pillarFrom, block) => {
+  const b = block || 'game:cobblestone-granite';
+  if (pillarFrom !== undefined && pillarFrom < y) F(x, pillarFrom, z, x, y - 1, z, b);
+  else S(x, y - 1, z, b);
   L(`spawner ${T(x)} ${T(y)} ${T(z)}`);
 };
 // ingot pile: mostly silver / copper / molybdochalkos, an occasional very large
@@ -221,8 +226,9 @@ function ruin() {
   rewards(x1 + 1, z1 + 1, x2 - 1, z2 - 1, 0, 9, 5);
   // cracked vessels
   S(3, 0, -3, pick(P.vessel)); S(-2, 0, 3, pick(P.vessel)); S(2, 0, 4, pick(P.vessel));
-  // two creature spawner spots (runner rolls the serpent / kraken chance)
-  SPAWN(2, 0, 3); SPAWN(-3, 0, -2);
+  // two creature spawner spots on pillars above the walls (runner rolls the
+  // serpent / kraken chance)
+  SPAWN(2, top + 2, 3, 0); SPAWN(-3, top + 2, -2, 0);
   write('ruin');
 }
 
@@ -286,8 +292,8 @@ function portal() {
   // debris and cracked vessels scattered inside the ring
   for (let i = 0; i < 30; i++) { const a = rnd() * Math.PI * 2, rr = ri(1, R - 1); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.debris)); }
   for (let i = 0; i < 4; i++) { const a = rnd() * Math.PI * 2, rr = ri(2, R - 2); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.vessel)); }
-  // two creature spawner spots on the platform
-  SPAWN(3, 0, 3); SPAWN(-4, 0, 2);
+  // two creature spawner spots on pillars above the portal frame
+  SPAWN(3, fy + fh + 2, 3, 0); SPAWN(-4, fy + fh + 2, 2, 0);
   write('portal');
 }
 
@@ -385,12 +391,16 @@ function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH, spawners 
     INGOTS(x, y, z);
   }
 
-  // creature spawner spot(s) on the sea floor inside the wreck; the huge wreck
-  // gets two, spread fore and aft
+  // creature spawner(s) atop broken masts rising from the deck, spread along
+  // the length, so the creature spawns in open water above the hull. The old
+  // fore/aft spacing overshot the stern for 3+ spawners (i * 0.8 * half with
+  // no divisor), which left the huge wreck's third spawner outside the ship.
   const ns = spawners || 1;
+  const [mrx, mry] = rot(0, H);
+  const mastX = round(mrx), deckY = round(mry) + yOff;
   for (let i = 0; i < ns; i++) {
-    const zc = ns > 1 ? round(-half * 0.4 + i * (half * 0.8)) : ri(-half + 6, half - 6);
-    SPAWN(ri(-2, 2), 0, zc);
+    const zc = ns > 1 ? round(-half * 0.4 + i * (half * 0.8 / (ns - 1))) : ri(-half + 6, half - 6);
+    SPAWN(mastX, deckY + 4, zc, 0, pick(P.beam));
   }
 
   // debris trailing out of the wreck on the sea floor
@@ -509,8 +519,8 @@ function city() {
     if (!inside(x, z)) continue;
     for (let j = 0; j < len; j++) { const th = hh - ri(0, 3); for (let y = fy + 1; y <= fy + th; y++) if (chance(0.7)) S(vert ? x : x + j, y, vert ? z + j : z, wb); }
   }
-  // two creature spawner spots in the streets
-  SPAWN(2, 0, 2); SPAWN(-6, 0, -5);
+  // two creature spawner spots on tall rubble pillars above the rooftops
+  SPAWN(2, 10, 2, 0); SPAWN(-6, 10, -5, 0);
   write('city');
 }
 

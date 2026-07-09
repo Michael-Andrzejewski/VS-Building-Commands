@@ -1411,7 +1411,7 @@ setblock ~-8 ~1 ~-7 game:brickruin-irregular-gray
 setblock ~-8 ~1 ~-6 game:brickruin-irregular-gray
 setblock ~-8 ~2 ~-6 game:brickruin-irregular-gray
 setblock ~-8 ~3 ~-6 game:brickruin-irregular-gray
-setblock ~2 ~-1 ~2 game:cobblestone-granite
-spawner ~2 ~ ~2
-setblock ~-6 ~-1 ~-5 game:cobblestone-granite
-spawner ~-6 ~ ~-5
+fill ~2 ~ ~2 ~2 ~9 ~2 game:cobblestone-granite
+spawner ~2 ~10 ~2
+fill ~-6 ~ ~-5 ~-6 ~9 ~-5 game:cobblestone-granite
+spawner ~-6 ~10 ~-5

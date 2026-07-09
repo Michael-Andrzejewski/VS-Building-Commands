@@ -2430,10 +2430,10 @@ setblock ~-2 ~ ~-2 game:cobblestone-granite
 ingots ~-2 ~1 ~-2 molybdochalkos 27
 setblock ~-2 ~1 ~-21 game:cobblestone-granite
 ingots ~-2 ~2 ~-21 steel 10
-setblock ~-2 ~-1 ~-10 game:cobblestone-granite
-spawner ~-2 ~ ~-10
-setblock ~2 ~-1 ~10 game:cobblestone-granite
-spawner ~2 ~ ~10
+fill ~ ~ ~-10 ~ ~18 ~-10 game:log-placed-aged-ud
+spawner ~ ~19 ~-10
+fill ~ ~ ~10 ~ ~18 ~10 game:log-placed-aged-we
+spawner ~ ~19 ~10
 setblock ~-9 ~ ~-9 game:loosestick
 setblock ~-5 ~ ~-25 game:cobblestone-granite
 setblock ~6 ~ ~3 game:metal-scraps

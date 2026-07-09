@@ -6528,12 +6528,12 @@ setblock ~7 ~9 ~-6 game:cobblestone-granite
 ingots ~7 ~10 ~-6 copper 33
 setblock ~-3 ~4 ~-33 game:cobblestone-granite
 ingots ~-3 ~5 ~-33 molybdochalkos 17
-setblock ~1 ~-1 ~-22 game:cobblestone-granite
-spawner ~1 ~ ~-22
-setblock ~-1 ~-1 ~22 game:cobblestone-granite
-spawner ~-1 ~ ~22
-setblock ~1 ~-1 ~66 game:cobblestone-granite
-spawner ~1 ~ ~66
+fill ~-6 ~ ~-22 ~-6 ~26 ~-22 game:log-placed-aged-we
+spawner ~-6 ~27 ~-22
+fill ~-6 ~ ~ ~-6 ~26 ~ game:log-placed-aged-ns
+spawner ~-6 ~27 ~
+fill ~-6 ~ ~22 ~-6 ~26 ~22 game:log-placed-aged-we
+spawner ~-6 ~27 ~22
 setblock ~-3 ~ ~-41 game:loosestick
 setblock ~-4 ~ ~-2 game:metal-parts
 setblock ~16 ~ ~-24 game:metal-scraps

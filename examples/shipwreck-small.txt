@@ -1104,8 +1104,8 @@ setblock ~3 ~4 ~-13 game:cobblestone-granite
 ingots ~3 ~5 ~-13 copper 39
 setblock ~2 ~4 ~3 game:cobblestone-granite
 ingots ~2 ~5 ~3 silver 12
-setblock ~-1 ~-1 ~-4 game:cobblestone-granite
-spawner ~-1 ~ ~-4
+fill ~-3 ~ ~-4 ~-3 ~17 ~-4 game:log-placed-aged-ud
+spawner ~-3 ~18 ~-4
 setblock ~-9 ~ ~-15 game:loosestick
 setblock ~9 ~ ~-8 game:loosestick
 setblock ~4 ~ ~-8 game:cobblestone-granite
