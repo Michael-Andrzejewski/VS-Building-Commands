@@ -218,7 +218,7 @@ function ruin() {
   scatterDebris(x1 + 1, z1 + 1, x2 - 1, z2 - 1, fy + 1, 22, P.debris);
   // collapsed chests + ingot hoards scattered on the floor
   CH(-4, 0, -5, 2, 'north'); CH(4, 0, 5, 3, 'south'); CH(-3, 0, 6, 1, 'north'); CH(4, 0, -4, 4, 'west'); CH(0, 0, -3, 2, 'east');
-  rewards(x1 + 1, z1 + 1, x2 - 1, z2 - 1, 0, 5, 4);
+  rewards(x1 + 1, z1 + 1, x2 - 1, z2 - 1, 0, 9, 5);
   // cracked vessels
   S(3, 0, -3, pick(P.vessel)); S(-2, 0, 3, pick(P.vessel)); S(2, 0, 4, pick(P.vessel));
   // two creature spawner spots (runner rolls the serpent / kraken chance)
@@ -275,7 +275,7 @@ function portal() {
   for (let z = -fw + 1; z <= fw - 1; z++) for (let y = fy + 2; y <= fy + fh - 2; y++) if (chance(0.6)) S(0, y, z, P.lightAlt);
 
   // scattered collapsed chests + ingot hoards around the ring
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 13; i++) {
     const a = rnd() * Math.PI * 2, rr = ri(4, R - 1);
     CH(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), 0, pick(SIDES));
   }
@@ -408,7 +408,7 @@ function city() {
       const w = ri(3, 5), d = ri(3, 5);
       const tower = chance(0.35);
       const h = tower ? ri(14, 26) : ri(5, 9);
-      ruinedBuilding(cx, cz, w, d, h, fy, { chests: ri(1, 3), ingots: ri(0, 2), holes: 1.0 });
+      ruinedBuilding(cx, cz, w, d, h, fy, { chests: ri(2, 4), ingots: ri(0, 2), holes: 1.0 });
       // rubble ring around each building
       scatterDebris(cx - w - 2, cz - d - 2, cx + w + 2, cz + d + 2, fy + 1, ri(4, 9), P.debris);
     }
@@ -416,7 +416,7 @@ function city() {
 
   // extra debris, loose chests and ingot hoards scattered in the streets
   for (let i = 0; i < 90; i++) S(ri(-R, R), fy + 1, ri(-R, R), pick(P.debris));
-  rewards(-R + 2, -R + 2, R - 2, R - 2, fy + 1, 12, 8);
+  rewards(-R + 2, -R + 2, R - 2, R - 2, fy + 1, 20, 8);
   for (let i = 0; i < 8; i++) S(ri(-R + 2, R - 2), fy + 1, ri(-R + 2, R - 2), pick(P.vessel));
   // a few standing broken archways / walls between buildings
   for (let i = 0; i < 8; i++) {
@@ -431,8 +431,8 @@ function city() {
 // ── run all ──────────────────────────────────────────────────────────────
 ruin();
 portal();
-ship({ name: 'shipwreck-huge', length: 110, tiltDeg: 26, chests: 22, dev: true, seed: 33, W: 11, H: 13, DEPTH: 6, spawners: 3 });
-ship({ name: 'shipwreck-small', length: 34, tiltDeg: 24, chests: 5, dev: false, seed: 44, W: 6, H: 8, DEPTH: 4, spawners: 1 });
-ship({ name: 'shipwreck-medium', length: 50, tiltDeg: 0, chests: 10, dev: false, seed: 66, W: 8, H: 10, DEPTH: 5, spawners: 2 });
+ship({ name: 'shipwreck-huge', length: 110, tiltDeg: 26, chests: 30, dev: true, seed: 33, W: 11, H: 13, DEPTH: 6, spawners: 3 });
+ship({ name: 'shipwreck-small', length: 34, tiltDeg: 24, chests: 8, dev: false, seed: 44, W: 6, H: 8, DEPTH: 4, spawners: 1 });
+ship({ name: 'shipwreck-medium', length: 50, tiltDeg: 0, chests: 15, dev: false, seed: 66, W: 8, H: 10, DEPTH: 5, spawners: 2 });
 city();
 console.log('done');
