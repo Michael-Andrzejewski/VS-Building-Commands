@@ -123,6 +123,14 @@ function ruinedBuilding(cx, cz, w, d, h, floorY, opts) {
   const dz = pick([z1, z2]);
   F(cx - 1, floorY + 1, dz, cx + 1, floorY + 2, dz, 'air');
 
+  // interior floors -> distinct levels; a chest and sometimes a light on each
+  for (let ly = floorY + 4; ly <= top - 2; ly += 4) {
+    F(x1 + 1, ly, z1 + 1, x2 - 1, ly, z2 - 1, pick(P.cobble));
+    if (chance(0.55)) CH(cx + ri(-w + 1, w - 1), ly + 1, cz + ri(-d + 1, d - 1), ri(1, 4), pick(SIDES));
+    if (chance(0.4)) S(cx + ri(-w + 1, w - 1), ly + 1, cz + ri(-d + 1, d - 1), chance(0.5) ? P.light : P.lightAlt);
+    scatterDebris(x1 + 1, z1 + 1, x2 - 1, z2 - 1, ly + 1, ri(1, 2), P.debris);
+  }
+
   // interior: a light, some debris, a chest or two
   if (opts.light !== false) S(cx, top - 1, cz, chance(0.5) ? P.light : P.lightAlt);
   scatterDebris(x1 + 1, z1 + 1, x2 - 1, z2 - 1, floorY + 1, ri(2, 5), P.debris);
@@ -164,8 +172,17 @@ function ruin() {
   // doorway
   F(-1, 0, z1, 1, 2, z1, 'air');
 
-  // lights
-  S(-4, top - 1, -6, P.light); S(4, top - 1, -6, P.light); S(-4, top - 1, 6, P.light); S(4, top - 1, 6, P.light); S(0, top - 1, 0, P.light);
+  // pillars every few blocks along each wall to tie the crumbled segments
+  // together so the walls read as connected
+  for (const [ax, wx1, wz1, wx2, wz2] of [['x', x1, z1, x1, z2], ['x', x2, z1, x2, z2], ['z', x1, z1, x2, z1], ['z', x1, z2, x2, z2]]) {
+    if (ax === 'x') for (let z = wz1; z <= wz2; z += 4) for (let y = fy + 1; y <= top; y++) S(wx1, y, z, pick(P.wall));
+    else for (let x = wx1; x <= wx2; x += 4) for (let y = fy + 1; y <= top; y++) S(x, y, wz1, pick(P.wall));
+  }
+  // pillars holding up the green lights
+  for (const [lx, lz] of [[-4, -6], [4, -6], [-4, 6], [4, 6], [0, 0]]) {
+    for (let y = fy + 1; y < top - 1; y++) S(lx, y, lz, pick(P.wall));
+    S(lx, top - 1, lz, P.light);
+  }
   // debris piles
   scatterDebris(x1 + 1, z1 + 1, x2 - 1, z2 - 1, fy + 1, 22, P.debris);
   // collapsed chests
@@ -280,6 +297,20 @@ function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH }) {
     // ribs every 6 segments
     if (zc % 6 === 0) for (let sx = -w; sx <= w; sx++) put(sx, keel(sx, w, dep), zc, pick(P.beam));
     if (dev && chance(0.05)) devSpots.push([w, zc]);
+  }
+
+  // interior bulkheads -> recognizable rooms, mostly intact with a doorway
+  const dims = (zc) => { const u = (zc + half) / length; const t = Math.pow(Math.min(1, Math.min(u, 1 - u) / 0.15), 0.5); return [Math.max(1, round(W * t)), Math.max(1, round(DEPTH * t))]; };
+  const bstep = Math.max(9, round(length / 7));
+  for (let bz = -half + bstep; bz <= half - bstep; bz += bstep) {
+    const [w, dep] = dims(bz);
+    for (let sx = -w + 1; sx <= w - 1; sx++) {
+      const ky = keel(sx, w, dep);
+      for (let y = ky + 1; y <= H - 1; y++) {
+        if (Math.abs(sx) <= 1 && y <= ky + 3) continue; // doorway through the bulkhead
+        if (chance(0.85)) put(sx, y, bz, pick(P.wood));
+      }
+    }
   }
 
   // devastation clusters bursting out of the hull
