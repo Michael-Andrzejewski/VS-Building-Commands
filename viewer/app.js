@@ -13,6 +13,7 @@ function tint(tok) { // '~' -> 0, '~5' -> 5, '~-3' -> -3, '10' -> 10
 
 function colorFor(code) {
   if (code === '__chest__') return 0x8a5a26;      // collapsed loot chest (bright so it stands out)
+  if (code === '__spawner__') return 0x00e5ff;    // creature spawner (cyan)
   const c = code.replace(/^game:/, '');
   if (c.startsWith('stonebricks')) return 0x8f8f8f;
   if (c.startsWith('cobblestone')) return 0x707070;
@@ -66,6 +67,8 @@ function parseScript(text) {
       set(tint(t[1]), tint(t[2]), tint(t[3]), t[4]);
     } else if (cmd === 'lootchest') {
       set(tint(t[1]), tint(t[2]), tint(t[3]), '__chest__');
+    } else if (cmd === 'spawner') {
+      set(tint(t[1]), tint(t[2]), tint(t[3]), '__spawner__');
     }
   }
   return map;

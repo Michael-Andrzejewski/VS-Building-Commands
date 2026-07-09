@@ -395,6 +395,7 @@ public class BuildingCommandsModSystem : ModSystem
             if (cmd == "fill") AddFillCells(tok, map, ref capped);
             else if (cmd == "setblock" || cmd == "cbsetblock") AddSetblockCells(tok, map, ref capped);
             else if (cmd == "lootchest") AddLootChestCell(tok, map, ref capped);
+            else if (cmd == "spawner") AddSpawnerCell(tok, map, ref capped);
 
             if (capped) break;
         }
@@ -524,10 +525,15 @@ public class BuildingCommandsModSystem : ModSystem
     /// first error text. Blank lines and lines starting with # or // are
     /// skipped; a leading / is optional.
     /// </summary>
+    // Set once at the start of each script run: a 5% chance that every serpent
+    // spawner in this structure becomes a kraken spawner instead.
+    private bool _runKrakenMode;
+
     private (int ran, int errors, string firstError) RunLines(IEnumerable<string> lines, Caller caller)
     {
         int ran = 0, errors = 0, lineNo = 0;
         string firstError = null;
+        _runKrakenMode = sapi.World.Rand.NextDouble() < 0.05;
 
         foreach (string raw in lines)
         {
@@ -551,8 +557,9 @@ public class BuildingCommandsModSystem : ModSystem
                 case "cbsetblock": r = DoSetblock(a, caller); break;
                 case "clone": r = DoClone(a, caller); break;
                 case "lootchest": r = DoLootChest(a, caller); break;
+                case "spawner": r = DoSpawner(a, caller); break;
                 case "blockcode": r = DoBlockcode(a, caller); break;
-                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, blockcode)"); break;
+                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, spawner, blockcode)"); break;
             }
 
             if (r.Status == EnumCommandStatus.Success)
@@ -805,7 +812,9 @@ public class BuildingCommandsModSystem : ModSystem
         int variant;
         string typeArg = A(a, 3);
         if (typeArg != null && int.TryParse(typeArg, out int t) && t >= 1 && t <= 4) variant = t;
-        else variant = 1 + rnd.Next(4);
+        // Only 2 and 3 render as a properly burst-open collapsed chest; 1 and 4
+        // look near-intact. Default to those two for a real "ruined" look.
+        else variant = (rnd.Next(2) == 0) ? 2 : 3;
         string collapsedType = "collapsed" + variant;
 
         string side = (A(a, 4) ?? "north").ToLowerInvariant();
@@ -822,10 +831,21 @@ public class BuildingCommandsModSystem : ModSystem
         var chestStack = new ItemStack(chest);
         chestStack.Attributes.SetString("type", collapsedType);
         accessor.SetBlock(chest.BlockId, pos, chestStack);
+
+        // Belt-and-suspenders: force the block entity's "type" field too, so it
+        // always renders as the collapsed variant (and gets retrieveOnly +
+        // changeIntoWhenEmpty -> clutter/chestrubble) even if the placing stack
+        // did not carry the type through on this VS build.
+        var beChest = accessor.GetBlockEntity(pos);
+        if (beChest != null)
+        {
+            var tf = beChest.GetType().GetField("type");
+            if (tf != null && tf.FieldType == typeof(string)) tf.SetValue(beChest, collapsedType);
+        }
         accessor.MarkBlockDirty(pos);
 
         int lootSlots = 0;
-        if (accessor.GetBlockEntity(pos) is IBlockEntityContainer bec && bec.Inventory != null)
+        if (beChest is IBlockEntityContainer bec && bec.Inventory != null)
         {
             IInventory inv = bec.Inventory;
             int slotCount = inv.Count;
@@ -843,7 +863,7 @@ public class BuildingCommandsModSystem : ModSystem
                 slot.MarkDirty();
                 if (slot.Itemstack != null) lootSlots++;
             }
-            (accessor.GetBlockEntity(pos))?.MarkDirty(true);
+            beChest.MarkDirty(true);
         }
 
         return TextCommandResult.Success($"Placed a {collapsedType} chest at ({x},{y},{z}) with loot in {lootSlots} slot(s).");
@@ -862,6 +882,53 @@ public class BuildingCommandsModSystem : ModSystem
         Block chest = sapi.World.GetBlock(new AssetLocation("game", "chest-" + side));
         if (chest == null) return;
         map[Pack(x, y, z)] = chest.BlockId;
+        if (map.Count >= MaxPreviewCells) capped = true;
+    }
+
+    // spawner x y z [serpent|kraken]
+    // Places an Underwater Horrors creature spawner. With no type it follows the
+    // ruin rules: a 50% chance to place one at all, and 5% of structures (rolled
+    // once per run) turn every serpent spawner into a kraken. Passing serpent or
+    // kraken always places that one. Skips quietly if Underwater Horrors is
+    // not installed.
+    private TextCommandResult DoSpawner(IList<string> a, Caller caller)
+    {
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
+        if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+
+        string typeArg = (A(a, 3) ?? "").ToLowerInvariant();
+        bool kraken;
+        if (typeArg == "serpent") kraken = false;
+        else if (typeArg == "kraken") kraken = true;
+        else
+        {
+            if (sapi.World.Rand.NextDouble() >= 0.5)
+                return TextCommandResult.Success("No spawner here (missed the 50% roll).");
+            kraken = _runKrakenMode;
+        }
+
+        string code = kraken ? "krakenspawner" : "serpentspawner";
+        Block spawner = sapi.World.GetBlock(new AssetLocation("underwaterhorrors", code));
+        if (spawner == null)
+            return TextCommandResult.Error($"Spawner block underwaterhorrors:{code} not found (is Underwater Horrors installed?).");
+
+        var pos = new BlockPos(x, y, z, dim);
+        sapi.World.BlockAccessor.SetBlock(spawner.BlockId, pos);
+        sapi.World.BlockAccessor.MarkBlockDirty(pos);
+        return TextCommandResult.Success($"Placed a {code} at ({x},{y},{z}).");
+    }
+
+    private void AddSpawnerCell(string[] tok, Dictionary<long, int> map, ref bool capped)
+    {
+        if (tok.Length < 4) return;
+        if (!ParseCoord(tok[1], 0, out int x, out _)) return;
+        if (!ParseCoord(tok[2], 0, out int y, out _)) return;
+        if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+        Block b = sapi.World.GetBlock(new AssetLocation("underwaterhorrors", "serpentspawner"));
+        if (b == null) return;
+        map[Pack(x, y, z)] = b.BlockId;
         if (map.Count >= MaxPreviewCells) capped = true;
     }
 

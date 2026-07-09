@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>collapsed chest shapes</title>
+<style>
+  html,body{margin:0;height:100%;background:#0a1a26;overflow:hidden;font-family:monospace;color:#cfe}
+  #info{position:fixed;left:10px;top:8px;font-size:13px;line-height:1.5;text-shadow:0 1px 2px #000}
+  canvas{display:block}
+</style>
+</head>
+<body>
+<div id="info">collapsed chest shapes &middot; drag to orbit, wheel to zoom<br>left to right: normal, collapsed1, collapsed2, collapsed3, collapsed4</div>
+<script src="/viewer/three.min.js"></script>
+<script>
+const SHAPES = ['normal','collapsed1','collapsed2','collapsed3','collapsed4'];
+const d2r = d => (d||0) * Math.PI/180;
+
+// face-name -> a color so we can read the lid vs sides vs floor
+function texColor(name){
+  if(!name) return 0x9a7a4a;
+  if(name.includes('lid'))   return 0xb5651d;  // lid = orange-brown (tells us if it's tilted/off)
+  if(name.includes('floor')) return 0x5a4326;  // floor = dark
+  if(name.includes('corner'))return 0x7a5a30;
+  return 0xa8823f;                             // sides = tan
+}
+
+// Build a Blockbench/VS element (with nested children + pivot rotation) into a group.
+function buildEl(el){
+  const ox = el.rotationOrigin || [0,0,0];
+  const pivot = new THREE.Group();
+  pivot.position.set(ox[0],ox[1],ox[2]);
+  pivot.rotation.set(d2r(el.rotationX), d2r(el.rotationY), d2r(el.rotationZ));
+  const content = new THREE.Group();
+  content.position.set(-ox[0],-ox[1],-ox[2]);
+  pivot.add(content);
+  const f = el.from, t = el.to;
+  const sx=Math.max(0.01,t[0]-f[0]), sy=Math.max(0.01,t[1]-f[1]), sz=Math.max(0.01,t[2]-f[2]);
+  // pick a color from the 'up' or first face texture
+  let col = 0xa8823f;
+  if(el.faces){ const face = el.faces.up || el.faces.north || Object.values(el.faces)[0]; if(face&&face.texture) col = texColor(face.texture); }
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz), new THREE.MeshLambertMaterial({color:col}));
+  mesh.position.set((f[0]+t[0])/2,(f[1]+t[1])/2,(f[2]+t[2])/2);
+  content.add(mesh);
+  for(const c of (el.children||[])) content.add(buildEl(c));
+  return pivot;
+}
+
+const renderer = new THREE.WebGLRenderer({antialias:true, preserveDrawingBuffer:true});
+renderer.setSize(innerWidth, innerHeight); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0a1a26);
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.1, 5000);
+scene.add(new THREE.HemisphereLight(0xdff0ff,0x35485a,0.8));
+scene.add(new THREE.AmbientLight(0xffffff,0.55));
+const dl=new THREE.DirectionalLight(0xffffff,0.9); dl.position.set(0.6,1,0.4); scene.add(dl);
+const dl2=new THREE.DirectionalLight(0xbcd6ee,0.5); dl2.position.set(-0.4,0.5,-0.6); scene.add(dl2);
+
+// ground grid so we can see what sits "on the floor"
+const grid = new THREE.GridHelper(160, 20, 0x244, 0x1a3);
+grid.position.set(40, 0, 0); scene.add(grid);
+
+let az=0.7, pol=1.15, rad=90, cx=40, cy=6, cz=0;
+function render(){ renderer.render(scene,camera); }
+function updateCam(){
+  const sp=Math.sin(pol);
+  camera.position.set(cx+rad*sp*Math.cos(az), cy+rad*Math.cos(pol), cz+rad*sp*Math.sin(az));
+  camera.lookAt(cx,cy,cz); render();
+}
+let drag=false,px=0,py=0;
+renderer.domElement.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;});
+addEventListener('pointerup',()=>drag=false);
+addEventListener('pointermove',e=>{ if(!drag)return; az+=(e.clientX-px)*0.006; pol=Math.max(0.1,Math.min(3.0,pol-(e.clientY-py)*0.006)); px=e.clientX;py=e.clientY; updateCam(); });
+renderer.domElement.addEventListener('wheel',e=>{e.preventDefault(); rad=Math.max(10,Math.min(600,rad*(1+Math.sign(e.deltaY)*0.1))); updateCam();},{passive:false});
+
+async function loadAll(){
+  for(let i=0;i<SHAPES.length;i++){
+    const name=SHAPES[i];
+    try{
+      const res=await fetch('/viewer/chests/'+name+'.json');
+      const data=await res.json();
+      const root=new THREE.Group();
+      for(const el of (data.elements||[])) root.add(buildEl(el));
+      // center each chest's 16-wide cell, space them 22 apart on X
+      root.position.set(i*22 - 8, 0, -8);   // shift so 0..16 sits around the cell
+      scene.add(root);
+    }catch(e){ console.error(name, e); }
+  }
+  updateCam();
+}
+loadAll();
+
+// capture helper (WebGL screenshot workaround)
+window.capture = async function(nm){
+  renderer.setPixelRatio(1); renderer.setSize(1400,600,false);
+  camera.aspect=1400/600; camera.updateProjectionMatrix(); render();
+  const gl=renderer.getContext(), w=gl.drawingBufferWidth, h=gl.drawingBufferHeight;
+  const px=new Uint8Array(w*h*4); gl.readPixels(0,0,w,h,gl.RGBA,gl.UNSIGNED_BYTE,px);
+  const cvs=document.createElement('canvas'); cvs.width=w; cvs.height=h;
+  const ctx=cvs.getContext('2d'); const img=ctx.createImageData(w,h);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const s=((h-1-y)*w+x)*4,d=(y*w+x)*4;img.data[d]=px[s];img.data[d+1]=px[s+1];img.data[d+2]=px[s+2];img.data[d+3]=255;}
+  ctx.putImageData(img,0,0);
+  await fetch('/capture?name='+nm,{method:'POST',headers:{'Content-Type':'text/plain'},body:cvs.toDataURL('image/png')});
+  return 'ok';
+};
+</script>
+</body>
+</html>

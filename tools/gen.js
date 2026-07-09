@@ -38,7 +38,19 @@ function floorRuined(x1, z1, x2, z2, y) {
     F(px, y, pz, Math.min(x2, px + ri(0, 1)), y, Math.min(z2, pz + ri(0, 1)), 'air');
   }
 }
-const CH = (x, y, z, variant, side) => L(`lootchest ${T(x)} ${T(y)} ${T(z)} ${variant} ${side}`);
+// collapsed loot chest. Always drop a support block directly beneath it so the
+// chest can never float, and only use the 2/3 variants (the ones that actually
+// look burst-open; 1 and 4 look near-intact). The variant arg is ignored.
+const CH = (x, y, z, _variant, side) => {
+  S(x, y - 1, z, 'game:cobblestone-granite');
+  L(`lootchest ${T(x)} ${T(y)} ${T(z)} ${pick([2, 3])} ${side}`);
+};
+// creature spawner spot (Underwater Horrors). The mod's runner rolls the 50%
+// serpent / 5% kraken chance at build time. Grounded with a support block.
+const SPAWN = (x, y, z) => {
+  S(x, y - 1, z, 'game:cobblestone-granite');
+  L(`spawner ${T(x)} ${T(y)} ${T(z)}`);
+};
 
 // ── seeded rng (stable output; bump SEED to reroll) ──────────────────────
 function mulberry32(a) {
@@ -189,6 +201,8 @@ function ruin() {
   CH(-4, 0, -5, 2, 'north'); CH(4, 0, 5, 3, 'south'); CH(-3, 0, 6, 1, 'north'); CH(4, 0, -4, 4, 'west'); CH(0, 0, -3, 2, 'east');
   // cracked vessels
   S(3, 0, -3, pick(P.vessel)); S(-2, 0, 3, pick(P.vessel)); S(2, 0, 4, pick(P.vessel));
+  // one creature spawner spot on the floor (runner rolls 50% serpent / 5% kraken)
+  SPAWN(2, 0, 3);
   write('ruin');
 }
 
@@ -248,6 +262,8 @@ function portal() {
   // debris and cracked vessels scattered inside the ring
   for (let i = 0; i < 30; i++) { const a = rnd() * Math.PI * 2, rr = ri(1, R - 1); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.debris)); }
   for (let i = 0; i < 4; i++) { const a = rnd() * Math.PI * 2, rr = ri(2, R - 2); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.vessel)); }
+  // one creature spawner spot on the platform
+  SPAWN(3, 0, 3);
   write('portal');
 }
 
@@ -257,7 +273,7 @@ function portal() {
 // A boat-shaped hull: curved SOLID bottom, solid sides up to a broken deck
 // rim, pointed bow/stern. tiltDeg rotates the whole cross-section so the
 // wreck lies over on its side. Heavily holed for ruin.
-function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH }) {
+function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH, spawners }) {
   rnd = mulberry32(seed);
   W = W || 8; H = H || 10; DEPTH = DEPTH || 5;
   begin(`Sunken shipwreck (${name}). Stand at the CENTER, then /build ${name}`);
@@ -323,12 +339,20 @@ function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH }) {
   // interior lights along the length
   for (let zc = -half + 5; zc <= half - 5; zc += ri(9, 15)) put(ri(-3, 3), ri(1, Math.max(2, H - 3)), zc, chance(0.5) ? P.light : P.lightAlt);
 
-  // collapsed chests inside the hull
-  const cw = Math.max(2, W - 3);
+  // collapsed chests resting on the sea floor inside the wreck (grounded, not
+  // floating up in the tilted hull)
+  const cw = Math.max(2, W - 2);
   for (let i = 0; i < chests; i++) {
     const zc = ri(-half + 4, half - 4);
-    const [rx, ry] = rot(ri(-cw, cw), ri(-DEPTH + 1, 2));
-    CH(round(rx), round(ry) + yOff, zc, ri(1, 4), pick(SIDES));
+    CH(ri(-cw, cw), 0, zc, 0, pick(SIDES));
+  }
+
+  // creature spawner spot(s) on the sea floor inside the wreck; the huge wreck
+  // gets two, spread fore and aft
+  const ns = spawners || 1;
+  for (let i = 0; i < ns; i++) {
+    const zc = ns > 1 ? round(-half * 0.4 + i * (half * 0.8)) : ri(-half + 6, half - 6);
+    SPAWN(ri(-2, 2), 0, zc);
   }
 
   // debris trailing out of the wreck on the sea floor
@@ -372,14 +396,16 @@ function city() {
     const x = ri(-R + 3, R - 3), z = ri(-R + 3, R - 3), len = ri(3, 7), vert = chance(0.5), hh = ri(3, 8), wb = pick(P.brick);
     for (let j = 0; j < len; j++) { const th = hh - ri(0, 3); for (let y = fy + 1; y <= fy + th; y++) if (chance(0.7)) S(vert ? x : x + j, y, vert ? z + j : z, wb); }
   }
+  // one creature spawner spot in the streets near the center
+  SPAWN(2, 0, 2);
   write('city');
 }
 
 // ── run all ──────────────────────────────────────────────────────────────
 ruin();
 portal();
-ship({ name: 'shipwreck-huge', length: 110, tiltDeg: 26, chests: 14, dev: true, seed: 33, W: 11, H: 13, DEPTH: 6 });
-ship({ name: 'shipwreck-small', length: 34, tiltDeg: 24, chests: 3, dev: false, seed: 44, W: 6, H: 8, DEPTH: 4 });
-ship({ name: 'shipwreck-medium', length: 50, tiltDeg: 0, chests: 6, dev: false, seed: 66, W: 8, H: 10, DEPTH: 5 });
+ship({ name: 'shipwreck-huge', length: 110, tiltDeg: 26, chests: 14, dev: true, seed: 33, W: 11, H: 13, DEPTH: 6, spawners: 2 });
+ship({ name: 'shipwreck-small', length: 34, tiltDeg: 24, chests: 3, dev: false, seed: 44, W: 6, H: 8, DEPTH: 4, spawners: 1 });
+ship({ name: 'shipwreck-medium', length: 50, tiltDeg: 0, chests: 6, dev: false, seed: 66, W: 8, H: 10, DEPTH: 5, spawners: 1 });
 city();
 console.log('done');

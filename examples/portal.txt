@@ -484,14 +484,18 @@ setblock ~ ~3 ~1 game:creativelight-49
 setblock ~ ~1 ~2 game:creativelight-49
 setblock ~ ~2 ~2 game:creativelight-49
 setblock ~ ~3 ~2 game:creativelight-49
-lootchest ~-6 ~ ~2 4 south
-lootchest ~ ~ ~5 4 west
-lootchest ~-2 ~ ~-5 2 east
-lootchest ~-1 ~ ~7 4 south
-lootchest ~-7 ~ ~-2 4 west
-lootchest ~-6 ~ ~3 1 north
-setblock ~-1 ~ ~-3 game:loosestick
-setblock ~-6 ~ ~-5 game:cobblestone-granite
+setblock ~-6 ~-1 ~2 game:cobblestone-granite
+lootchest ~-6 ~ ~2 2 south
+setblock ~-5 ~-1 ~7 game:cobblestone-granite
+lootchest ~-5 ~ ~7 2 south
+setblock ~-4 ~-1 ~2 game:cobblestone-granite
+lootchest ~-4 ~ ~2 3 south
+setblock ~-5 ~-1 ~-3 game:cobblestone-granite
+lootchest ~-5 ~ ~-3 3 west
+setblock ~-6 ~-1 ~3 game:cobblestone-granite
+lootchest ~-6 ~ ~3 3 north
+setblock ~-5 ~-1 ~5 game:cobblestone-granite
+lootchest ~-5 ~ ~5 3 west
 setblock ~-1 ~ ~-2 game:looseflints
 setblock ~4 ~ ~-1 game:metal-parts
 setblock ~6 ~ ~-3 game:metal-parts
@@ -520,7 +524,11 @@ setblock ~-4 ~ ~ game:cobblestone-granite
 setblock ~-2 ~ ~-5 game:metal-parts
 setblock ~2 ~ ~1 game:looseflints
 setblock ~1 ~ ~-1 game:metal-parts
-setblock ~ ~ ~2 game:lootvessel-food
-setblock ~5 ~ ~-2 game:lootvessel-tool
+setblock ~ ~ ~2 game:cobblestone-granite
+setblock ~5 ~ ~-2 game:metal-scraps
 setblock ~ ~ ~-2 game:lootvessel-farming
 setblock ~-2 ~ ~5 game:lootvessel-farming
+setblock ~-1 ~ ~-3 game:lootvessel-ore
+setblock ~4 ~ ~-4 game:lootvessel-tool
+setblock ~3 ~-1 ~3 game:cobblestone-granite
+spawner ~3 ~ ~3

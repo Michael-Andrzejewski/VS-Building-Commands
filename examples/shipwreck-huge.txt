@@ -6420,20 +6420,42 @@ setblock ~-4 ~17 ~4 game:creativelight-49
 setblock ~1 ~16 ~19 game:creativelight-49
 setblock ~-4 ~19 ~32 game:creativelight-49
 setblock ~-3 ~20 ~41 game:creativelight-49
-lootchest ~-5 ~6 ~ 2 west
-lootchest ~6 ~15 ~-8 3 north
-lootchest ~-6 ~10 ~ 4 north
-lootchest ~5 ~11 ~50 4 east
-lootchest ~7 ~15 ~21 2 east
-lootchest ~1 ~8 ~22 2 west
-lootchest ~ ~6 ~-49 3 south
-lootchest ~-5 ~11 ~44 1 east
-lootchest ~-5 ~8 ~-9 1 north
-lootchest ~4 ~7 ~19 1 south
-lootchest ~-4 ~7 ~1 4 east
-lootchest ~8 ~10 ~27 2 north
-lootchest ~4 ~14 ~-43 4 west
-lootchest ~2 ~9 ~-40 1 west
+setblock ~-8 ~-1 ~ game:cobblestone-granite
+lootchest ~-8 ~ ~ 2 east
+setblock ~-1 ~-1 ~45 game:cobblestone-granite
+lootchest ~-1 ~ ~45 3 west
+setblock ~-5 ~-1 ~3 game:cobblestone-granite
+lootchest ~-5 ~ ~3 2 south
+setblock ~6 ~-1 ~39 game:cobblestone-granite
+lootchest ~6 ~ ~39 3 north
+setblock ~-1 ~-1 ~30 game:cobblestone-granite
+lootchest ~-1 ~ ~30 2 west
+setblock ~9 ~-1 ~21 game:cobblestone-granite
+lootchest ~9 ~ ~21 2 west
+setblock ~4 ~-1 ~-16 game:cobblestone-granite
+lootchest ~4 ~ ~-16 2 east
+setblock ~7 ~-1 ~-1 game:cobblestone-granite
+lootchest ~7 ~ ~-1 2 north
+setblock ~1 ~-1 ~-45 game:cobblestone-granite
+lootchest ~1 ~ ~-45 3 south
+setblock ~9 ~-1 ~-31 game:cobblestone-granite
+lootchest ~9 ~ ~-31 2 north
+setblock ~-7 ~-1 ~-9 game:cobblestone-granite
+lootchest ~-7 ~ ~-9 2 south
+setblock ~3 ~-1 ~-46 game:cobblestone-granite
+lootchest ~3 ~ ~-46 2 south
+setblock ~1 ~-1 ~-31 game:cobblestone-granite
+lootchest ~1 ~ ~-31 2 south
+setblock ~7 ~-1 ~-12 game:cobblestone-granite
+lootchest ~7 ~ ~-12 3 east
+setblock ~2 ~-1 ~-22 game:cobblestone-granite
+spawner ~2 ~ ~-22
+setblock ~-2 ~-1 ~22 game:cobblestone-granite
+spawner ~-2 ~ ~22
+setblock ~-4 ~ ~-56 game:metal-scraps
+setblock ~10 ~ ~42 game:loosestick
+setblock ~13 ~ ~-46 game:looseflints
+setblock ~-5 ~ ~-55 game:cobblestone-granite
 setblock ~13 ~ ~41 game:metal-scraps
 setblock ~10 ~ ~45 game:loosestick
 setblock ~-14 ~ ~-29 game:looseflints
@@ -6540,11 +6562,7 @@ setblock ~11 ~ ~36 game:loosegears
 setblock ~6 ~ ~-43 game:metal-parts
 setblock ~-10 ~ ~23 game:loosegears
 setblock ~-13 ~ ~-14 game:metal-scraps
-setblock ~16 ~ ~19 game:metal-scraps
-setblock ~16 ~ ~-56 game:looseflints
-setblock ~16 ~ ~24 game:loosestick
-setblock ~3 ~ ~-38 game:metal-scraps
-setblock ~3 ~ ~42 game:lootvessel-tool
-setblock ~-3 ~ ~54 game:lootvessel-tool
-setblock ~1 ~ ~-28 game:lootvessel-farming
-setblock ~2 ~ ~8 game:lootvessel-ore
+setblock ~3 ~ ~17 game:lootvessel-tool
+setblock ~3 ~ ~-53 game:lootvessel-forage
+setblock ~3 ~ ~23 game:lootvessel-farming
+setblock ~1 ~ ~-35 game:lootvessel-tool
