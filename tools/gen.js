@@ -405,17 +405,55 @@ function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH, spawners 
 // ═══════════════════════════════════════════════════════════════════════
 function city() {
   rnd = mulberry32(55);
-  begin('Sunken ruined city, ~40x40. Stand at the CENTER, then /build city');
+  begin('Sunken ruined city, organic ~46-wide footprint. Stand at the CENTER, then /build city');
   const fy = -1, R = 20;
 
-  // broken street floor across the whole footprint
-  floorRuined(-R, -R, R, R, fy);
+  // organic footprint: the union of overlapping discs instead of a hard
+  // 40x40 square, so the edge meanders and reads as natural decay
+  const patches = [[0, 0, 15]];
+  for (let i = 0; i < 10; i++) patches.push([ri(-9, 9), ri(-9, 9), ri(9, 13)]);
+  const inside = (x, z) => {
+    for (const [pcx, pcz, pr] of patches) {
+      const dx = x - pcx, dz = z - pcz;
+      if (dx * dx + dz * dz <= pr * pr) return true;
+    }
+    return false;
+  };
 
-  // buildings on a jittered grid
+  // street floor + a 3-deep rubble plinth below it, emitted as row runs.
+  // The plinth anchors the city into sloped sea floors: on flat ground it
+  // stays buried, on a slope the downhill edge shows a bank of rubble
+  // instead of a floating slab.
+  const B = R + 6;
+  const plinthBlocks = ['game:cobblestone-granite', 'game:gravel-granite', 'game:cobblestone-andesite', 'game:gravel-andesite'];
+  for (let z = -B; z <= B; z++) {
+    let runStart = null;
+    for (let x = -B; x <= B + 1; x++) {
+      const inBlob = x <= B && inside(x, z);
+      if (inBlob && runStart === null) runStart = x;
+      if (!inBlob && runStart !== null) {
+        F(runStart, fy, z, x - 1, fy, z, pick(P.cobble));
+        F(runStart, fy - 3, z, x - 1, fy - 1, z, pick(plinthBlocks));
+        runStart = null;
+      }
+    }
+  }
+  // floor accents + punched holes (only where the blob exists)
+  for (let i = 0; i < 34; i++) {
+    const px = ri(-R, R), pz = ri(-R, R);
+    if (inside(px, pz)) F(px, fy, pz, Math.min(R, px + ri(1, 3)), fy, Math.min(R, pz + ri(1, 3)), pick(['game:cobblestone-limestone', 'game:cobblestone-andesite']));
+  }
+  for (let i = 0; i < 200; i++) {
+    const px = ri(-R, R), pz = ri(-R, R);
+    if (inside(px, pz)) AIR(px, fy, pz);
+  }
+
+  // buildings on a jittered grid, only where the footprint exists
   const step = 11;
   for (let gx = -R + 6; gx <= R - 6; gx += step) {
     for (let gz = -R + 6; gz <= R - 6; gz += step) {
       const cx = gx + ri(-2, 2), cz = gz + ri(-2, 2);
+      if (!inside(cx, cz)) continue;
       const w = ri(3, 5), d = ri(3, 5);
       const tower = chance(0.35);
       const h = tower ? ri(14, 26) : ri(5, 9);
@@ -425,13 +463,50 @@ function city() {
     }
   }
 
+  // collapsed rubble mounds along the rim so the edge tapers off instead
+  // of stopping dead, plus a few big fallen wall slabs in the streets
+  for (let i = 0; i < 14; i++) {
+    const a = rnd() * Math.PI * 2, rr = R - ri(0, 4);
+    const mx = round(Math.cos(a) * rr), mz = round(Math.sin(a) * rr);
+    const mh = ri(2, 4), mw = ri(1, 2);
+    for (let dx = -mw; dx <= mw; dx++) for (let dz = -mw; dz <= mw; dz++) {
+      const hh = Math.max(0, mh - Math.abs(dx) - Math.abs(dz) - ri(0, 1));
+      for (let y = 0; y < hh; y++) S(mx + dx, fy + 1 + y, mz + dz, pick(P.cobble.concat(P.brick)));
+    }
+  }
+  for (let i = 0; i < 5; i++) {
+    const x = ri(-R + 4, R - 4), z = ri(-R + 4, R - 4);
+    if (!inside(x, z)) continue;
+    const len = ri(4, 7), vert = chance(0.5), wb = pick(P.brick);
+    for (let j = 0; j < len; j++) for (let k = 0; k < 2; k++)
+      if (chance(0.85)) S(vert ? x + k : x + j, fy + 1, vert ? z + j : z + k, wb);
+  }
+
   // extra debris, loose chests and ingot hoards scattered in the streets
-  for (let i = 0; i < 90; i++) S(ri(-R, R), fy + 1, ri(-R, R), pick(P.debris));
-  rewards(-R + 2, -R + 2, R - 2, R - 2, fy + 1, 20, 8);
-  for (let i = 0; i < 8; i++) S(ri(-R + 2, R - 2), fy + 1, ri(-R + 2, R - 2), pick(P.vessel));
+  for (let i = 0; i < 90; i++) {
+    const x = ri(-R, R), z = ri(-R, R);
+    if (inside(x, z)) S(x, fy + 1, z, pick(P.debris));
+  }
+  let placed = 0, tries = 0;
+  while (placed < 20 && tries++ < 500) {
+    const x = ri(-R + 2, R - 2), z = ri(-R + 2, R - 2);
+    if (!inside(x, z)) continue;
+    CH(x, fy + 1, z, 0, pick(SIDES)); placed++;
+  }
+  placed = 0; tries = 0;
+  while (placed < 8 && tries++ < 500) {
+    const x = ri(-R + 2, R - 2), z = ri(-R + 2, R - 2);
+    if (!inside(x, z)) continue;
+    INGOTS(x, fy + 1, z); placed++;
+  }
+  for (let i = 0; i < 8; i++) {
+    const x = ri(-R + 2, R - 2), z = ri(-R + 2, R - 2);
+    if (inside(x, z)) S(x, fy + 1, z, pick(P.vessel));
+  }
   // a few standing broken archways / walls between buildings
   for (let i = 0; i < 8; i++) {
     const x = ri(-R + 3, R - 3), z = ri(-R + 3, R - 3), len = ri(3, 7), vert = chance(0.5), hh = ri(3, 8), wb = pick(P.brick);
+    if (!inside(x, z)) continue;
     for (let j = 0; j < len; j++) { const th = hh - ri(0, 3); for (let y = fy + 1; y <= fy + th; y++) if (chance(0.7)) S(vert ? x : x + j, y, vert ? z + j : z, wb); }
   }
   // two creature spawner spots in the streets

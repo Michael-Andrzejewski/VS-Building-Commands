@@ -15,6 +15,10 @@
       <HintPath>$(APPDATA)\Vintagestory\VintagestoryLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="VSSurvivalMod">
+      <HintPath>$(APPDATA)\Vintagestory\Mods\VSSurvivalMod.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="protobuf-net">
       <HintPath>$(APPDATA)\Vintagestory\Lib\protobuf-net.dll</HintPath>
       <Private>False</Private>

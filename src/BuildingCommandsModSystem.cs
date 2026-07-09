@@ -949,27 +949,29 @@ public class BuildingCommandsModSystem : ModSystem
         int count = 8;
         if (A(a, 4) != null && int.TryParse(A(a, 4), out int c)) count = Math.Max(1, Math.Min(64, c));
 
+        // Modern ground storage, the same thing a player creates by
+        // sneak-placing ingots. The legacy game:ingotpile block entity is no
+        // longer created by any vanilla code path and renders invisible.
         Item ingot = sapi.World.GetItem(new AssetLocation("game", "ingot-" + metal));
         if (ingot == null) return TextCommandResult.Error($"Ingot item game:ingot-{metal} not found.");
-        Block pile = sapi.World.GetBlock(new AssetLocation("game", "ingotpile"));
-        if (pile == null) return TextCommandResult.Error("Block game:ingotpile not found.");
+        if (ingot.GetBehavior<Vintagestory.GameContent.CollectibleBehaviorGroundStorable>() == null)
+            return TextCommandResult.Error($"game:ingot-{metal} is not ground-storable.");
+        Block storage = sapi.World.GetBlock(new AssetLocation("game", "groundstorage"));
+        if (storage == null) return TextCommandResult.Error("Block game:groundstorage not found.");
 
         var pos = new BlockPos(x, y, z, dim);
         var accessor = sapi.World.BlockAccessor;
-        accessor.SetBlock(pile.BlockId, pos);
+        accessor.SetBlock(storage.BlockId, pos);
 
-        int placed = 0;
-        BlockEntity be = accessor.GetBlockEntity(pos);
-        IInventory inv = GetBlockEntityInventory(be);
-        if (inv != null && inv.Count > 0)
-        {
-            inv[0].Itemstack = new ItemStack(ingot, count);
-            inv[0].MarkDirty();
-            placed = count;
-        }
-        be?.MarkDirty(true);
+        if (accessor.GetBlockEntity(pos) is not Vintagestory.GameContent.BlockEntityGroundStorage be)
+            return TextCommandResult.Error("Ground storage block entity did not spawn.");
+
+        be.Inventory[0].Itemstack = new ItemStack(ingot, count);
+        be.Inventory[0].MarkDirty();
+        be.DetermineStorageProperties(null);
+        be.MarkDirty(true);
         accessor.MarkBlockDirty(pos);
-        return TextCommandResult.Success($"Placed a pile of {placed} {metal} ingot(s) at ({x},{y},{z}).");
+        return TextCommandResult.Success($"Placed a pile of {count} {metal} ingot(s) at ({x},{y},{z}).");
     }
 
     // Finds a block entity's inventory whether it exposes IBlockEntityContainer
