@@ -324,8 +324,28 @@ setblock ~4 ~-1 ~-4 game:cobblestone-granite
 lootchest ~4 ~ ~-4 3 west
 setblock ~ ~-1 ~-3 game:cobblestone-granite
 lootchest ~ ~ ~-3 3 east
+setblock ~4 ~-1 ~-4 game:cobblestone-granite
+lootchest ~4 ~ ~-4 3 north
+setblock ~2 ~-1 ~2 game:cobblestone-granite
+lootchest ~2 ~ ~2 2 west
+setblock ~-4 ~-1 ~7 game:cobblestone-granite
+lootchest ~-4 ~ ~7 2 south
+setblock ~-2 ~-1 ~3 game:cobblestone-granite
+lootchest ~-2 ~ ~3 3 south
+setblock ~-2 ~-1 ~-3 game:cobblestone-granite
+lootchest ~-2 ~ ~-3 2 north
+setblock ~1 ~-1 ~-5 game:cobblestone-granite
+ingots ~1 ~ ~-5 molybdochalkos 33
+setblock ~-1 ~-1 ~-5 game:cobblestone-granite
+ingots ~-1 ~ ~-5 molybdochalkos 33
+setblock ~-2 ~-1 ~-3 game:cobblestone-granite
+ingots ~-2 ~ ~-3 steel 5
+setblock ~2 ~-1 ~-7 game:cobblestone-granite
+ingots ~2 ~ ~-7 silver 28
 setblock ~3 ~ ~-3 game:lootvessel-food
-setblock ~-2 ~ ~3 game:lootvessel-ore
-setblock ~2 ~ ~4 game:lootvessel-tool
+setblock ~-2 ~ ~3 game:lootvessel-food
+setblock ~2 ~ ~4 game:lootvessel-food
 setblock ~2 ~-1 ~3 game:cobblestone-granite
 spawner ~2 ~ ~3
+setblock ~-3 ~-1 ~-2 game:cobblestone-granite
+spawner ~-3 ~ ~-2

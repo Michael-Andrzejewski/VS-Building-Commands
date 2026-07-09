@@ -45,12 +45,28 @@ const CH = (x, y, z, _variant, side) => {
   S(x, y - 1, z, 'game:cobblestone-granite');
   L(`lootchest ${T(x)} ${T(y)} ${T(z)} ${pick([2, 3])} ${side}`);
 };
-// creature spawner spot (Underwater Horrors). The mod's runner rolls the 50%
-// serpent / 5% kraken chance at build time. Grounded with a support block.
+// creature spawner spot (Underwater Horrors). The mod's runner rolls the
+// serpent / kraken chance at build time. Grounded with a support block.
 const SPAWN = (x, y, z) => {
   S(x, y - 1, z, 'game:cobblestone-granite');
   L(`spawner ${T(x)} ${T(y)} ${T(z)}`);
 };
+// ingot pile: mostly silver / copper / molybdochalkos, an occasional very large
+// gold hoard, and some small steel piles. Grounded with a support block.
+const INGOTS = (x, y, z) => {
+  const r = rnd();
+  let metal, count;
+  if (r < 0.09) { metal = 'gold'; count = ri(48, 64); }          // rare, very large
+  else if (r < 0.24) { metal = 'steel'; count = ri(3, 10); }     // uncommon, small
+  else { metal = pick(['silver', 'copper', 'molybdochalkos']); count = ri(12, 40); }
+  S(x, y - 1, z, 'game:cobblestone-granite');
+  L(`ingots ${T(x)} ${T(y)} ${T(z)} ${metal} ${count}`);
+};
+// scatter loot chests + ingot piles across a floor rectangle at height y
+function rewards(x1, z1, x2, z2, y, nChests, nIngots) {
+  for (let i = 0; i < nChests; i++) CH(ri(x1, x2), y, ri(z1, z2), 0, pick(SIDES));
+  for (let i = 0; i < nIngots; i++) INGOTS(ri(x1, x2), y, ri(z1, z2));
+}
 
 // ── seeded rng (stable output; bump SEED to reroll) ──────────────────────
 function mulberry32(a) {
@@ -138,16 +154,19 @@ function ruinedBuilding(cx, cz, w, d, h, floorY, opts) {
   // interior floors -> distinct levels; a chest and sometimes a light on each
   for (let ly = floorY + 4; ly <= top - 2; ly += 4) {
     F(x1 + 1, ly, z1 + 1, x2 - 1, ly, z2 - 1, pick(P.cobble));
-    if (chance(0.55)) CH(cx + ri(-w + 1, w - 1), ly + 1, cz + ri(-d + 1, d - 1), ri(1, 4), pick(SIDES));
+    if (chance(0.65)) CH(cx + ri(-w + 1, w - 1), ly + 1, cz + ri(-d + 1, d - 1), 0, pick(SIDES));
+    if (chance(0.3)) INGOTS(cx + ri(-w + 1, w - 1), ly + 1, cz + ri(-d + 1, d - 1));
     if (chance(0.4)) S(cx + ri(-w + 1, w - 1), ly + 1, cz + ri(-d + 1, d - 1), chance(0.5) ? P.light : P.lightAlt);
     scatterDebris(x1 + 1, z1 + 1, x2 - 1, z2 - 1, ly + 1, ri(1, 2), P.debris);
   }
 
-  // interior: a light, some debris, a chest or two
+  // interior: a light, some debris, a chest or two, maybe an ingot hoard
   if (opts.light !== false) S(cx, top - 1, cz, chance(0.5) ? P.light : P.lightAlt);
   scatterDebris(x1 + 1, z1 + 1, x2 - 1, z2 - 1, floorY + 1, ri(2, 5), P.debris);
   const nch = opts.chests != null ? opts.chests : ri(0, 2);
-  for (let i = 0; i < nch; i++) CH(cx + ri(-w + 1, w - 1), floorY + 1, cz + ri(-d + 1, d - 1), ri(1, 4), pick(SIDES));
+  for (let i = 0; i < nch; i++) CH(cx + ri(-w + 1, w - 1), floorY + 1, cz + ri(-d + 1, d - 1), 0, pick(SIDES));
+  const nin = opts.ingots != null ? opts.ingots : 0;
+  for (let i = 0; i < nin; i++) INGOTS(cx + ri(-w + 1, w - 1), floorY + 1, cz + ri(-d + 1, d - 1));
 }
 
 // ── header + write ───────────────────────────────────────────────────────
@@ -197,12 +216,13 @@ function ruin() {
   }
   // debris piles
   scatterDebris(x1 + 1, z1 + 1, x2 - 1, z2 - 1, fy + 1, 22, P.debris);
-  // collapsed chests
+  // collapsed chests + ingot hoards scattered on the floor
   CH(-4, 0, -5, 2, 'north'); CH(4, 0, 5, 3, 'south'); CH(-3, 0, 6, 1, 'north'); CH(4, 0, -4, 4, 'west'); CH(0, 0, -3, 2, 'east');
+  rewards(x1 + 1, z1 + 1, x2 - 1, z2 - 1, 0, 5, 4);
   // cracked vessels
   S(3, 0, -3, pick(P.vessel)); S(-2, 0, 3, pick(P.vessel)); S(2, 0, 4, pick(P.vessel));
-  // one creature spawner spot on the floor (runner rolls 50% serpent / 5% kraken)
-  SPAWN(2, 0, 3);
+  // two creature spawner spots (runner rolls the serpent / kraken chance)
+  SPAWN(2, 0, 3); SPAWN(-3, 0, -2);
   write('ruin');
 }
 
@@ -254,16 +274,20 @@ function portal() {
   for (const czz of [-fw, fw]) for (let y = fy + 1; y <= fy + fh - 1; y++) if (chance(0.6)) S(0, y, czz, frameB);
   for (let z = -fw + 1; z <= fw - 1; z++) for (let y = fy + 2; y <= fy + fh - 2; y++) if (chance(0.6)) S(0, y, z, P.lightAlt);
 
-  // scattered collapsed chests around the ring
-  for (let i = 0; i < 6; i++) {
+  // scattered collapsed chests + ingot hoards around the ring
+  for (let i = 0; i < 9; i++) {
     const a = rnd() * Math.PI * 2, rr = ri(4, R - 1);
-    CH(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), ri(1, 4), pick(SIDES));
+    CH(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), 0, pick(SIDES));
+  }
+  for (let i = 0; i < 4; i++) {
+    const a = rnd() * Math.PI * 2, rr = ri(4, R - 1);
+    INGOTS(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr));
   }
   // debris and cracked vessels scattered inside the ring
   for (let i = 0; i < 30; i++) { const a = rnd() * Math.PI * 2, rr = ri(1, R - 1); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.debris)); }
   for (let i = 0; i < 4; i++) { const a = rnd() * Math.PI * 2, rr = ri(2, R - 2); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.vessel)); }
-  // one creature spawner spot on the platform
-  SPAWN(3, 0, 3);
+  // two creature spawner spots on the platform
+  SPAWN(3, 0, 3); SPAWN(-4, 0, 2);
   write('portal');
 }
 
@@ -346,6 +370,9 @@ function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH, spawners 
     const zc = ri(-half + 4, half - 4);
     CH(ri(-cw, cw), 0, zc, 0, pick(SIDES));
   }
+  // ingot cargo hoards spilled across the sea floor inside the wreck
+  const ni = Math.max(2, round(chests * 0.8));
+  for (let i = 0; i < ni; i++) INGOTS(ri(-cw, cw), 0, ri(-half + 4, half - 4));
 
   // creature spawner spot(s) on the sea floor inside the wreck; the huge wreck
   // gets two, spread fore and aft
@@ -381,31 +408,31 @@ function city() {
       const w = ri(3, 5), d = ri(3, 5);
       const tower = chance(0.35);
       const h = tower ? ri(14, 26) : ri(5, 9);
-      ruinedBuilding(cx, cz, w, d, h, fy, { chests: ri(0, 2), holes: 1.0 });
+      ruinedBuilding(cx, cz, w, d, h, fy, { chests: ri(1, 3), ingots: ri(0, 2), holes: 1.0 });
       // rubble ring around each building
       scatterDebris(cx - w - 2, cz - d - 2, cx + w + 2, cz + d + 2, fy + 1, ri(4, 9), P.debris);
     }
   }
 
-  // extra debris piles and a few loose chests/vessels scattered in the streets
+  // extra debris, loose chests and ingot hoards scattered in the streets
   for (let i = 0; i < 90; i++) S(ri(-R, R), fy + 1, ri(-R, R), pick(P.debris));
-  for (let i = 0; i < 6; i++) CH(ri(-R + 2, R - 2), fy + 1, ri(-R + 2, R - 2), ri(1, 4), pick(SIDES));
+  rewards(-R + 2, -R + 2, R - 2, R - 2, fy + 1, 12, 8);
   for (let i = 0; i < 8; i++) S(ri(-R + 2, R - 2), fy + 1, ri(-R + 2, R - 2), pick(P.vessel));
   // a few standing broken archways / walls between buildings
   for (let i = 0; i < 8; i++) {
     const x = ri(-R + 3, R - 3), z = ri(-R + 3, R - 3), len = ri(3, 7), vert = chance(0.5), hh = ri(3, 8), wb = pick(P.brick);
     for (let j = 0; j < len; j++) { const th = hh - ri(0, 3); for (let y = fy + 1; y <= fy + th; y++) if (chance(0.7)) S(vert ? x : x + j, y, vert ? z + j : z, wb); }
   }
-  // one creature spawner spot in the streets near the center
-  SPAWN(2, 0, 2);
+  // two creature spawner spots in the streets
+  SPAWN(2, 0, 2); SPAWN(-6, 0, -5);
   write('city');
 }
 
 // ── run all ──────────────────────────────────────────────────────────────
 ruin();
 portal();
-ship({ name: 'shipwreck-huge', length: 110, tiltDeg: 26, chests: 14, dev: true, seed: 33, W: 11, H: 13, DEPTH: 6, spawners: 2 });
-ship({ name: 'shipwreck-small', length: 34, tiltDeg: 24, chests: 3, dev: false, seed: 44, W: 6, H: 8, DEPTH: 4, spawners: 1 });
-ship({ name: 'shipwreck-medium', length: 50, tiltDeg: 0, chests: 6, dev: false, seed: 66, W: 8, H: 10, DEPTH: 5, spawners: 1 });
+ship({ name: 'shipwreck-huge', length: 110, tiltDeg: 26, chests: 22, dev: true, seed: 33, W: 11, H: 13, DEPTH: 6, spawners: 3 });
+ship({ name: 'shipwreck-small', length: 34, tiltDeg: 24, chests: 5, dev: false, seed: 44, W: 6, H: 8, DEPTH: 4, spawners: 1 });
+ship({ name: 'shipwreck-medium', length: 50, tiltDeg: 0, chests: 10, dev: false, seed: 66, W: 8, H: 10, DEPTH: 5, spawners: 2 });
 city();
 console.log('done');

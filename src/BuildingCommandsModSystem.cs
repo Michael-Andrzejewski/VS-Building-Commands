@@ -396,6 +396,7 @@ public class BuildingCommandsModSystem : ModSystem
             else if (cmd == "setblock" || cmd == "cbsetblock") AddSetblockCells(tok, map, ref capped);
             else if (cmd == "lootchest") AddLootChestCell(tok, map, ref capped);
             else if (cmd == "spawner") AddSpawnerCell(tok, map, ref capped);
+            else if (cmd == "ingots") AddIngotsCell(tok, map, ref capped);
 
             if (capped) break;
         }
@@ -558,8 +559,9 @@ public class BuildingCommandsModSystem : ModSystem
                 case "clone": r = DoClone(a, caller); break;
                 case "lootchest": r = DoLootChest(a, caller); break;
                 case "spawner": r = DoSpawner(a, caller); break;
+                case "ingots": r = DoIngots(a, caller); break;
                 case "blockcode": r = DoBlockcode(a, caller); break;
-                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, spawner, blockcode)"); break;
+                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, spawner, ingots, blockcode)"); break;
             }
 
             if (r.Status == EnumCommandStatus.Success)
@@ -849,7 +851,7 @@ public class BuildingCommandsModSystem : ModSystem
         {
             IInventory inv = bec.Inventory;
             int slotCount = inv.Count;
-            int toFill = Math.Min(slotCount, 3 + rnd.Next(4));
+            int toFill = Math.Min(slotCount, 5 + rnd.Next(4));
             for (int idx = 0; idx < toFill; idx++)
             {
                 string lootType = RuinLootTypes[rnd.Next(RuinLootTypes.Length)];
@@ -904,8 +906,8 @@ public class BuildingCommandsModSystem : ModSystem
         else if (typeArg == "kraken") kraken = true;
         else
         {
-            if (sapi.World.Rand.NextDouble() >= 0.5)
-                return TextCommandResult.Success("No spawner here (missed the 50% roll).");
+            if (sapi.World.Rand.NextDouble() >= 0.85)
+                return TextCommandResult.Success("No spawner here (missed the 85% roll).");
             kraken = _runKrakenMode;
         }
 
@@ -927,6 +929,70 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(tok[2], 0, out int y, out _)) return;
         if (!ParseCoord(tok[3], 0, out int z, out _)) return;
         Block b = sapi.World.GetBlock(new AssetLocation("underwaterhorrors", "serpentspawner"));
+        if (b == null) return;
+        map[Pack(x, y, z)] = b.BlockId;
+        if (map.Count >= MaxPreviewCells) capped = true;
+    }
+
+    // ingots x y z <metal> <count>
+    // Places a game:ingotpile and stocks it with <count> ingots of <metal>.
+    // The pile is a block entity, so a plain setblock would render an empty
+    // pile; we populate its inventory and re-tessellate.
+    private TextCommandResult DoIngots(IList<string> a, Caller caller)
+    {
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
+        if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+
+        string metal = (A(a, 3) ?? "copper").ToLowerInvariant();
+        int count = 8;
+        if (A(a, 4) != null && int.TryParse(A(a, 4), out int c)) count = Math.Max(1, Math.Min(64, c));
+
+        Item ingot = sapi.World.GetItem(new AssetLocation("game", "ingot-" + metal));
+        if (ingot == null) return TextCommandResult.Error($"Ingot item game:ingot-{metal} not found.");
+        Block pile = sapi.World.GetBlock(new AssetLocation("game", "ingotpile"));
+        if (pile == null) return TextCommandResult.Error("Block game:ingotpile not found.");
+
+        var pos = new BlockPos(x, y, z, dim);
+        var accessor = sapi.World.BlockAccessor;
+        accessor.SetBlock(pile.BlockId, pos);
+
+        int placed = 0;
+        BlockEntity be = accessor.GetBlockEntity(pos);
+        IInventory inv = GetBlockEntityInventory(be);
+        if (inv != null && inv.Count > 0)
+        {
+            inv[0].Itemstack = new ItemStack(ingot, count);
+            inv[0].MarkDirty();
+            placed = count;
+        }
+        be?.MarkDirty(true);
+        accessor.MarkBlockDirty(pos);
+        return TextCommandResult.Success($"Placed a pile of {placed} {metal} ingot(s) at ({x},{y},{z}).");
+    }
+
+    // Finds a block entity's inventory whether it exposes IBlockEntityContainer
+    // or just an "inventory" field (item piles do the latter).
+    private static IInventory GetBlockEntityInventory(BlockEntity be)
+    {
+        if (be == null) return null;
+        if (be is IBlockEntityContainer c && c.Inventory != null) return c.Inventory;
+        for (Type t = be.GetType(); t != null; t = t.BaseType)
+        {
+            var f = t.GetField("inventory", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (f != null && typeof(IInventory).IsAssignableFrom(f.FieldType)) return f.GetValue(be) as IInventory;
+        }
+        return null;
+    }
+
+    private void AddIngotsCell(string[] tok, Dictionary<long, int> map, ref bool capped)
+    {
+        if (tok.Length < 4) return;
+        if (!ParseCoord(tok[1], 0, out int x, out _)) return;
+        if (!ParseCoord(tok[2], 0, out int y, out _)) return;
+        if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+        Block b = sapi.World.GetBlock(new AssetLocation("game", "ingotpile"));
         if (b == null) return;
         map[Pack(x, y, z)] = b.BlockId;
         if (map.Count >= MaxPreviewCells) capped = true;

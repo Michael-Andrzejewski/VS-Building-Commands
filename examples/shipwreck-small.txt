@@ -1082,41 +1082,53 @@ setblock ~-2 ~-1 ~5 game:cobblestone-granite
 lootchest ~-2 ~ ~5 3 south
 setblock ~3 ~-1 ~-9 game:cobblestone-granite
 lootchest ~3 ~ ~-9 3 west
-setblock ~-2 ~-1 ~-8 game:cobblestone-granite
-spawner ~-2 ~ ~-8
-setblock ~-8 ~ ~18 game:looseflints
-setblock ~2 ~ ~-5 game:metal-scraps
-setblock ~-2 ~ ~14 game:looseflints
-setblock ~5 ~ ~8 game:loosegears
-setblock ~7 ~ ~8 game:loosestick
-setblock ~1 ~ ~19 game:looseflints
-setblock ~8 ~ ~16 game:loosestick
-setblock ~11 ~ ~7 game:loosestick
-setblock ~-6 ~ ~-10 game:looseflints
-setblock ~8 ~ ~-2 game:cobblestone-granite
-setblock ~11 ~ ~-20 game:metal-scraps
-setblock ~-10 ~ ~17 game:metal-scraps
-setblock ~7 ~ ~-20 game:loosestick
-setblock ~-3 ~ ~-7 game:cobblestone-granite
-setblock ~3 ~ ~7 game:loosegears
-setblock ~-6 ~ ~-20 game:metal-parts
-setblock ~-5 ~ ~-17 game:metal-scraps
-setblock ~6 ~ ~17 game:metal-parts
-setblock ~4 ~ ~8 game:metal-parts
-setblock ~8 ~ ~ game:metal-scraps
-setblock ~6 ~ ~8 game:loosestick
-setblock ~7 ~ ~18 game:looseflints
-setblock ~-11 ~ ~-19 game:cobblestone-granite
-setblock ~7 ~ ~-21 game:loosegears
-setblock ~2 ~ ~19 game:looseflints
-setblock ~ ~ ~8 game:loosegears
-setblock ~8 ~ ~-18 game:cobblestone-granite
-setblock ~10 ~ ~5 game:metal-parts
-setblock ~5 ~ ~-11 game:loosestick
-setblock ~-2 ~ ~13 game:metal-parts
-setblock ~-2 ~ ~-3 game:loosestick
-setblock ~9 ~ ~4 game:metal-scraps
-setblock ~6 ~ ~-4 game:metal-scraps
-setblock ~4 ~ ~-20 game:loosestick
-setblock ~-2 ~ ~-6 game:lootvessel-ore
-setblock ~-2 ~ ~8 game:lootvessel-forage
+setblock ~-4 ~-1 ~-9 game:cobblestone-granite
+lootchest ~-4 ~ ~-9 3 north
+setblock ~1 ~-1 ~1 game:cobblestone-granite
+lootchest ~1 ~ ~1 2 east
+setblock ~-1 ~-1 ~9 game:cobblestone-granite
+ingots ~-1 ~ ~9 molybdochalkos 32
+setblock ~-1 ~-1 ~8 game:cobblestone-granite
+ingots ~-1 ~ ~8 molybdochalkos 28
+setblock ~4 ~-1 ~3 game:cobblestone-granite
+ingots ~4 ~ ~3 molybdochalkos 32
+setblock ~4 ~-1 ~5 game:cobblestone-granite
+ingots ~4 ~ ~5 silver 19
+setblock ~2 ~-1 ~ game:cobblestone-granite
+spawner ~2 ~ ~
+setblock ~-1 ~ ~14 game:cobblestone-granite
+setblock ~-10 ~ ~-19 game:metal-scraps
+setblock ~9 ~ ~-17 game:loosestick
+setblock ~-11 ~ ~13 game:loosegears
+setblock ~-4 ~ ~19 game:looseflints
+setblock ~4 ~ ~ game:metal-parts
+setblock ~-11 ~ ~-8 game:metal-parts
+setblock ~-9 ~ ~-15 game:loosestick
+setblock ~9 ~ ~-8 game:loosestick
+setblock ~4 ~ ~-8 game:cobblestone-granite
+setblock ~ ~ ~-20 game:loosestick
+setblock ~4 ~ ~12 game:loosestick
+setblock ~9 ~ ~2 game:metal-scraps
+setblock ~-10 ~ ~19 game:loosestick
+setblock ~-11 ~ ~-6 game:looseflints
+setblock ~10 ~ ~1 game:looseflints
+setblock ~5 ~ ~-7 game:loosestick
+setblock ~-9 ~ ~21 game:cobblestone-granite
+setblock ~3 ~ ~-9 game:loosestick
+setblock ~-6 ~ ~12 game:loosegears
+setblock ~7 ~ ~-12 game:loosegears
+setblock ~-2 ~ ~12 game:cobblestone-granite
+setblock ~2 ~ ~-18 game:loosestick
+setblock ~-2 ~ ~-21 game:loosestick
+setblock ~-11 ~ ~8 game:metal-parts
+setblock ~-4 ~ ~-6 game:metal-parts
+setblock ~5 ~ ~3 game:looseflints
+setblock ~7 ~ ~-10 game:loosegears
+setblock ~-2 ~ ~17 game:loosestick
+setblock ~-10 ~ ~-13 game:looseflints
+setblock ~7 ~ ~21 game:loosestick
+setblock ~5 ~ ~-10 game:loosestick
+setblock ~6 ~ ~-5 game:cobblestone-granite
+setblock ~6 ~ ~5 game:loosestick
+setblock ~1 ~ ~9 game:lootvessel-tool
+setblock ~1 ~ ~3 game:lootvessel-food
