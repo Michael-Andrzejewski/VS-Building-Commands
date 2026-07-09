@@ -213,11 +213,15 @@ function portal() {
     scatterDebris(x - 1, z - 1, x + 1, z + 1, fy + 1, ri(1, 3), P.debris);
   }
 
-  // portal "energy" glow columns near the center
-  for (const [px, pz] of [[-2, 0], [2, 0], [0, -2], [0, 2]]) {
-    for (let y = fy + 1; y <= fy + ri(2, 4); y++) if (chance(0.7)) S(px, y, pz, P.light);
-  }
-  S(0, fy + 1, 0, P.lightAlt);
+  // central ruined portal FRAME (a broken doorway you can see through, with
+  // green energy glowing inside), like a Minecraft ruined portal.
+  const fh = 6, fw = 3, frameB = 'game:stonebricks-basalt';
+  for (const cxx of [-fw, fw]) for (let y = fy + 1; y <= fy + fh; y++) if (chance(0.82)) S(cxx, y, 0, frameB);      // columns
+  for (let x = -fw; x <= fw; x++) { if (chance(0.75)) S(x, fy + fh, 0, frameB); if (chance(0.85)) S(x, fy + 1, 0, frameB); } // lintel + threshold
+  for (let x = -fw + 1; x <= fw - 1; x++) for (let y = fy + 2; y <= fy + fh - 1; y++) if (chance(0.82)) S(x, y, 0, P.light); // energy
+  // a broken second frame crossing it for a more elaborate portal
+  for (const czz of [-fw, fw]) for (let y = fy + 1; y <= fy + fh - 1; y++) if (chance(0.6)) S(0, y, czz, frameB);
+  for (let z = -fw + 1; z <= fw - 1; z++) for (let y = fy + 2; y <= fy + fh - 2; y++) if (chance(0.6)) S(0, y, z, P.lightAlt);
 
   // scattered collapsed chests around the ring
   for (let i = 0; i < 6; i++) {
@@ -233,70 +237,71 @@ function portal() {
 // ═══════════════════════════════════════════════════════════════════════
 //  shipwreck hull generator (shared)
 // ═══════════════════════════════════════════════════════════════════════
-// tiltDeg: 0 = upright, ~70 = lying on its side.
-function ship({ name, length, tiltDeg, chests, dev, seed, upright }) {
+// A boat-shaped hull: curved SOLID bottom, solid sides up to a broken deck
+// rim, pointed bow/stern. tiltDeg rotates the whole cross-section so the
+// wreck lies over on its side. Heavily holed for ruin.
+function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH }) {
   rnd = mulberry32(seed);
+  W = W || 8; H = H || 10; DEPTH = DEPTH || 5;
   begin(`Sunken shipwreck (${name}). Stand at the CENTER, then /build ${name}`);
-  const W = 6, H = 8, DEPTH = 4;
-  const tilt = tiltDeg * Math.PI / 180;
-  const cs = Math.cos(tilt), sn = Math.sin(tilt);
+  const tilt = tiltDeg * Math.PI / 180, cs = Math.cos(tilt), sn = Math.sin(tilt);
   const half = Math.floor(length / 2);
-
-  // find the lowest rotated y so we can seat the hull on the sea floor (~ -1)
-  let minY = 1e9;
   const rot = (x, y) => [x * cs - y * sn, x * sn + y * cs];
-  for (let sx = -W; sx <= W; sx++) for (let sy = -DEPTH; sy <= H; sy++) { const [, ry] = rot(sx, sy); if (ry < minY) minY = ry; }
-  const yOff = -1 - round(minY);
 
+  let minY = 1e9;
+  for (let sx = -W - 2; sx <= W + 2; sx++) for (let sy = -DEPTH - 1; sy <= H + 1; sy++) { const ry = rot(sx, sy)[1]; if (ry < minY) minY = ry; }
+  const yOff = -1 - round(minY);
   const put = (sx, sy, z, block) => { const [rx, ry] = rot(sx, sy); S(round(rx), round(ry) + yOff, z, block); };
+  const hole = () => chance(0.13);
+  const keel = (sx, w, dep) => -round(dep * Math.sqrt(Math.max(0, 1 - (sx / (w + 0.01)) * (sx / (w + 0.01)))));
 
   const devSpots = [];
   for (let zc = -half; zc <= half; zc++) {
-    const u = (zc + half) / length;                 // 0..1 along length
-    const taper = Math.min(1, Math.min(u, 1 - u) * length / (length * 0.14) + 0.15);
+    const u = (zc + half) / length;
+    let taper = Math.min(1, Math.min(u, 1 - u) / 0.15);
+    taper = Math.pow(taper, 0.5);                    // full amidships, pointed ends
     const w = Math.max(1, round(W * taper));
-    // hull bottom curve
-    for (let sx = -w; sx <= w; sx++) {
-      const yb = -round(DEPTH * Math.sqrt(Math.max(0, 1 - (sx / w) * (sx / w))));
-      if (chance(0.72)) put(sx, yb, zc, pick(P.wood));
-    }
-    // hull sides up to the deck
-    for (const sx of [-w, w]) {
-      const yb = 0;
-      for (let sy = yb; sy <= H; sy++) if (chance(0.66)) put(sx, sy, zc, chance(0.15) ? pick(P.beam) : pick(P.wood));
-    }
-    // every few segments a full rib beam for structure
-    if (zc % 7 === 0) for (let sx = -w; sx <= w; sx++) put(sx, -round(DEPTH * Math.sqrt(Math.max(0, 1 - (sx / w) * (sx / w)))), zc, pick(P.beam));
-    // deck planks across (upright ships get a broken deck)
-    if (upright && chance(0.5)) for (let sx = -w; sx <= w; sx++) if (chance(0.4)) put(sx, H, zc, pick(P.woodAny));
-    if (dev && chance(0.06)) devSpots.push([w, zc]);
-  }
+    const dep = Math.max(1, round(DEPTH * taper));
 
-  // keel line
-  for (let zc = -half; zc <= half; zc++) if (chance(0.85)) put(0, -DEPTH, zc, pick(P.beam));
+    // curved hull bottom (keel spine always present), thin
+    for (let sx = -w; sx <= w; sx++) {
+      const ky = keel(sx, w, dep);
+      if (sx === 0 || !hole()) put(sx, ky, zc, sx === 0 ? pick(P.beam) : pick(P.wood));
+    }
+    // hull sides (one column each), wrecked: partway up most of the time,
+    // full deck height only at rib segments
+    for (const sx of [-w, w]) {
+      const ky = keel(sx, w, dep);
+      const topY = (zc % 6 === 0) ? H : Math.min(H, ky + 1 + ri(2, Math.max(3, H - 2)));
+      for (let y = ky + 1; y <= topY; y++) if (!hole()) put(sx, y, zc, chance(0.12) ? pick(P.beam) : pick(P.wood));
+    }
+    // broken deck rim (gunwale)
+    for (let sx = -w; sx <= w; sx++) if (chance(0.4)) put(sx, H, zc, pick(P.woodAny));
+    // ribs every 6 segments
+    if (zc % 6 === 0) for (let sx = -w; sx <= w; sx++) put(sx, keel(sx, w, dep), zc, pick(P.beam));
+    if (dev && chance(0.05)) devSpots.push([w, zc]);
+  }
 
   // devastation clusters bursting out of the hull
   for (const [w, zc] of devSpots) {
     const dir = chance(0.5) ? 1 : -1;
-    for (let k = 0; k <= ri(2, 5); k++) put((w + k) * dir, ri(-2, H), zc, pick(P.dev));
+    for (let k = 0; k <= ri(2, 6); k++) put((w + k) * dir, ri(0, H), zc, pick(P.dev));
   }
-  if (dev) { // a few big growths at bow/stern
-    for (const zc of [-half + 3, half - 3, 0]) for (let k = 0; k < ri(3, 7); k++) put(ri(-W, W), ri(-DEPTH, H), zc + ri(-2, 2), pick(P.dev));
-  }
+  if (dev) for (const zc of [-half + 4, half - 4, 0]) for (let k = 0; k < ri(4, 8); k++) put(ri(-W, W), ri(0, H), zc + ri(-3, 3), pick(P.dev));
 
   // interior lights along the length
-  for (let zc = -half + 4; zc <= half - 4; zc += ri(8, 14)) put(ri(-2, 2), ri(0, 4), zc, chance(0.5) ? P.light : P.lightAlt);
+  for (let zc = -half + 5; zc <= half - 5; zc += ri(9, 15)) put(ri(-3, 3), ri(1, Math.max(2, H - 3)), zc, chance(0.5) ? P.light : P.lightAlt);
 
-  // collapsed chests inside the hull, spread along the length
+  // collapsed chests inside the hull
+  const cw = Math.max(2, W - 3);
   for (let i = 0; i < chests; i++) {
-    const zc = ri(-half + 3, half - 3);
-    const [rx, ry] = rot(ri(-3, 3), ri(-DEPTH + 1, 2));
+    const zc = ri(-half + 4, half - 4);
+    const [rx, ry] = rot(ri(-cw, cw), ri(-DEPTH + 1, 2));
     CH(round(rx), round(ry) + yOff, zc, ri(1, 4), pick(SIDES));
   }
 
-  // debris trailing out of the wreck along the sea floor
-  for (let i = 0; i < Math.floor(length * 1.2); i++) S(ri(-W - 4, W + 4), 0, ri(-half - 3, half + 3), pick(P.debris));
-  // a couple of cracked vessels
+  // debris trailing out of the wreck on the sea floor
+  for (let i = 0; i < Math.floor(length * 1.0); i++) S(ri(-W - 5, W + 5), 0, ri(-half - 4, half + 4), pick(P.debris));
   for (let i = 0; i < Math.max(2, Math.floor(chests / 3)); i++) S(ri(-3, 3), 0, ri(-half, half), pick(P.vessel));
 
   write(name);
@@ -342,8 +347,8 @@ function city() {
 // ── run all ──────────────────────────────────────────────────────────────
 ruin();
 portal();
-ship({ name: 'shipwreck-huge', length: 120, tiltDeg: 70, chests: 14, dev: true, seed: 33 });
-ship({ name: 'shipwreck-small', length: 34, tiltDeg: 68, chests: 3, dev: false, seed: 44 });
-ship({ name: 'shipwreck-medium', length: 48, tiltDeg: 0, chests: 6, dev: false, seed: 66, upright: true });
+ship({ name: 'shipwreck-huge', length: 110, tiltDeg: 26, chests: 14, dev: true, seed: 33, W: 11, H: 13, DEPTH: 6 });
+ship({ name: 'shipwreck-small', length: 34, tiltDeg: 24, chests: 3, dev: false, seed: 44, W: 6, H: 8, DEPTH: 4 });
+ship({ name: 'shipwreck-medium', length: 50, tiltDeg: 0, chests: 6, dev: false, seed: 66, W: 8, H: 10, DEPTH: 5 });
 city();
 console.log('done');
