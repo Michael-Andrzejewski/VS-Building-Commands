@@ -1076,34 +1076,34 @@ setblock ~2 ~15 ~1 game:planks-aged-ud
 setblock ~2 ~15 ~1 game:planks-aged-ud
 setblock ~-3 ~7 ~-12 game:creativelight-43
 setblock ~-4 ~8 ~3 game:creativelight-49
-setblock ~-2 ~-1 ~-10 game:cobblestone-granite
-lootchest ~-2 ~ ~-10 3 north
-setblock ~-2 ~-1 ~5 game:cobblestone-granite
-lootchest ~-2 ~ ~5 3 south
-setblock ~3 ~-1 ~-9 game:cobblestone-granite
-lootchest ~3 ~ ~-9 3 west
-setblock ~-4 ~-1 ~-9 game:cobblestone-granite
-lootchest ~-4 ~ ~-9 3 north
-setblock ~1 ~-1 ~1 game:cobblestone-granite
-lootchest ~1 ~ ~1 2 east
-setblock ~3 ~-1 ~-2 game:cobblestone-granite
-lootchest ~3 ~ ~-2 3 south
-setblock ~-1 ~-1 ~5 game:cobblestone-granite
-lootchest ~-1 ~ ~5 3 west
-setblock ~ ~-1 ~5 game:cobblestone-granite
-lootchest ~ ~ ~5 3 west
-setblock ~3 ~-1 ~10 game:cobblestone-granite
-ingots ~3 ~ ~10 molybdochalkos 31
-setblock ~2 ~-1 ~-8 game:cobblestone-granite
-ingots ~2 ~ ~-8 copper 35
-setblock ~ ~-1 ~9 game:cobblestone-granite
-ingots ~ ~ ~9 silver 13
-setblock ~-4 ~-1 ~11 game:cobblestone-granite
-ingots ~-4 ~ ~11 steel 9
-setblock ~-4 ~-1 ~8 game:cobblestone-granite
-ingots ~-4 ~ ~8 copper 39
-setblock ~1 ~-1 ~4 game:cobblestone-granite
-ingots ~1 ~ ~4 silver 12
+setblock ~-1 ~2 ~-10 game:cobblestone-granite
+lootchest ~-1 ~3 ~-10 3 north
+setblock ~-1 ~2 ~5 game:cobblestone-granite
+lootchest ~-1 ~3 ~5 3 south
+setblock ~4 ~5 ~-9 game:cobblestone-granite
+lootchest ~4 ~6 ~-9 3 west
+setblock ~-3 ~3 ~-9 game:cobblestone-granite
+lootchest ~-3 ~4 ~-9 3 north
+setblock ~2 ~4 ~1 game:cobblestone-granite
+lootchest ~2 ~5 ~1 2 east
+setblock ~4 ~5 ~-2 game:cobblestone-granite
+lootchest ~4 ~6 ~-2 3 south
+setblock ~ ~3 ~5 game:cobblestone-granite
+lootchest ~ ~4 ~5 3 west
+setblock ~1 ~3 ~5 game:cobblestone-granite
+lootchest ~1 ~4 ~5 3 west
+setblock ~4 ~5 ~9 game:cobblestone-granite
+ingots ~4 ~6 ~9 molybdochalkos 31
+setblock ~-2 ~3 ~7 game:cobblestone-granite
+ingots ~-2 ~4 ~7 copper 35
+setblock ~4 ~5 ~-1 game:cobblestone-granite
+ingots ~4 ~6 ~-1 silver 13
+setblock ~4 ~6 ~-12 game:cobblestone-granite
+ingots ~4 ~7 ~-12 steel 9
+setblock ~3 ~4 ~-13 game:cobblestone-granite
+ingots ~3 ~5 ~-13 copper 39
+setblock ~2 ~4 ~3 game:cobblestone-granite
+ingots ~2 ~5 ~3 silver 12
 setblock ~-1 ~-1 ~-4 game:cobblestone-granite
 spawner ~-1 ~ ~-4
 setblock ~-9 ~ ~-15 game:loosestick

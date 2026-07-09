@@ -363,16 +363,27 @@ function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH, spawners 
   // interior lights along the length
   for (let zc = -half + 5; zc <= half - 5; zc += ri(9, 15)) put(ri(-3, 3), ri(1, Math.max(2, H - 3)), zc, chance(0.5) ? P.light : P.lightAlt);
 
-  // collapsed chests resting on the sea floor inside the wreck (grounded, not
-  // floating up in the tilted hull)
-  const cw = Math.max(2, W - 2);
+  // collapsed chests + ingot cargo resting on the inner hull bottom (the
+  // hold), run through the same tilt transform as the hull itself so they
+  // sit inside the wreck instead of dropping to the sea floor beneath it.
+  // CH/INGOTS still add a support block directly below, which doubles as a
+  // hull-plank patch when the spot lands over a punched hole.
+  const holdSpot = (zc) => {
+    const [w, dep] = dims(zc);
+    const sx = ri(-Math.max(0, w - 2), Math.max(0, w - 2));
+    const sy = keel(sx, w, dep) + 1;
+    const [rx, ry] = rot(sx, sy);
+    return [round(rx), round(ry) + yOff, zc];
+  };
   for (let i = 0; i < chests; i++) {
-    const zc = ri(-half + 4, half - 4);
-    CH(ri(-cw, cw), 0, zc, 0, pick(SIDES));
+    const [x, y, z] = holdSpot(ri(-half + 4, half - 4));
+    CH(x, y, z, 0, pick(SIDES));
   }
-  // ingot cargo hoards spilled across the sea floor inside the wreck
   const ni = Math.max(2, round(chests * 0.8));
-  for (let i = 0; i < ni; i++) INGOTS(ri(-cw, cw), 0, ri(-half + 4, half - 4));
+  for (let i = 0; i < ni; i++) {
+    const [x, y, z] = holdSpot(ri(-half + 4, half - 4));
+    INGOTS(x, y, z);
+  }
 
   // creature spawner spot(s) on the sea floor inside the wreck; the huge wreck
   // gets two, spread fore and aft
