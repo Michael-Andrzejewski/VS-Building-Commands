@@ -28,8 +28,16 @@ function colorFor(code) {
   if (c.startsWith('planks') || c.startsWith('log')) return c.includes('veryaged') || c.includes('rotten') ? 0x5f4a2a : 0x86663a;
   if (c.startsWith('creativelight')) return 0x55ff77;
   if (c.startsWith('lootvessel')) return 0xc39868;
-  if (c.startsWith('devgrowth') || c === 'drock' || c === 'devplate') return 0xcf3a48;
-  if (c.startsWith('metal-') || c === 'loosegears') return 0x59596a;
+  if (code === 'spreadingdevastation:machinecore') return 0xff7a22; // glowing machine heart
+  if (c.startsWith('devgrowth')) return 0xcf3a48;
+  if (c === 'drock') return 0x4a3038;
+  if (c.startsWith('devplate')) return 0x6b4038;
+  if (c.startsWith('devastatedsoil')) return 0x5c3430;
+  if (c.startsWith('metalblock')) return c.includes('riveted') ? 0x77503c : 0x8a614a;
+  if (c.startsWith('agedstonebricks')) return 0x9a9078;
+  if (c.startsWith('crackedstonebricks')) return 0x847a66;
+  if (c.startsWith('cobbleskull')) return 0xd8d0c0;
+  if (c.startsWith('metal-') || c.startsWith('loosegears')) return 0x59596a;
   if (c === 'looseflints') return 0x5a6a55;
   if (c === 'loosestick') return 0x7a6644;
   if (c.startsWith('gravel')) return 0x8a8478;
