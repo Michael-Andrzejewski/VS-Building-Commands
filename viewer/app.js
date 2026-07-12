@@ -3,7 +3,7 @@
    at 0,0,0) and renders them as colored cubes so we can critique designs
    without launching Vintage Story. */
 
-const STRUCTURES = ['ruin', 'portal', 'shipwreck-huge', 'shipwreck-small', 'shipwreck-medium', 'city', 'dungeon', 'beacondungeon', 'beacondungeon-cut'];
+const STRUCTURES = ['ruin', 'portal', 'shipwreck-huge', 'shipwreck-small', 'shipwreck-medium', 'city', 'dungeon', 'beacondungeon', 'beacondungeon-cut', 'beacondungeon-short', 'beacondungeon-short-cut'];
 
 // ── coordinate + color helpers ───────────────────────────────────────────
 function tint(tok) { // '~' -> 0, '~5' -> 5, '~-3' -> -3, '10' -> 10
