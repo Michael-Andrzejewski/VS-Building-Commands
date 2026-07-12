@@ -3,7 +3,7 @@
    at 0,0,0) and renders them as colored cubes so we can critique designs
    without launching Vintage Story. */
 
-const STRUCTURES = ['ruin', 'portal', 'shipwreck-huge', 'shipwreck-small', 'shipwreck-medium', 'city', 'dungeon'];
+const STRUCTURES = ['ruin', 'portal', 'shipwreck-huge', 'shipwreck-small', 'shipwreck-medium', 'city', 'dungeon', 'beacondungeon', 'beacondungeon-cut'];
 
 // ── coordinate + color helpers ───────────────────────────────────────────
 function tint(tok) { // '~' -> 0, '~5' -> 5, '~-3' -> -3, '10' -> 10
@@ -99,7 +99,7 @@ document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0a1a26);
-scene.fog = new THREE.FogExp2(0x0a1a26, 0.006);
+scene.fog = new THREE.FogExp2(0x0a1a26, 0.0012);
 
 const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 4000);
 
