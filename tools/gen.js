@@ -23,6 +23,12 @@ function F(x1, y1, z1, x2, y2, z2, block, mode) {
 // accessor + relight). Works in scripts even where /setblock is /cbsetblock.
 const S = (x, y, z, block) => L(`setblock ${T(x)} ${T(y)} ${T(z)} ${block}`);
 const AIR = (x, y, z) => S(x, y, z, 'air');
+// settling debris: the runner drops it onto the first solid surface below
+// the scripted spot (and places nothing when there is none), so debris and
+// rubble mounds can never float when a structure lands on a sloped floor.
+// count > 1 stacks a small column upward from the support.
+const SC = (x, y, z, block, count) =>
+  L(`scatter ${T(x)} ${T(y)} ${T(z)} ${block}${count && count > 1 ? ' ' + count : ''}`);
 
 // ruined floor: one base fill, a few accent patches, then punched holes,
 // instead of thousands of per-cell lines.
@@ -38,11 +44,11 @@ function floorRuined(x1, z1, x2, z2, y) {
     F(px, y, pz, Math.min(x2, px + ri(0, 1)), y, Math.min(z2, pz + ri(0, 1)), 'air');
   }
 }
-// collapsed loot chest. Always drop a support block directly beneath it so the
-// chest can never float, and only use the 2/3 variants (the ones that actually
-// look burst-open; 1 and 4 look near-intact). The variant arg is ignored.
+// collapsed loot chest. The runners settle chests onto the nearest support
+// below at placement time (no more scripted support block, which itself
+// could float on slopes). Only the 2/3 variants look properly burst-open;
+// 1 and 4 look near-intact. The variant arg is ignored.
 const CH = (x, y, z, _variant, side) => {
-  S(x, y - 1, z, 'game:cobblestone-granite');
   L(`lootchest ${T(x)} ${T(y)} ${T(z)} ${pick([2, 3])} ${side}`);
 };
 // creature spawner spot (Underwater Horrors). The mod's runner rolls the
@@ -57,14 +63,14 @@ const SPAWN = (x, y, z, pillarFrom, block) => {
   L(`spawner ${T(x)} ${T(y)} ${T(z)}`);
 };
 // ingot pile: mostly silver / copper / molybdochalkos, an occasional very large
-// gold hoard, and some small steel piles. Grounded with a support block.
+// gold hoard, and some small steel piles. Settled onto real support by the
+// runners at placement time, same as chests.
 const INGOTS = (x, y, z) => {
   const r = rnd();
   let metal, count;
   if (r < 0.09) { metal = 'gold'; count = ri(48, 64); }          // rare, very large
   else if (r < 0.24) { metal = 'steel'; count = ri(3, 10); }     // uncommon, small
   else { metal = pick(['silver', 'copper', 'molybdochalkos']); count = ri(12, 40); }
-  S(x, y - 1, z, 'game:cobblestone-granite');
   L(`ingots ${T(x)} ${T(y)} ${T(z)} ${metal} ${count}`);
 };
 // scatter loot chests + ingot piles across a floor rectangle at height y
@@ -101,14 +107,15 @@ const P = {
   metalDebris: ['game:metal-scraps', 'game:metal-parts', 'game:loosegears'],
   dev: ['game:devgrowth-shard', 'game:devgrowth-thorns', 'game:devgrowth-shrike'],
   vessel: ['game:lootvessel-tool', 'game:lootvessel-ore', 'game:lootvessel-forage', 'game:lootvessel-farming', 'game:lootvessel-food'],
-  light: 'game:creativelight-43',    // neon green
-  lightAlt: 'game:creativelight-49', // varied hue
+  light: 'underwaterhorrors:ghostlight-green',   // eerie green wisp
+  lightAlt: 'underwaterhorrors:ghostlight-blue', // pale blue wisp
 };
 
-// scatter n debris blocks over a floor rectangle at height y
+// scatter n debris blocks over a floor rectangle at height y (each one
+// settles onto the actual surface below via the scatter directive)
 function scatterDebris(x1, z1, x2, z2, y, n, blocks) {
   blocks = blocks || P.debris;
-  for (let i = 0; i < n; i++) S(ri(x1, x2), y, ri(z1, z2), pick(blocks));
+  for (let i = 0; i < n; i++) SC(ri(x1, x2), y, ri(z1, z2), pick(blocks));
 }
 
 // punch h air holes into an axis-aligned wall region
@@ -225,7 +232,7 @@ function ruin() {
   CH(-4, 0, -5, 2, 'north'); CH(4, 0, 5, 3, 'south'); CH(-3, 0, 6, 1, 'north'); CH(4, 0, -4, 4, 'west'); CH(0, 0, -3, 2, 'east');
   rewards(x1 + 1, z1 + 1, x2 - 1, z2 - 1, 0, 9, 5);
   // cracked vessels
-  S(3, 0, -3, pick(P.vessel)); S(-2, 0, 3, pick(P.vessel)); S(2, 0, 4, pick(P.vessel));
+  SC(3, 0, -3, pick(P.vessel)); SC(-2, 0, 3, pick(P.vessel)); SC(2, 0, 4, pick(P.vessel));
   // two creature spawner spots on pillars above the walls (runner rolls the
   // serpent / kraken chance)
   SPAWN(2, top + 2, 3, 0); SPAWN(-3, top + 2, -2, 0);
@@ -290,8 +297,8 @@ function portal() {
     INGOTS(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr));
   }
   // debris and cracked vessels scattered inside the ring
-  for (let i = 0; i < 30; i++) { const a = rnd() * Math.PI * 2, rr = ri(1, R - 1); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.debris)); }
-  for (let i = 0; i < 4; i++) { const a = rnd() * Math.PI * 2, rr = ri(2, R - 2); S(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.vessel)); }
+  for (let i = 0; i < 30; i++) { const a = rnd() * Math.PI * 2, rr = ri(1, R - 1); SC(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.debris)); }
+  for (let i = 0; i < 4; i++) { const a = rnd() * Math.PI * 2, rr = ri(2, R - 2); SC(round(Math.cos(a) * rr), fy + 1, round(Math.sin(a) * rr), pick(P.vessel)); }
   // two creature spawner spots on pillars above the portal frame
   SPAWN(3, fy + fh + 2, 3, 0); SPAWN(-4, fy + fh + 2, 2, 0);
   write('portal');
@@ -403,8 +410,9 @@ function ship({ name, length, tiltDeg, chests, dev, seed, W, H, DEPTH, spawners 
     SPAWN(mastX, deckY + 4, zc, 0, pick(P.beam));
   }
 
-  // debris trailing out of the wreck on the sea floor
-  for (let i = 0; i < Math.floor(length * 1.0); i++) S(ri(-W - 5, W + 5), 0, ri(-half - 4, half + 4), pick(P.debris));
+  // debris trailing out of the wreck on the sea floor (settles onto the
+  // real floor, so the trail follows slopes instead of hovering at y=0)
+  for (let i = 0; i < Math.floor(length * 1.0); i++) SC(ri(-W - 5, W + 5), 2, ri(-half - 4, half + 4), pick(P.debris));
   for (let i = 0; i < Math.max(2, Math.floor(chests / 3)); i++) S(ri(-3, 3), 0, ri(-half, half), pick(P.vessel));
 
   write(name);
@@ -474,14 +482,17 @@ function city() {
   }
 
   // collapsed rubble mounds along the rim so the edge tapers off instead
-  // of stopping dead, plus a few big fallen wall slabs in the streets
+  // of stopping dead, plus a few big fallen wall slabs in the streets.
+  // Both are emitted as settling scatter columns: the rim mounds sit partly
+  // outside the plinth, so on a slope each column drapes down to the real
+  // floor instead of hovering (the floating debris piles players reported).
   for (let i = 0; i < 14; i++) {
     const a = rnd() * Math.PI * 2, rr = R - ri(0, 4);
     const mx = round(Math.cos(a) * rr), mz = round(Math.sin(a) * rr);
     const mh = ri(2, 4), mw = ri(1, 2);
     for (let dx = -mw; dx <= mw; dx++) for (let dz = -mw; dz <= mw; dz++) {
       const hh = Math.max(0, mh - Math.abs(dx) - Math.abs(dz) - ri(0, 1));
-      for (let y = 0; y < hh; y++) S(mx + dx, fy + 1 + y, mz + dz, pick(P.cobble.concat(P.brick)));
+      if (hh > 0) SC(mx + dx, fy + 1, mz + dz, pick(P.cobble.concat(P.brick)), hh);
     }
   }
   for (let i = 0; i < 5; i++) {
@@ -489,13 +500,13 @@ function city() {
     if (!inside(x, z)) continue;
     const len = ri(4, 7), vert = chance(0.5), wb = pick(P.brick);
     for (let j = 0; j < len; j++) for (let k = 0; k < 2; k++)
-      if (chance(0.85)) S(vert ? x + k : x + j, fy + 1, vert ? z + j : z + k, wb);
+      if (chance(0.85)) SC(vert ? x + k : x + j, fy + 1, vert ? z + j : z + k, wb);
   }
 
   // extra debris, loose chests and ingot hoards scattered in the streets
   for (let i = 0; i < 90; i++) {
     const x = ri(-R, R), z = ri(-R, R);
-    if (inside(x, z)) S(x, fy + 1, z, pick(P.debris));
+    if (inside(x, z)) SC(x, fy + 1, z, pick(P.debris));
   }
   let placed = 0, tries = 0;
   while (placed < 20 && tries++ < 500) {
@@ -511,7 +522,7 @@ function city() {
   }
   for (let i = 0; i < 8; i++) {
     const x = ri(-R + 2, R - 2), z = ri(-R + 2, R - 2);
-    if (inside(x, z)) S(x, fy + 1, z, pick(P.vessel));
+    if (inside(x, z)) SC(x, fy + 1, z, pick(P.vessel));
   }
   // a few standing broken archways / walls between buildings
   for (let i = 0; i < 8; i++) {

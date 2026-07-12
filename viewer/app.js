@@ -72,6 +72,12 @@ function parseScript(text) {
       set(tint(t[1]), tint(t[2]), tint(t[3]), '__spawner__');
     } else if (cmd === 'ingots') {
       set(tint(t[1]), tint(t[2]), tint(t[3]), '__ingots__');
+    } else if (cmd === 'scatter') {
+      // in-game this settles onto the surface below; the viewer has no
+      // terrain, so render the column at the scripted spot
+      const x = tint(t[1]), y = tint(t[2]), z = tint(t[3]);
+      const n = t[5] ? Math.max(1, parseInt(t[5], 10) || 1) : 1;
+      for (let i = 0; i < n; i++) set(x, y + i, z, t[4]);
     }
   }
   return map;

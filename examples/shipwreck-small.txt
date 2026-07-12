@@ -1074,71 +1074,57 @@ setblock ~3 ~12 ~1 game:planks-veryaged-ud
 setblock ~3 ~13 ~1 game:planks-veryaged-ud
 setblock ~2 ~15 ~1 game:planks-aged-ud
 setblock ~2 ~15 ~1 game:planks-aged-ud
-setblock ~-3 ~7 ~-12 game:creativelight-43
-setblock ~-4 ~8 ~3 game:creativelight-49
-setblock ~-1 ~2 ~-10 game:cobblestone-granite
+setblock ~-3 ~7 ~-12 underwaterhorrors:ghostlight-green
+setblock ~-4 ~8 ~3 underwaterhorrors:ghostlight-blue
 lootchest ~-1 ~3 ~-10 3 north
-setblock ~-1 ~2 ~5 game:cobblestone-granite
 lootchest ~-1 ~3 ~5 3 south
-setblock ~4 ~5 ~-9 game:cobblestone-granite
 lootchest ~4 ~6 ~-9 3 west
-setblock ~-3 ~3 ~-9 game:cobblestone-granite
 lootchest ~-3 ~4 ~-9 3 north
-setblock ~2 ~4 ~1 game:cobblestone-granite
 lootchest ~2 ~5 ~1 2 east
-setblock ~4 ~5 ~-2 game:cobblestone-granite
 lootchest ~4 ~6 ~-2 3 south
-setblock ~ ~3 ~5 game:cobblestone-granite
 lootchest ~ ~4 ~5 3 west
-setblock ~1 ~3 ~5 game:cobblestone-granite
 lootchest ~1 ~4 ~5 3 west
-setblock ~4 ~5 ~9 game:cobblestone-granite
 ingots ~4 ~6 ~9 molybdochalkos 31
-setblock ~-2 ~3 ~7 game:cobblestone-granite
 ingots ~-2 ~4 ~7 copper 35
-setblock ~4 ~5 ~-1 game:cobblestone-granite
 ingots ~4 ~6 ~-1 silver 13
-setblock ~4 ~6 ~-12 game:cobblestone-granite
 ingots ~4 ~7 ~-12 steel 9
-setblock ~3 ~4 ~-13 game:cobblestone-granite
 ingots ~3 ~5 ~-13 copper 39
-setblock ~2 ~4 ~3 game:cobblestone-granite
 ingots ~2 ~5 ~3 silver 12
 fill ~-3 ~ ~-4 ~-3 ~17 ~-4 game:log-placed-aged-ud
 spawner ~-3 ~18 ~-4
-setblock ~-9 ~ ~-15 game:loosestick
-setblock ~9 ~ ~-8 game:loosestick
-setblock ~4 ~ ~-8 game:cobblestone-granite
-setblock ~ ~ ~-20 game:loosestick
-setblock ~4 ~ ~12 game:loosestick
-setblock ~9 ~ ~2 game:metal-scraps
-setblock ~-10 ~ ~19 game:loosestick
-setblock ~-11 ~ ~-6 game:looseflints
-setblock ~10 ~ ~1 game:looseflints
-setblock ~5 ~ ~-7 game:loosestick
-setblock ~-9 ~ ~21 game:cobblestone-granite
-setblock ~3 ~ ~-9 game:loosestick
-setblock ~-6 ~ ~12 game:loosegears
-setblock ~7 ~ ~-12 game:loosegears
-setblock ~-2 ~ ~12 game:cobblestone-granite
-setblock ~2 ~ ~-18 game:loosestick
-setblock ~-2 ~ ~-21 game:loosestick
-setblock ~-11 ~ ~8 game:metal-parts
-setblock ~-4 ~ ~-6 game:metal-parts
-setblock ~5 ~ ~3 game:looseflints
-setblock ~7 ~ ~-10 game:loosegears
-setblock ~-2 ~ ~17 game:loosestick
-setblock ~-10 ~ ~-13 game:looseflints
-setblock ~7 ~ ~21 game:loosestick
-setblock ~5 ~ ~-10 game:loosestick
-setblock ~6 ~ ~-5 game:cobblestone-granite
-setblock ~6 ~ ~5 game:loosestick
-setblock ~5 ~ ~11 game:metal-scraps
-setblock ~5 ~ ~4 game:loosestick
-setblock ~-5 ~ ~1 game:cobblestone-granite
-setblock ~6 ~ ~-9 game:cobblestone-granite
-setblock ~-4 ~ ~-11 game:looseflints
-setblock ~-8 ~ ~1 game:cobblestone-granite
-setblock ~-9 ~ ~20 game:metal-scraps
+scatter ~-9 ~2 ~-15 game:loosestick
+scatter ~9 ~2 ~-8 game:loosestick
+scatter ~4 ~2 ~-8 game:cobblestone-granite
+scatter ~ ~2 ~-20 game:loosestick
+scatter ~4 ~2 ~12 game:loosestick
+scatter ~9 ~2 ~2 game:metal-scraps
+scatter ~-10 ~2 ~19 game:loosestick
+scatter ~-11 ~2 ~-6 game:looseflints
+scatter ~10 ~2 ~1 game:looseflints
+scatter ~5 ~2 ~-7 game:loosestick
+scatter ~-9 ~2 ~21 game:cobblestone-granite
+scatter ~3 ~2 ~-9 game:loosestick
+scatter ~-6 ~2 ~12 game:loosegears
+scatter ~7 ~2 ~-12 game:loosegears
+scatter ~-2 ~2 ~12 game:cobblestone-granite
+scatter ~2 ~2 ~-18 game:loosestick
+scatter ~-2 ~2 ~-21 game:loosestick
+scatter ~-11 ~2 ~8 game:metal-parts
+scatter ~-4 ~2 ~-6 game:metal-parts
+scatter ~5 ~2 ~3 game:looseflints
+scatter ~7 ~2 ~-10 game:loosegears
+scatter ~-2 ~2 ~17 game:loosestick
+scatter ~-10 ~2 ~-13 game:looseflints
+scatter ~7 ~2 ~21 game:loosestick
+scatter ~5 ~2 ~-10 game:loosestick
+scatter ~6 ~2 ~-5 game:cobblestone-granite
+scatter ~6 ~2 ~5 game:loosestick
+scatter ~5 ~2 ~11 game:metal-scraps
+scatter ~5 ~2 ~4 game:loosestick
+scatter ~-5 ~2 ~1 game:cobblestone-granite
+scatter ~6 ~2 ~-9 game:cobblestone-granite
+scatter ~-4 ~2 ~-11 game:looseflints
+scatter ~-8 ~2 ~1 game:cobblestone-granite
+scatter ~-9 ~2 ~20 game:metal-scraps
 setblock ~1 ~ ~9 game:lootvessel-forage
 setblock ~3 ~ ~ game:lootvessel-tool

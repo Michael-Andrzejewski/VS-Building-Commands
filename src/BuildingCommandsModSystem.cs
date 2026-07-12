@@ -560,8 +560,9 @@ public class BuildingCommandsModSystem : ModSystem
                 case "lootchest": r = DoLootChest(a, caller); break;
                 case "spawner": r = DoSpawner(a, caller); break;
                 case "ingots": r = DoIngots(a, caller); break;
+                case "scatter": r = DoScatter(a, caller); break;
                 case "blockcode": r = DoBlockcode(a, caller); break;
-                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, spawner, ingots, blockcode)"); break;
+                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, spawner, ingots, scatter, blockcode)"); break;
             }
 
             if (r.Status == EnumCommandStatus.Success)
@@ -827,6 +828,7 @@ public class BuildingCommandsModSystem : ModSystem
 
         var pos = new BlockPos(x, y, z, dim);
         var accessor = sapi.World.BlockAccessor;
+        SettleOntoSupport(accessor, pos);
 
         // Place the chest AS a collapsed ruin chest: the block entity reads
         // its type from the placing item stack's attributes.
@@ -961,6 +963,7 @@ public class BuildingCommandsModSystem : ModSystem
 
         var pos = new BlockPos(x, y, z, dim);
         var accessor = sapi.World.BlockAccessor;
+        SettleOntoSupport(accessor, pos);
         accessor.SetBlock(storage.BlockId, pos);
 
         if (accessor.GetBlockEntity(pos) is not Vintagestory.GameContent.BlockEntityGroundStorage be)
@@ -972,6 +975,69 @@ public class BuildingCommandsModSystem : ModSystem
         be.MarkDirty(true);
         accessor.MarkBlockDirty(pos);
         return TextCommandResult.Success($"Placed a pile of {count} {metal} ingot(s) at ({x},{y},{z}).");
+    }
+
+    // scatter x y z <block> [count] — debris that settles onto the nearest
+    // solid surface below the scripted spot instead of trusting a flat-floor
+    // assumption. A spot buried in terrain, or with no support within 20
+    // blocks below, places nothing (so scripts never leave floating debris).
+    // count (1-8) stacks a small column upward from the support, letting
+    // rubble mounds drape over uneven ground column by column.
+    private TextCommandResult DoScatter(IList<string> a, Caller caller)
+    {
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
+        if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+
+        Block block = ResolveBlock(A(a, 3), out string berr);
+        if (block == null) return TextCommandResult.Error(berr);
+        int count = 1;
+        if (A(a, 4) != null && int.TryParse(A(a, 4), out int c)) count = Math.Max(1, Math.Min(8, c));
+
+        var accessor = sapi.World.BlockAccessor;
+        var pos = new BlockPos(x, y, z, dim);
+        if (IsScatterSupport(accessor.GetBlock(pos)))
+            return TextCommandResult.Success($"Scatter spot ({x},{y},{z}) is inside something solid; skipped.");
+
+        int baseY = int.MinValue;
+        var p = new BlockPos(x, 0, z, dim);
+        for (int yy = y - 1; yy >= Math.Max(1, y - 20); yy--)
+        {
+            p.Y = yy;
+            if (IsScatterSupport(accessor.GetBlock(p))) { baseY = yy + 1; break; }
+        }
+        if (baseY == int.MinValue)
+            return TextCommandResult.Success($"No support below ({x},{y},{z}); skipped so nothing floats.");
+
+        for (int i = 0; i < count; i++)
+        {
+            p.Y = baseY + i;
+            accessor.SetBlock(block.BlockId, p);
+        }
+        return TextCommandResult.Success($"Scattered {count} block(s) at ({x},{baseY},{z}).");
+    }
+
+    // Support = something with a collision box. Water, kelp and other
+    // collisionless blocks do not count, so debris sinks through them.
+    private static bool IsScatterSupport(Block b)
+    {
+        return b != null && b.Id != 0 && b.CollisionBoxes != null && b.CollisionBoxes.Length > 0;
+    }
+
+    // Drops a loot position onto the nearest solid support below (12 blocks
+    // max), so chests and ingot piles never hover over floor gaps or slope
+    // dips. Keeps the given spot when it is already supported or when no
+    // support is in reach (better a rare floater than lost loot).
+    private static void SettleOntoSupport(IBlockAccessor accessor, BlockPos pos)
+    {
+        var p = new BlockPos(pos.X, pos.Y - 1, pos.Z, pos.dimension);
+        if (IsScatterSupport(accessor.GetBlock(p))) return;
+        for (int y = pos.Y - 2; y >= Math.Max(1, pos.Y - 12); y--)
+        {
+            p.Y = y;
+            if (IsScatterSupport(accessor.GetBlock(p))) { pos.Y = y + 1; return; }
+        }
     }
 
     // Finds a block entity's inventory whether it exposes IBlockEntityContainer

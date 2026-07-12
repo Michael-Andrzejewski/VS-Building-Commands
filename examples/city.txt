@@ -311,30 +311,24 @@ fill ~-14 ~ ~13 ~-14 ~ ~13 air
 fill ~-15 ~3 ~13 ~-15 ~3 ~13 air
 fill ~-15 ~ ~7 ~-13 ~1 ~7 air
 fill ~-16 ~3 ~8 ~-12 ~3 ~12 game:cobblestone-andesite
-setblock ~-16 ~3 ~11 game:cobblestone-granite
 lootchest ~-16 ~4 ~11 3 west
-setblock ~-15 ~4 ~11 game:creativelight-43
-setblock ~-12 ~4 ~12 game:metal-parts
-setblock ~-13 ~4 ~10 game:metal-scraps
-setblock ~-14 ~6 ~10 game:creativelight-49
-setblock ~-13 ~ ~10 game:cobblestone-granite
-setblock ~-16 ~ ~10 game:looseflints
-setblock ~-13 ~ ~11 game:looseflints
-setblock ~-15 ~ ~11 game:metal-parts
-setblock ~-16 ~-1 ~9 game:cobblestone-granite
+setblock ~-15 ~4 ~11 underwaterhorrors:ghostlight-green
+scatter ~-12 ~4 ~12 game:metal-parts
+scatter ~-13 ~4 ~10 game:metal-scraps
+setblock ~-14 ~6 ~10 underwaterhorrors:ghostlight-blue
+scatter ~-13 ~ ~10 game:cobblestone-granite
+scatter ~-16 ~ ~10 game:looseflints
+scatter ~-13 ~ ~11 game:looseflints
+scatter ~-15 ~ ~11 game:metal-parts
 lootchest ~-16 ~ ~9 3 east
-setblock ~-13 ~-1 ~12 game:cobblestone-granite
 lootchest ~-13 ~ ~12 3 west
-setblock ~-15 ~-1 ~12 game:cobblestone-granite
 lootchest ~-15 ~ ~12 3 west
-setblock ~-16 ~-1 ~8 game:cobblestone-granite
 ingots ~-16 ~ ~8 copper 32
-setblock ~-16 ~-1 ~8 game:cobblestone-granite
 ingots ~-16 ~ ~8 copper 37
-setblock ~-18 ~ ~7 game:loosestick
-setblock ~-18 ~ ~5 game:metal-scraps
-setblock ~-19 ~ ~5 game:cobblestone-granite
-setblock ~-9 ~ ~14 game:metal-scraps
+scatter ~-18 ~ ~7 game:loosestick
+scatter ~-18 ~ ~5 game:metal-scraps
+scatter ~-19 ~ ~5 game:cobblestone-granite
+scatter ~-9 ~ ~14 game:metal-scraps
 fill ~-7 ~-1 ~-16 ~1 ~-1 ~-10 game:cobblestone-granite
 fill ~-2 ~-1 ~-11 ~-1 ~-1 ~-10 game:cobblestone-andesite
 fill ~1 ~-1 ~-13 ~1 ~-1 ~-12 air
@@ -437,35 +431,30 @@ fill ~-5 ~5 ~-10 ~-4 ~6 ~-10 air
 fill ~-6 ~2 ~-10 ~-6 ~2 ~-10 air
 fill ~-4 ~ ~-16 ~-2 ~1 ~-16 air
 fill ~-6 ~3 ~-15 ~ ~3 ~-11 game:cobblestone-limestone
-setblock ~ ~3 ~-11 game:cobblestone-granite
 lootchest ~ ~4 ~-11 3 south
-setblock ~ ~3 ~-11 game:cobblestone-granite
 ingots ~ ~4 ~-11 copper 40
-setblock ~-4 ~4 ~-14 game:creativelight-49
-setblock ~-4 ~4 ~-14 game:metal-scraps
+setblock ~-4 ~4 ~-14 underwaterhorrors:ghostlight-blue
+scatter ~-4 ~4 ~-14 game:metal-scraps
 fill ~-6 ~7 ~-15 ~ ~7 ~-11 game:cobblestone-granite
-setblock ~-4 ~8 ~-14 game:metal-parts
+scatter ~-4 ~8 ~-14 game:metal-parts
 fill ~-6 ~11 ~-15 ~ ~11 ~-11 game:cobblestone-granite
-setblock ~-5 ~12 ~-13 game:metal-scraps
-setblock ~-3 ~12 ~-13 game:metal-scraps
-setblock ~-3 ~12 ~-13 game:creativelight-49
-setblock ~-1 ~ ~-12 game:loosestick
-setblock ~-4 ~ ~-12 game:metal-scraps
-setblock ~-5 ~ ~-12 game:loosestick
-setblock ~-5 ~ ~-13 game:loosestick
-setblock ~-1 ~-1 ~-15 game:cobblestone-granite
+scatter ~-5 ~12 ~-13 game:metal-scraps
+scatter ~-3 ~12 ~-13 game:metal-scraps
+setblock ~-3 ~12 ~-13 underwaterhorrors:ghostlight-blue
+scatter ~-1 ~ ~-12 game:loosestick
+scatter ~-4 ~ ~-12 game:metal-scraps
+scatter ~-5 ~ ~-12 game:loosestick
+scatter ~-5 ~ ~-13 game:loosestick
 lootchest ~-1 ~ ~-15 2 south
-setblock ~-5 ~-1 ~-15 game:cobblestone-granite
 lootchest ~-5 ~ ~-15 3 north
-setblock ~-4 ~-1 ~-15 game:cobblestone-granite
 lootchest ~-4 ~ ~-15 3 east
-setblock ~-6 ~ ~-17 game:loosegears
-setblock ~-4 ~ ~-17 game:looseflints
-setblock ~-3 ~ ~-15 game:looseflints
-setblock ~-4 ~ ~-16 game:metal-scraps
-setblock ~-8 ~ ~-8 game:cobblestone-granite
-setblock ~-8 ~ ~-13 game:metal-scraps
-setblock ~2 ~ ~-12 game:loosestick
+scatter ~-6 ~ ~-17 game:loosegears
+scatter ~-4 ~ ~-17 game:looseflints
+scatter ~-3 ~ ~-15 game:looseflints
+scatter ~-4 ~ ~-16 game:metal-scraps
+scatter ~-8 ~ ~-8 game:cobblestone-granite
+scatter ~-8 ~ ~-13 game:metal-scraps
+scatter ~2 ~ ~-12 game:loosestick
 fill ~-8 ~-1 ~-7 ~ ~-1 ~3 game:cobblestone-granite
 fill ~-1 ~-1 ~-2 ~ ~-1 ~1 game:cobblestone-andesite
 fill ~-1 ~-1 ~-3 ~ ~-1 ~ game:cobblestone-limestone
@@ -539,33 +528,28 @@ fill ~-3 ~2 ~3 ~-1 ~3 ~3 air
 fill ~ ~1 ~3 ~ ~2 ~3 air
 fill ~-5 ~ ~3 ~-3 ~1 ~3 air
 fill ~-7 ~3 ~-6 ~-1 ~3 ~2 game:cobblestone-andesite
-setblock ~-7 ~3 ~-3 game:cobblestone-granite
 lootchest ~-7 ~4 ~-3 2 south
-setblock ~-1 ~3 ~-4 game:cobblestone-granite
 ingots ~-1 ~4 ~-4 copper 28
-setblock ~-6 ~4 ~2 game:creativelight-49
-setblock ~-4 ~4 ~-6 game:looseflints
-setblock ~-1 ~4 ~-1 game:cobblestone-granite
-setblock ~-4 ~4 ~-2 game:creativelight-43
-setblock ~-2 ~ ~-2 game:looseflints
-setblock ~-5 ~ ~-2 game:metal-scraps
-setblock ~-1 ~ ~ game:cobblestone-granite
-setblock ~-6 ~ ~2 game:metal-scraps
-setblock ~-4 ~-1 ~-1 game:cobblestone-granite
+setblock ~-6 ~4 ~2 underwaterhorrors:ghostlight-blue
+scatter ~-4 ~4 ~-6 game:looseflints
+scatter ~-1 ~4 ~-1 game:cobblestone-granite
+setblock ~-4 ~4 ~-2 underwaterhorrors:ghostlight-green
+scatter ~-2 ~ ~-2 game:looseflints
+scatter ~-5 ~ ~-2 game:metal-scraps
+scatter ~-1 ~ ~ game:cobblestone-granite
+scatter ~-6 ~ ~2 game:metal-scraps
 lootchest ~-4 ~ ~-1 3 west
-setblock ~-7 ~-1 ~ game:cobblestone-granite
 lootchest ~-7 ~ ~ 3 east
-setblock ~-1 ~-1 ~-1 game:cobblestone-granite
 lootchest ~-1 ~ ~-1 2 north
-setblock ~1 ~ ~-4 game:looseflints
-setblock ~-10 ~ ~5 game:metal-parts
-setblock ~-7 ~ ~2 game:loosegears
-setblock ~ ~ ~3 game:metal-scraps
-setblock ~-10 ~ ~-3 game:metal-parts
-setblock ~-8 ~ ~-7 game:loosestick
-setblock ~-5 ~ ~ game:metal-parts
-setblock ~-7 ~ ~ game:loosestick
-setblock ~2 ~ ~-8 game:loosegears
+scatter ~1 ~ ~-4 game:looseflints
+scatter ~-10 ~ ~5 game:metal-parts
+scatter ~-7 ~ ~2 game:loosegears
+scatter ~ ~ ~3 game:metal-scraps
+scatter ~-10 ~ ~-3 game:metal-parts
+scatter ~-8 ~ ~-7 game:loosestick
+scatter ~-5 ~ ~ game:metal-parts
+scatter ~-7 ~ ~ game:loosestick
+scatter ~2 ~ ~-8 game:loosegears
 fill ~-8 ~-1 ~4 ~ ~-1 ~12 game:cobblestone-granite
 fill ~-2 ~-1 ~10 ~-1 ~-1 ~12 game:cobblestone-limestone
 fill ~-2 ~-1 ~11 ~ ~-1 ~12 game:cobblestone-limestone
@@ -640,38 +624,31 @@ fill ~-7 ~3 ~12 ~-7 ~3 ~12 air
 fill ~-7 ~ ~12 ~-5 ~2 ~12 air
 fill ~-5 ~ ~12 ~-3 ~1 ~12 air
 fill ~-7 ~3 ~5 ~-1 ~3 ~11 game:cobblestone-limestone
-setblock ~-4 ~3 ~9 game:cobblestone-granite
 lootchest ~-4 ~4 ~9 2 west
-setblock ~-2 ~4 ~5 game:creativelight-43
-setblock ~-4 ~4 ~6 game:cobblestone-granite
-setblock ~-1 ~4 ~6 game:loosestick
-setblock ~-4 ~4 ~8 game:creativelight-49
-setblock ~-4 ~ ~8 game:looseflints
-setblock ~-6 ~ ~9 game:metal-scraps
-setblock ~-7 ~ ~11 game:metal-scraps
-setblock ~-3 ~ ~5 game:looseflints
-setblock ~-4 ~ ~10 game:loosestick
-setblock ~-5 ~-1 ~10 game:cobblestone-granite
+setblock ~-2 ~4 ~5 underwaterhorrors:ghostlight-green
+scatter ~-4 ~4 ~6 game:cobblestone-granite
+scatter ~-1 ~4 ~6 game:loosestick
+setblock ~-4 ~4 ~8 underwaterhorrors:ghostlight-blue
+scatter ~-4 ~ ~8 game:looseflints
+scatter ~-6 ~ ~9 game:metal-scraps
+scatter ~-7 ~ ~11 game:metal-scraps
+scatter ~-3 ~ ~5 game:looseflints
+scatter ~-4 ~ ~10 game:loosestick
 lootchest ~-5 ~ ~10 2 north
-setblock ~-4 ~-1 ~9 game:cobblestone-granite
 lootchest ~-4 ~ ~9 3 east
-setblock ~-7 ~-1 ~11 game:cobblestone-granite
 lootchest ~-7 ~ ~11 2 north
-setblock ~-4 ~-1 ~6 game:cobblestone-granite
 lootchest ~-4 ~ ~6 2 north
-setblock ~-1 ~-1 ~11 game:cobblestone-granite
 ingots ~-1 ~ ~11 steel 7
-setblock ~-4 ~-1 ~5 game:cobblestone-granite
 ingots ~-4 ~ ~5 silver 27
-setblock ~-7 ~ ~12 game:loosegears
-setblock ~-10 ~ ~4 game:looseflints
-setblock ~-2 ~ ~12 game:loosestick
-setblock ~2 ~ ~8 game:loosestick
-setblock ~-4 ~ ~9 game:loosegears
-setblock ~-2 ~ ~2 game:cobblestone-granite
-setblock ~-9 ~ ~9 game:cobblestone-granite
-setblock ~-7 ~ ~7 game:cobblestone-granite
-setblock ~-7 ~ ~8 game:cobblestone-granite
+scatter ~-7 ~ ~12 game:loosegears
+scatter ~-10 ~ ~4 game:looseflints
+scatter ~-2 ~ ~12 game:loosestick
+scatter ~2 ~ ~8 game:loosestick
+scatter ~-4 ~ ~9 game:loosegears
+scatter ~-2 ~ ~2 game:cobblestone-granite
+scatter ~-9 ~ ~9 game:cobblestone-granite
+scatter ~-7 ~ ~7 game:cobblestone-granite
+scatter ~-7 ~ ~8 game:cobblestone-granite
 fill ~4 ~-1 ~-20 ~10 ~-1 ~-10 game:cobblestone-granite
 fill ~9 ~-1 ~-12 ~10 ~-1 ~-11 game:cobblestone-andesite
 fill ~10 ~-1 ~-10 ~10 ~-1 ~-10 air
@@ -790,37 +767,31 @@ fill ~9 ~6 ~-10 ~10 ~8 ~-10 air
 fill ~7 ~9 ~-10 ~9 ~11 ~-10 air
 fill ~6 ~ ~-10 ~8 ~1 ~-10 air
 fill ~5 ~3 ~-19 ~9 ~3 ~-11 game:cobblestone-andesite
-setblock ~7 ~4 ~-15 game:cobblestone-granite
-setblock ~5 ~4 ~-12 game:metal-scraps
+scatter ~7 ~4 ~-15 game:cobblestone-granite
+scatter ~5 ~4 ~-12 game:metal-scraps
 fill ~5 ~7 ~-19 ~9 ~7 ~-11 game:cobblestone-limestone
-setblock ~9 ~7 ~-11 game:cobblestone-granite
 ingots ~9 ~8 ~-11 steel 10
-setblock ~5 ~8 ~-12 game:metal-scraps
-setblock ~9 ~8 ~-18 game:looseflints
+scatter ~5 ~8 ~-12 game:metal-scraps
+scatter ~9 ~8 ~-18 game:looseflints
 fill ~5 ~11 ~-19 ~9 ~11 ~-11 game:cobblestone-granite
-setblock ~8 ~11 ~-14 game:cobblestone-granite
 lootchest ~8 ~12 ~-14 2 south
-setblock ~6 ~12 ~-13 game:loosegears
-setblock ~7 ~15 ~-15 game:creativelight-49
-setblock ~5 ~ ~-15 game:cobblestone-granite
-setblock ~5 ~ ~-15 game:cobblestone-granite
-setblock ~5 ~-1 ~-15 game:cobblestone-granite
+scatter ~6 ~12 ~-13 game:loosegears
+setblock ~7 ~15 ~-15 underwaterhorrors:ghostlight-blue
+scatter ~5 ~ ~-15 game:cobblestone-granite
+scatter ~5 ~ ~-15 game:cobblestone-granite
 lootchest ~5 ~ ~-15 3 east
-setblock ~7 ~-1 ~-16 game:cobblestone-granite
 lootchest ~7 ~ ~-16 2 west
-setblock ~6 ~-1 ~-14 game:cobblestone-granite
 lootchest ~6 ~ ~-14 3 north
-setblock ~8 ~-1 ~-18 game:cobblestone-granite
 ingots ~8 ~ ~-18 molybdochalkos 39
-setblock ~11 ~ ~-17 game:loosestick
-setblock ~5 ~ ~-18 game:loosegears
-setblock ~3 ~ ~-21 game:metal-scraps
-setblock ~3 ~ ~-17 game:cobblestone-granite
-setblock ~6 ~ ~-20 game:metal-scraps
-setblock ~10 ~ ~-10 game:metal-scraps
-setblock ~6 ~ ~-20 game:loosegears
-setblock ~3 ~ ~-14 game:loosestick
-setblock ~10 ~ ~-22 game:metal-scraps
+scatter ~11 ~ ~-17 game:loosestick
+scatter ~5 ~ ~-18 game:loosegears
+scatter ~3 ~ ~-21 game:metal-scraps
+scatter ~3 ~ ~-17 game:cobblestone-granite
+scatter ~6 ~ ~-20 game:metal-scraps
+scatter ~10 ~ ~-10 game:metal-scraps
+scatter ~6 ~ ~-20 game:loosegears
+scatter ~3 ~ ~-14 game:loosestick
+scatter ~10 ~ ~-22 game:metal-scraps
 fill ~5 ~-1 ~-9 ~13 ~-1 ~-1 game:cobblestone-granite
 fill ~9 ~-1 ~-9 ~12 ~-1 ~-8 game:cobblestone-limestone
 fill ~13 ~-1 ~-8 ~13 ~-1 ~-6 game:cobblestone-limestone
@@ -891,24 +862,19 @@ fill ~10 ~2 ~-1 ~12 ~2 ~-1 air
 fill ~5 ~1 ~-1 ~6 ~2 ~-1 air
 fill ~5 ~2 ~-1 ~6 ~2 ~-1 air
 fill ~8 ~ ~-9 ~10 ~1 ~-9 air
-setblock ~9 ~3 ~-5 game:creativelight-49
-setblock ~11 ~ ~-5 game:loosestick
-setblock ~7 ~ ~-7 game:loosestick
-setblock ~11 ~ ~-7 game:loosestick
-setblock ~6 ~-1 ~-8 game:cobblestone-granite
+setblock ~9 ~3 ~-5 underwaterhorrors:ghostlight-blue
+scatter ~11 ~ ~-5 game:loosestick
+scatter ~7 ~ ~-7 game:loosestick
+scatter ~11 ~ ~-7 game:loosestick
 lootchest ~6 ~ ~-8 3 east
-setblock ~9 ~-1 ~-5 game:cobblestone-granite
 lootchest ~9 ~ ~-5 3 south
-setblock ~10 ~-1 ~-7 game:cobblestone-granite
 lootchest ~10 ~ ~-7 2 north
-setblock ~12 ~-1 ~-8 game:cobblestone-granite
 ingots ~12 ~ ~-8 molybdochalkos 20
-setblock ~11 ~-1 ~-3 game:cobblestone-granite
 ingots ~11 ~ ~-3 molybdochalkos 27
-setblock ~6 ~ ~-6 game:loosestick
-setblock ~9 ~ ~-10 game:cobblestone-granite
-setblock ~15 ~ ~-1 game:cobblestone-granite
-setblock ~11 ~ ~-8 game:looseflints
+scatter ~6 ~ ~-6 game:loosestick
+scatter ~9 ~ ~-10 game:cobblestone-granite
+scatter ~15 ~ ~-1 game:cobblestone-granite
+scatter ~11 ~ ~-8 game:looseflints
 fill ~4 ~-1 ~4 ~14 ~-1 ~10 game:cobblestone-granite
 fill ~4 ~-1 ~8 ~7 ~-1 ~10 game:cobblestone-andesite
 fill ~4 ~-1 ~8 ~5 ~-1 ~8 air
@@ -1013,404 +979,324 @@ fill ~12 ~4 ~10 ~12 ~4 ~10 air
 fill ~8 ~6 ~10 ~8 ~6 ~10 air
 fill ~8 ~ ~10 ~10 ~1 ~10 air
 fill ~5 ~3 ~5 ~13 ~3 ~9 game:cobblestone-granite
-setblock ~9 ~3 ~5 game:cobblestone-granite
 lootchest ~9 ~4 ~5 3 east
-setblock ~6 ~4 ~5 game:metal-scraps
+scatter ~6 ~4 ~5 game:metal-scraps
 fill ~5 ~7 ~5 ~13 ~7 ~9 game:cobblestone-limestone
-setblock ~8 ~7 ~8 game:cobblestone-granite
 lootchest ~8 ~8 ~8 3 east
-setblock ~5 ~8 ~5 game:loosegears
+scatter ~5 ~8 ~5 game:loosegears
 fill ~5 ~11 ~5 ~13 ~11 ~9 game:cobblestone-limestone
-setblock ~13 ~11 ~8 game:cobblestone-granite
 lootchest ~13 ~12 ~8 2 east
-setblock ~11 ~12 ~7 game:looseflints
-setblock ~10 ~12 ~9 game:loosestick
-setblock ~9 ~12 ~7 game:creativelight-43
-setblock ~10 ~ ~7 game:metal-parts
-setblock ~10 ~ ~8 game:metal-parts
-setblock ~5 ~ ~6 game:loosestick
-setblock ~11 ~ ~9 game:cobblestone-granite
-setblock ~11 ~-1 ~9 game:cobblestone-granite
+scatter ~11 ~12 ~7 game:looseflints
+scatter ~10 ~12 ~9 game:loosestick
+setblock ~9 ~12 ~7 underwaterhorrors:ghostlight-green
+scatter ~10 ~ ~7 game:metal-parts
+scatter ~10 ~ ~8 game:metal-parts
+scatter ~5 ~ ~6 game:loosestick
+scatter ~11 ~ ~9 game:cobblestone-granite
 lootchest ~11 ~ ~9 3 south
-setblock ~10 ~-1 ~5 game:cobblestone-granite
 lootchest ~10 ~ ~5 3 west
-setblock ~9 ~ ~10 game:looseflints
-setblock ~7 ~ ~12 game:looseflints
-setblock ~7 ~ ~5 game:metal-scraps
-setblock ~15 ~ ~11 game:looseflints
-setblock ~10 ~ ~8 game:metal-scraps
-setblock ~-13 ~ ~12 game:cobblestone-andesite
-setblock ~-13 ~1 ~12 game:brickruin-irregular-gray
-setblock ~-12 ~ ~12 game:brickruin-irregular-tan
-setblock ~-5 ~ ~-19 game:cobblestone-limestone
-setblock ~-5 ~ ~-18 game:cobblestone-andesite
-setblock ~ ~ ~-19 game:brickruin-irregular-gray
-setblock ~ ~1 ~-19 game:cobblestone-limestone
-setblock ~1 ~ ~-20 game:brickruin-irregular-gray
-setblock ~1 ~ ~-19 game:brickruin-irregular-brown
-setblock ~1 ~1 ~-19 game:cobblestone-andesite
-setblock ~1 ~2 ~-19 game:brickruin-irregular-brown
-setblock ~1 ~ ~-18 game:brickruin-irregular-gray
-setblock ~1 ~1 ~-18 game:cobblestone-limestone
-setblock ~2 ~ ~-20 game:brickruin-irregular-brown
-setblock ~2 ~ ~-19 game:cobblestone-limestone
-setblock ~2 ~1 ~-19 game:cobblestone-andesite
-setblock ~10 ~ ~10 game:brickruin-irregular-red
-setblock ~10 ~ ~11 game:cobblestone-andesite
-setblock ~11 ~ ~10 game:cobblestone-andesite
-setblock ~11 ~1 ~10 game:brickruin-irregular-brown
-setblock ~11 ~ ~11 game:cobblestone-limestone
-setblock ~11 ~1 ~11 game:cobblestone-limestone
-setblock ~11 ~2 ~11 game:brickruin-irregular-gray
-setblock ~11 ~ ~12 game:cobblestone-granite
-setblock ~12 ~ ~11 game:brickruin-irregular-brown
-setblock ~12 ~ ~12 game:cobblestone-granite
-setblock ~-10 ~ ~12 game:cobblestone-limestone
-setblock ~-10 ~ ~13 game:brickruin-irregular-tan
-setblock ~-10 ~1 ~13 game:cobblestone-granite
-setblock ~-9 ~ ~11 game:brickruin-irregular-red
-setblock ~-9 ~ ~12 game:brickruin-irregular-red
-setblock ~-9 ~ ~13 game:brickruin-irregular-tan
-setblock ~-9 ~1 ~13 game:brickruin-irregular-brown
-setblock ~-9 ~2 ~13 game:brickruin-irregular-red
-setblock ~-9 ~ ~14 game:cobblestone-limestone
-setblock ~-8 ~ ~13 game:brickruin-irregular-brown
-setblock ~-8 ~1 ~13 game:brickruin-irregular-gray
-setblock ~-8 ~ ~14 game:brickruin-irregular-gray
-setblock ~15 ~ ~4 game:brickruin-irregular-red
-setblock ~16 ~ ~4 game:cobblestone-limestone
-setblock ~16 ~1 ~4 game:brickruin-irregular-brown
-setblock ~16 ~ ~5 game:cobblestone-andesite
-setblock ~17 ~ ~2 game:brickruin-irregular-brown
-setblock ~17 ~ ~3 game:brickruin-irregular-gray
-setblock ~17 ~ ~4 game:brickruin-irregular-brown
-setblock ~17 ~1 ~4 game:brickruin-irregular-red
-setblock ~17 ~ ~5 game:cobblestone-limestone
-setblock ~18 ~ ~4 game:brickruin-irregular-gray
-setblock ~18 ~1 ~4 game:brickruin-irregular-brown
-setblock ~18 ~ ~5 game:cobblestone-granite
-setblock ~-5 ~ ~-17 game:brickruin-irregular-brown
-setblock ~-5 ~ ~-16 game:brickruin-irregular-brown
-setblock ~-5 ~ ~-15 game:brickruin-irregular-gray
-setblock ~-4 ~ ~-17 game:brickruin-irregular-red
-setblock ~-4 ~ ~-16 game:cobblestone-granite
-setblock ~-4 ~1 ~-16 game:cobblestone-granite
-setblock ~-4 ~ ~-15 game:brickruin-irregular-tan
-setblock ~-3 ~ ~-17 game:brickruin-irregular-gray
-setblock ~-3 ~ ~-16 game:brickruin-irregular-gray
-setblock ~-3 ~1 ~-16 game:cobblestone-limestone
-setblock ~-18 ~ ~-4 game:cobblestone-granite
-setblock ~-17 ~ ~-4 game:brickruin-irregular-gray
-setblock ~-17 ~ ~-3 game:brickruin-irregular-tan
-setblock ~-4 ~ ~19 game:brickruin-irregular-gray
-setblock ~-4 ~1 ~19 game:cobblestone-andesite
-setblock ~-4 ~ ~20 game:brickruin-irregular-tan
-setblock ~-4 ~1 ~20 game:brickruin-irregular-red
-setblock ~-4 ~ ~21 game:cobblestone-andesite
-setblock ~-3 ~ ~19 game:brickruin-irregular-brown
-setblock ~-3 ~1 ~19 game:brickruin-irregular-red
-setblock ~-3 ~2 ~19 game:brickruin-irregular-tan
-setblock ~-3 ~ ~20 game:brickruin-irregular-brown
-setblock ~-3 ~1 ~20 game:brickruin-irregular-gray
-setblock ~-3 ~2 ~20 game:brickruin-irregular-brown
-setblock ~-3 ~ ~21 game:cobblestone-granite
-setblock ~-3 ~1 ~21 game:brickruin-irregular-red
-setblock ~-2 ~ ~19 game:brickruin-irregular-tan
-setblock ~-2 ~1 ~19 game:brickruin-irregular-gray
-setblock ~-2 ~ ~20 game:cobblestone-limestone
-setblock ~-2 ~1 ~20 game:cobblestone-andesite
-setblock ~-2 ~ ~21 game:cobblestone-limestone
-setblock ~-2 ~1 ~21 game:brickruin-irregular-brown
-setblock ~-20 ~ ~-5 game:brickruin-irregular-tan
-setblock ~-20 ~1 ~-5 game:brickruin-irregular-tan
-setblock ~-19 ~ ~-7 game:brickruin-irregular-brown
-setblock ~-19 ~ ~-6 game:cobblestone-andesite
-setblock ~-19 ~ ~-5 game:brickruin-irregular-gray
-setblock ~-19 ~1 ~-5 game:brickruin-irregular-brown
-setblock ~-19 ~ ~-4 game:cobblestone-granite
-setblock ~-19 ~ ~-3 game:cobblestone-granite
-setblock ~-18 ~ ~-7 game:cobblestone-limestone
-setblock ~-18 ~ ~-6 game:brickruin-irregular-red
-setblock ~-18 ~1 ~-6 game:cobblestone-limestone
-setblock ~-18 ~ ~-5 game:cobblestone-limestone
-setblock ~-18 ~1 ~-5 game:cobblestone-granite
-setblock ~-18 ~2 ~-5 game:brickruin-irregular-gray
-setblock ~-18 ~3 ~-5 game:brickruin-irregular-tan
-setblock ~-18 ~ ~-4 game:brickruin-irregular-tan
-setblock ~-18 ~1 ~-4 game:brickruin-irregular-brown
-setblock ~-18 ~2 ~-4 game:cobblestone-andesite
-setblock ~-18 ~ ~-3 game:brickruin-irregular-brown
-setblock ~-18 ~1 ~-3 game:brickruin-irregular-red
-setblock ~-17 ~ ~-6 game:brickruin-irregular-tan
-setblock ~-17 ~1 ~-6 game:cobblestone-andesite
-setblock ~-17 ~ ~-5 game:brickruin-irregular-brown
-setblock ~-17 ~1 ~-5 game:brickruin-irregular-tan
-setblock ~-17 ~2 ~-5 game:cobblestone-andesite
-setblock ~-17 ~ ~-4 game:brickruin-irregular-red
-setblock ~-16 ~ ~-5 game:cobblestone-limestone
-setblock ~-16 ~1 ~-5 game:cobblestone-limestone
-setblock ~-18 ~ ~-4 game:brickruin-irregular-gray
-setblock ~-18 ~ ~-3 game:cobblestone-limestone
-setblock ~-18 ~ ~-2 game:cobblestone-limestone
-setblock ~-17 ~ ~-4 game:brickruin-irregular-tan
-setblock ~-17 ~1 ~-4 game:cobblestone-granite
-setblock ~-17 ~ ~-3 game:cobblestone-andesite
-setblock ~-17 ~1 ~-3 game:brickruin-irregular-gray
-setblock ~-17 ~2 ~-3 game:cobblestone-limestone
-setblock ~-17 ~ ~-2 game:cobblestone-limestone
-setblock ~-16 ~ ~-4 game:brickruin-irregular-red
-setblock ~-16 ~ ~-3 game:brickruin-irregular-tan
-setblock ~-16 ~1 ~-3 game:brickruin-irregular-brown
-setblock ~-16 ~ ~-14 game:brickruin-irregular-tan
-setblock ~-15 ~ ~-15 game:cobblestone-andesite
-setblock ~-15 ~ ~-14 game:cobblestone-granite
-setblock ~-15 ~1 ~-14 game:brickruin-irregular-red
-setblock ~-15 ~ ~-13 game:brickruin-irregular-red
-setblock ~-14 ~ ~-15 game:brickruin-irregular-gray
-setblock ~-14 ~ ~-14 game:cobblestone-granite
-setblock ~-4 ~ ~18 game:brickruin-irregular-gray
-setblock ~-4 ~1 ~18 game:cobblestone-limestone
-setblock ~-4 ~ ~19 game:brickruin-irregular-tan
-setblock ~-3 ~ ~17 game:brickruin-irregular-tan
-setblock ~-3 ~ ~18 game:brickruin-irregular-brown
-setblock ~-3 ~1 ~18 game:brickruin-irregular-red
-setblock ~-3 ~2 ~18 game:cobblestone-andesite
-setblock ~-3 ~ ~19 game:cobblestone-limestone
-setblock ~-2 ~ ~17 game:brickruin-irregular-gray
-setblock ~-2 ~ ~18 game:brickruin-irregular-tan
-setblock ~-2 ~ ~19 game:brickruin-irregular-brown
-setblock ~10 ~ ~-16 game:cobblestone-limestone
-setblock ~10 ~ ~-15 game:brickruin-irregular-tan
-setblock ~10 ~ ~-14 game:cobblestone-limestone
-setblock ~11 ~ ~-16 game:brickruin-irregular-brown
-setblock ~11 ~1 ~-16 game:brickruin-irregular-tan
-setblock ~11 ~ ~-15 game:brickruin-irregular-brown
-setblock ~11 ~1 ~-15 game:cobblestone-limestone
-setblock ~11 ~2 ~-15 game:cobblestone-andesite
-setblock ~11 ~ ~-14 game:brickruin-irregular-tan
-setblock ~11 ~1 ~-14 game:brickruin-irregular-gray
-setblock ~11 ~ ~-13 game:brickruin-irregular-gray
-setblock ~12 ~ ~-17 game:cobblestone-andesite
-setblock ~12 ~1 ~-17 game:brickruin-irregular-red
-setblock ~12 ~ ~-16 game:cobblestone-granite
-setblock ~12 ~1 ~-16 game:cobblestone-andesite
-setblock ~12 ~ ~-15 game:cobblestone-limestone
-setblock ~12 ~1 ~-15 game:cobblestone-andesite
-setblock ~12 ~2 ~-15 game:cobblestone-granite
-setblock ~12 ~ ~-14 game:brickruin-irregular-red
-setblock ~12 ~1 ~-14 game:brickruin-irregular-tan
-setblock ~12 ~ ~-13 game:cobblestone-andesite
-setblock ~13 ~ ~-17 game:brickruin-irregular-red
-setblock ~13 ~ ~-16 game:cobblestone-granite
-setblock ~13 ~1 ~-16 game:brickruin-irregular-tan
-setblock ~13 ~ ~-15 game:brickruin-irregular-red
-setblock ~13 ~1 ~-15 game:cobblestone-granite
-setblock ~13 ~2 ~-15 game:brickruin-irregular-brown
-setblock ~13 ~ ~-14 game:cobblestone-granite
-setblock ~13 ~1 ~-14 game:cobblestone-andesite
-setblock ~14 ~ ~-15 game:cobblestone-granite
-setblock ~14 ~1 ~-15 game:cobblestone-granite
-setblock ~14 ~ ~-14 game:cobblestone-granite
-setblock ~-3 ~ ~-15 game:brickruin-irregular-brown
-setblock ~-2 ~ ~-15 game:brickruin-irregular-brown
-setblock ~-2 ~ ~-14 game:brickruin-irregular-brown
-setblock ~-1 ~ ~-15 game:brickruin-irregular-brown
-setblock ~-1 ~ ~-14 game:brickruin-irregular-brown
-setblock ~ ~ ~-14 game:brickruin-irregular-brown
-setblock ~1 ~ ~-15 game:brickruin-irregular-brown
-setblock ~1 ~ ~-14 game:brickruin-irregular-brown
-setblock ~-8 ~ ~11 game:brickruin-irregular-brown
-setblock ~-7 ~ ~11 game:brickruin-irregular-brown
-setblock ~-8 ~ ~12 game:brickruin-irregular-brown
-setblock ~-7 ~ ~12 game:brickruin-irregular-brown
-setblock ~-8 ~ ~13 game:brickruin-irregular-brown
-setblock ~-7 ~ ~13 game:brickruin-irregular-brown
-setblock ~-8 ~ ~14 game:brickruin-irregular-brown
-setblock ~-7 ~ ~14 game:brickruin-irregular-brown
-setblock ~-7 ~ ~15 game:brickruin-irregular-brown
-setblock ~-8 ~ ~16 game:brickruin-irregular-brown
-setblock ~-3 ~ ~-3 game:brickruin-irregular-red
-setblock ~-3 ~ ~-2 game:brickruin-irregular-red
-setblock ~-2 ~ ~-3 game:brickruin-irregular-red
-setblock ~-2 ~ ~-2 game:brickruin-irregular-red
-setblock ~ ~ ~-2 game:brickruin-irregular-red
-setblock ~1 ~ ~-3 game:brickruin-irregular-red
-setblock ~1 ~ ~-2 game:brickruin-irregular-red
-setblock ~2 ~ ~-3 game:brickruin-irregular-red
-setblock ~2 ~ ~-2 game:brickruin-irregular-red
-setblock ~ ~ ~7 game:brickruin-irregular-brown
-setblock ~1 ~ ~7 game:brickruin-irregular-brown
-setblock ~ ~ ~8 game:brickruin-irregular-brown
-setblock ~1 ~ ~8 game:brickruin-irregular-brown
-setblock ~ ~ ~9 game:brickruin-irregular-brown
-setblock ~1 ~ ~9 game:brickruin-irregular-brown
-setblock ~ ~ ~10 game:brickruin-irregular-brown
-setblock ~1 ~ ~10 game:brickruin-irregular-brown
-setblock ~-5 ~ ~2 game:brickruin-irregular-red
-setblock ~-6 ~ ~3 game:brickruin-irregular-red
-setblock ~-5 ~ ~3 game:brickruin-irregular-red
-setblock ~-5 ~ ~4 game:brickruin-irregular-red
-setblock ~-5 ~ ~5 game:brickruin-irregular-red
-setblock ~-6 ~ ~6 game:brickruin-irregular-red
-setblock ~-5 ~ ~6 game:brickruin-irregular-red
-setblock ~-14 ~ ~3 game:loosegears
-setblock ~8 ~ ~9 game:metal-parts
-setblock ~-17 ~ ~4 game:loosegears
-setblock ~17 ~ ~-14 game:loosestick
-setblock ~-14 ~ ~-11 game:loosestick
-setblock ~2 ~ ~10 game:cobblestone-granite
-setblock ~-11 ~ ~11 game:looseflints
-setblock ~-1 ~ ~17 game:metal-scraps
-setblock ~-15 ~ ~-10 game:loosegears
-setblock ~14 ~ ~2 game:cobblestone-granite
-setblock ~15 ~ ~-5 game:metal-parts
-setblock ~11 ~ ~-19 game:looseflints
-setblock ~-1 ~ ~-4 game:metal-parts
-setblock ~5 ~ ~-17 game:loosegears
-setblock ~-5 ~ ~-13 game:looseflints
-setblock ~4 ~ ~2 game:metal-scraps
-setblock ~-6 ~ ~-20 game:cobblestone-granite
-setblock ~-9 ~ ~-19 game:loosestick
-setblock ~6 ~ ~-13 game:loosestick
-setblock ~-1 ~ ~-19 game:metal-scraps
-setblock ~12 ~ ~6 game:cobblestone-granite
-setblock ~1 ~ ~-17 game:loosestick
-setblock ~-5 ~ ~-10 game:cobblestone-granite
-setblock ~-2 ~ ~-4 game:loosegears
-setblock ~3 ~ ~1 game:looseflints
-setblock ~-15 ~ ~-1 game:looseflints
-setblock ~-9 ~ ~2 game:looseflints
-setblock ~4 ~ ~-1 game:metal-parts
-setblock ~-5 ~ ~-16 game:loosestick
-setblock ~11 ~ ~7 game:loosegears
-setblock ~16 ~ ~ game:loosegears
-setblock ~-8 ~ ~-18 game:metal-parts
-setblock ~4 ~ ~8 game:looseflints
-setblock ~-9 ~ ~-13 game:loosegears
-setblock ~11 ~ ~5 game:looseflints
-setblock ~-1 ~ ~-6 game:looseflints
-setblock ~14 ~ ~-9 game:metal-parts
-setblock ~-10 ~ ~3 game:metal-parts
-setblock ~8 ~ ~-9 game:loosegears
-setblock ~2 ~ ~10 game:loosegears
-setblock ~-7 ~ ~-16 game:looseflints
-setblock ~15 ~ ~-7 game:cobblestone-granite
-setblock ~-14 ~ ~9 game:loosestick
-setblock ~6 ~ ~1 game:metal-parts
-setblock ~15 ~ ~-6 game:cobblestone-granite
-setblock ~-6 ~ ~-16 game:metal-parts
-setblock ~-8 ~ ~-12 game:looseflints
-setblock ~-12 ~ ~-7 game:loosestick
-setblock ~-3 ~ ~17 game:cobblestone-granite
-setblock ~9 ~ ~-15 game:cobblestone-granite
-setblock ~8 ~ ~-3 game:metal-parts
-setblock ~10 ~ ~-17 game:loosegears
-setblock ~1 ~ ~-19 game:loosestick
-setblock ~4 ~ ~-18 game:cobblestone-granite
-setblock ~10 ~ ~3 game:cobblestone-granite
-setblock ~-2 ~ ~3 game:loosestick
-setblock ~-17 ~ ~5 game:metal-parts
-setblock ~2 ~ ~3 game:metal-parts
-setblock ~-8 ~ ~2 game:looseflints
-setblock ~-1 ~ ~12 game:metal-scraps
-setblock ~-4 ~ ~-12 game:loosestick
-setblock ~1 ~ ~-13 game:cobblestone-granite
-setblock ~14 ~ ~ game:metal-scraps
-setblock ~18 ~ ~-6 game:metal-parts
-setblock ~4 ~ ~10 game:metal-parts
-setblock ~-5 ~ ~-8 game:loosegears
-setblock ~-6 ~-1 ~10 game:cobblestone-granite
-lootchest ~-6 ~ ~10 2 south
-setblock ~ ~-1 ~-15 game:cobblestone-granite
-lootchest ~ ~ ~-15 2 south
-setblock ~11 ~-1 ~2 game:cobblestone-granite
-lootchest ~11 ~ ~2 2 north
-setblock ~11 ~-1 ~-6 game:cobblestone-granite
-lootchest ~11 ~ ~-6 2 north
-setblock ~-15 ~-1 ~-9 game:cobblestone-granite
-lootchest ~-15 ~ ~-9 2 west
-setblock ~-1 ~-1 ~-5 game:cobblestone-granite
-lootchest ~-1 ~ ~-5 2 west
-setblock ~13 ~-1 ~5 game:cobblestone-granite
-lootchest ~13 ~ ~5 3 east
-setblock ~-3 ~-1 ~6 game:cobblestone-granite
-lootchest ~-3 ~ ~6 3 west
-setblock ~-11 ~-1 ~3 game:cobblestone-granite
-lootchest ~-11 ~ ~3 2 west
-setblock ~-14 ~-1 ~-2 game:cobblestone-granite
-lootchest ~-14 ~ ~-2 2 north
-setblock ~7 ~-1 ~4 game:cobblestone-granite
-lootchest ~7 ~ ~4 2 south
-setblock ~-16 ~-1 ~5 game:cobblestone-granite
-lootchest ~-16 ~ ~5 3 south
-setblock ~-3 ~-1 ~-14 game:cobblestone-granite
-lootchest ~-3 ~ ~-14 3 east
-setblock ~12 ~-1 ~-12 game:cobblestone-granite
-lootchest ~12 ~ ~-12 2 west
-setblock ~-1 ~-1 ~9 game:cobblestone-granite
-lootchest ~-1 ~ ~9 3 south
-setblock ~5 ~-1 ~15 game:cobblestone-granite
-lootchest ~5 ~ ~15 2 east
-setblock ~-12 ~-1 ~5 game:cobblestone-granite
-lootchest ~-12 ~ ~5 3 west
-setblock ~-13 ~-1 ~-8 game:cobblestone-granite
-lootchest ~-13 ~ ~-8 2 north
-setblock ~-12 ~-1 ~ game:cobblestone-granite
-lootchest ~-12 ~ ~ 2 south
-setblock ~-4 ~-1 ~-11 game:cobblestone-granite
-lootchest ~-4 ~ ~-11 3 south
-setblock ~15 ~-1 ~-3 game:cobblestone-granite
-ingots ~15 ~ ~-3 molybdochalkos 37
-setblock ~9 ~-1 ~-15 game:cobblestone-granite
-ingots ~9 ~ ~-15 silver 33
-setblock ~6 ~-1 ~-17 game:cobblestone-granite
-ingots ~6 ~ ~-17 molybdochalkos 12
-setblock ~-9 ~-1 ~12 game:cobblestone-granite
-ingots ~-9 ~ ~12 steel 4
-setblock ~13 ~-1 ~-15 game:cobblestone-granite
-ingots ~13 ~ ~-15 gold 51
-setblock ~-11 ~-1 ~-11 game:cobblestone-granite
-ingots ~-11 ~ ~-11 copper 13
-setblock ~-4 ~-1 ~-2 game:cobblestone-granite
-ingots ~-4 ~ ~-2 copper 27
-setblock ~-9 ~-1 ~-10 game:cobblestone-granite
-ingots ~-9 ~ ~-10 copper 13
-setblock ~-7 ~ ~3 game:lootvessel-ore
-setblock ~14 ~ ~ game:lootvessel-forage
-setblock ~8 ~ ~-3 game:lootvessel-tool
-setblock ~6 ~ ~-7 game:lootvessel-food
-setblock ~-5 ~ ~-1 game:lootvessel-tool
-setblock ~-3 ~ ~-12 game:lootvessel-food
-setblock ~2 ~ ~2 game:brickruin-irregular-brown
-setblock ~2 ~1 ~2 game:brickruin-irregular-brown
-setblock ~2 ~2 ~2 game:brickruin-irregular-brown
-setblock ~4 ~ ~2 game:brickruin-irregular-brown
-setblock ~4 ~3 ~2 game:brickruin-irregular-brown
-setblock ~5 ~1 ~2 game:brickruin-irregular-brown
-setblock ~5 ~2 ~2 game:brickruin-irregular-brown
-setblock ~13 ~ ~-17 game:brickruin-irregular-gray
-setblock ~13 ~1 ~-17 game:brickruin-irregular-gray
-setblock ~13 ~ ~-16 game:brickruin-irregular-gray
-setblock ~13 ~1 ~-16 game:brickruin-irregular-gray
-setblock ~ ~ ~ game:brickruin-irregular-gray
-setblock ~ ~1 ~ game:brickruin-irregular-gray
-setblock ~ ~2 ~ game:brickruin-irregular-gray
-setblock ~ ~ ~1 game:brickruin-irregular-gray
-setblock ~ ~1 ~1 game:brickruin-irregular-gray
-setblock ~-5 ~ ~16 game:brickruin-irregular-red
-setblock ~-5 ~ ~18 game:brickruin-irregular-red
-setblock ~-2 ~2 ~-9 game:brickruin-irregular-tan
-setblock ~-1 ~ ~-9 game:brickruin-irregular-tan
-setblock ~ ~ ~-9 game:brickruin-irregular-tan
-setblock ~1 ~ ~-9 game:brickruin-irregular-tan
-setblock ~1 ~1 ~-9 game:brickruin-irregular-tan
-setblock ~2 ~ ~-9 game:brickruin-irregular-tan
-setblock ~-8 ~1 ~-8 game:brickruin-irregular-gray
-setblock ~-8 ~ ~-7 game:brickruin-irregular-gray
-setblock ~-8 ~1 ~-7 game:brickruin-irregular-gray
-setblock ~-8 ~1 ~-6 game:brickruin-irregular-gray
-setblock ~-8 ~2 ~-6 game:brickruin-irregular-gray
-setblock ~-8 ~3 ~-6 game:brickruin-irregular-gray
+scatter ~9 ~ ~10 game:looseflints
+scatter ~7 ~ ~12 game:looseflints
+scatter ~7 ~ ~5 game:metal-scraps
+scatter ~15 ~ ~11 game:looseflints
+scatter ~10 ~ ~8 game:metal-scraps
+scatter ~-13 ~ ~12 game:cobblestone-andesite 2
+scatter ~-13 ~ ~13 game:brickruin-irregular-red
+scatter ~-12 ~ ~12 game:brickruin-irregular-tan
+scatter ~-5 ~ ~-19 game:cobblestone-limestone
+scatter ~-5 ~ ~-18 game:cobblestone-andesite
+scatter ~ ~ ~-19 game:brickruin-irregular-gray 2
+scatter ~ ~ ~-18 game:brickruin-irregular-gray
+scatter ~1 ~ ~-20 game:brickruin-irregular-gray
+scatter ~1 ~ ~-19 game:brickruin-irregular-brown 3
+scatter ~1 ~ ~-18 game:brickruin-irregular-brown 2
+scatter ~2 ~ ~-20 game:brickruin-irregular-gray
+scatter ~2 ~ ~-19 game:cobblestone-granite 2
+scatter ~-19 ~ ~7 game:brickruin-irregular-brown
+scatter ~-18 ~ ~6 game:cobblestone-limestone
+scatter ~-18 ~ ~7 game:brickruin-irregular-gray 2
+scatter ~-18 ~ ~-8 game:brickruin-irregular-gray
+scatter ~-17 ~ ~-8 game:brickruin-irregular-red 2
+scatter ~-16 ~ ~-10 game:brickruin-irregular-tan
+scatter ~-16 ~ ~-9 game:brickruin-irregular-red
+scatter ~-16 ~ ~-8 game:cobblestone-limestone 2
+scatter ~-16 ~ ~-7 game:brickruin-irregular-tan
+scatter ~-15 ~ ~-8 game:brickruin-irregular-gray 2
+scatter ~15 ~ ~4 game:brickruin-irregular-red
+scatter ~16 ~ ~4 game:cobblestone-limestone 2
+scatter ~17 ~ ~2 game:cobblestone-granite
+scatter ~17 ~ ~3 game:brickruin-irregular-brown 2
+scatter ~17 ~ ~4 game:brickruin-irregular-gray 2
+scatter ~17 ~ ~5 game:brickruin-irregular-brown
+scatter ~18 ~ ~3 game:brickruin-irregular-tan
+scatter ~18 ~ ~4 game:brickruin-irregular-brown 2
+scatter ~18 ~ ~5 game:brickruin-irregular-gray
+scatter ~19 ~ ~4 game:brickruin-irregular-gray
+scatter ~-4 ~ ~18 game:brickruin-irregular-gray
+scatter ~-4 ~ ~19 game:brickruin-irregular-brown
+scatter ~-3 ~ ~17 game:brickruin-irregular-tan
+scatter ~-3 ~ ~18 game:brickruin-irregular-gray
+scatter ~-3 ~ ~19 game:cobblestone-granite 3
+scatter ~-3 ~ ~20 game:brickruin-irregular-tan
+scatter ~-3 ~ ~21 game:brickruin-irregular-gray
+scatter ~-2 ~ ~17 game:brickruin-irregular-gray 2
+scatter ~-2 ~ ~18 game:brickruin-irregular-red 3
+scatter ~-2 ~ ~19 game:brickruin-irregular-tan 3
+scatter ~-2 ~ ~20 game:brickruin-irregular-brown 3
+scatter ~-2 ~ ~21 game:brickruin-irregular-gray 2
+scatter ~-1 ~ ~18 game:cobblestone-limestone 2
+scatter ~-1 ~ ~19 game:cobblestone-limestone 2
+scatter ~-1 ~ ~20 game:cobblestone-granite 2
+scatter ~ ~ ~18 game:brickruin-irregular-gray
+scatter ~ ~ ~19 game:brickruin-irregular-gray
+scatter ~ ~ ~20 game:brickruin-irregular-tan
+scatter ~2 ~ ~-20 game:brickruin-irregular-gray 2
+scatter ~3 ~ ~-21 game:brickruin-irregular-tan 2
+scatter ~3 ~ ~-20 game:cobblestone-limestone 3
+scatter ~3 ~ ~-19 game:cobblestone-limestone
+scatter ~4 ~ ~-21 game:brickruin-irregular-gray
+scatter ~4 ~ ~-20 game:brickruin-irregular-brown 2
+scatter ~17 ~ ~-6 game:brickruin-irregular-gray
+scatter ~18 ~ ~-6 game:brickruin-irregular-red
+scatter ~-1 ~ ~-19 game:cobblestone-limestone 2
+scatter ~-1 ~ ~-18 game:brickruin-irregular-brown 3
+scatter ~-1 ~ ~-17 game:cobblestone-limestone
+scatter ~ ~ ~-19 game:brickruin-irregular-tan 2
+scatter ~ ~ ~-18 game:brickruin-irregular-brown 3
+scatter ~ ~ ~-17 game:brickruin-irregular-tan 3
+scatter ~1 ~ ~-19 game:brickruin-irregular-brown
+scatter ~1 ~ ~-18 game:cobblestone-granite 3
+scatter ~1 ~ ~-17 game:brickruin-irregular-red
+scatter ~-17 ~ ~9 game:cobblestone-granite
+scatter ~-16 ~ ~9 game:brickruin-irregular-gray 2
+scatter ~-16 ~ ~10 game:cobblestone-granite
+scatter ~-15 ~ ~8 game:brickruin-irregular-tan 2
+scatter ~-15 ~ ~9 game:cobblestone-andesite 2
+scatter ~-15 ~ ~10 game:brickruin-irregular-brown 2
+scatter ~-14 ~ ~8 game:brickruin-irregular-tan
+scatter ~-14 ~ ~9 game:cobblestone-andesite 2
+scatter ~20 ~ ~-1 game:cobblestone-granite 2
+scatter ~20 ~ ~ game:brickruin-irregular-gray
+scatter ~21 ~ ~-1 game:cobblestone-limestone
+scatter ~-16 ~ ~3 game:cobblestone-andesite 2
+scatter ~-12 ~ ~-12 game:brickruin-irregular-gray 2
+scatter ~8 ~ ~-1 game:brickruin-irregular-brown
+scatter ~8 ~ ~ game:brickruin-irregular-brown
+scatter ~9 ~ ~-1 game:brickruin-irregular-brown
+scatter ~9 ~ ~ game:brickruin-irregular-brown
+scatter ~10 ~ ~-1 game:brickruin-irregular-brown
+scatter ~10 ~ ~ game:brickruin-irregular-brown
+scatter ~11 ~ ~-1 game:brickruin-irregular-brown
+scatter ~11 ~ ~ game:brickruin-irregular-brown
+scatter ~12 ~ ~ game:brickruin-irregular-brown
+scatter ~13 ~ ~-1 game:brickruin-irregular-brown
+scatter ~-12 ~ ~1 game:brickruin-irregular-gray
+scatter ~-11 ~ ~1 game:brickruin-irregular-gray
+scatter ~-12 ~ ~2 game:brickruin-irregular-gray
+scatter ~-11 ~ ~2 game:brickruin-irregular-gray
+scatter ~-12 ~ ~3 game:brickruin-irregular-gray
+scatter ~-11 ~ ~3 game:brickruin-irregular-gray
+scatter ~-12 ~ ~4 game:brickruin-irregular-gray
+scatter ~-11 ~ ~4 game:brickruin-irregular-gray
+scatter ~-12 ~ ~5 game:brickruin-irregular-gray
+scatter ~-11 ~ ~5 game:brickruin-irregular-gray
+scatter ~-12 ~ ~6 game:brickruin-irregular-gray
+scatter ~-11 ~ ~6 game:brickruin-irregular-gray
+scatter ~-12 ~ ~7 game:brickruin-irregular-gray
+scatter ~-11 ~ ~7 game:brickruin-irregular-gray
+scatter ~-9 ~ ~-3 game:brickruin-irregular-gray
+scatter ~-9 ~ ~-2 game:brickruin-irregular-gray
+scatter ~-8 ~ ~-3 game:brickruin-irregular-gray
+scatter ~-8 ~ ~-2 game:brickruin-irregular-gray
+scatter ~-7 ~ ~-3 game:brickruin-irregular-gray
+scatter ~-6 ~ ~-2 game:brickruin-irregular-gray
+scatter ~-5 ~ ~-3 game:brickruin-irregular-gray
+scatter ~-5 ~ ~-2 game:brickruin-irregular-gray
+scatter ~-4 ~ ~-3 game:brickruin-irregular-gray
+scatter ~-3 ~ ~-3 game:brickruin-irregular-gray
+scatter ~-3 ~ ~-2 game:brickruin-irregular-gray
+scatter ~13 ~ ~-5 game:cobblestone-granite
+scatter ~-8 ~ ~14 game:cobblestone-granite
+scatter ~-7 ~ ~-18 game:looseflints
+scatter ~-4 ~ ~-18 game:metal-parts
+scatter ~1 ~ ~-4 game:metal-parts
+scatter ~-7 ~ ~-9 game:metal-parts
+scatter ~17 ~ ~-5 game:loosegears
+scatter ~-12 ~ ~-4 game:cobblestone-granite
+scatter ~-11 ~ ~9 game:loosegears
+scatter ~-4 ~ ~-17 game:loosestick
+scatter ~-11 ~ ~-17 game:cobblestone-granite
+scatter ~-4 ~ ~-3 game:looseflints
+scatter ~-6 ~ ~9 game:metal-parts
+scatter ~3 ~ ~15 game:cobblestone-granite
+scatter ~9 ~ ~7 game:loosegears
+scatter ~11 ~ ~ game:loosestick
+scatter ~-15 ~ ~-10 game:loosegears
+scatter ~9 ~ ~-3 game:looseflints
+scatter ~ ~ ~8 game:metal-scraps
+scatter ~-2 ~ ~-17 game:metal-parts
+scatter ~3 ~ ~-5 game:loosegears
+scatter ~-6 ~ ~ game:loosestick
+scatter ~-9 ~ ~14 game:metal-scraps
+scatter ~3 ~ ~-3 game:looseflints
+scatter ~9 ~ ~-12 game:cobblestone-granite
+scatter ~4 ~ ~-5 game:cobblestone-granite
+scatter ~-14 ~ ~9 game:metal-scraps
+scatter ~-11 ~ ~11 game:looseflints
+scatter ~-11 ~ ~11 game:looseflints
+scatter ~-1 ~ ~17 game:metal-scraps
+scatter ~-15 ~ ~-10 game:loosegears
+scatter ~14 ~ ~2 game:cobblestone-granite
+scatter ~15 ~ ~-5 game:metal-parts
+scatter ~11 ~ ~-19 game:looseflints
+scatter ~-1 ~ ~-4 game:metal-parts
+scatter ~5 ~ ~-17 game:loosegears
+scatter ~-5 ~ ~-13 game:looseflints
+scatter ~4 ~ ~2 game:metal-scraps
+scatter ~-6 ~ ~-20 game:cobblestone-granite
+scatter ~-9 ~ ~-19 game:loosestick
+scatter ~6 ~ ~-13 game:loosestick
+scatter ~-1 ~ ~-19 game:metal-scraps
+scatter ~12 ~ ~6 game:cobblestone-granite
+scatter ~1 ~ ~-17 game:loosestick
+scatter ~-5 ~ ~-10 game:cobblestone-granite
+scatter ~-2 ~ ~-4 game:loosegears
+scatter ~3 ~ ~1 game:looseflints
+scatter ~-15 ~ ~-1 game:looseflints
+scatter ~-9 ~ ~2 game:looseflints
+scatter ~4 ~ ~-1 game:metal-parts
+scatter ~-5 ~ ~-16 game:loosestick
+scatter ~11 ~ ~7 game:loosegears
+scatter ~16 ~ ~ game:loosegears
+scatter ~-8 ~ ~-18 game:metal-parts
+scatter ~4 ~ ~8 game:looseflints
+scatter ~-9 ~ ~-13 game:loosegears
+scatter ~11 ~ ~5 game:looseflints
+scatter ~-1 ~ ~-6 game:looseflints
+scatter ~14 ~ ~-9 game:metal-parts
+scatter ~-10 ~ ~3 game:metal-parts
+scatter ~8 ~ ~-9 game:loosegears
+scatter ~2 ~ ~10 game:loosegears
+scatter ~-7 ~ ~-16 game:looseflints
+scatter ~15 ~ ~-7 game:cobblestone-granite
+scatter ~-14 ~ ~9 game:loosestick
+lootchest ~-11 ~ ~13 3 south
+lootchest ~-10 ~ ~-10 3 west
+lootchest ~-5 ~ ~18 2 east
+lootchest ~-11 ~ ~-8 3 north
+lootchest ~-11 ~ ~-6 2 south
+lootchest ~8 ~ ~-14 3 west
+lootchest ~-3 ~ ~-9 3 north
+lootchest ~9 ~ ~-15 3 east
+lootchest ~3 ~ ~-16 3 west
+lootchest ~2 ~ ~-10 3 west
+lootchest ~2 ~ ~15 3 east
+lootchest ~8 ~ ~-15 2 south
+lootchest ~1 ~ ~3 2 north
+lootchest ~-1 ~ ~-7 3 south
+lootchest ~-1 ~ ~11 3 north
+lootchest ~12 ~ ~-16 2 west
+lootchest ~-11 ~ ~11 2 south
+lootchest ~ ~ ~-13 2 west
+lootchest ~-10 ~ ~4 2 south
+lootchest ~-4 ~ ~-8 3 east
+ingots ~2 ~ ~-6 copper 15
+ingots ~ ~ ~-15 silver 39
+ingots ~2 ~ ~-13 gold 61
+ingots ~-6 ~ ~-12 silver 19
+ingots ~11 ~ ~-17 copper 37
+ingots ~-6 ~ ~13 copper 26
+ingots ~-3 ~ ~6 copper 17
+ingots ~3 ~ ~14 steel 4
+scatter ~-2 ~ ~-12 game:lootvessel-forage
+scatter ~7 ~ ~4 game:lootvessel-forage
+scatter ~5 ~ ~4 game:lootvessel-farming
+scatter ~-3 ~ ~-14 game:lootvessel-ore
+setblock ~-17 ~ ~-1 game:brickruin-irregular-tan
+setblock ~-17 ~1 ~-1 game:brickruin-irregular-tan
+setblock ~-17 ~2 ~-1 game:brickruin-irregular-tan
+setblock ~-17 ~3 ~-1 game:brickruin-irregular-tan
+setblock ~-16 ~3 ~-1 game:brickruin-irregular-tan
+setblock ~-15 ~ ~-1 game:brickruin-irregular-tan
+setblock ~-15 ~1 ~-1 game:brickruin-irregular-tan
+setblock ~-15 ~2 ~-1 game:brickruin-irregular-tan
+setblock ~-15 ~3 ~-1 game:brickruin-irregular-tan
+setblock ~-14 ~ ~-1 game:brickruin-irregular-tan
+setblock ~-14 ~1 ~-1 game:brickruin-irregular-tan
+setblock ~-14 ~2 ~-1 game:brickruin-irregular-tan
+setblock ~-14 ~3 ~-1 game:brickruin-irregular-tan
+setblock ~-14 ~4 ~-1 game:brickruin-irregular-tan
+setblock ~-14 ~5 ~-1 game:brickruin-irregular-tan
+setblock ~-13 ~ ~-1 game:brickruin-irregular-tan
+setblock ~-13 ~1 ~-1 game:brickruin-irregular-tan
+setblock ~-12 ~ ~-1 game:brickruin-irregular-tan
+setblock ~-12 ~1 ~-1 game:brickruin-irregular-tan
+setblock ~-12 ~2 ~-1 game:brickruin-irregular-tan
+setblock ~-12 ~4 ~-1 game:brickruin-irregular-tan
+setblock ~-16 ~ ~2 game:brickruin-irregular-red
+setblock ~-16 ~2 ~2 game:brickruin-irregular-red
+setblock ~-16 ~3 ~2 game:brickruin-irregular-red
+setblock ~-16 ~ ~3 game:brickruin-irregular-red
+setblock ~-16 ~1 ~3 game:brickruin-irregular-red
+setblock ~-16 ~3 ~3 game:brickruin-irregular-red
+setblock ~-16 ~ ~4 game:brickruin-irregular-red
+setblock ~-16 ~1 ~4 game:brickruin-irregular-red
+setblock ~-16 ~2 ~4 game:brickruin-irregular-red
+setblock ~-16 ~3 ~4 game:brickruin-irregular-red
+setblock ~-16 ~ ~5 game:brickruin-irregular-red
+setblock ~-16 ~1 ~5 game:brickruin-irregular-red
+setblock ~-16 ~ ~6 game:brickruin-irregular-red
+setblock ~-16 ~1 ~6 game:brickruin-irregular-red
+setblock ~-16 ~2 ~6 game:brickruin-irregular-red
+setblock ~-16 ~ ~7 game:brickruin-irregular-red
+setblock ~7 ~ ~-3 game:brickruin-irregular-red
+setblock ~7 ~1 ~-3 game:brickruin-irregular-red
+setblock ~7 ~2 ~-3 game:brickruin-irregular-red
+setblock ~8 ~1 ~-3 game:brickruin-irregular-red
+setblock ~8 ~2 ~-3 game:brickruin-irregular-red
+setblock ~8 ~3 ~-3 game:brickruin-irregular-red
+setblock ~9 ~ ~-3 game:brickruin-irregular-red
+setblock ~9 ~1 ~-3 game:brickruin-irregular-red
+setblock ~-2 ~ ~ game:brickruin-irregular-red
+setblock ~-2 ~3 ~ game:brickruin-irregular-red
+setblock ~-2 ~4 ~ game:brickruin-irregular-red
+setblock ~-2 ~6 ~ game:brickruin-irregular-red
+setblock ~-2 ~7 ~ game:brickruin-irregular-red
+setblock ~-2 ~ ~1 game:brickruin-irregular-red
+setblock ~-2 ~1 ~1 game:brickruin-irregular-red
+setblock ~-2 ~2 ~1 game:brickruin-irregular-red
+setblock ~-2 ~3 ~1 game:brickruin-irregular-red
+setblock ~-2 ~4 ~1 game:brickruin-irregular-red
+setblock ~-2 ~ ~2 game:brickruin-irregular-red
+setblock ~-2 ~1 ~2 game:brickruin-irregular-red
+setblock ~-2 ~2 ~2 game:brickruin-irregular-red
+setblock ~-2 ~3 ~2 game:brickruin-irregular-red
+setblock ~-2 ~4 ~2 game:brickruin-irregular-red
+setblock ~-1 ~ ~ game:brickruin-irregular-gray
+setblock ~-1 ~1 ~ game:brickruin-irregular-gray
+setblock ~-1 ~2 ~ game:brickruin-irregular-gray
+setblock ~-1 ~3 ~ game:brickruin-irregular-gray
+setblock ~-1 ~ ~1 game:brickruin-irregular-gray
+setblock ~-1 ~1 ~1 game:brickruin-irregular-gray
+setblock ~-1 ~1 ~3 game:brickruin-irregular-gray
+setblock ~-1 ~2 ~3 game:brickruin-irregular-gray
+setblock ~-1 ~1 ~4 game:brickruin-irregular-gray
+setblock ~-1 ~2 ~4 game:brickruin-irregular-gray
+setblock ~6 ~ ~3 game:brickruin-irregular-red
+setblock ~6 ~1 ~3 game:brickruin-irregular-red
+setblock ~6 ~1 ~4 game:brickruin-irregular-red
+setblock ~6 ~ ~5 game:brickruin-irregular-red
+setblock ~6 ~1 ~5 game:brickruin-irregular-red
+setblock ~6 ~2 ~5 game:brickruin-irregular-red
+setblock ~6 ~1 ~6 game:brickruin-irregular-red
+setblock ~6 ~2 ~6 game:brickruin-irregular-red
+setblock ~6 ~3 ~6 game:brickruin-irregular-red
+setblock ~6 ~4 ~6 game:brickruin-irregular-red
+setblock ~6 ~ ~7 game:brickruin-irregular-red
+setblock ~6 ~1 ~7 game:brickruin-irregular-red
+setblock ~6 ~2 ~7 game:brickruin-irregular-red
+setblock ~6 ~3 ~7 game:brickruin-irregular-red
+setblock ~6 ~4 ~7 game:brickruin-irregular-red
 fill ~2 ~ ~2 ~2 ~9 ~2 game:cobblestone-granite
 spawner ~2 ~10 ~2
 fill ~-6 ~ ~-5 ~-6 ~9 ~-5 game:cobblestone-granite
