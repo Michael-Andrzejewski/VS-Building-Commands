@@ -330,7 +330,8 @@ function fillRingAir(y1, y2, rIn, rOut) {
     }
 }
 
-ringLevel('ring level A', 8, 36, 40, 49, 12, 13, 5, 11);
+// ring A rooms sit between the eight engineering hallways added further down
+ringLevel('ring level A', 8, 36, 40, 49, 8, 13, 5, 11, Math.PI / 8);
 ringLevel('ring level B', 64, 28, 32, 43, 10, 13, 5, 11);
 ringLevel('ring level C', 84, 20, 24, 33, 8, 11, 5, 9, Math.PI / 8);
 
@@ -351,6 +352,135 @@ for (const [sx, sz] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) {
         fill(x - 1, 90, z - 1, x + 1, 90, z + 1, MET_P);
         fill(x - 1, 85, z - 1, x + 1, 89, z + 1, 'air');
     }
+}
+
+// ── deep engineering district: outer ring D around level A ──────────────
+lines.push('# engineering district');
+{
+    const floorY = 8, ceilY = 15, rIn = 62, rOut = 66;
+    annulus(floorY, rIn - 0.5, rOut + 0.5, PLATE);
+    annulus(ceilY, rIn - 0.5, rOut + 0.5, MET_P);
+    ringWall(rOut, rOut + 1.5, floorY + 1, ceilY - 1, brickMat);
+    ringWall(rIn - 1.5, rIn, floorY + 1, ceilY - 1, brickMat);
+    fillRingAir(floorY + 1, ceilY - 1, rIn, rOut);
+    for (let a = 0; a < 16; a++) {
+        const rr = (rIn + rOut) / 2;
+        sb(Math.round(rr * Math.cos(a * Math.PI / 8)), ceilY - 1, Math.round(rr * Math.sin(a * Math.PI / 8)), GLOW);
+    }
+}
+// four cardinal hallways with overhead drive shafts, corridor A out to ring D
+for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+    const px = Math.abs(dz), pz = Math.abs(dx); // perpendicular unit
+    for (let d = 39; d <= 63; d++) {
+        const x = dx * d, z = dz * d;
+        fill(x - px * 3, 8, z - pz * 3, x + px * 3, 8, z + pz * 3, PLATE);
+        fill(x - px * 3, 15, z - pz * 3, x + px * 3, 15, z + pz * 3, MET_P);
+        fill(x - px * 3, 9, z - pz * 3, x - px * 3, 14, z - pz * 3, brickMat());
+        fill(x + px * 3, 9, z + pz * 3, x + px * 3, 14, z + pz * 3, brickMat());
+        fill(x - px * 2, 9, z - pz * 2, x + px * 2, 13, z + pz * 2, 'air');
+        sb(x, 13, z, MET_R); // drive shaft running down the hallway ceiling
+        if (d % 6 === 0) { sb(x - px, 13, z - pz, pick(GEARS)); sb(x + px, 13, z + pz, pick(GEARS)); }
+        if (d % 8 === 4) { sb(x - px * 2, 14, z - pz * 2, GLOW); }
+    }
+}
+// four stepped diagonal hallways between them
+for (const [sx, sz] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) {
+    for (let d = 28; d <= 45; d++) {
+        const x = sx * d, z = sz * d;
+        fill(x - 1, 8, z - 1, x + 1, 8, z + 1, PLATE);
+        fill(x - 1, 14, z - 1, x + 1, 14, z + 1, MET_P);
+        fill(x - 1, 9, z - 1, x + 1, 13, z + 1, 'air');
+        if (d % 6 === 0) sb(x, 13, z, GLOW);
+    }
+}
+// rubble part-blocking the east hallway and one diagonal
+scatter(52, 9, -1, COBBLE, 3); scatter(54, 9, 1, DROCK, 2); sb(53, 9, 2, pick(GROWTHS));
+scatter(-33, 9, -32, BRICK_C, 3); sb(-31, 9, -33, pick(GROWTHS));
+
+// engineering sections hanging off ring D
+function engRoom(cx, cz, w, hh, d, kind) {
+    const x1 = cx - Math.floor(w / 2), x2 = cx + Math.floor(w / 2);
+    const z1 = cz - Math.floor(d / 2), z2 = cz + Math.floor(d / 2);
+    const yTop = 9 + hh;
+    fill(x1, 8, z1, x2, 8, z2, kind === 'collapsed' ? DROCK : PLATE);
+    fill(x1, yTop, z1, x2, yTop, z2, MET_P);
+    fill(x1, 9, z1, x1, yTop - 1, z2, brickMat());
+    fill(x2, 9, z1, x2, yTop - 1, z2, brickMat());
+    fill(x1, 9, z1, x2, yTop - 1, z1, brickMat());
+    fill(x1, 9, z2, x2, yTop - 1, z2, brickMat());
+    fill(x1 + 1, 9, z1 + 1, x2 - 1, yTop - 1, z2 - 1, 'air');
+    const axisX = Math.abs(cx) >= Math.abs(cz);
+    if (axisX) { const wx = cx > 0 ? x1 : x2; fill(wx, 9, cz - 1, wx, 12, cz + 1, 'air'); }
+    else { const wz = cz > 0 ? z1 : z2; fill(cx - 1, 9, wz, cx + 1, 12, wz, 'air'); }
+    sb(cx, yTop - 1, cz, GLOW);
+    const fy = 9;
+    if (kind === 'turbine') {
+        // rows of turbine units along the long axis
+        for (let ox = x1 + 3; ox <= x2 - 3; ox += 6) {
+            fill(ox - 1, fy, cz - 1, ox + 1, fy + 3, cz + 1, MET_R);
+            sb(ox, fy + 4, cz, pick(GEARS));
+        }
+        fill(x1 + 1, fy + 3, z1 + 1, x2 - 1, fy + 3, z1 + 1, MET_P); // wall pipes
+        fill(x1 + 1, fy + 3, z2 - 1, x2 - 1, fy + 3, z2 - 1, MET_P);
+        chest(x1 + 2, fy, z2 - 2, 3); scatter(x2 - 3, fy, z1 + 2, 'game:metal-parts', 2);
+    } else if (kind === 'warehouse') {
+        for (const [ox, oz] of [[-5, -5], [5, -5], [-5, 5], [5, 5]]) {
+            fill(cx + ox, fy, cz + oz, cx + ox + 1, fy + 1, cz + oz + 1, PLANKS); // crates
+        }
+        ingots(cx - 5, fy, cz, 'copper', 30 + Math.floor(rnd() * 20));
+        ingots(cx + 5, fy, cz, 'copper', 30 + Math.floor(rnd() * 20));
+        ingots(cx, fy, cz + 5, 'copper', 25);
+        sb(cx - 2, fy, cz - 5, 'game:lootvessel-ore'); sb(cx + 2, fy, cz - 5, 'game:lootvessel-tool');
+        chest(cx, fy, cz, 4); chest(cx - 3, fy, cz + 3, 3); chest(cx + 4, fy, cz - 2, 3);
+    } else if (kind === 'boiler') {
+        for (let ox = x1 + 3; ox <= x2 - 3; ox += 5) {
+            for (const oz of [z1 + 2, z2 - 2]) {
+                fill(ox, fy, oz - 1, ox + 1, fy + 2, oz, MET_R);
+                fill(ox, fy + 3, oz - 1, ox, yTop - 1, oz - 1, COBBLE); // chimney
+            }
+        }
+        scatter(cx, fy, cz, 'game:metal-scraps', 2); chest(cx + 1, fy, cz + 1, 2);
+    } else if (kind === 'coolant') {
+        fill(cx - 5, 8, cz - 5, cx + 5, 8, cz + 5, GLOW); // glowing coolant pool sunk in the floor
+        for (const [ox, oz] of [[-6, -6], [6, -6], [-6, 6], [6, 6]]) sb(cx + ox, fy, cz + oz, MET_R);
+        fill(cx - 6, fy, cz - 6, cx - 6, fy, cz + 6, MET_P); fill(cx + 6, fy, cz - 6, cx + 6, fy, cz + 6, MET_P);
+        chest(x1 + 2, fy, z1 + 2, 3);
+    } else if (kind === 'workshop') {
+        fill(x1 + 2, fy, z1 + 2, x2 - 2, fy, z1 + 2, MET_P);
+        fill(x1 + 2, fy, z2 - 2, x2 - 2, fy, z2 - 2, MET_P);
+        sb(x1 + 3, fy + 1, z1 + 2, 'game:lootvessel-tool'); sb(x2 - 3, fy + 1, z2 - 2, 'game:lootvessel-forage');
+        scatter(cx, fy, cz - 2, pick(GEARS)); scatter(cx + 2, fy, cz + 2, 'game:metal-parts');
+        fill(x1 + 2, fy, z2 - 2, x1 + 2, fy + 2, z2 - 2, PLANKS);
+        chest(cx - 2, fy, cz, 3); chest(cx + 3, fy, cz - 3, 2);
+    } else if (kind === 'reactorannex') {
+        for (const [ox, oz] of [[-3, -3], [3, -3], [-3, 3], [3, 3]]) fill(cx + ox, fy, cz + oz, cx + ox, fy + 4, cz + oz, MET_R);
+        fill(cx - 1, fy + 1, cz - 1, cx + 1, fy + 3, cz + 1, GLOW);
+        scatter(x1 + 2, fy, z1 + 2, pick(GEARS)); scatter(x2 - 2, fy, z2 - 2, pick(GEARS));
+        chest(x1 + 2, fy, z2 - 2, 4);
+    } else { // collapsed
+        scatter(cx - 2, fy, cz + 1, COBBLE, 3); scatter(cx + 3, fy, cz - 2, DROCK, 3);
+        scatter(cx + 1, fy, cz + 4, BRICK_C, 2);
+        sb(x1 + 2, fy, z1 + 2, pick(GROWTHS)); sb(x2 - 2, fy, z2 - 2, pick(GROWTHS)); sb(cx - 3, fy, cz - 3, pick(GROWTHS));
+        sb(cx + 2, fy, cz + 2, DSOIL); sb(x1 + 3, fy, z2 - 3, SKULL);
+        chest(cx, fy, cz - 2, 2);
+    }
+    return { x1, x2, z1, z2, axisX };
+}
+// ten sections at 30-degree slots (skipping the two beside the broken east hallway)
+const ENG_KINDS = ['turbine', 'warehouse', 'boiler', 'coolant', 'workshop', 'reactorannex', 'collapsed', 'turbine', 'warehouse', 'workshop'];
+let engIdx = 0;
+for (let slot = 0; slot < 12; slot++) {
+    if (slot === 1 || slot === 11) continue; // asymmetry beside the collapsed hallway
+    const a = slot * Math.PI / 6;
+    const kind = ENG_KINDS[engIdx++ % ENG_KINDS.length];
+    const big = kind === 'turbine' || kind === 'boiler';
+    const cx = Math.round(76 * Math.cos(a)), cz = Math.round(76 * Math.sin(a));
+    const axisX = Math.abs(cx) >= Math.abs(cz);
+    // long axis tangent to the ring: wide across the dominant walk axis
+    const w = big ? (axisX ? 17 : 23) : 17;
+    const d = big ? (axisX ? 23 : 17) : 17;
+    const room = engRoom(cx, cz, w, 6, d, kind);
+    passage(cx, cz, 8, room, 66);
 }
 
 // spokes: vault wall to corridor A at the four cardinals (y8..13)
