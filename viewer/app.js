@@ -29,6 +29,7 @@ function colorFor(code) {
   if (c.startsWith('creativelight')) return 0x55ff77;
   if (c.startsWith('lootvessel')) return 0xc39868;
   if (code === 'spreadingdevastation:machinecore') return 0xff7a22; // glowing machine heart
+  if (code === 'spreadingdevastation:beaconlight') return 0xffb347; // beacon energy glow
   if (c.startsWith('devgrowth')) return 0xcf3a48;
   if (c === 'drock') return 0x4a3038;
   if (c.startsWith('devplate')) return 0x6b4038;
