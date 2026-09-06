@@ -146,7 +146,7 @@ public class BuildingCommandsModSystem : ModSystem
 
         RegisterCmd(api, "preview", name =>
             api.ChatCommands.Create(name)
-                .WithDescription("Show a build as a translucent ghost at your crosshair without placing it. /preview <script name>, then aim where you want it and /confirm (or /cancel).")
+                .WithDescription("Show a build as a translucent ghost at your crosshair without placing it. /preview &lt;script name&gt;, then aim where you want it and /confirm (or /cancel).")
                 .RequiresPrivilege(Privilege.controlserver)
                 .WithArgs(p.OptionalWord("name"))
                 .HandleWith(OnPreview));
@@ -246,7 +246,7 @@ public class BuildingCommandsModSystem : ModSystem
                 serverChannel.SendPacket(new OpenPasteDialogPacket(), sp);
                 return TextCommandResult.Success("Opening the paste window. Paste your commands and press Run.");
             }
-            return TextCommandResult.Error("Run /build with no name from in game to open the paste window, or /build <name> to run a script file.");
+            return TextCommandResult.Error("Run /build with no name from in game to open the paste window, or /build &lt;name&gt; to run a script file.");
         }
 
         if (string.Equals(name, "list", StringComparison.OrdinalIgnoreCase)) return ListScripts();
@@ -289,7 +289,7 @@ public class BuildingCommandsModSystem : ModSystem
 
         string name = args.Parsers[0].GetValue() as string;
         if (string.IsNullOrEmpty(name))
-            return TextCommandResult.Error("Usage: /preview <script name>. Or press Preview in /build's paste window.");
+            return TextCommandResult.Error("Usage: /preview &lt;script name&gt;. Or press Preview in /build's paste window.");
         if (name.IndexOfAny(new[] { '/', '\\', ':' }) >= 0)
             return TextCommandResult.Error("Script name must be a plain file name.");
 
@@ -309,7 +309,7 @@ public class BuildingCommandsModSystem : ModSystem
     {
         if (args.Caller.Player is not IServerPlayer sp) return TextCommandResult.Error("Players only.");
         if (!pending.TryGetValue(sp.PlayerUID, out PendingPreview pend))
-            return TextCommandResult.Error("No preview to confirm. Start one with /preview <name> or the Preview button.");
+            return TextCommandResult.Error("No preview to confirm. Start one with /preview &lt;name&gt; or the Preview button.");
         if (pend.Anchor == null)
             return TextCommandResult.Error("Aim at a block so the ghost has a spot, then /confirm.");
 
