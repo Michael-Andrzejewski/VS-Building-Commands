@@ -86,7 +86,7 @@ const MZ1 = -15, MZ2 = 0;         // 16 deep, front wall at z = 0
 const G0 = 0, G1 = 6;             // ground floor: slab y0, walls y1..6
 const U0 = 7, U1 = 13;            // upper floor: deck y7, walls y8..13
 const CEIL = 14;
-const RIDGE_Z = -7;
+const RIDGE_ZN = -8, RIDGE_ZS = -7;   // two-row ridge, block is 16 deep
 const BFLOOR = -9, BCEIL = -1;    // basement
 
 const WING = {
@@ -131,7 +131,8 @@ function mainBlock() {
       for (let x = MX1; x <= MX2; x++) { set(x, y, MZ1, WALL); set(x, y, MZ2, WALL); }
       for (let z = MZ1; z <= MZ2; z++) { set(MX1, y, z, WALL); set(MX2, y, z, WALL); }
     }
-  for (const x of [MX1, MX2, -16, -8, 8, 16])
+  // posts sit between the window bays, mirrored about the door's centre line
+  for (const x of [MX1, MX2, -13, -4, 3, 12])
     for (const z of [MZ1, MZ2]) { box(x, G0 + 1, z, x, G1, z, BEAM); box(x, U0 + 1, z, x, U1, z, BEAM); }
   for (let x = MX1; x <= MX2; x++) { set(x, U0, MZ1, BEAM_WE); set(x, U0, MZ2, BEAM_WE); }
   for (let z = MZ1; z <= MZ2; z++) { set(MX1, U0, z, BEAM_NS); set(MX2, U0, z, BEAM_NS); }
@@ -141,24 +142,29 @@ function mainBlock() {
   box(MX1 + 1, G0 + 1, MZ1 + 1, MX2 - 1, G1, MZ2 - 1, AIR);
   box(MX1 + 1, U0 + 1, MZ1 + 1, MX2 - 1, U1, MZ2 - 1, AIR);
 
-  // windows (v2 orientation)
-  for (let x = MX1 + 4; x <= MX2 - 4; x += 5)
-    for (const z of [MZ1, MZ2]) {
-      box(x, G0 + 2, z, x + 1, G0 + 4, z, PANE_IN_EW_WALL);
-      box(x, U0 + 2, z, x + 1, U0 + 4, z, PANE_IN_EW_WALL);
-    }
-  for (let z = MZ1 + 4; z <= MZ2 - 4; z += 5)
+  // ── windows ──
+  // Two-wide bays on a five block rhythm, mirrored about the door's centre
+  // line (x = -0.5), so no bay ever runs into the front door, the balcony
+  // door or a post. The front and back get the same rhythm; the back also
+  // gets the centre bay the door occupies at the front.
+  const FRONT_BAYS = [];
+  for (let k = 0; k < 4; k++) { FRONT_BAYS.push(5 + 5 * k); FRONT_BAYS.push(-7 - 5 * k); }
+  const BACK_BAYS = [-1, ...FRONT_BAYS];
+  const SIDE_BAYS = [-13, -8];
+  const bay2 = (x, z, y0) => box(x, y0 + 2, z, x + 1, y0 + 4, z, PANE_IN_EW_WALL);
+  for (const bx of FRONT_BAYS) { bay2(bx, MZ2, G0); bay2(bx, MZ2, U0); }
+  for (const bx of BACK_BAYS) { bay2(bx, MZ1, G0); bay2(bx, MZ1, U0); }
+  for (const bz of SIDE_BAYS)
     for (const x of [MX1, MX2]) {
-      box(x, G0 + 2, z, x, G0 + 4, z + 1, PANE_IN_NS_WALL);
-      box(x, U0 + 2, z, x, U0 + 4, z + 1, PANE_IN_NS_WALL);
+      box(x, G0 + 2, bz, x, G0 + 4, bz + 1, PANE_IN_NS_WALL);
+      box(x, U0 + 2, bz, x, U0 + 4, bz + 1, PANE_IN_NS_WALL);
     }
 
-  // front door + porch
+  // front door, with the porch posts carrying the balcony above it
   box(-1, G0 + 1, MZ2, 0, G0 + 3, MZ2, AIR);
-  box(-2, G0, MZ2 + 1, 1, G0, MZ2 + 2, STONE);
-  claim(-2, MZ2 + 1, 1); claim(1, MZ2 + 2, 1);
-  for (const x of [-3, 2]) { box(x, G0 + 1, MZ2 + 2, x, G0 + 5, MZ2 + 2, BEAM); claim(x, MZ2 + 2, G0 + 7); }
-  for (let x = -3; x <= 2; x++) for (let z = MZ2 + 1; z <= MZ2 + 2; z++) { set(x, G0 + 6, z, SLAB_DN); claim(x, z, G0 + 8); }
+  box(-2, G0, MZ2 + 1, 1, G0, MZ2 + 3, STONE);
+  for (let x = -2; x <= 1; x++) for (let z = MZ2 + 1; z <= MZ2 + 3; z++) claim(x, z, 1);
+  for (const x of [-4, 3]) { box(x, G0 + 1, MZ2 + 3, x, U0 - 1, MZ2 + 3, BEAM); claim(x, MZ2 + 3, U0 + 3); }
 
   // ── staircases, against the back wall, running east-west ──
   // A tread at height y is a block you stand on top of, so a run from the
@@ -220,9 +226,11 @@ function openJunctions() {
     const z0 = Math.floor(w.cz - w.half - w.wide - 2), z1 = Math.ceil(w.cz + w.half + w.wide + 2);
     for (let x = x0; x <= x1; x++)
       for (let z = z0; z <= z1; z++) {
+        // anywhere the wing crosses the main block AT ALL, including its outer
+        // walls, is opened right through: v1 and the first v2 pass left a wall
+        // standing across the passage
         if (!inWing(w, x, z)) continue;
-        if (!inMainInterior(x, z) && z !== MZ2) continue;   // the shared south wall too
-        if (!inMainInterior(x, z) && !inWing(w, x, z)) continue;
+        if (x < MX1 || x > MX2 || z < MZ1 || z > MZ2) continue;
         box(x, G0 + 1, z, x, G1, z, AIR);
         box(x, U0 + 1, z, x, U1, z, AIR);
         set(x, G0, z, FLOOR);
@@ -303,12 +311,14 @@ function tower() {
 
 // ════════════════════════════════════════════════════ 4. MAIN ROOF
 function mainRoof() {
-  const depth = MZ2 - RIDGE_Z;
-  for (let i = 0; i <= depth; i++) {
+  // The block is 16 deep, an even number, so the ridge is two rows wide and
+  // both slopes get the same number of courses. v2's first cut hung the ridge
+  // on one row and left the back wall with no roof over it at all.
+  const COURSES = RIDGE_ZN - MZ1 + 1;         // 8 each side
+  for (let i = 0; i < COURSES; i++) {
     const y = CEIL + 1 + i;
-    const zN = RIDGE_Z - (depth - i), zS = RIDGE_Z + (depth - i);
+    const zN = MZ1 + i, zS = MZ2 - i;
     for (let x = MX1 - 1; x <= MX2 + 1; x++) {
-      if (i === depth) { set(x, y, RIDGE_Z, ROOF_RIDGE); claim(x, RIDGE_Z, y + 1); continue; }
       set(x, y, zN, ROOF_N); claim(x, zN, y + 1);
       set(x, y, zS, ROOF_S); claim(x, zS, y + 1);
       for (let z = zN + 1; z <= zS - 1; z++) {
@@ -317,9 +327,33 @@ function mainRoof() {
       }
     }
   }
+  const ry = CEIL + 1 + COURSES;
+  for (let x = MX1 - 1; x <= MX2 + 1; x++)
+    for (const z of [RIDGE_ZN, RIDGE_ZS]) { set(x, ry, z, ROOF_RIDGE); claim(x, z, ry + 1); }
   box(20, CEIL, -11, 21, CEIL + 11, -10, COBBLE);
   box(20, CEIL + 12, -11, 21, CEIL + 12, -10, SLAB_UP);
   for (let x = 20; x <= 21; x++) for (let z = -11; z <= -10; z++) claim(x, z, CEIL + 14);
+}
+
+// Where a 45-degree wing runs into the main block the two pitches used to meet
+// in an open valley, which read as a notch in the roof. Fill that valley solid:
+// every wing column near the house rises to whichever roof is higher there.
+function sealRoofJunctions() {
+  const mainSurf = (z) => CEIL + 1 + (z <= RIDGE_ZN ? z - MZ1 : MZ2 - z);
+  for (const w of [WING.west, WING.east]) {
+    const x0 = Math.floor(w.cx - w.half - w.wide - 3), x1 = Math.ceil(w.cx + w.half + w.wide + 3);
+    const z0 = Math.floor(w.cz - w.half - w.wide - 3), z1 = Math.ceil(w.cz + w.half + w.wide + 3);
+    for (let x = x0; x <= x1; x++)
+      for (let z = z0; z <= z1; z++) {
+        if (!inWing(w, x, z)) continue;
+        if (x < MX1 - 3 || x > MX2 + 3 || z < MZ1 - 3 || z > MZ2 + 3) continue;
+        const { v } = wingLocal(w, x, z);
+        let top = CEIL + Math.max(0, Math.round((w.wide - Math.abs(v)) * 0.8));
+        if (z >= MZ1 && z <= MZ2 && x >= MX1 - 1 && x <= MX2 + 1) top = Math.max(top, mainSurf(z));
+        for (let y = CEIL + 1; y <= top; y++) { const c = get(x, y, z); if (c === undefined || c === AIR) set(x, y, z, ROOFBLOCK); }
+        claim(x, z, top + 2);
+      }
+  }
 }
 
 // ════════════════════════════════════════════════════ 5. FURNISHING
@@ -363,11 +397,11 @@ function furnish() {
   put(19, U0 + 1, -13, BOOKS);
   for (let x = 10; x <= 22; x += 2) put(x, U0 + 1, -14, chance(0.25) ? BOOKS_LORE : BOOKS);
 
-  box(-5, U0, MZ2 + 1, 4, U0, MZ2 + 4, FLOOR2);
-  for (let x = -5; x <= 4; x++) { claim(x, MZ2 + 4, U0 + 3); for (let z = MZ2 + 1; z <= MZ2 + 4; z++) claim(x, z, U0 + 3); }
+  box(-4, U0, MZ2 + 1, 3, U0, MZ2 + 3, FLOOR2);
+  for (let x = -4; x <= 3; x++) for (let z = MZ2 + 1; z <= MZ2 + 3; z++) claim(x, z, U0 + 3);
   box(-1, U0 + 1, MZ2, 0, U0 + 3, MZ2, AIR);
-  for (let x = -5; x <= 4; x++) RAIL.push([x, U0 + 1, MZ2 + 4]);
-  for (let z = MZ2 + 1; z <= MZ2 + 4; z++) { RAIL.push([-5, U0 + 1, z]); RAIL.push([4, U0 + 1, z]); }
+  for (let x = -4; x <= 3; x++) RAIL.push([x, U0 + 1, MZ2 + 3]);
+  for (let z = MZ2 + 1; z <= MZ2 + 3; z++) { RAIL.push([-4, U0 + 1, z]); RAIL.push([3, U0 + 1, z]); }
 
   // ---- basement laboratory ----
   for (let x = -20; x <= 20; x += 5) { put(x, BFLOOR + 1, -13, 'displaycase-generic'); put(x, BFLOOR + 1, -2, 'barrel'); }
@@ -425,6 +459,7 @@ wing(WING.east);
 openJunctions();
 tower();
 mainRoof();
+sealRoofJunctions();
 furnish();
 
 // railings: pick the fence variant that matches its neighbours
