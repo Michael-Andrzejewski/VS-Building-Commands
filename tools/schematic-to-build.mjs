@@ -33,6 +33,9 @@ if (!existsSync(src)) {
 }
 const outName = process.argv[3] || basename(src).replace(/\.json$/, '');
 
+// vegetation and loose ground cover: never part of the building
+const SKIP = /^(leaves|leavesbranchy|log-grown|tallgrass|sapling|flower|mushroom|fern|bigberrybush|smallberrybush|seaweed|crop-|grass|soil|farmland|looseflints|loosestones|looseboulders|loosestick|snowlayer|water-|lake-)/;
+
 const s = JSON.parse(readFileSync(src, 'utf8'));
 const SX = s.SizeX, SY = s.SizeY, SZ = s.SizeZ;
 const codes = {};
@@ -46,6 +49,7 @@ for (let i = 0; i < idx.length; i++) {
   const x = p & 1023, z = (p >> 10) & 1023, y = (p >> 20) & 1023;
   const c = codes[ids[i]];
   if (!c || c === 'air' || c.startsWith('meta-')) continue;   // meta-filler etc are worldgen markers
+  if (SKIP.test(c)) continue;                                  // trees and ground cover that grew into the shot
   cells.set(`${x},${y},${z}`, c);
 }
 

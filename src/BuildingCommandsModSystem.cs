@@ -397,6 +397,7 @@ public class BuildingCommandsModSystem : ModSystem
             else if (cmd == "lootchest") AddLootChestCell(tok, map, ref capped);
             else if (cmd == "spawner") AddSpawnerCell(tok, map, ref capped);
             else if (cmd == "ingots") AddIngotsCell(tok, map, ref capped);
+            else if (cmd == "translocator") AddTranslocatorCell(tok, map, ref capped);
 
             if (capped) break;
         }
@@ -560,9 +561,10 @@ public class BuildingCommandsModSystem : ModSystem
                 case "lootchest": r = DoLootChest(a, caller); break;
                 case "spawner": r = DoSpawner(a, caller); break;
                 case "ingots": r = DoIngots(a, caller); break;
+                case "translocator": r = DoTranslocator(a, caller); break;
                 case "scatter": r = DoScatter(a, caller); break;
                 case "blockcode": r = DoBlockcode(a, caller); break;
-                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, spawner, ingots, scatter, blockcode)"); break;
+                default: r = TextCommandResult.Error($"unknown command '{cmd}' (fill, setblock, clone, lootchest, spawner, translocator, ingots, scatter, blockcode)"); break;
             }
 
             if (r.Status == EnumCommandStatus.Success)
@@ -895,6 +897,58 @@ public class BuildingCommandsModSystem : ModSystem
     // once per run) turn every serpent spawner into a kraken. Passing serpent or
     // kraken always places that one. Skips quietly if Underwater Horrors is
     // not installed.
+    // translocator x y z [north|east|south|west]
+    // A plain setblock leaves a static translocator UNREPAIRED, which is why a
+    // scripted one looks broken. The game repairs it by bumping the block
+    // entity's repairState up to RepairInteractionsRequired, so do that here.
+    private TextCommandResult DoTranslocator(IList<string> a, Caller caller)
+    {
+        GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
+        if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
+        if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
+        if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+
+        string side = (A(a, 3) ?? "north").ToLowerInvariant();
+        if (side != "north" && side != "east" && side != "south" && side != "west") side = "north";
+
+        Block tl = sapi.World.GetBlock(new AssetLocation("game", "statictranslocator-normal-" + side));
+        if (tl == null) return TextCommandResult.Error("Block game:statictranslocator-normal-" + side + " not found.");
+
+        var pos = new BlockPos(x, y, z, dim);
+        sapi.World.BlockAccessor.SetBlock(tl.BlockId, pos);
+
+        var be = sapi.World.BlockAccessor.GetBlockEntity(pos);
+        if (be != null)
+        {
+            const System.Reflection.BindingFlags anyInst = System.Reflection.BindingFlags.Public
+                | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            var t = be.GetType();
+            int required = 4;
+            var reqF = t.GetField("RepairInteractionsRequired", anyInst);
+            if (reqF != null && reqF.FieldType == typeof(int)) required = (int)reqF.GetValue(be);
+            var stateF = t.GetField("repairState", anyInst);
+            if (stateF != null && stateF.FieldType == typeof(int)) stateF.SetValue(be, required);
+            var canF = t.GetField("canTeleport", anyInst);
+            if (canF != null && canF.FieldType == typeof(bool)) canF.SetValue(be, true);
+            be.MarkDirty(true);
+        }
+        sapi.World.BlockAccessor.MarkBlockDirty(pos);
+        return TextCommandResult.Success($"Placed a repaired translocator at ({x},{y},{z}).");
+    }
+
+    private void AddTranslocatorCell(string[] tok, Dictionary<long, int> map, ref bool capped)
+    {
+        if (tok.Length < 4) return;
+        if (!ParseCoord(tok[1], 0, out int x, out _)) return;
+        if (!ParseCoord(tok[2], 0, out int y, out _)) return;
+        if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+        string side = tok.Length > 4 ? tok[4].ToLowerInvariant() : "north";
+        Block b = sapi.World.GetBlock(new AssetLocation("game", "statictranslocator-normal-" + side));
+        if (b == null) return;
+        map[Pack(x, y, z)] = b.BlockId;
+        if (map.Count >= MaxPreviewCells) capped = true;
+    }
+
     private TextCommandResult DoSpawner(IList<string> a, Caller caller)
     {
         GetOrigin(caller, out int ox, out int oy, out int oz, out int dim);
