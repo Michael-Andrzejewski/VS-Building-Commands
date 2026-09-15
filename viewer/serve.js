@@ -15,6 +15,14 @@ const MIME = {
 http.createServer((req, res) => {
   // Capture endpoint: the page POSTs a PNG data URL, we save it so it can be
   // opened directly. Used to screenshot the WebGL canvas.
+  if (req.url.startsWith('/list')) {
+    const dir = path.join(__dirname, '..', 'examples');
+    let names = [];
+    try { names = fs.readdirSync(dir).filter(f => f.endsWith('.txt')).map(f => f.replace(/.txt$/, '')).sort(); } catch (e) {}
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify(names));
+  }
+
   if (req.method === 'POST' && req.url.startsWith('/capture')) {
     let body = '';
     req.on('data', (c) => (body += c));

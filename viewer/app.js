@@ -194,7 +194,12 @@ addEventListener('resize', () => {
 // ── load + wire UI ───────────────────────────────────────────────────────
 const sel = document.getElementById('sel');
 const info = document.getElementById('info');
-for (const s of STRUCTURES) { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); }
+function fillList(names) {
+  sel.innerHTML = '';
+  for (const s of names) { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); }
+}
+fillList(STRUCTURES);
+fetch('/list').then(r => r.json()).then(names => { if (names && names.length) { const cur = sel.value; fillList(names); sel.value = names.includes(cur) ? cur : names[0]; } }).catch(() => {});
 
 async function load(name) {
   info.textContent = 'loading ' + name + '...';
