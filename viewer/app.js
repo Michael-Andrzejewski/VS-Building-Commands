@@ -3,7 +3,7 @@
    at 0,0,0) and renders them as colored cubes so we can critique designs
    without launching Vintage Story. */
 
-const STRUCTURES = ['ruin', 'portal', 'shipwreck-huge', 'shipwreck-small', 'shipwreck-medium', 'city', 'dungeon', 'beacondungeon', 'beacondungeon-cut', 'beacondungeon-short', 'beacondungeon-short-cut'];
+const STRUCTURES = ['ruin', 'portal', 'shipwreck-huge', 'shipwreck-small', 'shipwreck-medium', 'city', 'dungeon', 'beacondungeon', 'beacondungeon-cut', 'beacondungeon-short', 'beacondungeon-short-cut', 'idealhouse'];
 
 // ── coordinate + color helpers ───────────────────────────────────────────
 function tint(tok) { // '~' -> 0, '~5' -> 5, '~-3' -> -3, '10' -> 10
@@ -16,6 +16,20 @@ function colorFor(code) {
   if (code === '__spawner__') return 0x00e5ff;    // creature spawner (cyan)
   if (code === '__ingots__') return 0xf2d24b;     // ingot pile (gold-ish)
   const c = code.replace(/^game:/, '');
+  // ideal house palette
+  if (c.startsWith('glasspane') || c.startsWith('glass')) return 0xa9dcef;
+  if (c.startsWith('slantedroofing') || c === 'stonebricks-slate') return 0x4d545c;
+  if (c.startsWith('bookshelf')) return 0x6d4b2c;
+  if (c.startsWith('displaycase') || c.startsWith('shelf') || c.startsWith('toolrack')) return 0xb08a52;
+  if (c.startsWith('table') || c.startsWith('chair') || c.startsWith('omok') || c.startsWith('bed-') || c.startsWith('crate') || c === 'barrel' || c.startsWith('chest')) return 0xc08a3e;
+  if (c.startsWith('farmland') || c.startsWith('soil')) return 0x4f3d27;
+  if (c.startsWith('lantern') || c.startsWith('chandelier')) return 0xffe08a;
+  if (c.startsWith('ladder')) return 0xd2a35c;
+  if (c.startsWith('door')) return 0x7a4a24;
+  if (c.startsWith('rug')) return 0x3a5a9c;
+  if (c.startsWith('statictranslocator')) return 0x00d0c0;
+  if (c.startsWith('mannequin')) return 0xd8c9a0;
+  if (c.startsWith('forge') || c.startsWith('anvil') || c.startsWith('quern') || c.startsWith('firepit') || c.startsWith('bloomery')) return 0x5a5a60;
   if (c.startsWith('stonebricks')) return 0x8f8f8f;
   if (c.startsWith('cobblestone')) return 0x707070;
   if (c.startsWith('brickruin')) {
