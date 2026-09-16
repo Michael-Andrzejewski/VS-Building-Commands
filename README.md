@@ -23,22 +23,36 @@ Copies the source cuboid so its minimum corner lands at `dx dy dz`. Modes: `repl
 ### `/blockcode <search>`
 Lists up to 50 registered block codes containing the search term, so you can find the exact code to build with. Example: `/blockcode stonebrick` returns `game:stonebricks-granite, game:stonebricks-andesite, ...`.
 
-### `/build <name>` and `/build` (paste window)
+### `/build <name> [direction]` and `/build` (paste window)
 Runs an entire script of commands at once, so you never paste hundreds of lines by hand.
 
 - `/build <name>` runs a plain-text `<name>.txt` file from the scripts folder (see Batch building below).
+- `/build <name> <direction>` turns the whole build so it faces `north`, `east`, `south` or `west`. You can also give a plain angle: `/build myhouse 90`.
 - `/build` with no name opens an in-game window where you paste a command list and press Run. Handy when the commands come from somewhere you cannot save to a file.
 - `/build list` shows the available scripts.
 
 Either way, tilde coordinates are measured from where you stand when you run it, so the whole structure lands around you.
 
-### `/preview <name>`, `/confirm`, `/cancel`
+### Turning a build
+A script says which way it faces as written with a `facing` line near the top:
+
+```
+facing south
+```
+
+`/build myhouse north` then works out the angle for you: a build declared `facing south` turns 180 degrees, and one declared `facing west` turns 90. A script with no `facing` line is taken to face north, so an existing script is unaffected by `/build <name> north`.
+
+Turning rewrites the block codes as well as the coordinates, so stairs, fences, glass panes, ladders, doors, beds, slanted roofing, logs and planks all come out pointing the right way. The mod asks each block to turn itself first, exactly as worldedit does; for the few that carry a compass word in their code but never implement rotation (chests are the common one, and worldedit gets those wrong too) it rewrites the direction word instead. Anything it still cannot turn is named in the summary line rather than left for you to find in the world.
+
+`clone` is the one exception: it copies blocks that are already in the world, so their own orientation is whatever it was. Its coordinates turn, its contents do not.
+
+### `/preview <name> [direction]`, `/confirm`, `/cancel`
 Place a build naturally by seeing it first. `/preview <name>` (or the **Preview** button in the paste window) projects the build as a translucent ghost at the block your crosshair is on, and the ghost follows your look. Aim it where you want, then:
 
 - `/confirm` places it for real at that spot.
 - `/cancel` discards it.
 
-Nothing is written to the world until you confirm. The ghost shows fill and setblock blocks (air is invisible); clone lines still place on confirm but are not drawn in the ghost. Large builds cap the ghost at 60000 blocks, but the full build still places.
+`/preview <name> <direction>` turns the ghost too, and `/confirm` places what the ghost showed. Nothing is written to the world until you confirm. The ghost shows fill and setblock blocks (air is invisible); clone lines still place on confirm but are not drawn in the ghost. Large builds cap the ghost at 60000 blocks, but the full build still places.
 
 ## Coordinates
 
@@ -58,6 +72,7 @@ Drop a file like `dungeon.txt` there, then run `/build dungeon`. In the file:
 
 - One command per line; the leading `/` is optional (`fill ...` or `/fill ...`).
 - Only this mod's commands run (`fill`, `setblock`, `clone`, `blockcode`).
+- A `facing <direction>` line declares which way the build faces, so `/build <name> <direction>` can turn it. It is a declaration, not a command, and does not count toward the total.
 - Blank lines and lines starting with `#` or `//` are ignored, so you can comment your build.
 - Tilde coordinates are all measured from where you stand when you run `/build`, so a whole structure lands around you.
 

@@ -63,6 +63,7 @@ public class BuildingCommandsModSystem : ModSystem
     {
         public List<string> Lines;
         public BlockPos Anchor;
+        public int Rotation;
     }
 
     // Whether the current command's caller has an entity, so ~relative
@@ -139,16 +140,16 @@ public class BuildingCommandsModSystem : ModSystem
 
         RegisterCmd(api, "build", name =>
             api.ChatCommands.Create(name)
-                .WithDescription("With a name, runs that .txt script from the BuildingCommands folder. With no name, opens a window to paste commands into. ~relative coords are measured from where you stand. /build list shows available scripts.")
+                .WithDescription("With a name, runs that .txt script from the BuildingCommands folder. With no name, opens a window to paste commands into. ~relative coords are measured from where you stand. Add a direction to turn the whole build, as in /build myhouse north; the script says which way it faces with a `facing` line, north if it says nothing. /build list shows available scripts.")
                 .RequiresPrivilege(Privilege.controlserver)
-                .WithArgs(p.OptionalWord("name"))
+                .WithArgs(p.OptionalWord("name"), p.OptionalWord("facing"))
                 .HandleWith(OnBuild));
 
         RegisterCmd(api, "preview", name =>
             api.ChatCommands.Create(name)
-                .WithDescription("Show a build as a translucent ghost at your crosshair without placing it. /preview &lt;script name&gt;, then aim where you want it and /confirm (or /cancel).")
+                .WithDescription("Show a build as a translucent ghost at your crosshair without placing it. /preview &lt;script name&gt; &lt;direction&gt;, then aim where you want it and /confirm (or /cancel). The ghost turns with the build.")
                 .RequiresPrivilege(Privilege.controlserver)
-                .WithArgs(p.OptionalWord("name"))
+                .WithArgs(p.OptionalWord("name"), p.OptionalWord("facing"))
                 .HandleWith(OnPreview));
 
         RegisterCmd(api, "confirm", name =>
@@ -250,7 +251,7 @@ public class BuildingCommandsModSystem : ModSystem
         }
 
         if (string.Equals(name, "list", StringComparison.OrdinalIgnoreCase)) return ListScripts();
-        return RunScript(name, args.Caller);
+        return RunScript(name, args.Caller, args.Parsers[1].GetValue() as string);
     }
 
     // Client -> server: run the pasted text as commands for that player.
@@ -302,7 +303,9 @@ public class BuildingCommandsModSystem : ModSystem
         try { lines = File.ReadAllLines(path); }
         catch (Exception e) { return TextCommandResult.Error($"Could not read {file}: {e.Message}"); }
 
-        return StartPreview(sp, lines, file);
+        if (!TryParseRotation(args.Parsers[1].GetValue() as string, ScriptFacing(lines), out int angle, out string ferr))
+            return TextCommandResult.Error(ferr);
+        return StartPreview(sp, lines, file, angle);
     }
 
     private TextCommandResult OnConfirm(TextCommandCallingArgs args)
@@ -314,15 +317,17 @@ public class BuildingCommandsModSystem : ModSystem
             return TextCommandResult.Error("Aim at a block so the ghost has a spot, then /confirm.");
 
         originOverride = pend.Anchor;
-        (int ran, int errors, string firstError) = RunLines(pend.Lines, args.Caller);
+        (int ran, int errors, string firstError) = RunLines(pend.Lines, args.Caller, pend.Rotation);
         originOverride = null;
 
         pending.Remove(sp.PlayerUID);
         serverChannel.SendPacket(new PreviewStopPacket(), sp);
 
         string summary = $"Placed {ran} command(s) at {pend.Anchor.X},{pend.Anchor.Y},{pend.Anchor.Z}";
+        if (pend.Rotation != 0) summary += $", turned {pend.Rotation} degrees";
         if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
         summary += ".";
+        summary += StuckNote();
         return TextCommandResult.Success(summary);
     }
 
@@ -356,13 +361,13 @@ public class BuildingCommandsModSystem : ModSystem
             pend.Anchor = new BlockPos(packet.X, packet.Y, packet.Z, packet.Dim);
     }
 
-    private TextCommandResult StartPreview(IServerPlayer sp, string[] lines, string sourceLabel)
+    private TextCommandResult StartPreview(IServerPlayer sp, string[] lines, string sourceLabel, int rotation = 0)
     {
-        ComputePlan(lines, out int[] xs, out int[] ys, out int[] zs, out int[] ids, out bool capped);
+        ComputePlan(lines, rotation, out int[] xs, out int[] ys, out int[] zs, out int[] ids, out bool capped);
         if (xs.Length == 0)
             return TextCommandResult.Error("That build has no visible blocks to preview (nothing but air, or only clone/blockcode lines).");
 
-        pending[sp.PlayerUID] = new PendingPreview { Lines = new List<string>(lines), Anchor = null };
+        pending[sp.PlayerUID] = new PendingPreview { Lines = new List<string>(lines), Anchor = null, Rotation = rotation };
         serverChannel.SendPacket(new PreviewCellsPacket { X = xs, Y = ys, Z = zs, Ids = ids }, sp);
 
         string msg = $"Previewing {xs.Length} block(s) from {sourceLabel}. Aim where you want it, then /confirm (or /cancel).";
@@ -375,10 +380,11 @@ public class BuildingCommandsModSystem : ModSystem
     // replace-filter are shown as plain replace (their result depends on the
     // world at the final spot, which is not known until confirm); clone and
     // blockcode are skipped.
-    private void ComputePlan(IEnumerable<string> lines, out int[] xs, out int[] ys, out int[] zs, out int[] ids, out bool capped)
+    private void ComputePlan(IEnumerable<string> lines, int rotation, out int[] xs, out int[] ys, out int[] zs, out int[] ids, out bool capped)
     {
         var map = new Dictionary<long, int>();
         capped = false;
+        _runRotation = rotation;
         bool prevAvail = originAvailable;
         originAvailable = true;
 
@@ -403,6 +409,7 @@ public class BuildingCommandsModSystem : ModSystem
         }
 
         originAvailable = prevAvail;
+        _runRotation = 0;
 
         int n = map.Count;
         xs = new int[n]; ys = new int[n]; zs = new int[n]; ids = new int[n];
@@ -423,6 +430,8 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(tok[4], 0, out int x2, out _)) return;
         if (!ParseCoord(tok[5], 0, out int y2, out _)) return;
         if (!ParseCoord(tok[6], 0, out int z2, out _)) return;
+        RotXZ(ref x1, ref z1, 0, 0);
+        RotXZ(ref x2, ref z2, 0, 0);
 
         Block block = ResolveBlock(tok[7], out _);
         if (block == null) return;
@@ -455,6 +464,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(tok[1], 0, out int x, out _)) return;
         if (!ParseCoord(tok[2], 0, out int y, out _)) return;
         if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+        RotXZ(ref x, ref z, 0, 0);
 
         Block block = ResolveBlock(tok[4], out _);
         if (block == null || block.BlockId == 0) return;
@@ -479,6 +489,18 @@ public class BuildingCommandsModSystem : ModSystem
         z = (int)(key & 0x1FFFFF) - 1048576;
     }
 
+    /// Names any directional block the run could not turn, so a wrong-facing
+    /// chest or stair is reported rather than left to be noticed in the world.
+    private string StuckNote()
+    {
+        if (_rotStuck.Count == 0) return "";
+        var names = new List<string>(_rotStuck);
+        names.Sort();
+        string shown = string.Join(", ", names.GetRange(0, Math.Min(4, names.Count)));
+        if (names.Count > 4) shown += $" and {names.Count - 4} more";
+        return $" {names.Count} block type(s) could not be turned and were placed unrotated: {shown}.";
+    }
+
     private TextCommandResult ListScripts()
     {
         try
@@ -496,7 +518,7 @@ public class BuildingCommandsModSystem : ModSystem
         }
     }
 
-    private TextCommandResult RunScript(string name, Caller caller)
+    private TextCommandResult RunScript(string name, Caller caller, string facing = null)
     {
         // Only allow a plain file name; no path separators, so scripts can
         // only come from the BuildingCommands folder.
@@ -512,11 +534,16 @@ public class BuildingCommandsModSystem : ModSystem
         try { lines = File.ReadAllLines(path); }
         catch (Exception e) { return TextCommandResult.Error($"Could not read {file}: {e.Message}"); }
 
-        (int ran, int errors, string firstError) = RunLines(lines, caller);
+        if (!TryParseRotation(facing, ScriptFacing(lines), out int angle, out string ferr))
+            return TextCommandResult.Error(ferr);
+
+        (int ran, int errors, string firstError) = RunLines(lines, caller, angle);
 
         string summary = $"Ran {ran} command(s) from {file}";
+        if (angle != 0) summary += $", turned {angle} degrees to face {FacingOrder[Mod4(ScriptFacing(lines) - angle / 90)]}";
         if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
         summary += ".";
+        summary += StuckNote();
         return TextCommandResult.Success(summary);
     }
 
@@ -531,11 +558,19 @@ public class BuildingCommandsModSystem : ModSystem
     // spawner in this structure becomes a kraken spawner instead.
     private bool _runKrakenMode;
 
-    private (int ran, int errors, string firstError) RunLines(IEnumerable<string> lines, Caller caller)
+    // Horizontal rotation applied to this whole run, in degrees: 0, 90, 180 or
+    // 270, clockwise seen from above. Directional block codes this run could
+    // not turn are collected so the summary can name them.
+    private int _runRotation;
+    private readonly HashSet<string> _rotStuck = new HashSet<string>();
+
+    private (int ran, int errors, string firstError) RunLines(IEnumerable<string> lines, Caller caller, int rotation = 0)
     {
         int ran = 0, errors = 0, lineNo = 0;
         string firstError = null;
         _runKrakenMode = sapi.World.Rand.NextDouble() < 0.05;
+        _runRotation = rotation;
+        _rotStuck.Clear();
 
         foreach (string raw in lines)
         {
@@ -548,6 +583,7 @@ public class BuildingCommandsModSystem : ModSystem
             if (tok.Length == 0) continue;
 
             string cmd = tok[0].ToLowerInvariant();
+            if (cmd == "facing") continue;          // a declaration, not a command
             var a = new List<string>(tok.Length - 1);
             for (int i = 1; i < tok.Length; i++) a.Add(tok[i]);
 
@@ -578,6 +614,7 @@ public class BuildingCommandsModSystem : ModSystem
             }
         }
 
+        _runRotation = 0;
         return (ran, errors, firstError);
     }
 
@@ -594,6 +631,8 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 3), ox, out int x2, out string e3)) return TextCommandResult.Error(e3);
         if (!ParseCoord(A(a, 4), oy, out int y2, out string e4)) return TextCommandResult.Error(e4);
         if (!ParseCoord(A(a, 5), oz, out int z2, out string e5)) return TextCommandResult.Error(e5);
+        RotXZ(ref x1, ref z1, ox, oz);
+        RotXZ(ref x2, ref z2, ox, oz);
 
         Block block = ResolveBlock(A(a, 6), out string berr);
         if (block == null) return TextCommandResult.Error(berr);
@@ -674,6 +713,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
         if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
         if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+        RotXZ(ref x, ref z, ox, oz);
 
         Block block = ResolveBlock(A(a, 3), out string berr);
         if (block == null) return TextCommandResult.Error(berr);
@@ -713,6 +753,9 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 6), ox, out int dx, out string e6)) return TextCommandResult.Error(e6);
         if (!ParseCoord(A(a, 7), oy, out int dy, out string e7)) return TextCommandResult.Error(e7);
         if (!ParseCoord(A(a, 8), oz, out int dz, out string e8)) return TextCommandResult.Error(e8);
+        RotXZ(ref x1, ref z1, ox, oz);
+        RotXZ(ref x2, ref z2, ox, oz);
+        RotXZ(ref dx, ref dz, ox, oz);
 
         string mode = (A(a, 9) ?? "replace").ToLowerInvariant();
         if (mode != "replace" && mode != "masked")
@@ -812,6 +855,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
         if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
         if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+        RotXZ(ref x, ref z, ox, oz);
 
         var rnd = sapi.World.Rand;
         int variant;
@@ -881,6 +925,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(tok[1], 0, out int x, out _)) return;
         if (!ParseCoord(tok[2], 0, out int y, out _)) return;
         if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+        RotXZ(ref x, ref z, 0, 0);
 
         string side = tok.Length > 5 ? tok[5].ToLowerInvariant() : "north";
         if (side != "north" && side != "east" && side != "south" && side != "west") side = "north";
@@ -907,9 +952,11 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
         if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
         if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+        RotXZ(ref x, ref z, ox, oz);
 
         string side = (A(a, 3) ?? "north").ToLowerInvariant();
         if (side != "north" && side != "east" && side != "south" && side != "west") side = "north";
+        side = RotFacingArg(side);
 
         Block tl = sapi.World.GetBlock(new AssetLocation("game", "statictranslocator-normal-" + side));
         if (tl == null) return TextCommandResult.Error("Block game:statictranslocator-normal-" + side + " not found.");
@@ -942,7 +989,8 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(tok[1], 0, out int x, out _)) return;
         if (!ParseCoord(tok[2], 0, out int y, out _)) return;
         if (!ParseCoord(tok[3], 0, out int z, out _)) return;
-        string side = tok.Length > 4 ? tok[4].ToLowerInvariant() : "north";
+        RotXZ(ref x, ref z, 0, 0);
+        string side = RotFacingArg(tok.Length > 4 ? tok[4].ToLowerInvariant() : "north");
         Block b = sapi.World.GetBlock(new AssetLocation("game", "statictranslocator-normal-" + side));
         if (b == null) return;
         map[Pack(x, y, z)] = b.BlockId;
@@ -955,6 +1003,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
         if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
         if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+        RotXZ(ref x, ref z, ox, oz);
 
         string typeArg = (A(a, 3) ?? "").ToLowerInvariant();
         bool kraken;
@@ -984,6 +1033,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(tok[1], 0, out int x, out _)) return;
         if (!ParseCoord(tok[2], 0, out int y, out _)) return;
         if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+        RotXZ(ref x, ref z, 0, 0);
         Block b = sapi.World.GetBlock(new AssetLocation("underwaterhorrors", "serpentspawner"));
         if (b == null) return;
         map[Pack(x, y, z)] = b.BlockId;
@@ -1000,6 +1050,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
         if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
         if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+        RotXZ(ref x, ref z, ox, oz);
 
         string metal = (A(a, 3) ?? "copper").ToLowerInvariant();
         int count = 8;
@@ -1043,6 +1094,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(A(a, 0), ox, out int x, out string e0)) return TextCommandResult.Error(e0);
         if (!ParseCoord(A(a, 1), oy, out int y, out string e1)) return TextCommandResult.Error(e1);
         if (!ParseCoord(A(a, 2), oz, out int z, out string e2)) return TextCommandResult.Error(e2);
+        RotXZ(ref x, ref z, ox, oz);
 
         Block block = ResolveBlock(A(a, 3), out string berr);
         if (block == null) return TextCommandResult.Error(berr);
@@ -1114,6 +1166,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (!ParseCoord(tok[1], 0, out int x, out _)) return;
         if (!ParseCoord(tok[2], 0, out int y, out _)) return;
         if (!ParseCoord(tok[3], 0, out int z, out _)) return;
+        RotXZ(ref x, ref z, 0, 0);
         Block b = sapi.World.GetBlock(new AssetLocation("game", "ingotpile"));
         if (b == null) return;
         map[Pack(x, y, z)] = b.BlockId;
@@ -1190,6 +1243,143 @@ public class BuildingCommandsModSystem : ModSystem
     }
 
     /// <summary>Resolve a block code (game: domain by default; "air" clears).</summary>
+    // ─────────────────────────────────────────────────────────────────────
+    //  Rotation
+    //
+    //  /build &lt;name&gt; &lt;direction&gt; turns the whole build so it faces that way.
+    //  A script says which way it faces as written with a `facing` line; with
+    //  no such line we assume north, so /build &lt;name&gt; north leaves an
+    //  undeclared script exactly as it was.
+    //
+    //  Angles are degrees clockwise seen from above, which is the same sense
+    //  the game uses in GetRotatedBlockCode: a facing's index runs east,
+    //  north, west, south and rotating SUBTRACTS angle/90 from it. Coordinates
+    //  and block variants have to share one convention or a turned build comes
+    //  out with its stairs and fences pointing the wrong way.
+    // ─────────────────────────────────────────────────────────────────────
+
+    private static readonly string[] FacingOrder = { "east", "north", "west", "south" };
+
+    private static int Mod4(int v) { return ((v % 4) + 4) % 4; }
+
+    private static bool TryParseFacing(string word, out int index)
+    {
+        index = -1;
+        if (string.IsNullOrEmpty(word)) return false;
+        switch (word.ToLowerInvariant())
+        {
+            case "e": case "east": index = 0; return true;
+            case "n": case "north": index = 1; return true;
+            case "w": case "west": index = 2; return true;
+            case "s": case "south": index = 3; return true;
+        }
+        return false;
+    }
+
+    /// Works out the angle that turns a build facing declaredIndex so that it
+    /// faces whatever the player asked for. A bare number is taken as the angle.
+    private static bool TryParseRotation(string word, int declaredIndex, out int angle, out string err)
+    {
+        angle = 0; err = null;
+        if (string.IsNullOrWhiteSpace(word)) return true;
+        if (TryParseFacing(word, out int want))
+        {
+            angle = Mod4(declaredIndex - want) * 90;
+            return true;
+        }
+        if (int.TryParse(word, out int deg))
+        {
+            deg = ((deg % 360) + 360) % 360;
+            if (deg % 90 == 0) { angle = deg; return true; }
+        }
+        err = $"'{word}' is not a direction. Use north, east, south or west, or an angle of 0, 90, 180 or 270.";
+        return false;
+    }
+
+    /// Reads a leading `facing &lt;dir&gt;` declaration off a script. Absent, a build
+    /// is taken to face north.
+    private static int ScriptFacing(IEnumerable<string> lines)
+    {
+        foreach (string raw in lines)
+        {
+            string line = (raw ?? "").Trim();
+            if (line.Length == 0 || line.StartsWith("#") || line.StartsWith("//")) continue;
+            if (line[0] == '/') line = line.Substring(1);
+            string[] tok = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+            if (tok.Length >= 2 && tok[0].Equals("facing", StringComparison.OrdinalIgnoreCase)
+                && TryParseFacing(tok[1], out int idx)) return idx;
+            break;                      // the first real line was not a declaration
+        }
+        return 1;                       // north
+    }
+
+    /// Turns a position about the build's origin. y is untouched.
+    private void RotXZ(ref int x, ref int z, int ox, int oz)
+    {
+        if (_runRotation == 0) return;
+        int dx = x - ox, dz = z - oz;
+        switch (_runRotation)
+        {
+            case 90: x = ox - dz; z = oz + dx; break;
+            case 180: x = ox - dx; z = oz - dz; break;
+            case 270: x = ox + dz; z = oz - dx; break;
+        }
+    }
+
+    /// Turns a compass word given as a command argument, such as the side on a
+    /// translocator line.
+    private string RotFacingArg(string side)
+    {
+        if (_runRotation == 0 || !TryParseFacing(side, out int idx)) return side;
+        return FacingOrder[Mod4(idx - _runRotation / 90)];
+    }
+
+    private Block RotateBlock(Block b)
+    {
+        if (_runRotation == 0 || b == null || b.BlockId == 0) return b;
+
+        // Ask the block itself first. Fences, stairs, slabs, panes, logs,
+        // planks, ladders, doors, beds, shelves, lanterns and slanted roofing
+        // all implement this; anything that does not hands its own code back.
+        AssetLocation spun = null;
+        try { spun = b.GetRotatedBlockCode(_runRotation); } catch { }
+        if (spun != null && !spun.Equals(b.Code))
+        {
+            Block r = sapi.World.GetBlock(spun);
+            if (r != null) return r;
+            _rotStuck.Add(b.Code.ToShortString());
+            return b;
+        }
+
+        // Some blocks carry a compass word in their code and still never
+        // implement rotation; chests are the one a house actually hits, and the
+        // game's own worldedit rotate leaves those facing the wrong way too.
+        // Turn the word ourselves, and keep it only if that is a real block.
+        AssetLocation byWord = SpinCompassWord(b.Code);
+        if (byWord == null) return b;
+        Block w = sapi.World.GetBlock(byWord);
+        if (w != null) return w;
+        _rotStuck.Add(b.Code.ToShortString());
+        return b;
+    }
+
+    /// Rewrites any whole north/east/south/west segment of a block code.
+    /// Returns null when the code holds no compass word, so a plain block is
+    /// never touched.
+    private AssetLocation SpinCompassWord(AssetLocation code)
+    {
+        string[] parts = code.Path.Split('-');
+        bool hit = false;
+        for (int i = 0; i < parts.Length; i++)
+        {
+            if (parts[i].Length < 4) continue;      // a whole word, not an ns/we axis letter
+            if (!TryParseFacing(parts[i], out int idx)) continue;
+            parts[i] = FacingOrder[Mod4(idx - _runRotation / 90)];
+            hit = true;
+        }
+        return hit ? new AssetLocation(code.Domain, string.Join("-", parts)) : null;
+    }
+
     private Block ResolveBlock(string code, out string err)
     {
         err = null;
@@ -1198,7 +1388,7 @@ public class BuildingCommandsModSystem : ModSystem
 
         AssetLocation loc = code.Contains(':') ? new AssetLocation(code) : new AssetLocation("game", code);
         Block b = sapi.World.GetBlock(loc);
-        if (b == null) err = $"Unknown block '{code}'. Use /blockcode {code} to find a valid code.";
-        return b;
+        if (b == null) { err = $"Unknown block '{code}'. Use /blockcode {code} to find a valid code."; return null; }
+        return RotateBlock(b);
     }
 }

@@ -4,6 +4,9 @@
 # at each floor, drum sealed but for four openings, big window in the game room end,
 # solid foundation, no raised bed cutting the floor. Needs Building Commands 0.8.0.
 
+# Which way the build faces as written, so /build idealhouse4 north can turn it.
+facing south
+
 # --- clear the volume ---
 fill ~-23 ~-8 ~-14 ~23 ~-6 ~-14 air
 fill ~-23 ~-8 ~-13 ~11 ~-8 ~-12 air
