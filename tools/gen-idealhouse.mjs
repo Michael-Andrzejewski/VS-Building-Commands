@@ -80,9 +80,13 @@ const BFLOOR = -9, BCEIL = -1;
 // wall instead of two walls meeting with a wedge of gap between them; the part
 // of the wing inside the house is pure interior and grows no wall at all.
 // Outer ends are unchanged from v2, so the wings look the same from outside.
+// half is how far a wing reaches INTO the house and must stay at 15, because
+// that is what lands both inner corners inside the main footprint and keeps the
+// junction one continuous wall. halfOut is the outer end, and he pulled the
+// game room's end wall one cell in before glazing it, so west stops at 14.5.
 const WING = {
-  west: { cx: -30, cz: 3, dx: -Math.SQRT1_2, dz: Math.SQRT1_2, half: 15, wide: 6 },
-  east: { cx: 30, cz: 3, dx: Math.SQRT1_2, dz: Math.SQRT1_2, half: 15, wide: 6 },
+  west: { cx: -30, cz: 3, dx: -Math.SQRT1_2, dz: Math.SQRT1_2, half: 15, halfOut: 14.5, wide: 6 },
+  east: { cx: 30, cz: 3, dx: Math.SQRT1_2, dz: Math.SQRT1_2, half: 15, halfOut: 15, wide: 6 },
 };
 const TOWER = { cx: 40, cz: 13, r: 5.6, top: 32, deck: 30, domeFrom: 33 };
 const CHIM_X1 = 20, CHIM_X2 = 21, CHIM_Z1 = -11, CHIM_Z2 = -10, CHIM_TOP = CEIL + 11;
@@ -91,7 +95,7 @@ function wingLocal(w, x, z) {
   const px = x + 0.5 - w.cx, pz = z + 0.5 - w.cz;
   return { u: px * w.dx + pz * w.dz, v: -px * w.dz + pz * w.dx };
 }
-const inWing = (w, x, z) => { const { u, v } = wingLocal(w, x, z); return Math.abs(u) <= w.half && Math.abs(v) <= w.wide; };
+const inWing = (w, x, z) => { const { u, v } = wingLocal(w, x, z); return u >= -w.half && u <= w.halfOut && Math.abs(v) <= w.wide; };
 const dist = (x, z, cx, cz) => Math.hypot(x + 0.5 - cx, z + 0.5 - cz);
 const inTower = (x, z) => dist(x, z, TOWER.cx, TOWER.cz) <= TOWER.r;
 const towerWall = (x, z) => { const d = dist(x, z, TOWER.cx, TOWER.cz); return d > TOWER.r - 1 && d <= TOWER.r; };
@@ -113,10 +117,12 @@ function shell() {
       set(x, G0, z, FLOOR);
       set(x, U0, z, FLOOR2);
       set(x, CEIL, z, WALL);
+      // he filled the whole underside solid rather than leaving a void under
+      // the wing floors, so the foundation is a slab, not a ring of footings
+      box(x, -5, z, x, G0 - 1, z, STONE);
       if (isBoundary(x, z)) {
         box(x, G0 + 1, z, x, G1, z, WALL);
         box(x, U0 + 1, z, x, U1, z, WALL);
-        box(x, -4, z, x, G0 - 1, z, STONE);          // footing under the wall
       } else {
         box(x, G0 + 1, z, x, G1, z, AIR);
         box(x, U0 + 1, z, x, U1, z, AIR);
@@ -160,18 +166,48 @@ function openingsAndStairs() {
       box(x, U0 + 2, bz, x, U0 + 4, bz + 1, PANE_IN_NS_WALL);
     }
 
-  // wing glazing: he replaced plank walls with glass, so glaze half of each
-  // long side on both storeys
-  for (const w of [WING.west, WING.east])
+  // wing glazing. v3 scattered single panes along the whole wall on a modulo
+  // rule; he repainted both wings so the middle of every long wall is solid and
+  // a pair of windows sits near each end. Walk the wall in order along the wing
+  // axis and glaze the 2nd and 4th cell in from either end.
+  const wingWall = (w, side) => {
+    const out = [];
     for (let x = BB.x1; x <= BB.x2; x++)
       for (let z = BB.z1; z <= BB.z2; z++) {
         if (!inWing(w, x, z) || !isBoundary(x, z)) continue;
         const { u, v } = wingLocal(w, x, z);
-        if (Math.abs(v) < w.wide - 1 || Math.abs(u) > w.half - 2) continue;
-        if (((Math.round(u) % 4) + 4) % 4 > 1) continue;
-        for (let y = G0 + 2; y <= G0 + 5; y++) if (get(x, y, z) === WALL) set(x, y, z, GLASS);
-        for (let y = U0 + 2; y <= U0 + 5; y++) if (get(x, y, z) === WALL) set(x, y, z, GLASS);
+        if (Math.abs(v) < w.wide - 1 || (v > 0 ? 1 : -1) !== side) continue;
+        out.push({ x, z, u });
       }
+    return out.sort((a, b) => a.u - b.u);
+  };
+  for (const w of [WING.west, WING.east])
+    for (const side of [-1, 1]) {
+      const wall = wingWall(w, side);
+      const pick = new Set([1, 3, wall.length - 2, wall.length - 4]);
+      wall.forEach((c, i) => {
+        if (!pick.has(i)) return;
+        for (const y0 of [G0, U0])
+          for (let y = y0 + 2; y <= y0 + 4; y++) if (get(c.x, y, c.z) === WALL) set(c.x, y, c.z, GLASS);
+      });
+    }
+
+  // the game room's end wall: one six wide, four tall window, everything but
+  // the two corner cells. The end wall cells are the only boundary cells out
+  // there with |v| under 5; the long walls start at 5.
+  {
+    const w = WING.west, end = [];
+    for (let x = BB.x1; x <= BB.x2; x++)
+      for (let z = BB.z1; z <= BB.z2; z++) {
+        if (!inWing(w, x, z) || !isBoundary(x, z)) continue;
+        const { u, v } = wingLocal(w, x, z);
+        if (u < w.halfOut - 1 || Math.abs(v) >= w.wide - 1) continue;
+        end.push({ x, z, v });
+      }
+    end.sort((a, b) => a.v - b.v);
+    for (const c of end.slice(1, -1))
+      for (let y = G0 + 2; y <= G0 + 5; y++) if (get(c.x, y, c.z) === WALL) set(c.x, y, c.z, GLASS);
+  }
 
   // front door and the porch posts that carry the balcony
   box(-1, G0 + 1, MZ2, 0, G0 + 3, MZ2, AIR);
@@ -196,66 +232,158 @@ function openingsAndStairs() {
 
 // ════════════════════════════════════════════════════ 2. TOWER
 const RAIL = [];
+
+// Every wall cell of the shaft, in order around the circle. The banding, the
+// mullions and the openings under the dome are all expressed against this list.
+const TOWER_RING = (() => {
+  const { cx, cz, r } = TOWER, out = [];
+  for (let x = Math.floor(cx - r - 2); x <= Math.ceil(cx + r + 2); x++)
+    for (let z = Math.floor(cz - r - 2); z <= Math.ceil(cz + r + 2); z++)
+      if (towerWall(x, z)) out.push({ x, z, a: Math.atan2(z + 0.5 - cz, x + 0.5 - cx) });
+  return out.sort((p, q) => p.a - q.a);
+})();
+
+// Granite mullions between the ground floor windows, and the four two-wide
+// openings he left in the drum below the dome: both copied cell for cell from
+// his export. They are tied to the tower's exact radius, so if that ever moves
+// this throws instead of quietly putting a pier in the middle of a window.
+const MULLIONS = [[44, 10], [44, 11], [44, 14], [41, 17], [38, 17], [37, 17]];
+const DRUM_GAPS = [[39, 7], [40, 7], [45, 12], [45, 13], [39, 18], [40, 18], [34, 12], [34, 13]];
+for (const [mx, mz] of [...MULLIONS, ...DRUM_GAPS])
+  if (!TOWER_RING.some((c) => c.x === mx && c.z === mz))
+    throw new Error('tower geometry moved: ' + mx + ',' + mz + ' is no longer a shaft wall cell');
+
 function tower() {
   const { cx, cz, r, top, deck, domeFrom } = TOWER;
   const x0 = Math.floor(cx - r - 5), x1 = Math.ceil(cx + r + 5);
   const z0 = Math.floor(cz - r - 5), z1 = Math.ceil(cz + r + 5);
   const DECKS = [U0, 16, 23, deck];
-  // his banding: glass shaft, stone band, slate cornice under the second deck
+  const lx = Math.round(cx), lz = Math.round(cz - r + 1);
+
+  // Where the library wing runs into the shaft the wall opens for the FULL
+  // height of both storeys. v3 opened only four courses, which is why the rest
+  // of the glass was left hanging off the ceiling with nothing under it.
+  const junction = (x, z) =>
+    inWing(WING.east, x, z) && Math.abs(wingLocal(WING.east, x, z).v) <= WING.east.wide - 1.5;
+  const isMullion = (x, z) => MULLIONS.some(([mx, mz]) => mx === x && mz === z);
+
+  // his banding, read off the export course by course
   const mat = (y) => {
     if (y <= 1) return STONE;
-    if (y <= 11) return GLASS;
-    if (y <= 14) return STONE;
-    if (y === 15) return ROOFBLOCK;
-    if (y === 16 || y === 24) return BEAM;
+    if (y <= 5) return GLASS;              // ground floor windows
+    if (y <= 7) return STONE;              // solid head, then the second floor line
+    if (y === 8) return BEAM;              // the wooden band he asked for at the
+    if (y <= 13) return GLASS;             //   base, so glass never reaches the floor
+    if (y === 14) return STONE;
+    if (y === 15) return ROOFBLOCK;        // slate cornice
+    if (y === 16 || y === 24) return BEAM; // the same band on the floors above
     return GLASS;
   };
 
+  // Ground floor glazing runs y2..y4 between the mullions. At y5 only the bays
+  // two or more cells wide stay glass, so a one-cell gap reads as a pier rather
+  // than a slot, which is how he left it.
+  const n = TOWER_RING.length;
+  const glazed = TOWER_RING.map((c) =>
+    !isMullion(c.x, c.z) && !junction(c.x, c.z) && !(c.x === lx && c.z === lz - 1));
+  const bayWidth = new Array(n).fill(0);
+  const from = glazed.indexOf(false);
+  if (from < 0) throw new Error('tower ring has no pier at all, the bay walk would never end');
+  for (let i = 0; i < n;) {
+    if (!glazed[(from + i) % n]) { i++; continue; }
+    let len = 0;
+    while (len < n && glazed[(from + i + len) % n]) len++;
+    for (let k = 0; k < len; k++) bayWidth[(from + i + k) % n] = len;
+    i += len;
+  }
+
+  // shaft interior and floors
   for (let x = x0; x <= x1; x++)
     for (let z = z0; z <= z1; z++) {
       if (!inTower(x, z)) continue;
       claim(x, z, domeFrom + 10);
-      box(x, -4, z, x, G0 - 1, z, STONE);
+      box(x, -5, z, x, G0 - 1, z, STONE);
       set(x, G0, z, FLOOR);
-      const wall = towerWall(x, z);
-      for (let y = G0 + 1; y <= top; y++) set(x, y, z, wall ? mat(y) : AIR);
-      if (!wall) for (const fy of DECKS) set(x, fy, z, FLOOR2);
+      if (towerWall(x, z)) continue;
+      for (let y = G0 + 1; y <= top; y++) set(x, y, z, AIR);
+      for (const fy of DECKS) set(x, fy, z, FLOOR2);
     }
 
-  // open the tower where the library wing meets it, both storeys
-  for (let x = x0; x <= x1; x++)
-    for (let z = z0; z <= z1; z++) {
-      if (!towerWall(x, z) || !inWing(WING.east, x, z)) continue;
-      box(x, G0 + 1, z, x, G0 + 4, z, AIR);
-      box(x, U0 + 1, z, x, U0 + 4, z, AIR);
+  // the wall
+  TOWER_RING.forEach((c, i) => {
+    for (let y = G0 + 1; y <= top; y++) {
+      let m = mat(y);
+      if (y >= 2 && y <= 5 && isMullion(c.x, c.z)) m = STONE;
+      if (y === 5 && glazed[i] && bayWidth[i] < 2) m = STONE;
+      set(c.x, y, c.z, m);
     }
+  });
+
+  // the library wing junction, both storeys, floor to ceiling and through the
+  // cornice. y7 stays solid because that course is the second floor's own edge.
+  for (const c of TOWER_RING) {
+    if (!junction(c.x, c.z)) continue;
+    box(c.x, G0 + 1, c.z, c.x, G1, c.z, AIR);
+    box(c.x, U0 + 1, c.z, c.x, CEIL + 1, c.z, AIR);
+  }
 
   // ── ladder ──
   // v2 cut the ladder at every deck. Lay the decks first, then run the ladder
   // straight through them, and give it a solid pier to hang on all the way up.
-  const lx = Math.round(cx), lz = Math.round(cz - r + 1);
   for (let y = G0 + 1; y <= deck; y++) {
     set(lx, y, lz - 1, STONE);          // backing the ladder attaches to
     set(lx, y, lz, LADDER);             // continuous, no gaps
   }
   set(lx, G0, lz, FLOOR);
 
-  // walkable balcony ring at the top of the shaft
+  // ── balcony ──
+  // The deck is a rasterised disk and the fence is its outer boundary. That
+  // boundary steps diagonally in four places, which is where his fence broke,
+  // so every diagonal step is closed by adding the cell OUTSIDE the deck that
+  // joins the two. That is exactly the one-cell widening he made by hand at the
+  // four cardinal points, and it leaves a ring that is 4-connected the whole way
+  // round, so every post has two square neighbours and the fence never breaks.
   const WALK = deck, OUT = r + 3;
-  for (let x = x0; x <= x1; x++)
-    for (let z = z0; z <= z1; z++) {
-      const d = dist(x, z, cx, cz);
-      if (d > r - 0.5 && d <= OUT) {
-        set(x, WALK, z, FLOOR2);
-        set(x, WALK - 1, z, SLAB_DN);
-        box(x, WALK + 1, z, x, WALK + 2, z, AIR);
-        claim(x, z, WALK + 4);
-        if (d > OUT - 1) RAIL.push([x, WALK + 1, z]);
+  const k2 = (x, z) => x + ',' + z;
+  const deckSet = new Set(), ringSet = new Set();
+  for (let x = x0 - 4; x <= x1 + 4; x++)
+    for (let z = z0 - 4; z <= z1 + 4; z++)
+      if (dist(x, z, cx, cz) <= OUT) deckSet.add(k2(x, z));
+  for (const k of deckSet) {
+    const [x, z] = k.split(',').map(Number);
+    if (!deckSet.has(k2(x + 1, z)) || !deckSet.has(k2(x - 1, z)) ||
+        !deckSet.has(k2(x, z + 1)) || !deckSet.has(k2(x, z - 1))) ringSet.add(k);
+  }
+  for (let pass = 0; pass < 4; pass++)
+    for (const k of [...ringSet]) {
+      const [x, z] = k.split(',').map(Number);
+      for (const [dx, dz] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) {
+        if (!ringSet.has(k2(x + dx, z + dz))) continue;
+        if (ringSet.has(k2(x + dx, z)) || ringSet.has(k2(x, z + dz))) continue;
+        const a = k2(x + dx, z), b = k2(x, z + dz);
+        const add = deckSet.has(a) ? b : a;
+        deckSet.add(add); ringSet.add(add);
       }
     }
-  for (let x = Math.round(cx) - 1; x <= Math.round(cx); x++)
-    for (let z = Math.round(cz); z <= Math.round(cz + r); z++)
-      if (dist(x, z, cx, cz) > r - 1.2) box(x, WALK + 1, z, x, WALK + 2, z, AIR);
+  for (const k of deckSet) {
+    const [x, z] = k.split(',').map(Number);
+    if (dist(x, z, cx, cz) <= r - 0.5) continue;   // that is the shaft's own floor
+    set(x, WALK, z, FLOOR2);
+    set(x, WALK - 1, z, SLAB_DN);
+    // headroom over the walkway only. Clearing it over the shaft wall too is
+    // what cut the drum into a comb of gaps in v3.
+    if (!towerWall(x, z)) box(x, WALK + 1, z, x, WALK + 2, z, AIR);
+    claim(x, z, WALK + 4);
+  }
+  for (const k of ringSet) {
+    const [x, z] = k.split(',').map(Number);
+    RAIL.push([x, WALK + 1, z]);
+  }
+
+  // The drum between the deck and the dome is sealed apart from four two-wide
+  // openings on the cardinal points; the south one is the way out onto the
+  // balcony. v3 left it as a comb of alternating gaps.
+  for (const [gx, gz] of DRUM_GAPS) { set(gx, WALK + 1, gz, AIR); set(gx, WALK + 2, gz, AIR); }
 
   const profile = [r + 0.8, r + 1.0, r + 0.9, r + 0.5, r - 0.4, r - 1.6, r - 2.8, r - 4.0];
   for (let i = 0; i < profile.length; i++) {
@@ -345,7 +473,7 @@ function furnish() {
   for (const x of [-12, -13]) put(x, U0 + 1, -2, 'chest-north');
   put(-17, U0 + 1, -13, 'table-normal'); put(-17, U0 + 1, -12, 'chair-brown');
   put(17, U0 + 1, -13, 'table-normal'); put(17, U0 + 1, -12, 'chair-brown');
-  for (const x of [20, 21]) put(x, U0 + 1, -14, 'displaycase-generic');
+  put(21, U0 + 1, -14, 'displaycase-generic');   // 20 is one of his bookshelves now
 
   box(-4, U0, MZ2 + 1, 3, U0, MZ2 + 3, FLOOR2);
   for (let x = -4; x <= 3; x++) for (let z = MZ2 + 1; z <= MZ2 + 3; z++) claim(x, z, U0 + 3);
@@ -389,8 +517,26 @@ function furnish() {
     put(Math.round(TOWER.cx) + 3, fy + 1, Math.round(TOWER.cz) + 1, 'chair-brown');
   }
 
-  for (let x = -42; x <= -30; x++)
-    for (let z = -15; z <= -5; z++) { set(x, G0 - 1, z, 'soil-compost-normal'); set(x, G0, z, AIR); claim(x, z, 1); }
+  // v3 dug a high fertility bed at x -42..-30, z -15..-5, but the west wing
+  // sweeps through its corner, so the plot cut a hole in the game room floor.
+  // Dropped entirely; shell() lays the floor over the whole footprint anyway.
+
+  // Bookshelves are back. v2 used `bookshelf`, which is class BlockBookshelf
+  // and renders as a question mark without the block entity a script cannot
+  // give it; `clutteredbookshelf` has no such requirement, and he placed these
+  // himself in the export to prove it.
+  const SHELF = 'clutteredbookshelf', LORE = 'clutteredbookshelfwithlore';
+  for (const [bx, by, bz, kind] of [
+    [-19, U0 + 1, -13, SHELF],
+    [-17, G0 + 1, -2, LORE], [-16, G0 + 1, -2, SHELF], [-14, G0 + 1, -2, SHELF],
+    [-13, G0 + 1, -2, SHELF], [-12, G0 + 1, -2, SHELF],
+    [10, U0 + 1, -14, SHELF], [12, U0 + 1, -14, LORE], [14, U0 + 1, -14, SHELF],
+    [16, U0 + 1, -14, SHELF], [18, U0 + 1, -14, SHELF], [19, U0 + 1, -13, SHELF],
+    [20, U0 + 1, -14, SHELF], [22, U0 + 1, -14, SHELF],
+    [28, U0 + 1, -6, SHELF],
+    [31, G0 + 1, 11, LORE], [31, G0 + 2, 11, LORE],
+    [37, 17, 13, SHELF], [37, 24, 13, SHELF],
+  ]) put(bx, by, bz, kind);
 }
 
 // ════════════════════════════════════════════════════ build
@@ -463,16 +609,17 @@ const airLines = emit(M, (c) => c === AIR);
 const solidLines = emit(M, (c) => c !== AIR);
 const furnLines = emit(F, () => true);
 const all = [
-  "# Michael's ideal house, v3. Stand on the front doorstep, face NORTH, then /build idealhouse3",
+  "# Michael's ideal house, v4. Stand on the front doorstep, face NORTH, then /build idealhouse4",
   '# House, both wings and the tower are one footprint, so the junctions are continuous',
-  '# walls on both storeys. No roof ridges, chimney capped with oak stairs, tower ladder',
-  '# runs unbroken to the balcony. Needs Building Commands 0.8.0 for the translocators.',
+  '# walls on both storeys. v4: continuous balcony fence, banded tower with a wooden band',
+  '# at each floor, drum sealed but for four openings, big window in the game room end,',
+  '# solid foundation, no raised bed cutting the floor. Needs Building Commands 0.8.0.',
   '', '# --- clear the volume ---', ...airLines,
   '', '# --- structure ---', ...solidLines,
   '', '# --- furniture, placed last so nothing is dropped for want of support ---', ...furnLines,
   ...(DIRECT.length ? ['', '# --- repaired translocators ---', ...DIRECT] : []),
 ];
 
-writeFileSync(join(root, 'examples', 'idealhouse3.txt'), all.join('\n'));
+writeFileSync(join(root, 'examples', 'idealhouse4.txt'), all.join('\n'));
 const solids = [...M.values()].filter((c) => c !== AIR).length;
-console.log(`idealhouse3.txt: ${all.length} lines (${airLines.length} clear + ${solidLines.length} build + ${furnLines.length} furniture), ${solids + F.size} blocks`);
+console.log(`idealhouse4.txt: ${all.length} lines (${airLines.length} clear + ${solidLines.length} build + ${furnLines.length} furniture), ${solids + F.size} blocks`);
