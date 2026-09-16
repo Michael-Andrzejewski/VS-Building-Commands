@@ -1183,26 +1183,26 @@ fill ~-24 ~1 ~-14 ~-24 ~1 ~-12 planks-oak-ud
 fill ~24 ~1 ~-14 ~24 ~1 ~-11 planks-oak-ud
 fill ~-4 ~1 ~-13 ~-4 ~1 ~-12 planks-oak-ud
 setblock ~-25 ~1 ~-11 planks-oak-ud
-fill ~-26 ~1 ~-10 ~-26 ~6 ~-10 planks-oak-ud
+setblock ~-26 ~1 ~-10 planks-oak-ud
 setblock ~25 ~1 ~-10 planks-oak-ud
 setblock ~-27 ~1 ~-9 planks-oak-ud
-fill ~26 ~1 ~-9 ~26 ~6 ~-9 planks-oak-ud
+setblock ~26 ~1 ~-9 planks-oak-ud
 fill ~-28 ~1 ~-8 ~-28 ~6 ~-8 planks-oak-ud
 setblock ~27 ~1 ~-8 planks-oak-ud
-fill ~-29 ~1 ~-7 ~-29 ~6 ~-7 planks-oak-ud
+setblock ~-29 ~1 ~-7 planks-oak-ud
 fill ~28 ~1 ~-7 ~28 ~6 ~-7 planks-oak-ud
-fill ~-30 ~1 ~-6 ~-30 ~6 ~-6 planks-oak-ud
-fill ~29 ~1 ~-6 ~29 ~6 ~-6 planks-oak-ud
-fill ~-31 ~1 ~-5 ~-31 ~6 ~-5 planks-oak-ud
-fill ~30 ~1 ~-5 ~30 ~6 ~-5 planks-oak-ud
+setblock ~-30 ~1 ~-6 planks-oak-ud
+setblock ~29 ~1 ~-6 planks-oak-ud
+setblock ~-31 ~1 ~-5 planks-oak-ud
+setblock ~30 ~1 ~-5 planks-oak-ud
 fill ~-32 ~1 ~-4 ~-32 ~6 ~-4 planks-oak-ud
-fill ~31 ~1 ~-4 ~31 ~6 ~-4 planks-oak-ud
-fill ~-33 ~1 ~-3 ~-33 ~6 ~-3 planks-oak-ud
+setblock ~31 ~1 ~-4 planks-oak-ud
+setblock ~-33 ~1 ~-3 planks-oak-ud
 fill ~32 ~1 ~-3 ~32 ~6 ~-3 planks-oak-ud
-fill ~-34 ~1 ~-2 ~-34 ~6 ~-2 planks-oak-ud
-fill ~33 ~1 ~-2 ~33 ~6 ~-2 planks-oak-ud
-fill ~-35 ~1 ~-1 ~-35 ~6 ~-1 planks-oak-ud
-fill ~34 ~1 ~-1 ~34 ~6 ~-1 planks-oak-ud
+setblock ~-34 ~1 ~-2 planks-oak-ud
+setblock ~33 ~1 ~-2 planks-oak-ud
+setblock ~-35 ~1 ~-1 planks-oak-ud
+setblock ~34 ~1 ~-1 planks-oak-ud
 fill ~-36 ~1 ~ ~-36 ~6 ~ planks-oak-ud
 fill ~-20 ~1 ~ ~-14 ~1 ~ planks-oak-ud
 fill ~-13 ~1 ~ ~-13 ~6 ~ log-placed-oak-ud
@@ -1214,72 +1214,72 @@ fill ~3 ~1 ~ ~3 ~6 ~ log-placed-oak-ud
 fill ~4 ~1 ~ ~11 ~1 ~ planks-oak-ud
 fill ~12 ~1 ~ ~12 ~6 ~ log-placed-oak-ud
 fill ~13 ~1 ~ ~19 ~1 ~ planks-oak-ud
-fill ~35 ~1 ~ ~35 ~6 ~ planks-oak-ud
-fill ~-37 ~1 ~1 ~-37 ~6 ~1 planks-oak-ud
+setblock ~35 ~1 ~ planks-oak-ud
+setblock ~-37 ~1 ~1 planks-oak-ud
 setblock ~-21 ~1 ~1 planks-oak-ud
 setblock ~20 ~1 ~1 planks-oak-ud
 fill ~36 ~1 ~1 ~36 ~6 ~1 planks-oak-ud
-fill ~-38 ~1 ~2 ~-38 ~6 ~2 planks-oak-ud
-fill ~-22 ~1 ~2 ~-22 ~6 ~2 planks-oak-ud
-fill ~21 ~1 ~2 ~21 ~6 ~2 planks-oak-ud
-fill ~37 ~1 ~2 ~37 ~6 ~2 planks-oak-ud
-fill ~-39 ~1 ~3 ~-39 ~6 ~3 planks-oak-ud
+setblock ~-38 ~1 ~2 planks-oak-ud
+setblock ~-22 ~1 ~2 planks-oak-ud
+setblock ~21 ~1 ~2 planks-oak-ud
+setblock ~37 ~1 ~2 planks-oak-ud
+setblock ~-39 ~1 ~3 planks-oak-ud
 setblock ~-23 ~1 ~3 planks-oak-ud
 fill ~-4 ~1 ~3 ~-4 ~6 ~3 log-placed-oak-ud
 fill ~3 ~1 ~3 ~3 ~6 ~3 log-placed-oak-ud
 setblock ~22 ~1 ~3 planks-oak-ud
-fill ~38 ~1 ~3 ~38 ~6 ~3 planks-oak-ud
+setblock ~38 ~1 ~3 planks-oak-ud
 fill ~-40 ~1 ~4 ~-40 ~6 ~4 planks-oak-ud
 fill ~-24 ~1 ~4 ~-24 ~6 ~4 planks-oak-ud
 fill ~23 ~1 ~4 ~23 ~6 ~4 planks-oak-ud
-fill ~39 ~1 ~4 ~39 ~6 ~4 planks-oak-ud
+setblock ~39 ~1 ~4 planks-oak-ud
 setblock ~-41 ~1 ~5 planks-oak-ud
-fill ~-25 ~1 ~5 ~-25 ~6 ~5 planks-oak-ud
-fill ~24 ~1 ~5 ~24 ~6 ~5 planks-oak-ud
+setblock ~-25 ~1 ~5 planks-oak-ud
+setblock ~24 ~1 ~5 planks-oak-ud
 fill ~40 ~1 ~5 ~40 ~6 ~5 planks-oak-ud
-fill ~-42 ~1 ~6 ~-42 ~6 ~6 planks-oak-ud
-fill ~-26 ~1 ~6 ~-26 ~6 ~6 planks-oak-ud
-fill ~25 ~1 ~6 ~25 ~6 ~6 planks-oak-ud
+setblock ~-42 ~1 ~6 planks-oak-ud
+setblock ~-26 ~1 ~6 planks-oak-ud
+setblock ~25 ~1 ~6 planks-oak-ud
 setblock ~41 ~1 ~6 planks-oak-ud
 setblock ~-43 ~1 ~7 planks-oak-ud
-fill ~-27 ~1 ~7 ~-27 ~6 ~7 planks-oak-ud
-fill ~26 ~1 ~7 ~26 ~6 ~7 planks-oak-ud
+setblock ~-27 ~1 ~7 planks-oak-ud
+setblock ~26 ~1 ~7 planks-oak-ud
 fill ~40 ~1 ~7 ~40 ~28 ~7 stonebricks-granite
-fill ~42 ~1 ~7 ~42 ~6 ~7 planks-oak-ud
+setblock ~42 ~1 ~7 planks-oak-ud
 fill ~-44 ~1 ~8 ~-44 ~6 ~9 planks-oak-ud
 fill ~-28 ~1 ~8 ~-28 ~6 ~8 planks-oak-ud
 fill ~27 ~1 ~8 ~27 ~6 ~8 planks-oak-ud
 fill ~40 ~1 ~8 ~40 ~30 ~8 ladder-wood-oak-north
 setblock ~42 ~1 ~8 stonebricks-granite
 setblock ~43 ~1 ~8 planks-oak-ud
-fill ~-29 ~1 ~9 ~-29 ~6 ~9 planks-oak-ud
-fill ~28 ~1 ~9 ~28 ~6 ~9 planks-oak-ud
+setblock ~-29 ~1 ~9 planks-oak-ud
+setblock ~28 ~1 ~9 planks-oak-ud
 setblock ~43 ~1 ~9 stonebricks-granite
 fill ~44 ~1 ~9 ~44 ~6 ~9 planks-oak-ud
 setblock ~-43 ~1 ~10 planks-oak-ud
-fill ~-30 ~1 ~10 ~-30 ~6 ~10 planks-oak-ud
-fill ~29 ~1 ~10 ~29 ~6 ~10 planks-oak-ud
+setblock ~-30 ~1 ~10 planks-oak-ud
+setblock ~29 ~1 ~10 planks-oak-ud
 fill ~44 ~1 ~10 ~44 ~7 ~11 stonebricks-granite
 setblock ~-42 ~1 ~11 planks-oak-ud
-fill ~-31 ~1 ~11 ~-31 ~6 ~11 planks-oak-ud
-fill ~30 ~1 ~11 ~30 ~6 ~11 planks-oak-ud
+setblock ~-31 ~1 ~11 planks-oak-ud
+setblock ~30 ~1 ~11 planks-oak-ud
 setblock ~-41 ~1 ~12 planks-oak-ud
 fill ~-32 ~1 ~12 ~-32 ~6 ~12 planks-oak-ud
 fill ~31 ~1 ~12 ~31 ~6 ~12 planks-oak-ud
 fill ~45 ~1 ~12 ~45 ~1 ~13 stonebricks-granite
 setblock ~-40 ~1 ~13 planks-oak-ud
 setblock ~-33 ~1 ~13 planks-oak-ud
-fill ~32 ~1 ~13 ~32 ~6 ~13 planks-oak-ud
+setblock ~32 ~1 ~13 planks-oak-ud
 setblock ~-39 ~1 ~14 planks-oak-ud
-fill ~-34 ~1 ~14 ~-34 ~6 ~14 planks-oak-ud
+setblock ~-34 ~1 ~14 planks-oak-ud
 setblock ~33 ~1 ~14 planks-oak-ud
 fill ~44 ~1 ~14 ~44 ~1 ~15 stonebricks-granite
 setblock ~-38 ~1 ~15 planks-oak-ud
 setblock ~-35 ~1 ~15 planks-oak-ud
-fill ~34 ~1 ~15 ~34 ~6 ~15 planks-oak-ud
+setblock ~34 ~1 ~15 planks-oak-ud
 setblock ~35 ~1 ~15 stonebricks-granite
 fill ~-37 ~1 ~16 ~-36 ~6 ~16 planks-oak-ud
-setblock ~35 ~1 ~16 planks-oak-ud
+fill ~35 ~1 ~16 ~35 ~6 ~16 planks-oak-ud
 setblock ~36 ~1 ~16 stonebricks-granite
 setblock ~43 ~1 ~16 stonebricks-granite
 fill ~36 ~1 ~17 ~36 ~6 ~17 planks-oak-ud
@@ -1312,11 +1312,24 @@ fill ~24 ~2 ~-14 ~24 ~6 ~-14 planks-oak-ud
 fill ~-24 ~2 ~-13 ~-24 ~4 ~-12 glasspane-leaded-oak-ew
 fill ~-3 ~2 ~-13 ~-3 ~2 ~-12 planks-oak-ud
 fill ~24 ~2 ~-13 ~24 ~4 ~-12 glasspane-leaded-oak-ew
-fill ~-25 ~2 ~-11 ~-25 ~4 ~-11 glass-plain
+fill ~-25 ~2 ~-11 ~-25 ~5 ~-11 glass-plain
 fill ~24 ~2 ~-11 ~24 ~6 ~-11 planks-oak-ud
-fill ~25 ~2 ~-10 ~25 ~4 ~-10 glass-plain
-fill ~-27 ~2 ~-9 ~-27 ~4 ~-9 glass-plain
-fill ~27 ~2 ~-8 ~27 ~4 ~-8 glass-plain
+fill ~-26 ~2 ~-10 ~-26 ~5 ~-10 glass-plain
+fill ~25 ~2 ~-10 ~25 ~5 ~-10 glass-plain
+fill ~-27 ~2 ~-9 ~-27 ~5 ~-9 glass-plain
+fill ~26 ~2 ~-9 ~26 ~5 ~-9 glass-plain
+fill ~27 ~2 ~-8 ~27 ~5 ~-8 glass-plain
+fill ~-29 ~2 ~-7 ~-29 ~5 ~-7 glass-plain
+fill ~-30 ~2 ~-6 ~-30 ~5 ~-6 glass-plain
+fill ~29 ~2 ~-6 ~29 ~5 ~-6 glass-plain
+fill ~-31 ~2 ~-5 ~-31 ~5 ~-5 glass-plain
+fill ~30 ~2 ~-5 ~30 ~5 ~-5 glass-plain
+fill ~31 ~2 ~-4 ~31 ~5 ~-4 glass-plain
+fill ~-33 ~2 ~-3 ~-33 ~5 ~-3 glass-plain
+fill ~-34 ~2 ~-2 ~-34 ~5 ~-2 glass-plain
+fill ~33 ~2 ~-2 ~33 ~5 ~-2 glass-plain
+fill ~-35 ~2 ~-1 ~-35 ~5 ~-1 glass-plain
+fill ~34 ~2 ~-1 ~34 ~5 ~-1 glass-plain
 fill ~-20 ~2 ~ ~-18 ~6 ~ planks-oak-ud
 fill ~-17 ~2 ~ ~-16 ~4 ~ glasspane-leaded-oak-ns
 fill ~-15 ~2 ~ ~-14 ~6 ~ planks-oak-ud
@@ -1331,27 +1344,51 @@ fill ~10 ~2 ~ ~11 ~4 ~ glasspane-leaded-oak-ns
 fill ~13 ~2 ~ ~14 ~6 ~ planks-oak-ud
 fill ~15 ~2 ~ ~16 ~4 ~ glasspane-leaded-oak-ns
 fill ~17 ~2 ~ ~19 ~6 ~ planks-oak-ud
-fill ~-21 ~2 ~1 ~-21 ~4 ~1 glass-plain
-fill ~20 ~2 ~1 ~20 ~4 ~1 glass-plain
-fill ~-23 ~2 ~3 ~-23 ~4 ~3 glass-plain
-fill ~22 ~2 ~3 ~22 ~4 ~3 glass-plain
-fill ~-41 ~2 ~5 ~-41 ~4 ~5 glass-plain
-fill ~41 ~2 ~6 ~41 ~4 ~6 glass-plain
-fill ~-43 ~2 ~7 ~-43 ~4 ~7 glass-plain
-fill ~42 ~2 ~8 ~43 ~4 ~8 glass-plain
-fill ~43 ~2 ~9 ~43 ~5 ~9 glass-plain
+fill ~35 ~2 ~ ~35 ~5 ~ glass-plain
+fill ~-37 ~2 ~1 ~-37 ~5 ~1 glass-plain
+fill ~-21 ~2 ~1 ~-21 ~5 ~1 glass-plain
+fill ~20 ~2 ~1 ~20 ~5 ~1 glass-plain
+fill ~-38 ~2 ~2 ~-38 ~5 ~2 glass-plain
+fill ~-22 ~2 ~2 ~-22 ~5 ~2 glass-plain
+fill ~21 ~2 ~2 ~21 ~5 ~2 glass-plain
+fill ~37 ~2 ~2 ~37 ~5 ~2 glass-plain
+fill ~-39 ~2 ~3 ~-39 ~5 ~3 glass-plain
+fill ~-23 ~2 ~3 ~-23 ~5 ~3 glass-plain
+fill ~22 ~2 ~3 ~22 ~5 ~3 glass-plain
+fill ~38 ~2 ~3 ~38 ~5 ~3 glass-plain
+fill ~39 ~2 ~4 ~39 ~5 ~4 glass-plain
+fill ~-41 ~2 ~5 ~-41 ~5 ~5 glass-plain
+fill ~-25 ~2 ~5 ~-25 ~5 ~5 glass-plain
+fill ~24 ~2 ~5 ~24 ~5 ~5 glass-plain
+fill ~-42 ~2 ~6 ~-42 ~5 ~6 glass-plain
+fill ~-26 ~2 ~6 ~-26 ~5 ~6 glass-plain
+fill ~25 ~2 ~6 ~25 ~5 ~6 glass-plain
+fill ~41 ~2 ~6 ~41 ~5 ~6 glass-plain
+fill ~-43 ~2 ~7 ~-43 ~5 ~7 glass-plain
+fill ~-27 ~2 ~7 ~-27 ~5 ~7 glass-plain
+fill ~26 ~2 ~7 ~26 ~5 ~7 glass-plain
+fill ~42 ~2 ~7 ~42 ~5 ~8 glass-plain
+fill ~43 ~2 ~8 ~43 ~5 ~9 glass-plain
+fill ~-29 ~2 ~9 ~-29 ~5 ~9 glass-plain
+fill ~28 ~2 ~9 ~28 ~5 ~9 glass-plain
 fill ~-43 ~2 ~10 ~-43 ~5 ~10 glass-plain
+fill ~-30 ~2 ~10 ~-30 ~5 ~10 glass-plain
+fill ~29 ~2 ~10 ~29 ~5 ~10 glass-plain
 fill ~-42 ~2 ~11 ~-42 ~5 ~11 glass-plain
+fill ~-31 ~2 ~11 ~-31 ~5 ~11 glass-plain
+fill ~30 ~2 ~11 ~30 ~5 ~11 glass-plain
 fill ~-41 ~2 ~12 ~-41 ~5 ~12 glass-plain
 fill ~45 ~2 ~12 ~45 ~5 ~13 glass-plain
 fill ~-40 ~2 ~13 ~-40 ~5 ~13 glass-plain
-fill ~-33 ~2 ~13 ~-33 ~4 ~13 glass-plain
+fill ~-33 ~2 ~13 ~-33 ~5 ~13 glass-plain
+fill ~32 ~2 ~13 ~32 ~5 ~13 glass-plain
 fill ~-39 ~2 ~14 ~-39 ~5 ~14 glass-plain
-fill ~33 ~2 ~14 ~33 ~4 ~14 glass-plain
+fill ~-34 ~2 ~14 ~-34 ~5 ~14 glass-plain
+fill ~33 ~2 ~14 ~33 ~5 ~14 glass-plain
 fill ~44 ~2 ~14 ~44 ~7 ~14 stonebricks-granite
 fill ~-38 ~2 ~15 ~-38 ~5 ~15 glass-plain
-fill ~-35 ~2 ~15 ~-35 ~4 ~15 glass-plain
-fill ~35 ~2 ~15 ~35 ~4 ~16 glass-plain
+fill ~-35 ~2 ~15 ~-35 ~5 ~15 glass-plain
+fill ~34 ~2 ~15 ~35 ~5 ~15 glass-plain
 fill ~44 ~2 ~15 ~44 ~5 ~15 glass-plain
 fill ~36 ~2 ~16 ~36 ~5 ~16 glass-plain
 fill ~43 ~2 ~16 ~43 ~5 ~16 glass-plain
@@ -1383,40 +1420,76 @@ fill ~20 ~5 ~-15 ~21 ~6 ~-15 planks-oak-ud
 fill ~-24 ~5 ~-13 ~-24 ~6 ~-12 planks-oak-ud
 fill ~ ~5 ~-13 ~ ~5 ~-12 planks-oak-ud
 fill ~24 ~5 ~-13 ~24 ~6 ~-12 planks-oak-ud
-fill ~-25 ~5 ~-11 ~-25 ~6 ~-11 planks-oak-ud
-fill ~25 ~5 ~-10 ~25 ~6 ~-10 planks-oak-ud
-fill ~-27 ~5 ~-9 ~-27 ~6 ~-9 planks-oak-ud
-fill ~27 ~5 ~-8 ~27 ~6 ~-8 planks-oak-ud
 fill ~-17 ~5 ~ ~-16 ~6 ~ planks-oak-ud
 fill ~-12 ~5 ~ ~-11 ~6 ~ planks-oak-ud
 fill ~-7 ~5 ~ ~-6 ~6 ~ planks-oak-ud
 fill ~5 ~5 ~ ~6 ~6 ~ planks-oak-ud
 fill ~10 ~5 ~ ~11 ~6 ~ planks-oak-ud
 fill ~15 ~5 ~ ~16 ~6 ~ planks-oak-ud
-fill ~-21 ~5 ~1 ~-21 ~6 ~1 planks-oak-ud
-fill ~20 ~5 ~1 ~20 ~6 ~1 planks-oak-ud
-fill ~-23 ~5 ~3 ~-23 ~6 ~3 planks-oak-ud
-fill ~22 ~5 ~3 ~22 ~6 ~3 planks-oak-ud
-fill ~-41 ~5 ~5 ~-41 ~6 ~5 planks-oak-ud
-fill ~41 ~5 ~6 ~41 ~6 ~6 planks-oak-ud
-fill ~-43 ~5 ~7 ~-43 ~6 ~7 planks-oak-ud
-setblock ~42 ~5 ~8 glass-plain
-fill ~43 ~5 ~8 ~43 ~6 ~8 planks-oak-ud
-fill ~-33 ~5 ~13 ~-33 ~6 ~13 planks-oak-ud
-fill ~33 ~5 ~14 ~33 ~6 ~14 planks-oak-ud
-fill ~-35 ~5 ~15 ~-35 ~6 ~15 planks-oak-ud
-setblock ~35 ~5 ~15 glass-plain
-fill ~35 ~5 ~16 ~35 ~6 ~16 planks-oak-ud
 fill ~1 ~6 ~-13 ~1 ~6 ~-12 planks-oak-ud
+setblock ~-25 ~6 ~-11 planks-oak-ud
+setblock ~-26 ~6 ~-10 planks-oak-ud
+setblock ~25 ~6 ~-10 planks-oak-ud
+setblock ~-27 ~6 ~-9 planks-oak-ud
+setblock ~26 ~6 ~-9 planks-oak-ud
+setblock ~27 ~6 ~-8 planks-oak-ud
+setblock ~-29 ~6 ~-7 planks-oak-ud
+setblock ~-30 ~6 ~-6 planks-oak-ud
+setblock ~29 ~6 ~-6 planks-oak-ud
+setblock ~-31 ~6 ~-5 planks-oak-ud
+setblock ~30 ~6 ~-5 planks-oak-ud
+setblock ~31 ~6 ~-4 planks-oak-ud
+setblock ~-33 ~6 ~-3 planks-oak-ud
+setblock ~-34 ~6 ~-2 planks-oak-ud
+setblock ~33 ~6 ~-2 planks-oak-ud
+setblock ~-35 ~6 ~-1 planks-oak-ud
+setblock ~34 ~6 ~-1 planks-oak-ud
+setblock ~35 ~6 ~ planks-oak-ud
+setblock ~-37 ~6 ~1 planks-oak-ud
+setblock ~-21 ~6 ~1 planks-oak-ud
+setblock ~20 ~6 ~1 planks-oak-ud
+setblock ~-38 ~6 ~2 planks-oak-ud
+setblock ~-22 ~6 ~2 planks-oak-ud
+setblock ~21 ~6 ~2 planks-oak-ud
+setblock ~37 ~6 ~2 planks-oak-ud
+setblock ~-39 ~6 ~3 planks-oak-ud
+setblock ~-23 ~6 ~3 planks-oak-ud
+setblock ~22 ~6 ~3 planks-oak-ud
+setblock ~38 ~6 ~3 planks-oak-ud
+setblock ~39 ~6 ~4 planks-oak-ud
+setblock ~-41 ~6 ~5 planks-oak-ud
+setblock ~-25 ~6 ~5 planks-oak-ud
+setblock ~24 ~6 ~5 planks-oak-ud
+setblock ~-42 ~6 ~6 planks-oak-ud
+setblock ~-26 ~6 ~6 planks-oak-ud
+setblock ~25 ~6 ~6 planks-oak-ud
+setblock ~41 ~6 ~6 planks-oak-ud
+setblock ~-43 ~6 ~7 planks-oak-ud
+setblock ~-27 ~6 ~7 planks-oak-ud
+setblock ~26 ~6 ~7 planks-oak-ud
+setblock ~42 ~6 ~7 planks-oak-ud
 fill ~42 ~6 ~8 ~42 ~7 ~8 stonebricks-granite
+setblock ~43 ~6 ~8 planks-oak-ud
+setblock ~-29 ~6 ~9 planks-oak-ud
+setblock ~28 ~6 ~9 planks-oak-ud
 fill ~43 ~6 ~9 ~43 ~7 ~9 stonebricks-granite
 setblock ~-43 ~6 ~10 planks-oak-ud
+setblock ~-30 ~6 ~10 planks-oak-ud
+setblock ~29 ~6 ~10 planks-oak-ud
 setblock ~-42 ~6 ~11 planks-oak-ud
+setblock ~-31 ~6 ~11 planks-oak-ud
+setblock ~30 ~6 ~11 planks-oak-ud
 setblock ~-41 ~6 ~12 planks-oak-ud
 fill ~45 ~6 ~12 ~45 ~7 ~13 stonebricks-granite
 setblock ~-40 ~6 ~13 planks-oak-ud
+setblock ~-33 ~6 ~13 planks-oak-ud
+setblock ~32 ~6 ~13 planks-oak-ud
 setblock ~-39 ~6 ~14 planks-oak-ud
+setblock ~-34 ~6 ~14 planks-oak-ud
+setblock ~33 ~6 ~14 planks-oak-ud
 setblock ~-38 ~6 ~15 planks-oak-ud
+setblock ~-35 ~6 ~15 planks-oak-ud
+setblock ~34 ~6 ~15 planks-oak-ud
 fill ~35 ~6 ~15 ~35 ~7 ~15 stonebricks-granite
 fill ~44 ~6 ~15 ~44 ~7 ~15 stonebricks-granite
 fill ~36 ~6 ~16 ~36 ~7 ~16 stonebricks-granite
@@ -1514,26 +1587,26 @@ fill ~24 ~8 ~-15 ~24 ~13 ~-15 log-placed-oak-ud
 fill ~-24 ~8 ~-14 ~-24 ~8 ~-12 planks-oak-ud
 fill ~24 ~8 ~-14 ~24 ~8 ~-11 planks-oak-ud
 setblock ~-25 ~8 ~-11 planks-oak-ud
-fill ~-26 ~8 ~-10 ~-26 ~14 ~-10 planks-oak-ud
+setblock ~-26 ~8 ~-10 planks-oak-ud
 setblock ~25 ~8 ~-10 planks-oak-ud
 setblock ~-27 ~8 ~-9 planks-oak-ud
-fill ~26 ~8 ~-9 ~26 ~14 ~-9 planks-oak-ud
+setblock ~26 ~8 ~-9 planks-oak-ud
 fill ~-28 ~8 ~-8 ~-28 ~14 ~-8 planks-oak-ud
 setblock ~27 ~8 ~-8 planks-oak-ud
-fill ~-29 ~8 ~-7 ~-29 ~14 ~-7 planks-oak-ud
+setblock ~-29 ~8 ~-7 planks-oak-ud
 fill ~28 ~8 ~-7 ~28 ~14 ~-7 planks-oak-ud
-fill ~-30 ~8 ~-6 ~-30 ~14 ~-6 planks-oak-ud
-fill ~29 ~8 ~-6 ~29 ~14 ~-6 planks-oak-ud
-fill ~-31 ~8 ~-5 ~-31 ~14 ~-5 planks-oak-ud
-fill ~30 ~8 ~-5 ~30 ~14 ~-5 planks-oak-ud
+setblock ~-30 ~8 ~-6 planks-oak-ud
+setblock ~29 ~8 ~-6 planks-oak-ud
+setblock ~-31 ~8 ~-5 planks-oak-ud
+setblock ~30 ~8 ~-5 planks-oak-ud
 fill ~-32 ~8 ~-4 ~-32 ~14 ~-4 planks-oak-ud
-fill ~31 ~8 ~-4 ~31 ~14 ~-4 planks-oak-ud
-fill ~-33 ~8 ~-3 ~-33 ~14 ~-3 planks-oak-ud
+setblock ~31 ~8 ~-4 planks-oak-ud
+setblock ~-33 ~8 ~-3 planks-oak-ud
 fill ~32 ~8 ~-3 ~32 ~14 ~-3 planks-oak-ud
-fill ~-34 ~8 ~-2 ~-34 ~14 ~-2 planks-oak-ud
-fill ~33 ~8 ~-2 ~33 ~14 ~-2 planks-oak-ud
-fill ~-35 ~8 ~-1 ~-35 ~14 ~-1 planks-oak-ud
-fill ~34 ~8 ~-1 ~34 ~14 ~-1 planks-oak-ud
+setblock ~-34 ~8 ~-2 planks-oak-ud
+setblock ~33 ~8 ~-2 planks-oak-ud
+setblock ~-35 ~8 ~-1 planks-oak-ud
+setblock ~34 ~8 ~-1 planks-oak-ud
 fill ~-36 ~8 ~ ~-36 ~14 ~ planks-oak-ud
 fill ~-20 ~8 ~ ~-14 ~8 ~ planks-oak-ud
 fill ~-13 ~8 ~ ~-13 ~13 ~ log-placed-oak-ud
@@ -1545,68 +1618,68 @@ fill ~3 ~8 ~ ~3 ~13 ~ log-placed-oak-ud
 fill ~4 ~8 ~ ~11 ~8 ~ planks-oak-ud
 fill ~12 ~8 ~ ~12 ~13 ~ log-placed-oak-ud
 fill ~13 ~8 ~ ~19 ~8 ~ planks-oak-ud
-fill ~35 ~8 ~ ~35 ~14 ~ planks-oak-ud
-fill ~-37 ~8 ~1 ~-37 ~14 ~1 planks-oak-ud
+setblock ~35 ~8 ~ planks-oak-ud
+setblock ~-37 ~8 ~1 planks-oak-ud
 setblock ~-21 ~8 ~1 planks-oak-ud
 setblock ~20 ~8 ~1 planks-oak-ud
 fill ~36 ~8 ~1 ~36 ~14 ~1 planks-oak-ud
-fill ~-38 ~8 ~2 ~-38 ~14 ~2 planks-oak-ud
-fill ~-22 ~8 ~2 ~-22 ~14 ~2 planks-oak-ud
-fill ~21 ~8 ~2 ~21 ~14 ~2 planks-oak-ud
-fill ~37 ~8 ~2 ~37 ~14 ~2 planks-oak-ud
-fill ~-39 ~8 ~3 ~-39 ~14 ~3 planks-oak-ud
+setblock ~-38 ~8 ~2 planks-oak-ud
+setblock ~-22 ~8 ~2 planks-oak-ud
+setblock ~21 ~8 ~2 planks-oak-ud
+setblock ~37 ~8 ~2 planks-oak-ud
+setblock ~-39 ~8 ~3 planks-oak-ud
 setblock ~-23 ~8 ~3 planks-oak-ud
 setblock ~22 ~8 ~3 planks-oak-ud
-fill ~38 ~8 ~3 ~38 ~14 ~3 planks-oak-ud
+setblock ~38 ~8 ~3 planks-oak-ud
 fill ~-40 ~8 ~4 ~-40 ~14 ~4 planks-oak-ud
 fill ~-24 ~8 ~4 ~-24 ~14 ~4 planks-oak-ud
 fill ~23 ~8 ~4 ~23 ~14 ~4 planks-oak-ud
-fill ~39 ~8 ~4 ~39 ~14 ~4 planks-oak-ud
+setblock ~39 ~8 ~4 planks-oak-ud
 setblock ~-41 ~8 ~5 planks-oak-ud
-fill ~-25 ~8 ~5 ~-25 ~14 ~5 planks-oak-ud
-fill ~24 ~8 ~5 ~24 ~14 ~5 planks-oak-ud
+setblock ~-25 ~8 ~5 planks-oak-ud
+setblock ~24 ~8 ~5 planks-oak-ud
 fill ~40 ~8 ~5 ~40 ~14 ~5 planks-oak-ud
-fill ~-42 ~8 ~6 ~-42 ~14 ~6 planks-oak-ud
-fill ~-26 ~8 ~6 ~-26 ~14 ~6 planks-oak-ud
-fill ~25 ~8 ~6 ~25 ~14 ~6 planks-oak-ud
+setblock ~-42 ~8 ~6 planks-oak-ud
+setblock ~-26 ~8 ~6 planks-oak-ud
+setblock ~25 ~8 ~6 planks-oak-ud
 setblock ~41 ~8 ~6 planks-oak-ud
 setblock ~-43 ~8 ~7 planks-oak-ud
-fill ~-27 ~8 ~7 ~-27 ~14 ~7 planks-oak-ud
-fill ~26 ~8 ~7 ~26 ~14 ~7 planks-oak-ud
-fill ~42 ~8 ~7 ~42 ~14 ~7 planks-oak-ud
+setblock ~-27 ~8 ~7 planks-oak-ud
+setblock ~26 ~8 ~7 planks-oak-ud
+setblock ~42 ~8 ~7 planks-oak-ud
 fill ~-44 ~8 ~8 ~-44 ~14 ~9 planks-oak-ud
 fill ~-28 ~8 ~8 ~-28 ~14 ~8 planks-oak-ud
 fill ~27 ~8 ~8 ~27 ~14 ~8 planks-oak-ud
 setblock ~42 ~8 ~8 log-placed-oak-ud
 setblock ~43 ~8 ~8 planks-oak-ud
-fill ~-29 ~8 ~9 ~-29 ~14 ~9 planks-oak-ud
-fill ~28 ~8 ~9 ~28 ~14 ~9 planks-oak-ud
+setblock ~-29 ~8 ~9 planks-oak-ud
+setblock ~28 ~8 ~9 planks-oak-ud
 setblock ~43 ~8 ~9 log-placed-oak-ud
 fill ~44 ~8 ~9 ~44 ~14 ~9 planks-oak-ud
-fill ~-43 ~8 ~10 ~-43 ~14 ~10 planks-oak-ud
-fill ~-30 ~8 ~10 ~-30 ~14 ~10 planks-oak-ud
-fill ~29 ~8 ~10 ~29 ~14 ~10 planks-oak-ud
+setblock ~-43 ~8 ~10 planks-oak-ud
+setblock ~-30 ~8 ~10 planks-oak-ud
+setblock ~29 ~8 ~10 planks-oak-ud
 fill ~44 ~8 ~10 ~44 ~8 ~11 log-placed-oak-ud
-fill ~-42 ~8 ~11 ~-42 ~14 ~11 planks-oak-ud
-fill ~-31 ~8 ~11 ~-31 ~14 ~11 planks-oak-ud
-fill ~30 ~8 ~11 ~30 ~14 ~11 planks-oak-ud
-fill ~-41 ~8 ~12 ~-41 ~14 ~12 planks-oak-ud
+setblock ~-42 ~8 ~11 planks-oak-ud
+setblock ~-31 ~8 ~11 planks-oak-ud
+setblock ~30 ~8 ~11 planks-oak-ud
+setblock ~-41 ~8 ~12 planks-oak-ud
 fill ~-32 ~8 ~12 ~-32 ~14 ~12 planks-oak-ud
 fill ~31 ~8 ~12 ~31 ~14 ~12 planks-oak-ud
 fill ~45 ~8 ~12 ~45 ~8 ~13 log-placed-oak-ud
-fill ~-40 ~8 ~13 ~-40 ~14 ~13 planks-oak-ud
+setblock ~-40 ~8 ~13 planks-oak-ud
 setblock ~-33 ~8 ~13 planks-oak-ud
-fill ~32 ~8 ~13 ~32 ~14 ~13 planks-oak-ud
-fill ~-39 ~8 ~14 ~-39 ~14 ~14 planks-oak-ud
-fill ~-34 ~8 ~14 ~-34 ~14 ~14 planks-oak-ud
+setblock ~32 ~8 ~13 planks-oak-ud
+setblock ~-39 ~8 ~14 planks-oak-ud
+setblock ~-34 ~8 ~14 planks-oak-ud
 setblock ~33 ~8 ~14 planks-oak-ud
 fill ~44 ~8 ~14 ~44 ~8 ~15 log-placed-oak-ud
-fill ~-38 ~8 ~15 ~-38 ~14 ~15 planks-oak-ud
+setblock ~-38 ~8 ~15 planks-oak-ud
 setblock ~-35 ~8 ~15 planks-oak-ud
-fill ~34 ~8 ~15 ~34 ~14 ~15 planks-oak-ud
+setblock ~34 ~8 ~15 planks-oak-ud
 setblock ~35 ~8 ~15 log-placed-oak-ud
 fill ~-37 ~8 ~16 ~-36 ~14 ~16 planks-oak-ud
-setblock ~35 ~8 ~16 planks-oak-ud
+fill ~35 ~8 ~16 ~35 ~14 ~16 planks-oak-ud
 setblock ~36 ~8 ~16 log-placed-oak-ud
 setblock ~43 ~8 ~16 log-placed-oak-ud
 fill ~36 ~8 ~17 ~36 ~14 ~17 planks-oak-ud
@@ -1638,11 +1711,24 @@ fill ~-24 ~9 ~-14 ~-24 ~14 ~-14 planks-oak-ud
 fill ~24 ~9 ~-14 ~24 ~14 ~-14 planks-oak-ud
 fill ~-24 ~9 ~-13 ~-24 ~11 ~-12 glasspane-leaded-oak-ew
 fill ~24 ~9 ~-13 ~24 ~11 ~-12 glasspane-leaded-oak-ew
-fill ~-25 ~9 ~-11 ~-25 ~11 ~-11 glass-plain
+fill ~-25 ~9 ~-11 ~-25 ~12 ~-11 glass-plain
 fill ~24 ~9 ~-11 ~24 ~14 ~-11 planks-oak-ud
-fill ~25 ~9 ~-10 ~25 ~11 ~-10 glass-plain
-fill ~-27 ~9 ~-9 ~-27 ~11 ~-9 glass-plain
-fill ~27 ~9 ~-8 ~27 ~11 ~-8 glass-plain
+fill ~-26 ~9 ~-10 ~-26 ~12 ~-10 glass-plain
+fill ~25 ~9 ~-10 ~25 ~12 ~-10 glass-plain
+fill ~-27 ~9 ~-9 ~-27 ~12 ~-9 glass-plain
+fill ~26 ~9 ~-9 ~26 ~12 ~-9 glass-plain
+fill ~27 ~9 ~-8 ~27 ~12 ~-8 glass-plain
+fill ~-29 ~9 ~-7 ~-29 ~12 ~-7 glass-plain
+fill ~-30 ~9 ~-6 ~-30 ~12 ~-6 glass-plain
+fill ~29 ~9 ~-6 ~29 ~12 ~-6 glass-plain
+fill ~-31 ~9 ~-5 ~-31 ~12 ~-5 glass-plain
+fill ~30 ~9 ~-5 ~30 ~12 ~-5 glass-plain
+fill ~31 ~9 ~-4 ~31 ~12 ~-4 glass-plain
+fill ~-33 ~9 ~-3 ~-33 ~12 ~-3 glass-plain
+fill ~-34 ~9 ~-2 ~-34 ~12 ~-2 glass-plain
+fill ~33 ~9 ~-2 ~33 ~12 ~-2 glass-plain
+fill ~-35 ~9 ~-1 ~-35 ~12 ~-1 glass-plain
+fill ~34 ~9 ~-1 ~34 ~12 ~-1 glass-plain
 fill ~-20 ~9 ~ ~-18 ~14 ~ planks-oak-ud
 fill ~-17 ~9 ~ ~-16 ~11 ~ glasspane-leaded-oak-ns
 fill ~-15 ~9 ~ ~-14 ~14 ~ planks-oak-ud
@@ -1657,22 +1743,52 @@ fill ~10 ~9 ~ ~11 ~11 ~ glasspane-leaded-oak-ns
 fill ~13 ~9 ~ ~14 ~14 ~ planks-oak-ud
 fill ~15 ~9 ~ ~16 ~11 ~ glasspane-leaded-oak-ns
 fill ~17 ~9 ~ ~19 ~14 ~ planks-oak-ud
-fill ~-21 ~9 ~1 ~-21 ~11 ~1 glass-plain
-fill ~20 ~9 ~1 ~20 ~11 ~1 glass-plain
-fill ~-23 ~9 ~3 ~-23 ~11 ~3 glass-plain
-fill ~22 ~9 ~3 ~22 ~11 ~3 glass-plain
-fill ~-41 ~9 ~5 ~-41 ~11 ~5 glass-plain
-fill ~41 ~9 ~6 ~41 ~11 ~6 glass-plain
-fill ~-43 ~9 ~7 ~-43 ~11 ~7 glass-plain
-fill ~42 ~9 ~8 ~43 ~11 ~8 glass-plain
-fill ~43 ~9 ~9 ~43 ~13 ~9 glass-plain
+fill ~35 ~9 ~ ~35 ~12 ~ glass-plain
+fill ~-37 ~9 ~1 ~-37 ~12 ~1 glass-plain
+fill ~-21 ~9 ~1 ~-21 ~12 ~1 glass-plain
+fill ~20 ~9 ~1 ~20 ~12 ~1 glass-plain
+fill ~-38 ~9 ~2 ~-38 ~12 ~2 glass-plain
+fill ~-22 ~9 ~2 ~-22 ~12 ~2 glass-plain
+fill ~21 ~9 ~2 ~21 ~12 ~2 glass-plain
+fill ~37 ~9 ~2 ~37 ~12 ~2 glass-plain
+fill ~-39 ~9 ~3 ~-39 ~12 ~3 glass-plain
+fill ~-23 ~9 ~3 ~-23 ~12 ~3 glass-plain
+fill ~22 ~9 ~3 ~22 ~12 ~3 glass-plain
+fill ~38 ~9 ~3 ~38 ~12 ~3 glass-plain
+fill ~39 ~9 ~4 ~39 ~12 ~4 glass-plain
+fill ~-41 ~9 ~5 ~-41 ~12 ~5 glass-plain
+fill ~-25 ~9 ~5 ~-25 ~12 ~5 glass-plain
+fill ~24 ~9 ~5 ~24 ~12 ~5 glass-plain
+fill ~-42 ~9 ~6 ~-42 ~12 ~6 glass-plain
+fill ~-26 ~9 ~6 ~-26 ~12 ~6 glass-plain
+fill ~25 ~9 ~6 ~25 ~12 ~6 glass-plain
+fill ~41 ~9 ~6 ~41 ~12 ~6 glass-plain
+fill ~-43 ~9 ~7 ~-43 ~12 ~7 glass-plain
+fill ~-27 ~9 ~7 ~-27 ~12 ~7 glass-plain
+fill ~26 ~9 ~7 ~26 ~12 ~7 glass-plain
+fill ~42 ~9 ~7 ~42 ~12 ~8 glass-plain
+fill ~43 ~9 ~8 ~43 ~12 ~9 glass-plain
+fill ~-29 ~9 ~9 ~-29 ~12 ~9 glass-plain
+fill ~28 ~9 ~9 ~28 ~12 ~9 glass-plain
+fill ~-43 ~9 ~10 ~-43 ~12 ~10 glass-plain
+fill ~-30 ~9 ~10 ~-30 ~12 ~10 glass-plain
+fill ~29 ~9 ~10 ~29 ~12 ~10 glass-plain
 fill ~44 ~9 ~10 ~44 ~13 ~11 glass-plain
+fill ~-42 ~9 ~11 ~-42 ~12 ~11 glass-plain
+fill ~-31 ~9 ~11 ~-31 ~12 ~11 glass-plain
+fill ~30 ~9 ~11 ~30 ~12 ~11 glass-plain
+fill ~-41 ~9 ~12 ~-41 ~12 ~12 glass-plain
 fill ~45 ~9 ~12 ~45 ~13 ~13 glass-plain
-fill ~-33 ~9 ~13 ~-33 ~11 ~13 glass-plain
-fill ~33 ~9 ~14 ~33 ~11 ~14 glass-plain
+fill ~-40 ~9 ~13 ~-40 ~12 ~13 glass-plain
+fill ~-33 ~9 ~13 ~-33 ~12 ~13 glass-plain
+fill ~32 ~9 ~13 ~32 ~12 ~13 glass-plain
+fill ~-39 ~9 ~14 ~-39 ~12 ~14 glass-plain
+fill ~-34 ~9 ~14 ~-34 ~12 ~14 glass-plain
+fill ~33 ~9 ~14 ~33 ~12 ~14 glass-plain
 fill ~44 ~9 ~14 ~44 ~13 ~15 glass-plain
-fill ~-35 ~9 ~15 ~-35 ~11 ~15 glass-plain
-fill ~35 ~9 ~15 ~35 ~11 ~16 glass-plain
+fill ~-38 ~9 ~15 ~-38 ~12 ~15 glass-plain
+fill ~-35 ~9 ~15 ~-35 ~12 ~15 glass-plain
+fill ~34 ~9 ~15 ~35 ~12 ~15 glass-plain
 fill ~36 ~9 ~16 ~36 ~13 ~16 glass-plain
 fill ~43 ~9 ~16 ~43 ~13 ~16 glass-plain
 fill ~37 ~9 ~17 ~38 ~13 ~17 glass-plain
@@ -1690,30 +1806,75 @@ fill ~15 ~12 ~-15 ~16 ~14 ~-15 planks-oak-ud
 fill ~20 ~12 ~-15 ~21 ~14 ~-15 planks-oak-ud
 fill ~-24 ~12 ~-13 ~-24 ~14 ~-12 planks-oak-ud
 fill ~24 ~12 ~-13 ~24 ~14 ~-12 planks-oak-ud
-fill ~-25 ~12 ~-11 ~-25 ~18 ~-11 planks-oak-ud
-fill ~25 ~12 ~-10 ~25 ~19 ~-10 planks-oak-ud
-fill ~-27 ~12 ~-9 ~-27 ~14 ~-9 planks-oak-ud
-fill ~27 ~12 ~-8 ~27 ~14 ~-8 planks-oak-ud
 fill ~-17 ~12 ~ ~-16 ~14 ~ planks-oak-ud
 fill ~-12 ~12 ~ ~-11 ~14 ~ planks-oak-ud
 fill ~-7 ~12 ~ ~-6 ~14 ~ planks-oak-ud
 fill ~5 ~12 ~ ~6 ~14 ~ planks-oak-ud
 fill ~10 ~12 ~ ~11 ~14 ~ planks-oak-ud
 fill ~15 ~12 ~ ~16 ~14 ~ planks-oak-ud
-fill ~-21 ~12 ~1 ~-21 ~14 ~1 planks-oak-ud
-fill ~20 ~12 ~1 ~20 ~14 ~1 planks-oak-ud
-fill ~-23 ~12 ~3 ~-23 ~14 ~3 planks-oak-ud
-fill ~22 ~12 ~3 ~22 ~14 ~3 planks-oak-ud
-fill ~-41 ~12 ~5 ~-41 ~14 ~5 planks-oak-ud
-fill ~41 ~12 ~6 ~41 ~14 ~6 planks-oak-ud
-fill ~-43 ~12 ~7 ~-43 ~14 ~7 planks-oak-ud
-fill ~42 ~12 ~8 ~42 ~13 ~8 glass-plain
-fill ~43 ~12 ~8 ~43 ~14 ~8 planks-oak-ud
-fill ~-33 ~12 ~13 ~-33 ~14 ~13 planks-oak-ud
-fill ~33 ~12 ~14 ~33 ~14 ~14 planks-oak-ud
-fill ~-35 ~12 ~15 ~-35 ~14 ~15 planks-oak-ud
-fill ~35 ~12 ~15 ~35 ~13 ~15 glass-plain
-fill ~35 ~12 ~16 ~35 ~14 ~16 planks-oak-ud
+fill ~-25 ~13 ~-11 ~-25 ~18 ~-11 planks-oak-ud
+fill ~-26 ~13 ~-10 ~-26 ~14 ~-10 planks-oak-ud
+fill ~25 ~13 ~-10 ~25 ~19 ~-10 planks-oak-ud
+fill ~-27 ~13 ~-9 ~-27 ~14 ~-9 planks-oak-ud
+fill ~26 ~13 ~-9 ~26 ~14 ~-9 planks-oak-ud
+fill ~27 ~13 ~-8 ~27 ~14 ~-8 planks-oak-ud
+fill ~-29 ~13 ~-7 ~-29 ~14 ~-7 planks-oak-ud
+fill ~-30 ~13 ~-6 ~-30 ~14 ~-6 planks-oak-ud
+fill ~29 ~13 ~-6 ~29 ~14 ~-6 planks-oak-ud
+fill ~-31 ~13 ~-5 ~-31 ~14 ~-5 planks-oak-ud
+fill ~30 ~13 ~-5 ~30 ~14 ~-5 planks-oak-ud
+fill ~31 ~13 ~-4 ~31 ~14 ~-4 planks-oak-ud
+fill ~-33 ~13 ~-3 ~-33 ~14 ~-3 planks-oak-ud
+fill ~-34 ~13 ~-2 ~-34 ~14 ~-2 planks-oak-ud
+fill ~33 ~13 ~-2 ~33 ~14 ~-2 planks-oak-ud
+fill ~-35 ~13 ~-1 ~-35 ~14 ~-1 planks-oak-ud
+fill ~34 ~13 ~-1 ~34 ~14 ~-1 planks-oak-ud
+fill ~35 ~13 ~ ~35 ~14 ~ planks-oak-ud
+fill ~-37 ~13 ~1 ~-37 ~14 ~1 planks-oak-ud
+fill ~-21 ~13 ~1 ~-21 ~14 ~1 planks-oak-ud
+fill ~20 ~13 ~1 ~20 ~14 ~1 planks-oak-ud
+fill ~-38 ~13 ~2 ~-38 ~14 ~2 planks-oak-ud
+fill ~-22 ~13 ~2 ~-22 ~14 ~2 planks-oak-ud
+fill ~21 ~13 ~2 ~21 ~14 ~2 planks-oak-ud
+fill ~37 ~13 ~2 ~37 ~14 ~2 planks-oak-ud
+fill ~-39 ~13 ~3 ~-39 ~14 ~3 planks-oak-ud
+fill ~-23 ~13 ~3 ~-23 ~14 ~3 planks-oak-ud
+fill ~22 ~13 ~3 ~22 ~14 ~3 planks-oak-ud
+fill ~38 ~13 ~3 ~38 ~14 ~3 planks-oak-ud
+fill ~39 ~13 ~4 ~39 ~14 ~4 planks-oak-ud
+fill ~-41 ~13 ~5 ~-41 ~14 ~5 planks-oak-ud
+fill ~-25 ~13 ~5 ~-25 ~14 ~5 planks-oak-ud
+fill ~24 ~13 ~5 ~24 ~14 ~5 planks-oak-ud
+fill ~-42 ~13 ~6 ~-42 ~14 ~6 planks-oak-ud
+fill ~-26 ~13 ~6 ~-26 ~14 ~6 planks-oak-ud
+fill ~25 ~13 ~6 ~25 ~14 ~6 planks-oak-ud
+fill ~41 ~13 ~6 ~41 ~14 ~6 planks-oak-ud
+fill ~-43 ~13 ~7 ~-43 ~14 ~7 planks-oak-ud
+fill ~-27 ~13 ~7 ~-27 ~14 ~7 planks-oak-ud
+fill ~26 ~13 ~7 ~26 ~14 ~7 planks-oak-ud
+fill ~42 ~13 ~7 ~42 ~14 ~7 planks-oak-ud
+setblock ~42 ~13 ~8 glass-plain
+fill ~43 ~13 ~8 ~43 ~14 ~8 planks-oak-ud
+fill ~-29 ~13 ~9 ~-29 ~14 ~9 planks-oak-ud
+fill ~28 ~13 ~9 ~28 ~14 ~9 planks-oak-ud
+setblock ~43 ~13 ~9 glass-plain
+fill ~-43 ~13 ~10 ~-43 ~14 ~10 planks-oak-ud
+fill ~-30 ~13 ~10 ~-30 ~14 ~10 planks-oak-ud
+fill ~29 ~13 ~10 ~29 ~14 ~10 planks-oak-ud
+fill ~-42 ~13 ~11 ~-42 ~14 ~11 planks-oak-ud
+fill ~-31 ~13 ~11 ~-31 ~14 ~11 planks-oak-ud
+fill ~30 ~13 ~11 ~30 ~14 ~11 planks-oak-ud
+fill ~-41 ~13 ~12 ~-41 ~14 ~12 planks-oak-ud
+fill ~-40 ~13 ~13 ~-40 ~14 ~13 planks-oak-ud
+fill ~-33 ~13 ~13 ~-33 ~14 ~13 planks-oak-ud
+fill ~32 ~13 ~13 ~32 ~14 ~13 planks-oak-ud
+fill ~-39 ~13 ~14 ~-39 ~14 ~14 planks-oak-ud
+fill ~-34 ~13 ~14 ~-34 ~14 ~14 planks-oak-ud
+fill ~33 ~13 ~14 ~33 ~14 ~14 planks-oak-ud
+fill ~-38 ~13 ~15 ~-38 ~14 ~15 planks-oak-ud
+fill ~-35 ~13 ~15 ~-35 ~14 ~15 planks-oak-ud
+fill ~34 ~13 ~15 ~34 ~14 ~15 planks-oak-ud
+setblock ~35 ~13 ~15 glass-plain
 setblock ~-24 ~14 ~-15 planks-oak-ud
 fill ~-13 ~14 ~-15 ~-13 ~14 ~ planks-oak-ud
 fill ~-4 ~14 ~-15 ~-4 ~14 ~ planks-oak-ud

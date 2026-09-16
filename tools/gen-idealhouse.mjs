@@ -166,10 +166,10 @@ function openingsAndStairs() {
       box(x, U0 + 2, bz, x, U0 + 4, bz + 1, PANE_IN_NS_WALL);
     }
 
-  // wing glazing. v3 scattered single panes along the whole wall on a modulo
-  // rule; he repainted both wings so the middle of every long wall is solid and
-  // a pair of windows sits near each end. Walk the wall in order along the wing
-  // axis and glaze the 2nd and 4th cell in from either end.
+  // Wing glazing. The wings are meant to read as glass halls: most of each long
+  // wall is window on BOTH storeys, broken by a plank pier every fourth cell and
+  // by a solid cell at each corner, with a sill course under and a head course
+  // over so the roof still lands on timber.
   const wingWall = (w, side) => {
     const out = [];
     for (let x = BB.x1; x <= BB.x2; x++)
@@ -184,17 +184,16 @@ function openingsAndStairs() {
   for (const w of [WING.west, WING.east])
     for (const side of [-1, 1]) {
       const wall = wingWall(w, side);
-      const pick = new Set([1, 3, wall.length - 2, wall.length - 4]);
       wall.forEach((c, i) => {
-        if (!pick.has(i)) return;
+        if (i === 0 || i === wall.length - 1 || i % 4 === 0) return;   // corner, or a pier
         for (const y0 of [G0, U0])
-          for (let y = y0 + 2; y <= y0 + 4; y++) if (get(c.x, y, c.z) === WALL) set(c.x, y, c.z, GLASS);
+          for (let y = y0 + 2; y <= y0 + 5; y++) if (get(c.x, y, c.z) === WALL) set(c.x, y, c.z, GLASS);
       });
     }
 
-  // the game room's end wall: one six wide, four tall window, everything but
-  // the two corner cells. The end wall cells are the only boundary cells out
-  // there with |v| under 5; the long walls start at 5.
+  // The game room's end wall: one six wide, four tall window on EACH storey,
+  // everything but the two corner cells. The end wall cells are the only
+  // boundary cells out there with |v| under 5; the long walls start at 5.
   {
     const w = WING.west, end = [];
     for (let x = BB.x1; x <= BB.x2; x++)
@@ -206,7 +205,8 @@ function openingsAndStairs() {
       }
     end.sort((a, b) => a.v - b.v);
     for (const c of end.slice(1, -1))
-      for (let y = G0 + 2; y <= G0 + 5; y++) if (get(c.x, y, c.z) === WALL) set(c.x, y, c.z, GLASS);
+      for (const y0 of [G0, U0])
+        for (let y = y0 + 2; y <= y0 + 5; y++) if (get(c.x, y, c.z) === WALL) set(c.x, y, c.z, GLASS);
   }
 
   // front door and the porch posts that carry the balcony
