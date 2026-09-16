@@ -16,6 +16,11 @@ function colorFor(code) {
   if (code === '__spawner__') return 0x00e5ff;    // creature spawner (cyan)
   if (code === '__ingots__') return 0xf2d24b;     // ingot pile (gold-ish)
   const c = code.replace(/^game:/, '');
+  // pond aquarium palette
+  if (c.startsWith('water-') || c.startsWith('lake-')) return 0x2f7fb8;
+  if (c.startsWith('gravel')) return 0x8a8378;
+  if (c.startsWith('sand')) return 0xd8c98a;
+  if (c.startsWith('woodenfence')) return 0x9a7a48;
   // ideal house palette
   if (c.startsWith('glasspane') || c.startsWith('glass')) return 0xa9dcef;
   if (c.startsWith('slantedroofing') || c === 'stonebricks-slate') return 0x4d545c;

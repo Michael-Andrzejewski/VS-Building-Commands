@@ -525,6 +525,8 @@ public class BuildingCommandsModSystem : ModSystem
         public int Dim;
         public bool Truncated;
         public readonly Dictionary<long, int> Before = new Dictionary<long, int>();
+        // Only the positions that actually held a fluid, which is far fewer.
+        public readonly Dictionary<long, int> Fluids = new Dictionary<long, int>();
         public readonly Dictionary<long, byte[]> Entities = new Dictionary<long, byte[]>();
     }
 
@@ -547,8 +549,14 @@ public class BuildingCommandsModSystem : ModSystem
 
         if (_recording.Before.Count == 0) _recording.Dim = pos.dimension;
 
-        Block cur = sapi.World.BlockAccessor.GetBlock(pos);
-        _recording.Before[k] = cur?.BlockId ?? 0;
+        // Read the two layers separately. The game keeps fluids in their own
+        // layer, so a position can hold stone AND water at once, and a plain
+        // GetBlock would only report one of them.
+        Block solid = sapi.World.BlockAccessor.GetBlock(pos, BlockLayersAccess.Solid);
+        _recording.Before[k] = solid?.BlockId ?? 0;
+        Block fluid = sapi.World.BlockAccessor.GetBlock(pos, BlockLayersAccess.Fluid);
+        int fluidId = fluid?.BlockId ?? 0;
+        if (fluidId != 0) _recording.Fluids[k] = fluidId;
 
         // A block entity holds what a bare block id cannot: a chest's contents,
         // a sign's text, a translocator's repair state.
@@ -601,7 +609,8 @@ public class BuildingCommandsModSystem : ModSystem
         foreach (var kv in rec.Before)
         {
             UnpackPos(kv.Key, out int x, out int y, out int z);
-            cells.Add(new[] { y, x, z, kv.Value });
+            rec.Fluids.TryGetValue(kv.Key, out int fluidId);
+            cells.Add(new[] { y, x, z, kv.Value, fluidId });
         }
         cells.Sort((a, b) => a[0].CompareTo(b[0]));
 
@@ -610,7 +619,11 @@ public class BuildingCommandsModSystem : ModSystem
         foreach (int[] c in cells)
         {
             pos.Set(c[1], c[0], c[2]);
-            ba.SetBlock(c[3], pos);
+            // Both layers, every time. Setting a solid block does NOT clear the
+            // fluid layer, so without this an undone pond leaves its water
+            // sitting inside the restored stone.
+            ba.SetBlock(c[3], pos, BlockLayersAccess.Solid);
+            ba.SetBlock(c[4], pos, BlockLayersAccess.Fluid);
         }
         ba.Commit();
 

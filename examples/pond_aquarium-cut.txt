@@ -1,0 +1,1922 @@
+# pond_aquarium-cut: pond_aquarium with the low half removed at z=-36, for looking at the section.
+fill ~-31 ~-21 ~-36 ~-31 ~-19 ~-18 air
+fill ~30 ~-21 ~-36 ~30 ~-19 ~-18 air
+fill ~-32 ~-21 ~-36 ~-32 ~-18 ~-20 air
+fill ~31 ~-21 ~-36 ~31 ~-18 ~-20 air
+fill ~-33 ~-21 ~-36 ~-33 ~-18 ~-22 air
+fill ~32 ~-21 ~-36 ~32 ~-18 ~-22 air
+fill ~-34 ~-21 ~-36 ~-34 ~-18 ~-24 air
+fill ~33 ~-21 ~-36 ~33 ~-18 ~-24 air
+fill ~-35 ~-21 ~-36 ~-35 ~-19 ~-27 air
+fill ~34 ~-21 ~-36 ~34 ~-19 ~-27 air
+fill ~-36 ~-21 ~-36 ~-36 ~-19 ~-31 air
+fill ~35 ~-21 ~-36 ~35 ~-19 ~-31 air
+fill ~-30 ~-21 ~-31 ~-30 ~-18 ~-16 air
+fill ~29 ~-21 ~-31 ~29 ~-18 ~-16 air
+fill ~-29 ~-21 ~-27 ~-29 ~-18 ~-15 air
+fill ~28 ~-21 ~-27 ~28 ~-18 ~-15 air
+fill ~-28 ~-21 ~-24 ~-28 ~-18 ~-14 air
+fill ~27 ~-21 ~-24 ~27 ~-18 ~-14 air
+fill ~-27 ~-21 ~-22 ~-27 ~-18 ~-13 air
+fill ~26 ~-21 ~-22 ~26 ~-18 ~-13 air
+fill ~-26 ~-21 ~-20 ~-26 ~-18 ~-12 air
+fill ~25 ~-21 ~-20 ~25 ~-18 ~-12 air
+fill ~-25 ~-21 ~-19 ~-25 ~-18 ~-11 air
+fill ~24 ~-21 ~-19 ~24 ~-18 ~-11 air
+fill ~-24 ~-21 ~-17 ~-24 ~-18 ~-10 air
+fill ~23 ~-21 ~-17 ~23 ~-18 ~-10 air
+fill ~-23 ~-21 ~-16 ~-23 ~-18 ~-9 air
+fill ~22 ~-21 ~-16 ~22 ~-18 ~-9 air
+fill ~-22 ~-21 ~-15 ~-22 ~-18 ~-8 air
+fill ~21 ~-21 ~-15 ~21 ~-18 ~-8 air
+fill ~-21 ~-21 ~-14 ~-21 ~-18 ~-7 air
+fill ~20 ~-21 ~-14 ~20 ~-18 ~-7 air
+fill ~-20 ~-21 ~-13 ~-20 ~-18 ~-7 air
+fill ~19 ~-21 ~-13 ~19 ~-18 ~-7 air
+fill ~-19 ~-21 ~-12 ~-18 ~-19 ~-6 air
+fill ~17 ~-21 ~-12 ~18 ~-19 ~-6 air
+fill ~-17 ~-21 ~-11 ~-17 ~-18 ~-5 air
+fill ~16 ~-21 ~-11 ~16 ~-18 ~-5 air
+fill ~-16 ~-21 ~-10 ~-15 ~-18 ~-5 air
+fill ~14 ~-21 ~-10 ~15 ~-18 ~-5 air
+fill ~-14 ~-21 ~-9 ~-13 ~-18 ~-4 air
+fill ~12 ~-21 ~-9 ~13 ~-18 ~-4 air
+fill ~-12 ~-21 ~-8 ~-10 ~-18 ~-3 air
+fill ~9 ~-21 ~-8 ~11 ~-18 ~-3 air
+fill ~-9 ~-21 ~-7 ~-6 ~-18 ~-2 air
+fill ~5 ~-21 ~-7 ~8 ~-18 ~-2 air
+fill ~-5 ~-21 ~-6 ~4 ~-19 ~-1 air
+fill ~-15 ~-21 ~-4 ~-15 ~-18 ~-4 air
+fill ~14 ~-21 ~-4 ~14 ~-18 ~-4 air
+fill ~-13 ~-21 ~-3 ~-13 ~-18 ~-3 air
+fill ~12 ~-21 ~-3 ~12 ~-18 ~-3 air
+fill ~-10 ~-21 ~-2 ~-10 ~-19 ~-2 air
+fill ~9 ~-21 ~-2 ~9 ~-19 ~-2 air
+fill ~-6 ~-21 ~-1 ~-6 ~-18 ~-1 air
+fill ~5 ~-21 ~-1 ~7 ~-18 ~26 air
+fill ~4 ~-21 ~ ~4 ~-19 ~26 air
+fill ~3 ~-21 ~24 ~3 ~-18 ~26 air
+fill ~-2 ~-21 ~25 ~2 ~-19 ~25 air
+fill ~-2 ~-20 ~24 ~2 ~-17 ~24 air
+fill ~-2 ~-19 ~23 ~2 ~-16 ~23 air
+fill ~-31 ~-18 ~-36 ~-31 ~-18 ~-20 air
+fill ~30 ~-18 ~-36 ~30 ~-18 ~-20 air
+fill ~-35 ~-18 ~-36 ~-35 ~-18 ~-28 air
+fill ~34 ~-18 ~-36 ~34 ~-18 ~-28 air
+fill ~-36 ~-18 ~-35 ~-36 ~-18 ~-31 air
+fill ~35 ~-18 ~-35 ~35 ~-18 ~-31 air
+setblock ~-31 ~-18 ~-18 air
+setblock ~30 ~-18 ~-18 air
+fill ~-19 ~-18 ~-12 ~-18 ~-18 ~-7 air
+fill ~17 ~-18 ~-12 ~18 ~-18 ~-7 air
+setblock ~-19 ~-18 ~-6 air
+fill ~-5 ~-18 ~-6 ~4 ~-18 ~-3 air
+setblock ~18 ~-18 ~-6 air
+fill ~-5 ~-18 ~-2 ~3 ~-18 ~-2 air
+fill ~-5 ~-18 ~-1 ~-1 ~-18 ~-1 air
+fill ~1 ~-18 ~-1 ~4 ~-18 ~-1 air
+fill ~4 ~-18 ~ ~4 ~-18 ~3 air
+fill ~4 ~-18 ~5 ~4 ~-18 ~9 air
+fill ~4 ~-18 ~11 ~4 ~-18 ~15 air
+fill ~4 ~-18 ~17 ~4 ~-18 ~21 air
+fill ~-2 ~-18 ~22 ~2 ~-15 ~22 air
+fill ~4 ~-18 ~23 ~4 ~-18 ~26 air
+fill ~-1 ~-18 ~25 ~2 ~-18 ~25 air
+fill ~-2 ~-17 ~21 ~2 ~-14 ~21 air
+fill ~-2 ~-16 ~20 ~2 ~-14 ~20 air
+fill ~-2 ~-15 ~19 ~2 ~-12 ~19 air
+fill ~-31 ~-14 ~-36 ~-31 ~-12 ~-18 air
+fill ~30 ~-14 ~-36 ~30 ~-12 ~-18 air
+fill ~-32 ~-14 ~-36 ~-32 ~-11 ~-20 air
+fill ~31 ~-14 ~-36 ~31 ~-11 ~-20 air
+fill ~-33 ~-14 ~-36 ~-33 ~-11 ~-22 air
+fill ~32 ~-14 ~-36 ~32 ~-11 ~-22 air
+fill ~-34 ~-14 ~-36 ~-34 ~-11 ~-24 air
+fill ~33 ~-14 ~-36 ~33 ~-11 ~-24 air
+fill ~-35 ~-14 ~-36 ~-35 ~-12 ~-27 air
+fill ~34 ~-14 ~-36 ~34 ~-12 ~-27 air
+fill ~-36 ~-14 ~-36 ~-36 ~-12 ~-31 air
+fill ~35 ~-14 ~-36 ~35 ~-12 ~-31 air
+fill ~-30 ~-14 ~-31 ~-30 ~-11 ~-16 air
+fill ~29 ~-14 ~-31 ~29 ~-11 ~-16 air
+fill ~-29 ~-14 ~-27 ~-29 ~-11 ~-15 air
+fill ~28 ~-14 ~-27 ~28 ~-11 ~-15 air
+fill ~-28 ~-14 ~-24 ~-28 ~-11 ~-14 air
+fill ~27 ~-14 ~-24 ~27 ~-11 ~-14 air
+fill ~-27 ~-14 ~-22 ~-27 ~-11 ~-13 air
+fill ~26 ~-14 ~-22 ~26 ~-11 ~-13 air
+fill ~-26 ~-14 ~-20 ~-26 ~-11 ~-12 air
+fill ~25 ~-14 ~-20 ~25 ~-11 ~-12 air
+fill ~-25 ~-14 ~-19 ~-25 ~-11 ~-11 air
+fill ~24 ~-14 ~-19 ~24 ~-11 ~-11 air
+fill ~-24 ~-14 ~-17 ~-24 ~-11 ~-10 air
+fill ~23 ~-14 ~-17 ~23 ~-11 ~-10 air
+fill ~-23 ~-14 ~-16 ~-23 ~-11 ~-9 air
+fill ~22 ~-14 ~-16 ~22 ~-11 ~-9 air
+fill ~-22 ~-14 ~-15 ~-22 ~-11 ~-8 air
+fill ~21 ~-14 ~-15 ~21 ~-11 ~-8 air
+fill ~-21 ~-14 ~-14 ~-21 ~-11 ~-7 air
+fill ~20 ~-14 ~-14 ~20 ~-11 ~-7 air
+fill ~-20 ~-14 ~-13 ~-20 ~-11 ~-7 air
+fill ~19 ~-14 ~-13 ~19 ~-11 ~-7 air
+fill ~-19 ~-14 ~-12 ~-18 ~-12 ~-6 air
+fill ~17 ~-14 ~-12 ~18 ~-12 ~-6 air
+fill ~-17 ~-14 ~-11 ~-17 ~-11 ~-5 air
+fill ~16 ~-14 ~-11 ~16 ~-11 ~-5 air
+fill ~-16 ~-14 ~-10 ~-15 ~-11 ~-5 air
+fill ~14 ~-14 ~-10 ~15 ~-11 ~-5 air
+fill ~-14 ~-14 ~-9 ~-13 ~-11 ~-4 air
+fill ~12 ~-14 ~-9 ~13 ~-11 ~-4 air
+fill ~-12 ~-14 ~-8 ~-10 ~-11 ~-3 air
+fill ~9 ~-14 ~-8 ~11 ~-11 ~-3 air
+fill ~-9 ~-14 ~-7 ~-6 ~-12 ~-2 air
+fill ~5 ~-14 ~-7 ~8 ~-11 ~-2 air
+fill ~-5 ~-14 ~-6 ~4 ~-12 ~-1 air
+fill ~-15 ~-14 ~-4 ~-15 ~-11 ~-4 air
+fill ~14 ~-14 ~-4 ~14 ~-11 ~-4 air
+fill ~-13 ~-14 ~-3 ~-13 ~-11 ~-3 air
+fill ~12 ~-14 ~-3 ~12 ~-11 ~-3 air
+fill ~-10 ~-14 ~-2 ~-10 ~-12 ~-2 air
+fill ~9 ~-14 ~-2 ~9 ~-12 ~-2 air
+fill ~-7 ~-14 ~-1 ~-6 ~-12 ~19 air
+fill ~5 ~-14 ~-1 ~5 ~-11 ~-1 air
+fill ~-5 ~-14 ~ ~-4 ~-11 ~19 air
+fill ~-3 ~-14 ~17 ~-3 ~-11 ~19 air
+fill ~-2 ~-14 ~18 ~2 ~-11 ~18 air
+fill ~-2 ~-13 ~17 ~2 ~-10 ~17 air
+fill ~-1 ~-13 ~20 ~2 ~-13 ~20 air
+fill ~-2 ~-12 ~16 ~2 ~-9 ~16 air
+fill ~-31 ~-11 ~-36 ~-31 ~-11 ~-20 air
+fill ~30 ~-11 ~-36 ~30 ~-11 ~-20 air
+fill ~-35 ~-11 ~-36 ~-35 ~-11 ~-28 air
+fill ~34 ~-11 ~-36 ~34 ~-11 ~-28 air
+fill ~-36 ~-11 ~-35 ~-36 ~-11 ~-31 air
+fill ~35 ~-11 ~-35 ~35 ~-11 ~-31 air
+setblock ~-31 ~-11 ~-18 air
+setblock ~30 ~-11 ~-18 air
+fill ~-19 ~-11 ~-12 ~-18 ~-11 ~-7 air
+fill ~17 ~-11 ~-12 ~18 ~-11 ~-7 air
+fill ~-9 ~-11 ~-7 ~-6 ~-11 ~-3 air
+setblock ~-19 ~-11 ~-6 air
+fill ~-5 ~-11 ~-6 ~4 ~-11 ~-2 air
+setblock ~18 ~-11 ~-6 air
+fill ~-9 ~-11 ~-2 ~-8 ~-11 ~-2 air
+fill ~-6 ~-11 ~-2 ~-6 ~-11 ~19 air
+fill ~-7 ~-11 ~-1 ~-7 ~-11 ~3 air
+fill ~-5 ~-11 ~-1 ~-1 ~-11 ~-1 air
+fill ~1 ~-11 ~-1 ~4 ~-11 ~-1 air
+fill ~-7 ~-11 ~5 ~-7 ~-11 ~9 air
+fill ~-7 ~-11 ~11 ~-7 ~-11 ~15 air
+fill ~-2 ~-11 ~15 ~2 ~-9 ~15 air
+fill ~-7 ~-11 ~17 ~-7 ~-11 ~19 air
+fill ~-2 ~-10 ~14 ~2 ~-7 ~14 air
+fill ~-2 ~-9 ~13 ~2 ~-6 ~13 air
+fill ~-2 ~-8 ~12 ~2 ~-5 ~12 air
+fill ~-1 ~-8 ~15 ~2 ~-8 ~15 air
+fill ~-31 ~-7 ~-36 ~-31 ~-5 ~-18 air
+fill ~30 ~-7 ~-36 ~30 ~-5 ~-18 air
+fill ~-32 ~-7 ~-36 ~-32 ~-4 ~-20 air
+fill ~31 ~-7 ~-36 ~31 ~-4 ~-20 air
+fill ~-33 ~-7 ~-36 ~-33 ~-4 ~-22 air
+fill ~32 ~-7 ~-36 ~32 ~-4 ~-22 air
+fill ~-34 ~-7 ~-36 ~-34 ~-4 ~-24 air
+fill ~33 ~-7 ~-36 ~33 ~-4 ~-24 air
+fill ~-35 ~-7 ~-36 ~-35 ~-5 ~-27 air
+fill ~34 ~-7 ~-36 ~34 ~-5 ~-27 air
+fill ~-36 ~-7 ~-36 ~-36 ~-5 ~-31 air
+fill ~35 ~-7 ~-36 ~35 ~-5 ~-31 air
+fill ~-30 ~-7 ~-31 ~-30 ~-4 ~-16 air
+fill ~29 ~-7 ~-31 ~29 ~-4 ~-16 air
+fill ~-29 ~-7 ~-27 ~-29 ~-4 ~-15 air
+fill ~28 ~-7 ~-27 ~28 ~-4 ~-15 air
+fill ~-28 ~-7 ~-24 ~-28 ~-4 ~-14 air
+fill ~27 ~-7 ~-24 ~27 ~-4 ~-14 air
+fill ~-27 ~-7 ~-22 ~-27 ~-4 ~-13 air
+fill ~26 ~-7 ~-22 ~26 ~-4 ~-13 air
+fill ~-26 ~-7 ~-20 ~-26 ~-4 ~-12 air
+fill ~25 ~-7 ~-20 ~25 ~-4 ~-12 air
+fill ~-25 ~-7 ~-19 ~-25 ~-4 ~-11 air
+fill ~24 ~-7 ~-19 ~24 ~-4 ~-11 air
+fill ~-24 ~-7 ~-17 ~-24 ~-4 ~-10 air
+fill ~23 ~-7 ~-17 ~23 ~-4 ~-10 air
+fill ~-23 ~-7 ~-16 ~-23 ~-4 ~-9 air
+fill ~22 ~-7 ~-16 ~22 ~-4 ~-9 air
+fill ~-22 ~-7 ~-15 ~-22 ~-4 ~-8 air
+fill ~21 ~-7 ~-15 ~21 ~-4 ~-8 air
+fill ~-21 ~-7 ~-14 ~-21 ~-4 ~-7 air
+fill ~20 ~-7 ~-14 ~20 ~-4 ~-7 air
+fill ~-20 ~-7 ~-13 ~-20 ~-4 ~-7 air
+fill ~19 ~-7 ~-13 ~19 ~-4 ~-7 air
+fill ~-19 ~-7 ~-12 ~-18 ~-5 ~-6 air
+fill ~17 ~-7 ~-12 ~18 ~-5 ~-6 air
+fill ~-17 ~-7 ~-11 ~-17 ~-4 ~-5 air
+fill ~16 ~-7 ~-11 ~16 ~-4 ~-5 air
+fill ~-16 ~-7 ~-10 ~-15 ~-4 ~-5 air
+fill ~14 ~-7 ~-10 ~15 ~-4 ~-5 air
+fill ~-14 ~-7 ~-9 ~-13 ~-4 ~-4 air
+fill ~12 ~-7 ~-9 ~13 ~-4 ~-4 air
+fill ~-12 ~-7 ~-8 ~-10 ~-4 ~-3 air
+fill ~9 ~-7 ~-8 ~11 ~-4 ~-3 air
+fill ~-9 ~-7 ~-7 ~-6 ~-4 ~-2 air
+fill ~5 ~-7 ~-7 ~8 ~-4 ~-2 air
+fill ~-5 ~-7 ~-6 ~4 ~-5 ~-1 air
+fill ~-15 ~-7 ~-4 ~-15 ~-4 ~-4 air
+fill ~14 ~-7 ~-4 ~14 ~-4 ~-4 air
+fill ~-13 ~-7 ~-3 ~-13 ~-4 ~-3 air
+fill ~12 ~-7 ~-3 ~12 ~-4 ~-3 air
+fill ~-10 ~-7 ~-2 ~-10 ~-5 ~-2 air
+fill ~9 ~-7 ~-2 ~9 ~-5 ~-2 air
+fill ~-6 ~-7 ~-1 ~-6 ~-4 ~-1 air
+fill ~5 ~-7 ~-1 ~7 ~-4 ~12 air
+fill ~4 ~-7 ~ ~4 ~-5 ~12 air
+fill ~3 ~-7 ~10 ~3 ~-4 ~12 air
+fill ~-2 ~-7 ~11 ~2 ~-4 ~11 air
+fill ~-2 ~-6 ~10 ~2 ~-4 ~10 air
+fill ~-2 ~-5 ~9 ~2 ~-2 ~9 air
+fill ~-31 ~-4 ~-36 ~-31 ~-4 ~-20 air
+fill ~30 ~-4 ~-36 ~30 ~-4 ~-20 air
+fill ~-35 ~-4 ~-36 ~-35 ~-4 ~-28 air
+fill ~34 ~-4 ~-36 ~34 ~-4 ~-28 air
+fill ~-36 ~-4 ~-35 ~-36 ~-4 ~-31 air
+fill ~35 ~-4 ~-35 ~35 ~-4 ~-31 air
+setblock ~-31 ~-4 ~-18 air
+setblock ~30 ~-4 ~-18 air
+fill ~-19 ~-4 ~-12 ~-18 ~-4 ~-7 air
+fill ~17 ~-4 ~-12 ~18 ~-4 ~-7 air
+setblock ~-19 ~-4 ~-6 air
+fill ~-5 ~-4 ~-6 ~4 ~-4 ~-3 air
+setblock ~18 ~-4 ~-6 air
+fill ~-5 ~-4 ~-2 ~3 ~-4 ~-2 air
+fill ~-5 ~-4 ~-1 ~-1 ~-4 ~-1 air
+fill ~1 ~-4 ~-1 ~4 ~-4 ~-1 air
+fill ~4 ~-4 ~ ~4 ~-4 ~3 air
+fill ~4 ~-4 ~5 ~4 ~-4 ~9 air
+fill ~-2 ~-4 ~8 ~2 ~-1 ~8 air
+fill ~4 ~-4 ~11 ~4 ~-4 ~12 air
+fill ~-2 ~-3 ~7 ~2 ~ ~7 air
+fill ~-1 ~-3 ~10 ~2 ~-3 ~10 air
+fill ~-2 ~-2 ~6 ~2 ~4 ~6 air
+fill ~-2 ~-1 ~5 ~2 ~1 ~5 air
+fill ~-2 ~ ~4 ~2 ~4 ~4 air
+fill ~-6 ~1 ~-36 ~5 ~6 ~-21 air
+fill ~-10 ~1 ~-36 ~-7 ~6 ~-1 air
+fill ~6 ~1 ~-36 ~9 ~6 ~-1 air
+fill ~-13 ~1 ~-36 ~-11 ~6 ~-2 air
+fill ~10 ~1 ~-36 ~12 ~6 ~-2 air
+fill ~-16 ~1 ~-36 ~-14 ~6 ~-3 air
+fill ~13 ~1 ~-36 ~15 ~6 ~-3 air
+fill ~-18 ~1 ~-36 ~-17 ~6 ~-4 air
+fill ~16 ~1 ~-36 ~17 ~6 ~-4 air
+fill ~-19 ~1 ~-36 ~-19 ~6 ~-5 air
+fill ~18 ~1 ~-36 ~18 ~6 ~-5 air
+fill ~-21 ~1 ~-36 ~-20 ~6 ~-6 air
+fill ~19 ~1 ~-36 ~20 ~6 ~-6 air
+fill ~-22 ~1 ~-36 ~-22 ~6 ~-7 air
+fill ~21 ~1 ~-36 ~21 ~6 ~-7 air
+fill ~-24 ~1 ~-36 ~-23 ~6 ~-8 air
+fill ~22 ~1 ~-36 ~23 ~6 ~-8 air
+fill ~-25 ~1 ~-36 ~-25 ~6 ~-9 air
+fill ~24 ~1 ~-36 ~24 ~6 ~-9 air
+fill ~-26 ~1 ~-36 ~-26 ~6 ~-10 air
+fill ~25 ~1 ~-36 ~25 ~6 ~-10 air
+fill ~-27 ~1 ~-36 ~-27 ~6 ~-11 air
+fill ~26 ~1 ~-36 ~26 ~6 ~-11 air
+fill ~-28 ~1 ~-36 ~-28 ~6 ~-12 air
+fill ~27 ~1 ~-36 ~27 ~6 ~-12 air
+fill ~-29 ~1 ~-36 ~-29 ~6 ~-13 air
+fill ~28 ~1 ~-36 ~28 ~6 ~-13 air
+fill ~-30 ~1 ~-36 ~-30 ~6 ~-15 air
+fill ~29 ~1 ~-36 ~29 ~6 ~-15 air
+fill ~-31 ~1 ~-36 ~-31 ~6 ~-16 air
+fill ~30 ~1 ~-36 ~30 ~6 ~-16 air
+fill ~-32 ~1 ~-36 ~-32 ~6 ~-18 air
+fill ~31 ~1 ~-36 ~31 ~6 ~-18 air
+fill ~-33 ~1 ~-36 ~-33 ~6 ~-19 air
+fill ~32 ~1 ~-36 ~32 ~6 ~-19 air
+fill ~-34 ~1 ~-36 ~-34 ~6 ~-21 air
+fill ~33 ~1 ~-36 ~33 ~6 ~-21 air
+fill ~-35 ~1 ~-36 ~-35 ~6 ~-24 air
+fill ~34 ~1 ~-36 ~34 ~6 ~-24 air
+fill ~-36 ~1 ~-36 ~-36 ~6 ~-27 air
+fill ~35 ~1 ~-36 ~35 ~6 ~-27 air
+fill ~-37 ~1 ~-36 ~-37 ~6 ~-31 air
+fill ~36 ~1 ~-36 ~36 ~6 ~-31 air
+fill ~-6 ~1 ~-20 ~-3 ~6 ~ air
+fill ~3 ~1 ~-20 ~5 ~6 ~ air
+fill ~-2 ~1 ~-1 ~2 ~6 ~ air
+fill ~-1 ~1 ~1 ~1 ~3 ~3 air
+fill ~-3 ~1 ~2 ~-2 ~4 ~3 air
+fill ~2 ~1 ~2 ~3 ~4 ~3 air
+fill ~-3 ~1 ~4 ~-3 ~4 ~6 air
+fill ~3 ~1 ~4 ~3 ~4 ~6 air
+fill ~-2 ~2 ~-20 ~2 ~2 ~-2 air
+fill ~-1 ~2 ~5 ~2 ~4 ~5 air
+fill ~-1 ~3 ~-20 ~1 ~6 ~-2 air
+fill ~-2 ~3 ~-19 ~-2 ~6 ~-17 air
+fill ~2 ~3 ~-19 ~2 ~6 ~-17 air
+fill ~-2 ~3 ~-15 ~-2 ~6 ~-13 air
+fill ~2 ~3 ~-15 ~2 ~6 ~-13 air
+fill ~-2 ~3 ~-11 ~-2 ~6 ~-9 air
+fill ~2 ~3 ~-11 ~2 ~6 ~-9 air
+fill ~-2 ~3 ~-7 ~-2 ~6 ~-2 air
+fill ~2 ~3 ~-7 ~2 ~6 ~-2 air
+fill ~-2 ~3 ~5 ~-2 ~4 ~5 air
+fill ~-2 ~4 ~-20 ~-2 ~6 ~-20 air
+fill ~2 ~4 ~-20 ~2 ~6 ~-20 air
+fill ~-2 ~4 ~-16 ~-2 ~6 ~-16 air
+fill ~2 ~4 ~-16 ~2 ~6 ~-16 air
+fill ~-2 ~4 ~-12 ~-2 ~6 ~-12 air
+fill ~2 ~4 ~-12 ~2 ~6 ~-12 air
+fill ~-2 ~4 ~-8 ~-2 ~6 ~-8 air
+fill ~2 ~4 ~-8 ~2 ~6 ~-8 air
+fill ~-1 ~4 ~2 ~1 ~4 ~3 air
+fill ~-6 ~-26 ~-36 ~5 ~-26 ~ cobblestone-granite
+fill ~-10 ~-26 ~-36 ~-7 ~-26 ~-1 cobblestone-granite
+fill ~6 ~-26 ~-36 ~9 ~-26 ~-1 cobblestone-granite
+fill ~-13 ~-26 ~-36 ~-11 ~-26 ~-2 cobblestone-granite
+fill ~10 ~-26 ~-36 ~12 ~-26 ~-2 cobblestone-granite
+fill ~-16 ~-26 ~-36 ~-14 ~-26 ~-3 cobblestone-granite
+fill ~13 ~-26 ~-36 ~15 ~-26 ~-3 cobblestone-granite
+fill ~-18 ~-26 ~-36 ~-17 ~-26 ~-4 cobblestone-granite
+fill ~16 ~-26 ~-36 ~17 ~-26 ~-4 cobblestone-granite
+fill ~-19 ~-26 ~-36 ~-19 ~-26 ~-5 cobblestone-granite
+fill ~18 ~-26 ~-36 ~18 ~-26 ~-5 cobblestone-granite
+fill ~-21 ~-26 ~-36 ~-20 ~-26 ~-6 cobblestone-granite
+fill ~19 ~-26 ~-36 ~20 ~-26 ~-6 cobblestone-granite
+fill ~-22 ~-26 ~-36 ~-22 ~-26 ~-7 cobblestone-granite
+fill ~21 ~-26 ~-36 ~21 ~-26 ~-7 cobblestone-granite
+fill ~-24 ~-26 ~-36 ~-23 ~-26 ~-8 cobblestone-granite
+fill ~22 ~-26 ~-36 ~23 ~-26 ~-8 cobblestone-granite
+fill ~-25 ~-26 ~-36 ~-25 ~-26 ~-9 cobblestone-granite
+fill ~24 ~-26 ~-36 ~24 ~-26 ~-9 cobblestone-granite
+fill ~-26 ~-26 ~-36 ~-26 ~-26 ~-10 cobblestone-granite
+fill ~25 ~-26 ~-36 ~25 ~-26 ~-10 cobblestone-granite
+fill ~-27 ~-26 ~-36 ~-27 ~-26 ~-11 cobblestone-granite
+fill ~26 ~-26 ~-36 ~26 ~-26 ~-11 cobblestone-granite
+fill ~-28 ~-26 ~-36 ~-28 ~-26 ~-12 cobblestone-granite
+fill ~27 ~-26 ~-36 ~27 ~-26 ~-12 cobblestone-granite
+fill ~-29 ~-26 ~-36 ~-29 ~-26 ~-13 cobblestone-granite
+fill ~28 ~-26 ~-36 ~28 ~-26 ~-13 cobblestone-granite
+fill ~-30 ~-26 ~-36 ~-30 ~-26 ~-15 cobblestone-granite
+fill ~29 ~-26 ~-36 ~29 ~-26 ~-15 cobblestone-granite
+fill ~-31 ~-26 ~-36 ~-31 ~-23 ~-16 cobblestone-granite
+fill ~30 ~-26 ~-36 ~30 ~-23 ~-16 cobblestone-granite
+fill ~-32 ~-26 ~-36 ~-32 ~-23 ~-18 cobblestone-granite
+fill ~31 ~-26 ~-36 ~31 ~-23 ~-18 cobblestone-granite
+fill ~-33 ~-26 ~-36 ~-33 ~-23 ~-19 cobblestone-granite
+fill ~32 ~-26 ~-36 ~32 ~-23 ~-19 cobblestone-granite
+fill ~-34 ~-26 ~-36 ~-34 ~-23 ~-21 cobblestone-granite
+fill ~33 ~-26 ~-36 ~33 ~-23 ~-21 cobblestone-granite
+fill ~-35 ~-26 ~-36 ~-35 ~-23 ~-24 cobblestone-granite
+fill ~34 ~-26 ~-36 ~34 ~-23 ~-24 cobblestone-granite
+fill ~-36 ~-26 ~-36 ~-36 ~-23 ~-27 cobblestone-granite
+fill ~35 ~-26 ~-36 ~35 ~-23 ~-27 cobblestone-granite
+fill ~-37 ~-26 ~-36 ~-37 ~-1 ~-31 cobblestone-granite
+fill ~36 ~-26 ~-36 ~36 ~-1 ~-31 cobblestone-granite
+fill ~-21 ~-25 ~-36 ~-21 ~-25 ~-35 gravel-granite
+fill ~-18 ~-25 ~-36 ~-18 ~-25 ~-33 gravel-granite
+fill ~-28 ~-25 ~-36 ~-28 ~-25 ~-34 gravel-granite
+fill ~-17 ~-25 ~-36 ~-17 ~-25 ~-32 gravel-granite
+fill ~-15 ~-25 ~-36 ~-15 ~-25 ~-36 gravel-granite
+fill ~10 ~-25 ~-36 ~10 ~-25 ~-36 gravel-granite
+fill ~17 ~-25 ~-36 ~17 ~-25 ~-28 gravel-granite
+fill ~11 ~-25 ~-36 ~11 ~-25 ~-15 gravel-granite
+fill ~-30 ~-25 ~-36 ~-30 ~-25 ~-32 stonebricks-granite
+fill ~-10 ~-25 ~-36 ~-10 ~-25 ~-26 gravel-granite
+fill ~9 ~-25 ~-36 ~9 ~-25 ~-26 gravel-granite
+fill ~29 ~-25 ~-36 ~29 ~-25 ~-32 stonebricks-granite
+fill ~-24 ~-25 ~-36 ~-24 ~-25 ~-28 gravel-granite
+fill ~-11 ~-25 ~-36 ~-11 ~-25 ~-35 gravel-granite
+fill ~-6 ~-25 ~-36 ~-5 ~-25 ~-35 gravel-granite
+fill ~22 ~-25 ~-36 ~22 ~-25 ~-35 gravel-granite
+fill ~-25 ~-25 ~-36 ~-25 ~-25 ~-32 gravel-granite
+fill ~-14 ~-25 ~-36 ~-14 ~-25 ~-28 gravel-granite
+fill ~-7 ~-25 ~-36 ~-7 ~-25 ~-33 gravel-granite
+fill ~7 ~-25 ~-36 ~7 ~-25 ~-35 sand-granite
+fill ~20 ~-25 ~-36 ~21 ~-25 ~-36 gravel-granite
+fill ~25 ~-25 ~-36 ~26 ~-25 ~-34 gravel-granite
+fill ~28 ~-25 ~-36 ~28 ~-25 ~-36 gravel-granite
+fill ~-3 ~-25 ~-36 ~-1 ~-25 ~-35 gravel-granite
+fill ~6 ~-25 ~-36 ~6 ~-25 ~-34 gravel-granite
+fill ~12 ~-25 ~-36 ~12 ~-25 ~-30 gravel-granite
+fill ~15 ~-25 ~-36 ~15 ~-25 ~-30 gravel-granite
+fill ~-29 ~-25 ~-36 ~-29 ~-25 ~-36 gravel-granite
+fill ~-26 ~-25 ~-36 ~-26 ~-25 ~-36 gravel-granite
+fill ~-16 ~-25 ~-36 ~-16 ~-25 ~-36 sand-granite
+fill ~-4 ~-25 ~-36 ~-4 ~-25 ~-23 gravel-granite
+fill ~ ~-25 ~-36 ~ ~-25 ~-35 gravel-granite
+fill ~2 ~-25 ~-36 ~2 ~-25 ~-36 gravel-granite
+fill ~5 ~-25 ~-36 ~5 ~-25 ~-27 gravel-granite
+fill ~13 ~-25 ~-36 ~13 ~-25 ~-31 gravel-granite
+fill ~19 ~-25 ~-36 ~19 ~-25 ~-32 gravel-granite
+fill ~24 ~-25 ~-36 ~24 ~-25 ~-24 gravel-granite
+fill ~-27 ~-25 ~-36 ~-27 ~-25 ~-32 gravel-granite
+setblock ~-23 ~-25 ~-36 sand-granite
+fill ~-22 ~-25 ~-36 ~-22 ~-25 ~-32 gravel-granite
+fill ~-20 ~-25 ~-36 ~-20 ~-25 ~-33 gravel-granite
+fill ~-19 ~-25 ~-36 ~-19 ~-25 ~-35 sand-granite
+setblock ~-13 ~-25 ~-36 sand-granite
+fill ~-12 ~-25 ~-36 ~-12 ~-25 ~-30 gravel-granite
+fill ~-9 ~-25 ~-36 ~-9 ~-25 ~-33 gravel-granite
+setblock ~-8 ~-25 ~-36 sand-granite
+fill ~1 ~-25 ~-36 ~1 ~-25 ~-31 gravel-granite
+fill ~3 ~-25 ~-36 ~3 ~-25 ~-35 sand-granite
+fill ~4 ~-25 ~-36 ~4 ~-25 ~-34 gravel-granite
+setblock ~8 ~-25 ~-36 sand-granite
+fill ~14 ~-25 ~-36 ~14 ~-25 ~-23 gravel-granite
+fill ~16 ~-25 ~-36 ~16 ~-25 ~-27 gravel-granite
+fill ~18 ~-25 ~-36 ~18 ~-25 ~-31 gravel-granite
+setblock ~23 ~-25 ~-36 sand-granite
+fill ~27 ~-25 ~-36 ~27 ~-25 ~-29 gravel-granite
+fill ~-29 ~-25 ~-35 ~-29 ~-25 ~-34 sand-granite
+setblock ~-26 ~-25 ~-35 sand-granite
+setblock ~-23 ~-25 ~-35 gravel-granite
+fill ~-16 ~-25 ~-35 ~-16 ~-25 ~-30 gravel-granite
+setblock ~-15 ~-25 ~-35 sand-granite
+fill ~-13 ~-25 ~-35 ~-13 ~-25 ~-33 gravel-granite
+fill ~-8 ~-25 ~-35 ~-8 ~-25 ~-34 gravel-granite
+setblock ~2 ~-25 ~-35 sand-granite
+fill ~8 ~-25 ~-35 ~8 ~-25 ~-34 gravel-granite
+setblock ~10 ~-25 ~-35 sand-granite
+setblock ~20 ~-25 ~-35 sand-granite
+fill ~21 ~-25 ~-35 ~21 ~-25 ~-32 gravel-granite
+fill ~23 ~-25 ~-35 ~23 ~-25 ~-23 gravel-granite
+setblock ~28 ~-25 ~-35 sand-granite
+setblock ~-26 ~-25 ~-34 gravel-granite
+setblock ~-23 ~-25 ~-34 sand-granite
+fill ~-21 ~-25 ~-34 ~-21 ~-25 ~-33 sand-granite
+fill ~-19 ~-25 ~-34 ~-19 ~-25 ~-33 gravel-granite
+setblock ~-15 ~-25 ~-34 gravel-granite
+setblock ~-11 ~-25 ~-34 sand-granite
+setblock ~-6 ~-25 ~-34 sand-granite
+fill ~-5 ~-25 ~-34 ~-5 ~-25 ~-32 gravel-granite
+setblock ~-3 ~-25 ~-34 sand-granite
+fill ~-2 ~-25 ~-34 ~-1 ~-25 ~-34 gravel-granite
+fill ~ ~-25 ~-34 ~ ~-25 ~-33 sand-granite
+fill ~2 ~-25 ~-34 ~3 ~-25 ~-24 gravel-granite
+fill ~7 ~-25 ~-34 ~7 ~-25 ~-30 gravel-granite
+fill ~10 ~-25 ~-34 ~10 ~-25 ~-29 gravel-granite
+setblock ~20 ~-25 ~-34 gravel-granite
+setblock ~22 ~-25 ~-34 sand-granite
+fill ~28 ~-25 ~-34 ~28 ~-25 ~-32 gravel-granite
+fill ~-29 ~-25 ~-33 ~-29 ~-25 ~-32 gravel-granite
+setblock ~-28 ~-25 ~-33 sand-granite
+setblock ~-26 ~-25 ~-33 sand-granite
+fill ~-23 ~-25 ~-33 ~-23 ~-25 ~-32 gravel-granite
+setblock ~-15 ~-25 ~-33 sand-granite
+fill ~-11 ~-25 ~-33 ~-11 ~-25 ~-31 gravel-granite
+setblock ~-8 ~-25 ~-33 sand-granite
+fill ~-6 ~-25 ~-33 ~-6 ~-25 ~-28 gravel-granite
+fill ~-3 ~-25 ~-33 ~-3 ~-25 ~-28 gravel-granite
+setblock ~-2 ~-25 ~-33 sand-granite
+fill ~-1 ~-25 ~-33 ~-1 ~-25 ~-30 gravel-granite
+setblock ~4 ~-25 ~-33 sand-granite
+setblock ~6 ~-25 ~-33 sand-granite
+setblock ~8 ~-25 ~-33 sand-granite
+setblock ~20 ~-25 ~-33 sand-granite
+fill ~22 ~-25 ~-33 ~22 ~-25 ~-30 gravel-granite
+setblock ~25 ~-25 ~-33 sand-granite
+fill ~26 ~-25 ~-33 ~26 ~-25 ~-32 gravel-granite
+setblock ~-28 ~-25 ~-32 gravel-granite
+fill ~-26 ~-25 ~-32 ~-26 ~-25 ~-31 gravel-granite
+fill ~-21 ~-25 ~-32 ~-21 ~-25 ~-27 gravel-granite
+fill ~-20 ~-25 ~-32 ~-18 ~-25 ~-32 sand-granite
+fill ~-15 ~-25 ~-32 ~-15 ~-25 ~-31 gravel-granite
+setblock ~-13 ~-25 ~-32 sand-granite
+setblock ~-9 ~-25 ~-32 sand-granite
+setblock ~-8 ~-25 ~-32 gravel-granite
+setblock ~-7 ~-25 ~-32 sand-granite
+fill ~-2 ~-25 ~-32 ~-2 ~-25 ~-27 gravel-granite
+fill ~ ~-25 ~-32 ~ ~-25 ~-30 gravel-granite
+fill ~4 ~-25 ~-32 ~4 ~-25 ~-28 gravel-granite
+setblock ~6 ~-25 ~-32 gravel-granite
+fill ~8 ~-25 ~-32 ~8 ~-25 ~-30 gravel-granite
+setblock ~20 ~-25 ~-32 gravel-granite
+setblock ~25 ~-25 ~-32 gravel-granite
+fill ~-30 ~-25 ~-31 ~-30 ~-23 ~-15 cobblestone-granite
+fill ~-29 ~-25 ~-31 ~-29 ~-25 ~-28 stonebricks-granite
+fill ~-28 ~-25 ~-31 ~-27 ~-25 ~-31 sand-granite
+fill ~-25 ~-25 ~-31 ~-25 ~-25 ~-29 sand-granite
+fill ~-23 ~-25 ~-31 ~-22 ~-25 ~-31 sand-granite
+fill ~-20 ~-25 ~-31 ~-20 ~-25 ~-25 gravel-granite
+setblock ~-19 ~-25 ~-31 sand-granite
+fill ~-18 ~-25 ~-31 ~-18 ~-25 ~-23 gravel-granite
+setblock ~-17 ~-25 ~-31 sand-granite
+setblock ~-13 ~-25 ~-31 gravel-granite
+setblock ~-9 ~-25 ~-31 gravel-granite
+setblock ~-8 ~-25 ~-31 sand-granite
+fill ~-7 ~-25 ~-31 ~-7 ~-25 ~-24 gravel-granite
+setblock ~-5 ~-25 ~-31 sand-granite
+setblock ~6 ~-25 ~-31 sand-granite
+fill ~19 ~-25 ~-31 ~21 ~-25 ~-31 sand-granite
+fill ~25 ~-25 ~-31 ~26 ~-25 ~-31 sand-granite
+fill ~28 ~-25 ~-31 ~28 ~-25 ~-28 stonebricks-granite
+fill ~29 ~-25 ~-31 ~29 ~-23 ~-15 cobblestone-granite
+fill ~-28 ~-25 ~-30 ~-27 ~-25 ~-29 gravel-granite
+fill ~-26 ~-25 ~-30 ~-26 ~-25 ~-29 sand-granite
+fill ~-23 ~-25 ~-30 ~-22 ~-25 ~-27 gravel-granite
+fill ~-19 ~-25 ~-30 ~-19 ~-25 ~-23 gravel-granite
+setblock ~-17 ~-25 ~-30 gravel-granite
+fill ~-15 ~-25 ~-30 ~-15 ~-25 ~-29 sand-granite
+setblock ~-13 ~-25 ~-30 sand-granite
+setblock ~-11 ~-25 ~-30 sand-granite
+fill ~-9 ~-25 ~-30 ~-9 ~-25 ~-28 sand-granite
+setblock ~-8 ~-25 ~-30 gravel-granite
+fill ~-5 ~-25 ~-30 ~-5 ~-25 ~-29 gravel-granite
+fill ~1 ~-25 ~-30 ~1 ~-25 ~-27 sand-granite
+fill ~6 ~-25 ~-30 ~6 ~-25 ~-12 gravel-granite
+setblock ~13 ~-25 ~-30 sand-granite
+fill ~18 ~-25 ~-30 ~19 ~-25 ~-30 sand-granite
+fill ~20 ~-25 ~-30 ~20 ~-25 ~-20 gravel-granite
+setblock ~21 ~-25 ~-30 sand-granite
+fill ~25 ~-25 ~-30 ~26 ~-25 ~-25 gravel-granite
+fill ~-17 ~-25 ~-29 ~-16 ~-25 ~-29 sand-granite
+fill ~-13 ~-25 ~-29 ~-13 ~-25 ~-24 gravel-granite
+fill ~-12 ~-25 ~-29 ~-12 ~-25 ~-28 sand-granite
+setblock ~-11 ~-25 ~-29 gravel-granite
+fill ~-8 ~-25 ~-29 ~-8 ~-25 ~-28 sand-granite
+fill ~-1 ~-25 ~-29 ~ ~-25 ~-29 sand-granite
+fill ~7 ~-25 ~-29 ~8 ~-25 ~-29 sand-granite
+setblock ~12 ~-25 ~-29 sand-granite
+fill ~13 ~-25 ~-29 ~13 ~-25 ~-25 gravel-granite
+setblock ~15 ~-25 ~-29 sand-granite
+fill ~18 ~-25 ~-29 ~19 ~-25 ~-29 gravel-granite
+fill ~21 ~-25 ~-29 ~21 ~-25 ~-24 gravel-granite
+setblock ~22 ~-25 ~-29 sand-granite
+setblock ~-28 ~-25 ~-28 gravel-granite
+setblock ~-27 ~-25 ~-28 sand-granite
+fill ~-26 ~-25 ~-28 ~-25 ~-25 ~-27 gravel-granite
+fill ~-17 ~-25 ~-28 ~-15 ~-25 ~-28 gravel-granite
+setblock ~-11 ~-25 ~-28 sand-granite
+setblock ~-5 ~-25 ~-28 sand-granite
+fill ~-1 ~-25 ~-28 ~-1 ~-25 ~-23 gravel-granite
+setblock ~ ~-25 ~-28 sand-granite
+fill ~7 ~-25 ~-28 ~7 ~-25 ~-23 gravel-granite
+setblock ~8 ~-25 ~-28 sand-granite
+setblock ~10 ~-25 ~-28 sand-granite
+fill ~12 ~-25 ~-28 ~12 ~-25 ~-27 gravel-granite
+setblock ~15 ~-25 ~-28 gravel-granite
+setblock ~18 ~-25 ~-28 sand-granite
+fill ~19 ~-25 ~-28 ~19 ~-25 ~-20 gravel-granite
+fill ~22 ~-25 ~-28 ~22 ~-25 ~-26 gravel-granite
+setblock ~27 ~-25 ~-28 sand-granite
+fill ~-29 ~-25 ~-27 ~-29 ~-23 ~-13 cobblestone-granite
+fill ~-28 ~-25 ~-27 ~-28 ~-25 ~-25 stonebricks-granite
+fill ~-27 ~-25 ~-27 ~-27 ~-25 ~-25 gravel-granite
+setblock ~-24 ~-25 ~-27 sand-granite
+fill ~-17 ~-25 ~-27 ~-17 ~-25 ~-25 gravel-granite
+fill ~-16 ~-25 ~-27 ~-16 ~-25 ~-26 sand-granite
+fill ~-15 ~-25 ~-27 ~-15 ~-25 ~-20 gravel-granite
+fill ~-14 ~-25 ~-27 ~-14 ~-25 ~-26 sand-granite
+fill ~-12 ~-25 ~-27 ~-11 ~-25 ~-25 gravel-granite
+fill ~-9 ~-25 ~-27 ~-8 ~-25 ~-27 gravel-granite
+setblock ~-6 ~-25 ~-27 sand-granite
+fill ~-5 ~-25 ~-27 ~-5 ~-25 ~-22 gravel-granite
+setblock ~-3 ~-25 ~-27 sand-granite
+setblock ~ ~-25 ~-27 gravel-granite
+setblock ~4 ~-25 ~-27 sand-granite
+fill ~8 ~-25 ~-27 ~8 ~-25 ~-15 gravel-granite
+fill ~10 ~-25 ~-27 ~10 ~-25 ~-12 gravel-granite
+setblock ~15 ~-25 ~-27 sand-granite
+setblock ~17 ~-25 ~-27 sand-granite
+setblock ~18 ~-25 ~-27 gravel-granite
+fill ~27 ~-25 ~-27 ~27 ~-25 ~-25 stonebricks-granite
+fill ~28 ~-25 ~-27 ~28 ~-23 ~-13 cobblestone-granite
+fill ~-26 ~-25 ~-26 ~-26 ~-25 ~-24 sand-granite
+fill ~-25 ~-25 ~-26 ~-24 ~-25 ~-25 gravel-granite
+fill ~-23 ~-25 ~-26 ~-23 ~-25 ~-25 sand-granite
+fill ~-22 ~-25 ~-26 ~-22 ~-25 ~-18 gravel-granite
+setblock ~-21 ~-25 ~-26 sand-granite
+fill ~-9 ~-25 ~-26 ~-9 ~-25 ~-21 gravel-granite
+setblock ~-8 ~-25 ~-26 sand-granite
+fill ~-6 ~-25 ~-26 ~-6 ~-25 ~-25 gravel-granite
+fill ~-3 ~-25 ~-26 ~-3 ~-25 ~-18 gravel-granite
+fill ~-2 ~-25 ~-26 ~-2 ~-25 ~-25 sand-granite
+setblock ~ ~-25 ~-26 sand-granite
+fill ~1 ~-25 ~-26 ~1 ~-25 ~-10 gravel-granite
+fill ~4 ~-25 ~-26 ~4 ~-25 ~-16 gravel-granite
+fill ~5 ~-25 ~-26 ~5 ~-25 ~-24 sand-granite
+fill ~12 ~-25 ~-26 ~12 ~-25 ~-25 sand-granite
+setblock ~15 ~-25 ~-26 gravel-granite
+fill ~16 ~-25 ~-26 ~16 ~-25 ~-25 sand-granite
+fill ~17 ~-25 ~-26 ~17 ~-25 ~-25 gravel-granite
+setblock ~18 ~-25 ~-26 sand-granite
+fill ~-21 ~-25 ~-25 ~-21 ~-25 ~-16 gravel-granite
+fill ~-16 ~-25 ~-25 ~-16 ~-25 ~-23 gravel-granite
+fill ~-14 ~-25 ~-25 ~-14 ~-25 ~-23 gravel-granite
+setblock ~-10 ~-25 ~-25 sand-granite
+fill ~-8 ~-25 ~-25 ~-8 ~-25 ~-21 gravel-granite
+fill ~ ~-25 ~-25 ~ ~-25 ~-21 gravel-granite
+setblock ~9 ~-25 ~-25 sand-granite
+fill ~15 ~-25 ~-25 ~15 ~-25 ~-24 sand-granite
+fill ~18 ~-25 ~-25 ~18 ~-25 ~-20 gravel-granite
+setblock ~22 ~-25 ~-25 sand-granite
+fill ~-28 ~-25 ~-24 ~-28 ~-23 ~-12 cobblestone-granite
+fill ~-27 ~-25 ~-24 ~-27 ~-25 ~-23 stonebricks-granite
+fill ~-25 ~-25 ~-24 ~-25 ~-25 ~-23 gravel-granite
+fill ~-24 ~-25 ~-24 ~-24 ~-25 ~-23 sand-granite
+setblock ~-23 ~-25 ~-24 gravel-granite
+setblock ~-20 ~-25 ~-24 sand-granite
+setblock ~-17 ~-25 ~-24 sand-granite
+fill ~-12 ~-25 ~-24 ~-12 ~-25 ~-10 gravel-granite
+setblock ~-11 ~-25 ~-24 sand-granite
+setblock ~-10 ~-25 ~-24 gravel-granite
+setblock ~-6 ~-25 ~-24 sand-granite
+fill ~-2 ~-25 ~-24 ~-2 ~-25 ~-21 gravel-granite
+fill ~9 ~-25 ~-24 ~9 ~-25 ~-23 gravel-granite
+fill ~12 ~-25 ~-24 ~12 ~-25 ~-22 gravel-granite
+setblock ~13 ~-25 ~-24 sand-granite
+fill ~16 ~-25 ~-24 ~16 ~-25 ~-16 gravel-granite
+fill ~17 ~-25 ~-24 ~17 ~-25 ~-23 sand-granite
+setblock ~22 ~-25 ~-24 gravel-granite
+fill ~25 ~-25 ~-24 ~25 ~-25 ~-23 gravel-granite
+fill ~26 ~-25 ~-24 ~26 ~-25 ~-23 stonebricks-granite
+fill ~27 ~-25 ~-24 ~27 ~-23 ~-12 cobblestone-granite
+setblock ~-26 ~-25 ~-23 gravel-granite
+fill ~-23 ~-25 ~-23 ~-23 ~-25 ~-22 sand-granite
+setblock ~-20 ~-25 ~-23 gravel-granite
+fill ~-17 ~-25 ~-23 ~-17 ~-25 ~-16 gravel-granite
+fill ~-13 ~-25 ~-23 ~-13 ~-25 ~-22 sand-granite
+fill ~-11 ~-25 ~-23 ~-11 ~-25 ~-21 gravel-granite
+setblock ~-10 ~-25 ~-23 sand-granite
+setblock ~-7 ~-25 ~-23 sand-granite
+setblock ~-6 ~-25 ~-23 gravel-granite
+fill ~2 ~-25 ~-23 ~3 ~-25 ~-23 sand-granite
+fill ~5 ~-25 ~-23 ~5 ~-25 ~-20 gravel-granite
+setblock ~13 ~-25 ~-23 gravel-granite
+fill ~15 ~-25 ~-23 ~15 ~-25 ~-19 gravel-granite
+fill ~21 ~-25 ~-23 ~22 ~-25 ~-23 sand-granite
+setblock ~24 ~-25 ~-23 sand-granite
+fill ~-27 ~-25 ~-22 ~-27 ~-23 ~-11 cobblestone-granite
+fill ~-26 ~-25 ~-22 ~-26 ~-25 ~-21 stonebricks-granite
+fill ~-25 ~-25 ~-22 ~-25 ~-25 ~-21 sand-granite
+setblock ~-24 ~-25 ~-22 gravel-granite
+fill ~-20 ~-25 ~-22 ~-18 ~-25 ~-22 sand-granite
+setblock ~-16 ~-25 ~-22 sand-granite
+setblock ~-14 ~-25 ~-22 sand-granite
+fill ~-10 ~-25 ~-22 ~-10 ~-25 ~-19 gravel-granite
+fill ~-7 ~-25 ~-22 ~-7 ~-25 ~-19 gravel-granite
+setblock ~-6 ~-25 ~-22 sand-granite
+setblock ~-4 ~-25 ~-22 sand-granite
+setblock ~-1 ~-25 ~-22 sand-granite
+fill ~2 ~-25 ~-22 ~3 ~-25 ~-22 gravel-granite
+setblock ~7 ~-25 ~-22 sand-granite
+fill ~9 ~-25 ~-22 ~9 ~-25 ~-21 sand-granite
+fill ~13 ~-25 ~-22 ~14 ~-25 ~-22 sand-granite
+fill ~17 ~-25 ~-22 ~17 ~-25 ~-21 gravel-granite
+fill ~21 ~-25 ~-22 ~22 ~-25 ~-19 gravel-granite
+setblock ~23 ~-25 ~-22 sand-granite
+fill ~24 ~-25 ~-22 ~24 ~-25 ~-21 gravel-granite
+fill ~25 ~-25 ~-22 ~25 ~-25 ~-21 stonebricks-granite
+fill ~26 ~-25 ~-22 ~26 ~-23 ~-11 cobblestone-granite
+setblock ~-24 ~-25 ~-21 sand-granite
+fill ~-23 ~-25 ~-21 ~-23 ~-25 ~-19 gravel-granite
+fill ~-20 ~-25 ~-21 ~-19 ~-25 ~-21 sand-granite
+fill ~-18 ~-25 ~-21 ~-18 ~-25 ~-17 gravel-granite
+fill ~-16 ~-25 ~-21 ~-16 ~-25 ~-13 gravel-granite
+fill ~-14 ~-25 ~-21 ~-13 ~-25 ~-13 gravel-granite
+setblock ~-6 ~-25 ~-21 gravel-granite
+setblock ~-5 ~-25 ~-21 sand-granite
+setblock ~-4 ~-25 ~-21 gravel-granite
+fill ~-1 ~-25 ~-21 ~-1 ~-25 ~-19 gravel-granite
+setblock ~2 ~-25 ~-21 gravel-granite
+fill ~3 ~-25 ~-21 ~3 ~-25 ~-19 sand-granite
+fill ~7 ~-25 ~-21 ~7 ~-25 ~-20 gravel-granite
+setblock ~12 ~-25 ~-21 sand-granite
+fill ~13 ~-25 ~-21 ~13 ~-25 ~-19 gravel-granite
+setblock ~14 ~-25 ~-21 sand-granite
+fill ~23 ~-25 ~-21 ~23 ~-25 ~-20 gravel-granite
+fill ~-26 ~-25 ~-20 ~-26 ~-23 ~-10 cobblestone-granite
+setblock ~-25 ~-25 ~-20 stonebricks-granite
+setblock ~-24 ~-25 ~-20 gravel-granite
+fill ~-20 ~-25 ~-20 ~-19 ~-25 ~-19 gravel-granite
+setblock ~-11 ~-25 ~-20 sand-granite
+fill ~-9 ~-25 ~-20 ~-8 ~-25 ~-20 sand-granite
+setblock ~-6 ~-25 ~-20 sand-granite
+fill ~-5 ~-25 ~-20 ~-5 ~-25 ~-17 gravel-granite
+setblock ~-4 ~-25 ~-20 sand-granite
+setblock ~-2 ~-25 ~-20 stonebricks-granite
+setblock ~ ~-25 ~-20 sand-granite
+setblock ~2 ~-25 ~-20 stonebricks-granite
+fill ~9 ~-25 ~-20 ~9 ~-25 ~-17 gravel-granite
+fill ~12 ~-25 ~-20 ~12 ~-25 ~-19 gravel-granite
+fill ~14 ~-25 ~-20 ~14 ~-25 ~-19 gravel-granite
+fill ~17 ~-25 ~-20 ~17 ~-25 ~-19 sand-granite
+setblock ~24 ~-25 ~-20 stonebricks-granite
+fill ~25 ~-25 ~-20 ~25 ~-23 ~-10 cobblestone-granite
+fill ~-25 ~-25 ~-19 ~-25 ~-23 ~-9 cobblestone-granite
+fill ~-24 ~-25 ~-19 ~-24 ~-25 ~-18 stonebricks-granite
+fill ~-15 ~-25 ~-19 ~-15 ~-25 ~-18 sand-granite
+fill ~-11 ~-25 ~-19 ~-11 ~-25 ~-17 gravel-granite
+fill ~-9 ~-25 ~-19 ~-8 ~-25 ~-19 gravel-granite
+setblock ~-6 ~-25 ~-19 gravel-granite
+fill ~-4 ~-25 ~-19 ~-4 ~-25 ~-15 gravel-granite
+fill ~-2 ~-25 ~-19 ~-2 ~-25 ~-17 gravel-granite
+fill ~ ~-25 ~-19 ~ ~-25 ~-17 gravel-granite
+fill ~2 ~-25 ~-19 ~2 ~-25 ~-18 gravel-granite
+fill ~5 ~-25 ~-19 ~5 ~-25 ~-18 sand-granite
+setblock ~7 ~-25 ~-19 sand-granite
+fill ~18 ~-25 ~-19 ~20 ~-25 ~-19 sand-granite
+fill ~23 ~-25 ~-19 ~23 ~-25 ~-18 stonebricks-granite
+fill ~24 ~-25 ~-19 ~24 ~-23 ~-9 cobblestone-granite
+fill ~-23 ~-25 ~-18 ~-23 ~-25 ~-17 stonebricks-granite
+setblock ~-20 ~-25 ~-18 sand-granite
+fill ~-19 ~-25 ~-18 ~-19 ~-25 ~-15 gravel-granite
+fill ~-10 ~-25 ~-18 ~-10 ~-25 ~-17 sand-granite
+fill ~-9 ~-25 ~-18 ~-9 ~-25 ~-16 gravel-granite
+fill ~-8 ~-25 ~-18 ~-6 ~-25 ~-18 sand-granite
+setblock ~-1 ~-25 ~-18 sand-granite
+setblock ~3 ~-25 ~-18 gravel-granite
+fill ~7 ~-25 ~-18 ~7 ~-25 ~-13 gravel-granite
+fill ~12 ~-25 ~-18 ~15 ~-25 ~-18 sand-granite
+fill ~17 ~-25 ~-18 ~21 ~-25 ~-18 gravel-granite
+fill ~22 ~-25 ~-18 ~22 ~-25 ~-17 stonebricks-granite
+fill ~-24 ~-25 ~-17 ~-24 ~-23 ~-8 cobblestone-granite
+fill ~-22 ~-25 ~-17 ~-22 ~-25 ~-16 stonebricks-granite
+fill ~-20 ~-25 ~-17 ~-20 ~-25 ~-16 gravel-granite
+fill ~-15 ~-25 ~-17 ~-15 ~-25 ~-12 gravel-granite
+fill ~-8 ~-25 ~-17 ~-6 ~-25 ~-17 gravel-granite
+fill ~-3 ~-25 ~-17 ~-3 ~-25 ~-16 sand-granite
+fill ~-1 ~-25 ~-17 ~-1 ~-25 ~-13 gravel-granite
+fill ~2 ~-25 ~-17 ~3 ~-25 ~-17 sand-granite
+setblock ~5 ~-25 ~-17 gravel-granite
+fill ~12 ~-25 ~-17 ~12 ~-25 ~-13 gravel-granite
+setblock ~13 ~-25 ~-17 sand-granite
+fill ~14 ~-25 ~-17 ~15 ~-25 ~-16 gravel-granite
+fill ~17 ~-25 ~-17 ~17 ~-25 ~-14 gravel-granite
+fill ~18 ~-25 ~-17 ~19 ~-25 ~-16 sand-granite
+fill ~20 ~-25 ~-17 ~20 ~-25 ~-16 gravel-granite
+fill ~21 ~-25 ~-17 ~21 ~-25 ~-16 stonebricks-granite
+fill ~23 ~-25 ~-17 ~23 ~-23 ~-8 cobblestone-granite
+fill ~-23 ~-25 ~-16 ~-23 ~-23 ~-8 cobblestone-granite
+setblock ~-18 ~-25 ~-16 sand-granite
+fill ~-11 ~-25 ~-16 ~-11 ~-25 ~-14 sand-granite
+fill ~-10 ~-25 ~-16 ~-10 ~-25 ~-10 gravel-granite
+fill ~-8 ~-25 ~-16 ~-7 ~-25 ~-15 gravel-granite
+fill ~-6 ~-25 ~-16 ~-5 ~-25 ~-16 sand-granite
+setblock ~-2 ~-25 ~-16 stonebricks-granite
+setblock ~ ~-25 ~-16 sand-granite
+setblock ~2 ~-25 ~-16 stonebricks-granite
+fill ~3 ~-25 ~-16 ~3 ~-25 ~-9 gravel-granite
+setblock ~5 ~-25 ~-16 sand-granite
+fill ~9 ~-25 ~-16 ~9 ~-25 ~-15 sand-granite
+fill ~13 ~-25 ~-16 ~13 ~-25 ~-15 gravel-granite
+fill ~22 ~-25 ~-16 ~22 ~-23 ~-8 cobblestone-granite
+fill ~-22 ~-25 ~-15 ~-22 ~-23 ~-7 cobblestone-granite
+fill ~-21 ~-25 ~-15 ~-20 ~-25 ~-15 stonebricks-granite
+fill ~-18 ~-25 ~-15 ~-18 ~-25 ~-14 gravel-granite
+fill ~-17 ~-25 ~-15 ~-17 ~-25 ~-14 sand-granite
+setblock ~-9 ~-25 ~-15 sand-granite
+fill ~-6 ~-25 ~-15 ~-5 ~-25 ~-12 gravel-granite
+fill ~-3 ~-25 ~-15 ~-2 ~-25 ~-13 gravel-granite
+fill ~ ~-25 ~-15 ~ ~-25 ~-12 gravel-granite
+setblock ~2 ~-25 ~-15 gravel-granite
+setblock ~4 ~-25 ~-15 sand-granite
+fill ~5 ~-25 ~-15 ~5 ~-25 ~-9 gravel-granite
+setblock ~14 ~-25 ~-15 sand-granite
+fill ~15 ~-25 ~-15 ~15 ~-25 ~-12 gravel-granite
+setblock ~16 ~-25 ~-15 sand-granite
+setblock ~18 ~-25 ~-15 sand-granite
+fill ~19 ~-25 ~-15 ~20 ~-25 ~-15 stonebricks-granite
+fill ~21 ~-25 ~-15 ~21 ~-23 ~-7 cobblestone-granite
+fill ~-21 ~-25 ~-14 ~-21 ~-23 ~-6 cobblestone-granite
+fill ~-20 ~-25 ~-14 ~-19 ~-25 ~-14 stonebricks-granite
+fill ~-9 ~-25 ~-14 ~-8 ~-25 ~-12 gravel-granite
+setblock ~-7 ~-25 ~-14 sand-granite
+setblock ~-4 ~-25 ~-14 sand-granite
+setblock ~2 ~-25 ~-14 sand-granite
+fill ~4 ~-25 ~-14 ~4 ~-25 ~-10 gravel-granite
+setblock ~8 ~-25 ~-14 sand-granite
+fill ~9 ~-25 ~-14 ~9 ~-25 ~-11 gravel-granite
+setblock ~11 ~-25 ~-14 sand-granite
+setblock ~13 ~-25 ~-14 sand-granite
+fill ~14 ~-25 ~-14 ~14 ~-25 ~-13 gravel-granite
+fill ~16 ~-25 ~-14 ~16 ~-25 ~-13 gravel-granite
+fill ~18 ~-25 ~-14 ~19 ~-25 ~-14 stonebricks-granite
+fill ~20 ~-25 ~-14 ~20 ~-23 ~-6 cobblestone-granite
+fill ~-20 ~-25 ~-13 ~-20 ~-23 ~-6 cobblestone-granite
+fill ~-19 ~-25 ~-13 ~-18 ~-25 ~-13 stonebricks-granite
+setblock ~-17 ~-25 ~-13 gravel-granite
+setblock ~-11 ~-25 ~-13 gravel-granite
+fill ~-7 ~-25 ~-13 ~-7 ~-25 ~-9 gravel-granite
+setblock ~-4 ~-25 ~-13 gravel-granite
+setblock ~2 ~-25 ~-13 gravel-granite
+fill ~8 ~-25 ~-13 ~8 ~-25 ~-9 gravel-granite
+fill ~11 ~-25 ~-13 ~11 ~-25 ~-12 gravel-granite
+fill ~13 ~-25 ~-13 ~13 ~-25 ~-12 gravel-granite
+fill ~17 ~-25 ~-13 ~18 ~-25 ~-13 stonebricks-granite
+fill ~19 ~-25 ~-13 ~19 ~-23 ~-6 cobblestone-granite
+fill ~-19 ~-25 ~-12 ~-18 ~-23 ~-5 cobblestone-granite
+setblock ~-17 ~-25 ~-12 stonebricks-granite
+setblock ~-16 ~-25 ~-12 sand-granite
+setblock ~-14 ~-25 ~-12 gravel-granite
+setblock ~-13 ~-25 ~-12 sand-granite
+setblock ~-11 ~-25 ~-12 sand-granite
+fill ~-4 ~-25 ~-12 ~-4 ~-25 ~-11 sand-granite
+fill ~-3 ~-25 ~-12 ~-3 ~-25 ~-8 gravel-granite
+setblock ~-2 ~-25 ~-12 stonebricks-granite
+setblock ~-1 ~-25 ~-12 sand-granite
+setblock ~2 ~-25 ~-12 stonebricks-granite
+setblock ~7 ~-25 ~-12 sand-granite
+fill ~12 ~-25 ~-12 ~12 ~-25 ~-11 sand-granite
+setblock ~14 ~-25 ~-12 sand-granite
+setblock ~16 ~-25 ~-12 stonebricks-granite
+fill ~17 ~-25 ~-12 ~18 ~-23 ~-5 cobblestone-granite
+fill ~-17 ~-25 ~-11 ~-17 ~-23 ~-4 cobblestone-granite
+fill ~-16 ~-25 ~-11 ~-15 ~-25 ~-11 stonebricks-granite
+setblock ~-14 ~-25 ~-11 sand-granite
+setblock ~-13 ~-25 ~-11 gravel-granite
+setblock ~-11 ~-25 ~-11 gravel-granite
+setblock ~-9 ~-25 ~-11 sand-granite
+fill ~-8 ~-25 ~-11 ~-8 ~-25 ~-9 gravel-granite
+setblock ~-6 ~-25 ~-11 sand-granite
+fill ~-5 ~-25 ~-11 ~-5 ~-25 ~-9 gravel-granite
+fill ~-2 ~-25 ~-11 ~-1 ~-25 ~-9 gravel-granite
+setblock ~ ~-25 ~-11 sand-granite
+fill ~2 ~-25 ~-11 ~2 ~-25 ~-9 gravel-granite
+setblock ~6 ~-25 ~-11 sand-granite
+setblock ~7 ~-25 ~-11 gravel-granite
+fill ~10 ~-25 ~-11 ~11 ~-25 ~-11 sand-granite
+setblock ~13 ~-25 ~-11 sand-granite
+fill ~14 ~-25 ~-11 ~15 ~-25 ~-11 stonebricks-granite
+fill ~16 ~-25 ~-11 ~16 ~-23 ~-4 cobblestone-granite
+fill ~-16 ~-25 ~-10 ~-15 ~-23 ~-3 cobblestone-granite
+fill ~-14 ~-25 ~-10 ~-13 ~-25 ~-10 stonebricks-granite
+setblock ~-11 ~-25 ~-10 sand-granite
+fill ~-9 ~-25 ~-10 ~-9 ~-25 ~-9 gravel-granite
+setblock ~-6 ~-25 ~-10 gravel-granite
+fill ~-4 ~-25 ~-10 ~-4 ~-25 ~-8 gravel-granite
+fill ~ ~-25 ~-10 ~ ~-25 ~-8 gravel-granite
+setblock ~6 ~-25 ~-10 gravel-granite
+fill ~7 ~-25 ~-10 ~7 ~-25 ~-9 sand-granite
+setblock ~9 ~-25 ~-10 sand-granite
+fill ~10 ~-25 ~-10 ~11 ~-25 ~-10 gravel-granite
+fill ~12 ~-25 ~-10 ~13 ~-25 ~-10 stonebricks-granite
+fill ~14 ~-25 ~-10 ~15 ~-23 ~-3 cobblestone-granite
+fill ~-14 ~-25 ~-9 ~-13 ~-23 ~-3 cobblestone-granite
+fill ~-12 ~-25 ~-9 ~-10 ~-25 ~-9 stonebricks-granite
+setblock ~-6 ~-25 ~-9 sand-granite
+setblock ~1 ~-25 ~-9 sand-granite
+setblock ~4 ~-25 ~-9 sand-granite
+setblock ~6 ~-25 ~-9 sand-granite
+fill ~9 ~-25 ~-9 ~11 ~-25 ~-9 stonebricks-granite
+fill ~12 ~-25 ~-9 ~13 ~-23 ~-3 cobblestone-granite
+fill ~-12 ~-25 ~-8 ~-10 ~-23 ~-2 cobblestone-granite
+fill ~-9 ~-25 ~-8 ~-6 ~-25 ~-8 stonebricks-granite
+setblock ~-5 ~-25 ~-8 sand-granite
+fill ~-2 ~-25 ~-8 ~-2 ~-25 ~-7 stonebricks-granite
+setblock ~-1 ~-25 ~-8 gravel-granite
+setblock ~1 ~-25 ~-8 gravel-granite
+fill ~2 ~-25 ~-8 ~2 ~-25 ~-7 stonebricks-granite
+setblock ~3 ~-25 ~-8 sand-granite
+setblock ~4 ~-25 ~-8 gravel-granite
+fill ~5 ~-25 ~-8 ~8 ~-25 ~-8 stonebricks-granite
+fill ~9 ~-25 ~-8 ~11 ~-23 ~-2 cobblestone-granite
+fill ~-9 ~-25 ~-7 ~-6 ~-23 ~-1 cobblestone-granite
+fill ~-5 ~-25 ~-7 ~-3 ~-25 ~-7 stonebricks-granite
+fill ~-1 ~-25 ~-7 ~1 ~-25 ~-7 stonebricks-granite
+fill ~3 ~-25 ~-7 ~4 ~-25 ~-7 stonebricks-granite
+fill ~5 ~-25 ~-7 ~8 ~-23 ~-1 cobblestone-granite
+fill ~-5 ~-25 ~-6 ~4 ~-23 ~ cobblestone-granite
+fill ~-18 ~-25 ~-4 ~-18 ~-1 ~-4 cobblestone-granite
+fill ~17 ~-25 ~-4 ~17 ~-1 ~-4 cobblestone-granite
+fill ~-13 ~-25 ~-2 ~-13 ~-1 ~-2 cobblestone-granite
+fill ~12 ~-25 ~-2 ~12 ~-1 ~-2 cobblestone-granite
+fill ~-10 ~-25 ~-1 ~-10 ~-1 ~-1 cobblestone-granite
+fill ~9 ~-25 ~-1 ~9 ~-1 ~-1 cobblestone-granite
+fill ~-6 ~-25 ~ ~-6 ~-16 ~ cobblestone-granite
+fill ~5 ~-25 ~ ~5 ~-23 ~ cobblestone-granite
+fill ~-5 ~-24 ~-36 ~4 ~-1 ~-21 cobblestone-granite
+fill ~-9 ~-24 ~-36 ~-6 ~-1 ~-9 cobblestone-granite
+fill ~5 ~-24 ~-36 ~8 ~-1 ~-9 cobblestone-granite
+fill ~-12 ~-24 ~-36 ~-10 ~-1 ~-10 cobblestone-granite
+fill ~9 ~-24 ~-36 ~11 ~-1 ~-10 cobblestone-granite
+fill ~-14 ~-24 ~-36 ~-13 ~-1 ~-11 cobblestone-granite
+fill ~12 ~-24 ~-36 ~13 ~-1 ~-11 cobblestone-granite
+fill ~-16 ~-24 ~-36 ~-15 ~-1 ~-12 cobblestone-granite
+fill ~14 ~-24 ~-36 ~15 ~-1 ~-12 cobblestone-granite
+fill ~-17 ~-24 ~-36 ~-17 ~-1 ~-13 cobblestone-granite
+fill ~16 ~-24 ~-36 ~16 ~-1 ~-13 cobblestone-granite
+fill ~-18 ~-24 ~-36 ~-18 ~-1 ~-14 cobblestone-granite
+fill ~17 ~-24 ~-36 ~17 ~-1 ~-14 cobblestone-granite
+fill ~-19 ~-24 ~-36 ~-19 ~-1 ~-15 cobblestone-granite
+fill ~18 ~-24 ~-36 ~18 ~-1 ~-15 cobblestone-granite
+fill ~-21 ~-24 ~-36 ~-20 ~-1 ~-16 cobblestone-granite
+fill ~19 ~-24 ~-36 ~20 ~-1 ~-16 cobblestone-granite
+fill ~-22 ~-24 ~-36 ~-22 ~-1 ~-18 cobblestone-granite
+fill ~21 ~-24 ~-36 ~21 ~-1 ~-18 cobblestone-granite
+fill ~-23 ~-24 ~-36 ~-23 ~-1 ~-19 cobblestone-granite
+fill ~22 ~-24 ~-36 ~22 ~-1 ~-19 cobblestone-granite
+fill ~-24 ~-24 ~-36 ~-24 ~-1 ~-20 cobblestone-granite
+fill ~23 ~-24 ~-36 ~23 ~-1 ~-20 cobblestone-granite
+fill ~-25 ~-24 ~-36 ~-25 ~-1 ~-21 cobblestone-granite
+fill ~24 ~-24 ~-36 ~24 ~-1 ~-21 cobblestone-granite
+fill ~-26 ~-24 ~-36 ~-26 ~-1 ~-23 cobblestone-granite
+fill ~25 ~-24 ~-36 ~25 ~-1 ~-23 cobblestone-granite
+fill ~-27 ~-24 ~-36 ~-27 ~-1 ~-25 cobblestone-granite
+fill ~26 ~-24 ~-36 ~26 ~-1 ~-25 cobblestone-granite
+fill ~-28 ~-24 ~-36 ~-28 ~-1 ~-28 cobblestone-granite
+fill ~27 ~-24 ~-36 ~27 ~-1 ~-28 cobblestone-granite
+fill ~-30 ~-24 ~-36 ~-30 ~-2 ~-32 glass-plain
+fill ~-29 ~-24 ~-36 ~-29 ~-1 ~-32 cobblestone-granite
+fill ~28 ~-24 ~-36 ~28 ~-1 ~-32 cobblestone-granite
+fill ~29 ~-24 ~-36 ~29 ~-2 ~-32 glass-plain
+fill ~-29 ~-24 ~-31 ~-29 ~-2 ~-28 glass-plain
+fill ~28 ~-24 ~-31 ~28 ~-2 ~-28 glass-plain
+fill ~-28 ~-24 ~-27 ~-28 ~-2 ~-25 glass-plain
+fill ~27 ~-24 ~-27 ~27 ~-2 ~-25 glass-plain
+fill ~-27 ~-24 ~-24 ~-27 ~-2 ~-23 glass-plain
+fill ~26 ~-24 ~-24 ~26 ~-2 ~-23 glass-plain
+fill ~-26 ~-24 ~-22 ~-26 ~-2 ~-21 glass-plain
+fill ~25 ~-24 ~-22 ~25 ~-2 ~-21 glass-plain
+fill ~-25 ~-24 ~-20 ~-25 ~-2 ~-20 glass-plain
+fill ~-5 ~-24 ~-20 ~-3 ~-1 ~-8 cobblestone-granite
+fill ~-2 ~-24 ~-20 ~-2 ~ ~-20 log-placed-oak-ud
+fill ~-1 ~-24 ~-20 ~1 ~ ~-8 cobblestone-granite
+fill ~2 ~-24 ~-20 ~2 ~ ~-20 log-placed-oak-ud
+fill ~3 ~-24 ~-20 ~4 ~-1 ~-8 cobblestone-granite
+fill ~24 ~-24 ~-20 ~24 ~-2 ~-20 glass-plain
+fill ~-24 ~-24 ~-19 ~-24 ~-2 ~-18 glass-plain
+fill ~-2 ~-24 ~-19 ~-2 ~ ~-17 cobblestone-granite
+fill ~2 ~-24 ~-19 ~2 ~ ~-17 cobblestone-granite
+fill ~23 ~-24 ~-19 ~23 ~-2 ~-18 glass-plain
+fill ~-23 ~-24 ~-18 ~-23 ~-2 ~-17 glass-plain
+fill ~22 ~-24 ~-18 ~22 ~-2 ~-17 glass-plain
+fill ~-22 ~-24 ~-17 ~-22 ~-2 ~-16 glass-plain
+fill ~21 ~-24 ~-17 ~21 ~-2 ~-16 glass-plain
+fill ~-2 ~-24 ~-16 ~-2 ~ ~-16 log-placed-oak-ud
+fill ~2 ~-24 ~-16 ~2 ~ ~-16 log-placed-oak-ud
+fill ~-21 ~-24 ~-15 ~-20 ~-2 ~-15 glass-plain
+fill ~-2 ~-24 ~-15 ~-2 ~ ~-13 cobblestone-granite
+fill ~2 ~-24 ~-15 ~2 ~ ~-13 cobblestone-granite
+fill ~19 ~-24 ~-15 ~20 ~-2 ~-15 glass-plain
+fill ~-20 ~-24 ~-14 ~-19 ~-2 ~-14 glass-plain
+fill ~18 ~-24 ~-14 ~19 ~-2 ~-14 glass-plain
+fill ~-19 ~-24 ~-13 ~-18 ~-2 ~-13 glass-plain
+fill ~17 ~-24 ~-13 ~18 ~-2 ~-13 glass-plain
+fill ~-17 ~-24 ~-12 ~-17 ~-2 ~-12 glass-plain
+fill ~-2 ~-24 ~-12 ~-2 ~ ~-12 log-placed-oak-ud
+fill ~2 ~-24 ~-12 ~2 ~ ~-12 log-placed-oak-ud
+fill ~16 ~-24 ~-12 ~16 ~-2 ~-12 glass-plain
+fill ~-16 ~-24 ~-11 ~-15 ~-2 ~-11 glass-plain
+fill ~-2 ~-24 ~-11 ~-2 ~ ~-9 cobblestone-granite
+fill ~2 ~-24 ~-11 ~2 ~ ~-9 cobblestone-granite
+fill ~14 ~-24 ~-11 ~15 ~-2 ~-11 glass-plain
+fill ~-14 ~-24 ~-10 ~-13 ~-2 ~-10 glass-plain
+fill ~12 ~-24 ~-10 ~13 ~-2 ~-10 glass-plain
+fill ~-12 ~-24 ~-9 ~-10 ~-2 ~-9 glass-plain
+fill ~9 ~-24 ~-9 ~11 ~-2 ~-9 glass-plain
+fill ~-9 ~-24 ~-8 ~-6 ~-2 ~-8 glass-plain
+fill ~-2 ~-24 ~-8 ~-2 ~ ~-8 log-placed-oak-ud
+fill ~2 ~-24 ~-8 ~2 ~ ~-8 log-placed-oak-ud
+fill ~5 ~-24 ~-8 ~8 ~-2 ~-8 glass-plain
+fill ~-5 ~-24 ~-7 ~4 ~-2 ~-7 glass-plain
+fill ~-31 ~-22 ~-36 ~-31 ~-22 ~-18 stonebricks-slate
+fill ~30 ~-22 ~-36 ~30 ~-22 ~-18 stonebricks-slate
+fill ~-32 ~-22 ~-36 ~-32 ~-22 ~-20 stonebricks-slate
+fill ~31 ~-22 ~-36 ~31 ~-22 ~-20 stonebricks-slate
+fill ~-33 ~-22 ~-36 ~-33 ~-22 ~-22 stonebricks-slate
+fill ~32 ~-22 ~-36 ~32 ~-22 ~-22 stonebricks-slate
+fill ~-34 ~-22 ~-36 ~-34 ~-22 ~-24 stonebricks-slate
+fill ~33 ~-22 ~-36 ~33 ~-22 ~-24 stonebricks-slate
+fill ~-35 ~-22 ~-36 ~-35 ~-22 ~-27 stonebricks-slate
+fill ~34 ~-22 ~-36 ~34 ~-22 ~-27 stonebricks-slate
+fill ~-36 ~-22 ~-36 ~-36 ~-22 ~-31 stonebricks-slate
+fill ~35 ~-22 ~-36 ~35 ~-22 ~-31 stonebricks-slate
+fill ~-30 ~-22 ~-31 ~-30 ~-22 ~-16 stonebricks-slate
+fill ~29 ~-22 ~-31 ~29 ~-22 ~-16 stonebricks-slate
+fill ~-36 ~-22 ~-30 ~-36 ~-1 ~-27 cobblestone-granite
+fill ~35 ~-22 ~-30 ~35 ~-1 ~-27 cobblestone-granite
+fill ~-29 ~-22 ~-27 ~-29 ~-22 ~-15 stonebricks-slate
+fill ~28 ~-22 ~-27 ~28 ~-22 ~-15 stonebricks-slate
+fill ~-35 ~-22 ~-26 ~-35 ~-1 ~-24 cobblestone-granite
+fill ~34 ~-22 ~-26 ~34 ~-1 ~-24 cobblestone-granite
+fill ~-28 ~-22 ~-24 ~-28 ~-22 ~-14 stonebricks-slate
+fill ~27 ~-22 ~-24 ~27 ~-22 ~-14 stonebricks-slate
+fill ~-34 ~-22 ~-23 ~-34 ~-1 ~-21 cobblestone-granite
+fill ~33 ~-22 ~-23 ~33 ~-1 ~-21 cobblestone-granite
+fill ~-27 ~-22 ~-22 ~-27 ~-22 ~-13 stonebricks-slate
+fill ~26 ~-22 ~-22 ~26 ~-22 ~-13 stonebricks-slate
+fill ~-33 ~-22 ~-21 ~-33 ~-1 ~-19 cobblestone-granite
+fill ~32 ~-22 ~-21 ~32 ~-1 ~-19 cobblestone-granite
+fill ~-26 ~-22 ~-20 ~-26 ~-22 ~-12 stonebricks-slate
+fill ~25 ~-22 ~-20 ~25 ~-22 ~-12 stonebricks-slate
+fill ~-32 ~-22 ~-19 ~-32 ~-1 ~-18 cobblestone-granite
+fill ~-25 ~-22 ~-19 ~-25 ~-22 ~-11 stonebricks-slate
+fill ~24 ~-22 ~-19 ~24 ~-22 ~-11 stonebricks-slate
+fill ~31 ~-22 ~-19 ~31 ~-1 ~-18 cobblestone-granite
+fill ~-31 ~-22 ~-17 ~-31 ~-1 ~-16 cobblestone-granite
+fill ~-24 ~-22 ~-17 ~-24 ~-22 ~-10 stonebricks-slate
+fill ~23 ~-22 ~-17 ~23 ~-22 ~-10 stonebricks-slate
+fill ~30 ~-22 ~-17 ~30 ~-1 ~-16 cobblestone-granite
+fill ~-23 ~-22 ~-16 ~-23 ~-22 ~-9 stonebricks-slate
+fill ~22 ~-22 ~-16 ~22 ~-22 ~-9 stonebricks-slate
+fill ~-30 ~-22 ~-15 ~-30 ~-1 ~-15 cobblestone-granite
+fill ~-22 ~-22 ~-15 ~-22 ~-22 ~-8 stonebricks-slate
+fill ~21 ~-22 ~-15 ~21 ~-22 ~-8 stonebricks-slate
+fill ~29 ~-22 ~-15 ~29 ~-1 ~-15 cobblestone-granite
+fill ~-29 ~-22 ~-14 ~-29 ~-1 ~-13 cobblestone-granite
+fill ~-21 ~-22 ~-14 ~-21 ~-22 ~-7 stonebricks-slate
+fill ~20 ~-22 ~-14 ~20 ~-22 ~-7 stonebricks-slate
+fill ~28 ~-22 ~-14 ~28 ~-1 ~-13 cobblestone-granite
+fill ~-28 ~-22 ~-13 ~-28 ~-1 ~-12 cobblestone-granite
+fill ~-20 ~-22 ~-13 ~-20 ~-22 ~-7 stonebricks-slate
+fill ~19 ~-22 ~-13 ~19 ~-22 ~-7 stonebricks-slate
+fill ~27 ~-22 ~-13 ~27 ~-1 ~-12 cobblestone-granite
+fill ~-27 ~-22 ~-12 ~-27 ~-1 ~-11 cobblestone-granite
+fill ~-19 ~-22 ~-12 ~-18 ~-22 ~-6 stonebricks-slate
+fill ~17 ~-22 ~-12 ~18 ~-22 ~-6 stonebricks-slate
+fill ~26 ~-22 ~-12 ~26 ~-1 ~-11 cobblestone-granite
+fill ~-26 ~-22 ~-11 ~-26 ~-1 ~-10 cobblestone-granite
+fill ~-17 ~-22 ~-11 ~-17 ~-22 ~-5 stonebricks-slate
+fill ~16 ~-22 ~-11 ~16 ~-22 ~-5 stonebricks-slate
+fill ~25 ~-22 ~-11 ~25 ~-1 ~-10 cobblestone-granite
+fill ~-25 ~-22 ~-10 ~-25 ~-1 ~-9 cobblestone-granite
+fill ~-16 ~-22 ~-10 ~-15 ~-22 ~-5 stonebricks-slate
+fill ~14 ~-22 ~-10 ~15 ~-22 ~-5 stonebricks-slate
+fill ~24 ~-22 ~-10 ~24 ~-1 ~-9 cobblestone-granite
+fill ~-24 ~-22 ~-9 ~-24 ~-1 ~-8 cobblestone-granite
+fill ~-14 ~-22 ~-9 ~-13 ~-22 ~-4 stonebricks-slate
+fill ~12 ~-22 ~-9 ~13 ~-22 ~-4 stonebricks-slate
+fill ~23 ~-22 ~-9 ~23 ~-1 ~-8 cobblestone-granite
+fill ~-23 ~-22 ~-8 ~-23 ~-1 ~-8 cobblestone-granite
+fill ~-12 ~-22 ~-8 ~-10 ~-22 ~-3 stonebricks-slate
+fill ~9 ~-22 ~-8 ~11 ~-22 ~-3 stonebricks-slate
+fill ~22 ~-22 ~-8 ~22 ~-1 ~-8 cobblestone-granite
+fill ~-22 ~-22 ~-7 ~-22 ~-1 ~-7 cobblestone-granite
+fill ~-9 ~-22 ~-7 ~-6 ~-22 ~-2 stonebricks-slate
+fill ~5 ~-22 ~-7 ~8 ~-22 ~-4 stonebricks-slate
+fill ~21 ~-22 ~-7 ~21 ~-1 ~-7 cobblestone-granite
+fill ~-21 ~-22 ~-6 ~-20 ~-1 ~-6 cobblestone-granite
+fill ~-5 ~-22 ~-6 ~4 ~-22 ~-4 stonebricks-slate
+fill ~19 ~-22 ~-6 ~20 ~-1 ~-6 cobblestone-granite
+fill ~-19 ~-22 ~-5 ~-18 ~-1 ~-5 cobblestone-granite
+fill ~17 ~-22 ~-5 ~18 ~-1 ~-5 cobblestone-granite
+fill ~-17 ~-22 ~-4 ~-16 ~-1 ~-4 cobblestone-granite
+setblock ~-15 ~-22 ~-4 stonebricks-slate
+setblock ~14 ~-22 ~-4 stonebricks-slate
+fill ~15 ~-22 ~-4 ~16 ~-1 ~-4 cobblestone-granite
+fill ~-16 ~-22 ~-3 ~-14 ~-1 ~-3 cobblestone-granite
+setblock ~-13 ~-22 ~-3 stonebricks-slate
+fill ~-5 ~-22 ~-3 ~3 ~-22 ~-1 stonebricks-slate
+fill ~4 ~-22 ~-3 ~7 ~-22 ~26 stonebricks-granite
+fill ~8 ~-22 ~-3 ~8 ~-22 ~-2 stonebricks-slate
+setblock ~12 ~-22 ~-3 stonebricks-slate
+fill ~13 ~-22 ~-3 ~15 ~-1 ~-3 cobblestone-granite
+fill ~-12 ~-22 ~-2 ~-11 ~-1 ~-2 cobblestone-granite
+setblock ~-10 ~-22 ~-2 stonebricks-slate
+setblock ~9 ~-22 ~-2 stonebricks-slate
+fill ~10 ~-22 ~-2 ~11 ~-1 ~-2 cobblestone-granite
+fill ~-9 ~-22 ~-1 ~-7 ~-16 ~-1 cobblestone-granite
+setblock ~-6 ~-22 ~-1 stonebricks-slate
+fill ~8 ~-22 ~-1 ~8 ~-1 ~-1 cobblestone-granite
+fill ~-5 ~-22 ~ ~3 ~-16 ~ cobblestone-granite
+fill ~3 ~-22 ~24 ~3 ~-22 ~26 stonebricks-granite
+fill ~-2 ~-22 ~25 ~2 ~-22 ~25 stonebricks-granite
+fill ~8 ~-21 ~ ~8 ~-18 ~26 cobblestone-granite
+fill ~3 ~-21 ~1 ~3 ~-18 ~23 cobblestone-granite
+fill ~-2 ~-21 ~24 ~2 ~-21 ~24 stonebricks-granite
+fill ~-3 ~-21 ~25 ~-3 ~-18 ~25 cobblestone-granite
+fill ~-2 ~-21 ~26 ~2 ~-18 ~26 cobblestone-granite
+fill ~3 ~-21 ~27 ~7 ~-18 ~27 cobblestone-granite
+fill ~-2 ~-20 ~23 ~2 ~-20 ~23 stonebricks-granite
+fill ~-3 ~-20 ~24 ~-3 ~-17 ~24 cobblestone-granite
+fill ~-2 ~-19 ~22 ~2 ~-19 ~22 stonebricks-granite
+fill ~-3 ~-19 ~23 ~-3 ~-16 ~23 cobblestone-granite
+setblock ~-36 ~-18 ~-36 stonebrickslab-granite-down-free
+setblock ~35 ~-18 ~-36 stonebrickslab-granite-down-free
+setblock ~-35 ~-18 ~-27 stonebrickslab-granite-down-free
+setblock ~34 ~-18 ~-27 stonebrickslab-granite-down-free
+setblock ~-31 ~-18 ~-19 stonebrickslab-granite-down-free
+setblock ~30 ~-18 ~-19 stonebrickslab-granite-down-free
+setblock ~-18 ~-18 ~-6 stonebrickslab-granite-down-free
+setblock ~17 ~-18 ~-6 stonebrickslab-granite-down-free
+setblock ~-10 ~-18 ~-2 stonebrickslab-granite-down-free
+setblock ~4 ~-18 ~-2 stonebrickslab-granite-down-free
+setblock ~9 ~-18 ~-2 stonebrickslab-granite-down-free
+setblock ~ ~-18 ~-1 stonebrickslab-granite-down-free
+setblock ~4 ~-18 ~4 stonebrickslab-granite-down-free
+setblock ~4 ~-18 ~10 stonebrickslab-granite-down-free
+setblock ~4 ~-18 ~16 stonebrickslab-granite-down-free
+fill ~-2 ~-18 ~21 ~2 ~-18 ~21 stonebricks-granite
+fill ~-3 ~-18 ~22 ~-3 ~-15 ~22 cobblestone-granite
+setblock ~4 ~-18 ~22 stonebrickslab-granite-down-free
+setblock ~-2 ~-18 ~25 stonebrickslab-granite-down-free
+fill ~-31 ~-17 ~-36 ~-31 ~-17 ~-18 stonebricks-granite
+fill ~30 ~-17 ~-36 ~30 ~-17 ~-18 stonebricks-granite
+fill ~-32 ~-17 ~-36 ~-32 ~-17 ~-20 stonebricks-granite
+fill ~31 ~-17 ~-36 ~31 ~-17 ~-20 stonebricks-granite
+fill ~-33 ~-17 ~-36 ~-33 ~-17 ~-22 stonebricks-granite
+fill ~32 ~-17 ~-36 ~32 ~-17 ~-22 stonebricks-granite
+fill ~-34 ~-17 ~-36 ~-34 ~-17 ~-24 stonebricks-granite
+fill ~33 ~-17 ~-36 ~33 ~-17 ~-24 stonebricks-granite
+fill ~-35 ~-17 ~-36 ~-35 ~-17 ~-27 stonebricks-granite
+fill ~34 ~-17 ~-36 ~34 ~-17 ~-27 stonebricks-granite
+fill ~-36 ~-17 ~-36 ~-36 ~-17 ~-31 stonebricks-granite
+fill ~35 ~-17 ~-36 ~35 ~-17 ~-31 stonebricks-granite
+fill ~-30 ~-17 ~-31 ~-30 ~-17 ~-16 stonebricks-granite
+fill ~29 ~-17 ~-31 ~29 ~-17 ~-16 stonebricks-granite
+fill ~-29 ~-17 ~-27 ~-29 ~-17 ~-15 stonebricks-granite
+fill ~28 ~-17 ~-27 ~28 ~-17 ~-15 stonebricks-granite
+fill ~-28 ~-17 ~-24 ~-28 ~-17 ~-14 stonebricks-granite
+fill ~27 ~-17 ~-24 ~27 ~-17 ~-14 stonebricks-granite
+fill ~-27 ~-17 ~-22 ~-27 ~-17 ~-13 stonebricks-granite
+fill ~26 ~-17 ~-22 ~26 ~-17 ~-13 stonebricks-granite
+fill ~-26 ~-17 ~-20 ~-26 ~-17 ~-12 stonebricks-granite
+fill ~25 ~-17 ~-20 ~25 ~-17 ~-12 stonebricks-granite
+fill ~-25 ~-17 ~-19 ~-25 ~-17 ~-11 stonebricks-granite
+fill ~24 ~-17 ~-19 ~24 ~-17 ~-11 stonebricks-granite
+fill ~-24 ~-17 ~-17 ~-24 ~-17 ~-10 stonebricks-granite
+fill ~23 ~-17 ~-17 ~23 ~-17 ~-10 stonebricks-granite
+fill ~-23 ~-17 ~-16 ~-23 ~-17 ~-9 stonebricks-granite
+fill ~22 ~-17 ~-16 ~22 ~-17 ~-9 stonebricks-granite
+fill ~-22 ~-17 ~-15 ~-22 ~-17 ~-8 stonebricks-granite
+fill ~21 ~-17 ~-15 ~21 ~-17 ~-8 stonebricks-granite
+fill ~-21 ~-17 ~-14 ~-21 ~-17 ~-7 stonebricks-granite
+fill ~20 ~-17 ~-14 ~20 ~-17 ~-7 stonebricks-granite
+fill ~-20 ~-17 ~-13 ~-20 ~-17 ~-7 stonebricks-granite
+fill ~19 ~-17 ~-13 ~19 ~-17 ~-7 stonebricks-granite
+fill ~-19 ~-17 ~-12 ~-18 ~-17 ~-6 stonebricks-granite
+fill ~17 ~-17 ~-12 ~18 ~-17 ~-6 stonebricks-granite
+fill ~-17 ~-17 ~-11 ~-17 ~-17 ~-5 stonebricks-granite
+fill ~16 ~-17 ~-11 ~16 ~-17 ~-5 stonebricks-granite
+fill ~-16 ~-17 ~-10 ~-15 ~-17 ~-5 stonebricks-granite
+fill ~14 ~-17 ~-10 ~15 ~-17 ~-5 stonebricks-granite
+fill ~-14 ~-17 ~-9 ~-13 ~-17 ~-4 stonebricks-granite
+fill ~12 ~-17 ~-9 ~13 ~-17 ~-4 stonebricks-granite
+fill ~-12 ~-17 ~-8 ~-10 ~-17 ~-3 stonebricks-granite
+fill ~9 ~-17 ~-8 ~11 ~-17 ~-3 stonebricks-granite
+fill ~-9 ~-17 ~-7 ~-6 ~-17 ~-2 stonebricks-granite
+fill ~5 ~-17 ~-7 ~8 ~-17 ~-2 stonebricks-granite
+fill ~-5 ~-17 ~-6 ~4 ~-17 ~-1 stonebricks-granite
+setblock ~-15 ~-17 ~-4 stonebricks-granite
+setblock ~14 ~-17 ~-4 stonebricks-granite
+setblock ~-13 ~-17 ~-3 stonebricks-granite
+setblock ~12 ~-17 ~-3 stonebricks-granite
+setblock ~-10 ~-17 ~-2 stonebricks-granite
+setblock ~9 ~-17 ~-2 stonebricks-granite
+setblock ~-6 ~-17 ~-1 stonebricks-granite
+setblock ~5 ~-17 ~-1 stonebricks-granite
+fill ~6 ~-17 ~-1 ~7 ~-17 ~26 cobblestone-granite
+fill ~4 ~-17 ~ ~5 ~-17 ~26 cobblestone-granite
+fill ~-2 ~-17 ~20 ~2 ~-17 ~20 stonebricks-granite
+fill ~-3 ~-17 ~21 ~-3 ~-14 ~21 cobblestone-granite
+fill ~3 ~-17 ~21 ~3 ~-17 ~26 cobblestone-granite
+fill ~-2 ~-17 ~25 ~2 ~-17 ~25 cobblestone-granite
+fill ~-31 ~-16 ~-36 ~-31 ~-16 ~-18 cobblestone-granite
+fill ~30 ~-16 ~-36 ~30 ~-16 ~-18 cobblestone-granite
+fill ~-32 ~-16 ~-36 ~-32 ~-16 ~-20 cobblestone-granite
+fill ~31 ~-16 ~-36 ~31 ~-16 ~-20 cobblestone-granite
+fill ~-33 ~-16 ~-36 ~-33 ~-16 ~-22 cobblestone-granite
+fill ~32 ~-16 ~-36 ~32 ~-16 ~-22 cobblestone-granite
+fill ~-34 ~-16 ~-36 ~-34 ~-16 ~-24 cobblestone-granite
+fill ~33 ~-16 ~-36 ~33 ~-16 ~-24 cobblestone-granite
+fill ~-35 ~-16 ~-36 ~-35 ~-16 ~-27 cobblestone-granite
+fill ~34 ~-16 ~-36 ~34 ~-16 ~-27 cobblestone-granite
+fill ~-36 ~-16 ~-36 ~-36 ~-16 ~-31 cobblestone-granite
+fill ~35 ~-16 ~-36 ~35 ~-16 ~-31 cobblestone-granite
+fill ~-30 ~-16 ~-31 ~-30 ~-16 ~-16 cobblestone-granite
+fill ~29 ~-16 ~-31 ~29 ~-16 ~-16 cobblestone-granite
+fill ~-29 ~-16 ~-27 ~-29 ~-16 ~-15 cobblestone-granite
+fill ~28 ~-16 ~-27 ~28 ~-16 ~-15 cobblestone-granite
+fill ~-28 ~-16 ~-24 ~-28 ~-16 ~-14 cobblestone-granite
+fill ~27 ~-16 ~-24 ~27 ~-16 ~-14 cobblestone-granite
+fill ~-27 ~-16 ~-22 ~-27 ~-16 ~-13 cobblestone-granite
+fill ~26 ~-16 ~-22 ~26 ~-16 ~-13 cobblestone-granite
+fill ~-26 ~-16 ~-20 ~-26 ~-16 ~-12 cobblestone-granite
+fill ~25 ~-16 ~-20 ~25 ~-16 ~-12 cobblestone-granite
+fill ~-25 ~-16 ~-19 ~-25 ~-16 ~-11 cobblestone-granite
+fill ~24 ~-16 ~-19 ~24 ~-16 ~-11 cobblestone-granite
+fill ~-24 ~-16 ~-17 ~-24 ~-16 ~-10 cobblestone-granite
+fill ~23 ~-16 ~-17 ~23 ~-16 ~-10 cobblestone-granite
+fill ~-23 ~-16 ~-16 ~-23 ~-16 ~-9 cobblestone-granite
+fill ~22 ~-16 ~-16 ~22 ~-16 ~-9 cobblestone-granite
+fill ~-22 ~-16 ~-15 ~-22 ~-16 ~-8 cobblestone-granite
+fill ~21 ~-16 ~-15 ~21 ~-16 ~-8 cobblestone-granite
+fill ~-21 ~-16 ~-14 ~-21 ~-16 ~-7 cobblestone-granite
+fill ~20 ~-16 ~-14 ~20 ~-16 ~-7 cobblestone-granite
+fill ~-20 ~-16 ~-13 ~-20 ~-16 ~-7 cobblestone-granite
+fill ~19 ~-16 ~-13 ~19 ~-16 ~-7 cobblestone-granite
+fill ~-19 ~-16 ~-12 ~-18 ~-16 ~-6 cobblestone-granite
+fill ~17 ~-16 ~-12 ~18 ~-16 ~-6 cobblestone-granite
+fill ~-17 ~-16 ~-11 ~-17 ~-16 ~-5 cobblestone-granite
+fill ~16 ~-16 ~-11 ~16 ~-16 ~-5 cobblestone-granite
+fill ~-16 ~-16 ~-10 ~-15 ~-16 ~-5 cobblestone-granite
+fill ~14 ~-16 ~-10 ~15 ~-16 ~-5 cobblestone-granite
+fill ~-14 ~-16 ~-9 ~-13 ~-16 ~-4 cobblestone-granite
+fill ~12 ~-16 ~-9 ~13 ~-16 ~-4 cobblestone-granite
+fill ~-12 ~-16 ~-8 ~-10 ~-16 ~-3 cobblestone-granite
+fill ~9 ~-16 ~-8 ~11 ~-16 ~-3 cobblestone-granite
+fill ~-9 ~-16 ~-7 ~-6 ~-16 ~-2 cobblestone-granite
+fill ~5 ~-16 ~-7 ~8 ~-16 ~-2 cobblestone-granite
+fill ~-5 ~-16 ~-6 ~4 ~-16 ~-1 cobblestone-granite
+setblock ~-15 ~-16 ~-4 cobblestone-granite
+setblock ~14 ~-16 ~-4 cobblestone-granite
+setblock ~-13 ~-16 ~-3 cobblestone-granite
+setblock ~12 ~-16 ~-3 cobblestone-granite
+setblock ~-10 ~-16 ~-2 cobblestone-granite
+setblock ~9 ~-16 ~-2 cobblestone-granite
+setblock ~-6 ~-16 ~-1 cobblestone-granite
+fill ~5 ~-16 ~-1 ~7 ~-16 ~-1 cobblestone-granite
+fill ~4 ~-16 ~ ~5 ~-9 ~ cobblestone-granite
+fill ~-2 ~-16 ~19 ~2 ~-16 ~19 stonebricks-granite
+fill ~-3 ~-16 ~20 ~-3 ~-11 ~20 cobblestone-granite
+fill ~3 ~-16 ~20 ~3 ~-16 ~23 cobblestone-granite
+fill ~-2 ~-16 ~24 ~2 ~-16 ~24 cobblestone-granite
+fill ~-31 ~-15 ~-36 ~-31 ~-15 ~-18 stonebricks-slate
+fill ~30 ~-15 ~-36 ~30 ~-15 ~-18 stonebricks-slate
+fill ~-32 ~-15 ~-36 ~-32 ~-15 ~-20 stonebricks-slate
+fill ~31 ~-15 ~-36 ~31 ~-15 ~-20 stonebricks-slate
+fill ~-33 ~-15 ~-36 ~-33 ~-15 ~-22 stonebricks-slate
+fill ~32 ~-15 ~-36 ~32 ~-15 ~-22 stonebricks-slate
+fill ~-34 ~-15 ~-36 ~-34 ~-15 ~-24 stonebricks-slate
+fill ~33 ~-15 ~-36 ~33 ~-15 ~-24 stonebricks-slate
+fill ~-35 ~-15 ~-36 ~-35 ~-15 ~-27 stonebricks-slate
+fill ~34 ~-15 ~-36 ~34 ~-15 ~-27 stonebricks-slate
+fill ~-36 ~-15 ~-36 ~-36 ~-15 ~-31 stonebricks-slate
+fill ~35 ~-15 ~-36 ~35 ~-15 ~-31 stonebricks-slate
+fill ~-30 ~-15 ~-31 ~-30 ~-15 ~-16 stonebricks-slate
+fill ~29 ~-15 ~-31 ~29 ~-15 ~-16 stonebricks-slate
+fill ~-29 ~-15 ~-27 ~-29 ~-15 ~-15 stonebricks-slate
+fill ~28 ~-15 ~-27 ~28 ~-15 ~-15 stonebricks-slate
+fill ~-28 ~-15 ~-24 ~-28 ~-15 ~-14 stonebricks-slate
+fill ~27 ~-15 ~-24 ~27 ~-15 ~-14 stonebricks-slate
+fill ~-27 ~-15 ~-22 ~-27 ~-15 ~-13 stonebricks-slate
+fill ~26 ~-15 ~-22 ~26 ~-15 ~-13 stonebricks-slate
+fill ~-26 ~-15 ~-20 ~-26 ~-15 ~-12 stonebricks-slate
+fill ~25 ~-15 ~-20 ~25 ~-15 ~-12 stonebricks-slate
+fill ~-25 ~-15 ~-19 ~-25 ~-15 ~-11 stonebricks-slate
+fill ~24 ~-15 ~-19 ~24 ~-15 ~-11 stonebricks-slate
+fill ~-24 ~-15 ~-17 ~-24 ~-15 ~-10 stonebricks-slate
+fill ~23 ~-15 ~-17 ~23 ~-15 ~-10 stonebricks-slate
+fill ~-23 ~-15 ~-16 ~-23 ~-15 ~-9 stonebricks-slate
+fill ~22 ~-15 ~-16 ~22 ~-15 ~-9 stonebricks-slate
+fill ~-22 ~-15 ~-15 ~-22 ~-15 ~-8 stonebricks-slate
+fill ~21 ~-15 ~-15 ~21 ~-15 ~-8 stonebricks-slate
+fill ~-21 ~-15 ~-14 ~-21 ~-15 ~-7 stonebricks-slate
+fill ~20 ~-15 ~-14 ~20 ~-15 ~-7 stonebricks-slate
+fill ~-20 ~-15 ~-13 ~-20 ~-15 ~-7 stonebricks-slate
+fill ~19 ~-15 ~-13 ~19 ~-15 ~-7 stonebricks-slate
+fill ~-19 ~-15 ~-12 ~-18 ~-15 ~-6 stonebricks-slate
+fill ~17 ~-15 ~-12 ~18 ~-15 ~-6 stonebricks-slate
+fill ~-17 ~-15 ~-11 ~-17 ~-15 ~-5 stonebricks-slate
+fill ~16 ~-15 ~-11 ~16 ~-15 ~-5 stonebricks-slate
+fill ~-16 ~-15 ~-10 ~-15 ~-15 ~-5 stonebricks-slate
+fill ~14 ~-15 ~-10 ~15 ~-15 ~-5 stonebricks-slate
+fill ~-14 ~-15 ~-9 ~-13 ~-15 ~-4 stonebricks-slate
+fill ~12 ~-15 ~-9 ~13 ~-15 ~-4 stonebricks-slate
+fill ~-12 ~-15 ~-8 ~-10 ~-15 ~-3 stonebricks-slate
+fill ~9 ~-15 ~-8 ~11 ~-15 ~-3 stonebricks-slate
+fill ~-9 ~-15 ~-7 ~-6 ~-15 ~-4 stonebricks-slate
+fill ~5 ~-15 ~-7 ~8 ~-15 ~-2 stonebricks-slate
+fill ~-5 ~-15 ~-6 ~4 ~-15 ~-4 stonebricks-slate
+setblock ~-15 ~-15 ~-4 stonebricks-slate
+setblock ~14 ~-15 ~-4 stonebricks-slate
+setblock ~-13 ~-15 ~-3 stonebricks-slate
+fill ~-9 ~-15 ~-3 ~-8 ~-15 ~-2 stonebricks-slate
+fill ~-7 ~-15 ~-3 ~-4 ~-15 ~19 stonebricks-granite
+fill ~-3 ~-15 ~-3 ~4 ~-15 ~-1 stonebricks-slate
+setblock ~12 ~-15 ~-3 stonebricks-slate
+setblock ~-10 ~-15 ~-2 stonebricks-slate
+setblock ~9 ~-15 ~-2 stonebricks-slate
+fill ~-9 ~-15 ~-1 ~-8 ~-1 ~-1 cobblestone-granite
+setblock ~5 ~-15 ~-1 stonebricks-slate
+fill ~6 ~-15 ~-1 ~7 ~-9 ~-1 cobblestone-granite
+fill ~-3 ~-15 ~ ~3 ~-1 ~ cobblestone-granite
+fill ~-3 ~-15 ~17 ~-3 ~-15 ~19 stonebricks-granite
+fill ~-2 ~-15 ~18 ~2 ~-15 ~18 stonebricks-granite
+fill ~3 ~-15 ~19 ~3 ~-15 ~22 cobblestone-granite
+fill ~-2 ~-15 ~23 ~2 ~-15 ~23 cobblestone-granite
+fill ~-8 ~-14 ~ ~-8 ~-11 ~19 cobblestone-granite
+fill ~-3 ~-14 ~1 ~-3 ~-11 ~16 cobblestone-granite
+fill ~-2 ~-14 ~17 ~2 ~-14 ~17 stonebricks-granite
+fill ~3 ~-14 ~18 ~3 ~-14 ~21 cobblestone-granite
+fill ~-7 ~-14 ~20 ~-4 ~-11 ~20 cobblestone-granite
+fill ~-2 ~-14 ~22 ~2 ~-14 ~22 cobblestone-granite
+fill ~-2 ~-13 ~16 ~2 ~-13 ~16 stonebricks-granite
+fill ~3 ~-13 ~17 ~3 ~-13 ~20 cobblestone-granite
+setblock ~-2 ~-13 ~20 stonebrickslab-granite-down-free
+fill ~-2 ~-13 ~21 ~2 ~-13 ~21 cobblestone-granite
+fill ~-2 ~-12 ~15 ~2 ~-12 ~15 stonebricks-granite
+fill ~3 ~-12 ~16 ~3 ~-12 ~19 cobblestone-granite
+fill ~-2 ~-12 ~20 ~2 ~-12 ~20 cobblestone-granite
+setblock ~-36 ~-11 ~-36 stonebrickslab-granite-down-free
+setblock ~35 ~-11 ~-36 stonebrickslab-granite-down-free
+setblock ~-35 ~-11 ~-27 stonebrickslab-granite-down-free
+setblock ~34 ~-11 ~-27 stonebrickslab-granite-down-free
+setblock ~-31 ~-11 ~-19 stonebrickslab-granite-down-free
+setblock ~30 ~-11 ~-19 stonebrickslab-granite-down-free
+setblock ~-18 ~-11 ~-6 stonebrickslab-granite-down-free
+setblock ~17 ~-11 ~-6 stonebrickslab-granite-down-free
+setblock ~-10 ~-11 ~-2 stonebrickslab-granite-down-free
+setblock ~-7 ~-11 ~-2 stonebrickslab-granite-down-free
+setblock ~9 ~-11 ~-2 stonebrickslab-granite-down-free
+setblock ~ ~-11 ~-1 stonebrickslab-granite-down-free
+setblock ~-7 ~-11 ~4 stonebrickslab-granite-down-free
+setblock ~-7 ~-11 ~10 stonebrickslab-granite-down-free
+fill ~-2 ~-11 ~14 ~2 ~-11 ~14 stonebricks-granite
+fill ~3 ~-11 ~15 ~3 ~-11 ~18 cobblestone-granite
+setblock ~-7 ~-11 ~16 stonebrickslab-granite-down-free
+fill ~-2 ~-11 ~19 ~2 ~-11 ~19 cobblestone-granite
+fill ~-31 ~-10 ~-36 ~-31 ~-10 ~-18 stonebricks-granite
+fill ~30 ~-10 ~-36 ~30 ~-10 ~-18 stonebricks-granite
+fill ~-32 ~-10 ~-36 ~-32 ~-10 ~-20 stonebricks-granite
+fill ~31 ~-10 ~-36 ~31 ~-10 ~-20 stonebricks-granite
+fill ~-33 ~-10 ~-36 ~-33 ~-10 ~-22 stonebricks-granite
+fill ~32 ~-10 ~-36 ~32 ~-10 ~-22 stonebricks-granite
+fill ~-34 ~-10 ~-36 ~-34 ~-10 ~-24 stonebricks-granite
+fill ~33 ~-10 ~-36 ~33 ~-10 ~-24 stonebricks-granite
+fill ~-35 ~-10 ~-36 ~-35 ~-10 ~-27 stonebricks-granite
+fill ~34 ~-10 ~-36 ~34 ~-10 ~-27 stonebricks-granite
+fill ~-36 ~-10 ~-36 ~-36 ~-10 ~-31 stonebricks-granite
+fill ~35 ~-10 ~-36 ~35 ~-10 ~-31 stonebricks-granite
+fill ~-30 ~-10 ~-31 ~-30 ~-10 ~-16 stonebricks-granite
+fill ~29 ~-10 ~-31 ~29 ~-10 ~-16 stonebricks-granite
+fill ~-29 ~-10 ~-27 ~-29 ~-10 ~-15 stonebricks-granite
+fill ~28 ~-10 ~-27 ~28 ~-10 ~-15 stonebricks-granite
+fill ~-28 ~-10 ~-24 ~-28 ~-10 ~-14 stonebricks-granite
+fill ~27 ~-10 ~-24 ~27 ~-10 ~-14 stonebricks-granite
+fill ~-27 ~-10 ~-22 ~-27 ~-10 ~-13 stonebricks-granite
+fill ~26 ~-10 ~-22 ~26 ~-10 ~-13 stonebricks-granite
+fill ~-26 ~-10 ~-20 ~-26 ~-10 ~-12 stonebricks-granite
+fill ~25 ~-10 ~-20 ~25 ~-10 ~-12 stonebricks-granite
+fill ~-25 ~-10 ~-19 ~-25 ~-10 ~-11 stonebricks-granite
+fill ~24 ~-10 ~-19 ~24 ~-10 ~-11 stonebricks-granite
+fill ~-24 ~-10 ~-17 ~-24 ~-10 ~-10 stonebricks-granite
+fill ~23 ~-10 ~-17 ~23 ~-10 ~-10 stonebricks-granite
+fill ~-23 ~-10 ~-16 ~-23 ~-10 ~-9 stonebricks-granite
+fill ~22 ~-10 ~-16 ~22 ~-10 ~-9 stonebricks-granite
+fill ~-22 ~-10 ~-15 ~-22 ~-10 ~-8 stonebricks-granite
+fill ~21 ~-10 ~-15 ~21 ~-10 ~-8 stonebricks-granite
+fill ~-21 ~-10 ~-14 ~-21 ~-10 ~-7 stonebricks-granite
+fill ~20 ~-10 ~-14 ~20 ~-10 ~-7 stonebricks-granite
+fill ~-20 ~-10 ~-13 ~-20 ~-10 ~-7 stonebricks-granite
+fill ~19 ~-10 ~-13 ~19 ~-10 ~-7 stonebricks-granite
+fill ~-19 ~-10 ~-12 ~-18 ~-10 ~-6 stonebricks-granite
+fill ~17 ~-10 ~-12 ~18 ~-10 ~-6 stonebricks-granite
+fill ~-17 ~-10 ~-11 ~-17 ~-10 ~-5 stonebricks-granite
+fill ~16 ~-10 ~-11 ~16 ~-10 ~-5 stonebricks-granite
+fill ~-16 ~-10 ~-10 ~-15 ~-10 ~-5 stonebricks-granite
+fill ~14 ~-10 ~-10 ~15 ~-10 ~-5 stonebricks-granite
+fill ~-14 ~-10 ~-9 ~-13 ~-10 ~-4 stonebricks-granite
+fill ~12 ~-10 ~-9 ~13 ~-10 ~-4 stonebricks-granite
+fill ~-12 ~-10 ~-8 ~-10 ~-10 ~-3 stonebricks-granite
+fill ~9 ~-10 ~-8 ~11 ~-10 ~-3 stonebricks-granite
+fill ~-9 ~-10 ~-7 ~-6 ~-10 ~-2 stonebricks-granite
+fill ~5 ~-10 ~-7 ~8 ~-10 ~-2 stonebricks-granite
+fill ~-5 ~-10 ~-6 ~4 ~-10 ~-1 stonebricks-granite
+setblock ~-15 ~-10 ~-4 stonebricks-granite
+setblock ~14 ~-10 ~-4 stonebricks-granite
+setblock ~-13 ~-10 ~-3 stonebricks-granite
+setblock ~12 ~-10 ~-3 stonebricks-granite
+setblock ~-10 ~-10 ~-2 stonebricks-granite
+setblock ~9 ~-10 ~-2 stonebricks-granite
+fill ~-7 ~-10 ~-1 ~-7 ~-10 ~19 cobblestone-granite
+setblock ~-6 ~-10 ~-1 stonebricks-granite
+setblock ~5 ~-10 ~-1 stonebricks-granite
+fill ~-6 ~-10 ~ ~-4 ~-10 ~19 cobblestone-granite
+fill ~-2 ~-10 ~13 ~2 ~-10 ~13 stonebricks-granite
+fill ~-3 ~-10 ~14 ~-3 ~-10 ~19 cobblestone-granite
+fill ~3 ~-10 ~14 ~3 ~-10 ~17 cobblestone-granite
+fill ~-2 ~-10 ~18 ~2 ~-10 ~18 cobblestone-granite
+fill ~-31 ~-9 ~-36 ~-31 ~-9 ~-18 cobblestone-granite
+fill ~30 ~-9 ~-36 ~30 ~-9 ~-18 cobblestone-granite
+fill ~-32 ~-9 ~-36 ~-32 ~-9 ~-20 cobblestone-granite
+fill ~31 ~-9 ~-36 ~31 ~-9 ~-20 cobblestone-granite
+fill ~-33 ~-9 ~-36 ~-33 ~-9 ~-22 cobblestone-granite
+fill ~32 ~-9 ~-36 ~32 ~-9 ~-22 cobblestone-granite
+fill ~-34 ~-9 ~-36 ~-34 ~-9 ~-24 cobblestone-granite
+fill ~33 ~-9 ~-36 ~33 ~-9 ~-24 cobblestone-granite
+fill ~-35 ~-9 ~-36 ~-35 ~-9 ~-27 cobblestone-granite
+fill ~34 ~-9 ~-36 ~34 ~-9 ~-27 cobblestone-granite
+fill ~-36 ~-9 ~-36 ~-36 ~-9 ~-31 cobblestone-granite
+fill ~35 ~-9 ~-36 ~35 ~-9 ~-31 cobblestone-granite
+fill ~-30 ~-9 ~-31 ~-30 ~-9 ~-16 cobblestone-granite
+fill ~29 ~-9 ~-31 ~29 ~-9 ~-16 cobblestone-granite
+fill ~-29 ~-9 ~-27 ~-29 ~-9 ~-15 cobblestone-granite
+fill ~28 ~-9 ~-27 ~28 ~-9 ~-15 cobblestone-granite
+fill ~-28 ~-9 ~-24 ~-28 ~-9 ~-14 cobblestone-granite
+fill ~27 ~-9 ~-24 ~27 ~-9 ~-14 cobblestone-granite
+fill ~-27 ~-9 ~-22 ~-27 ~-9 ~-13 cobblestone-granite
+fill ~26 ~-9 ~-22 ~26 ~-9 ~-13 cobblestone-granite
+fill ~-26 ~-9 ~-20 ~-26 ~-9 ~-12 cobblestone-granite
+fill ~25 ~-9 ~-20 ~25 ~-9 ~-12 cobblestone-granite
+fill ~-25 ~-9 ~-19 ~-25 ~-9 ~-11 cobblestone-granite
+fill ~24 ~-9 ~-19 ~24 ~-9 ~-11 cobblestone-granite
+fill ~-24 ~-9 ~-17 ~-24 ~-9 ~-10 cobblestone-granite
+fill ~23 ~-9 ~-17 ~23 ~-9 ~-10 cobblestone-granite
+fill ~-23 ~-9 ~-16 ~-23 ~-9 ~-9 cobblestone-granite
+fill ~22 ~-9 ~-16 ~22 ~-9 ~-9 cobblestone-granite
+fill ~-22 ~-9 ~-15 ~-22 ~-9 ~-8 cobblestone-granite
+fill ~21 ~-9 ~-15 ~21 ~-9 ~-8 cobblestone-granite
+fill ~-21 ~-9 ~-14 ~-21 ~-9 ~-7 cobblestone-granite
+fill ~20 ~-9 ~-14 ~20 ~-9 ~-7 cobblestone-granite
+fill ~-20 ~-9 ~-13 ~-20 ~-9 ~-7 cobblestone-granite
+fill ~19 ~-9 ~-13 ~19 ~-9 ~-7 cobblestone-granite
+fill ~-19 ~-9 ~-12 ~-18 ~-9 ~-6 cobblestone-granite
+fill ~17 ~-9 ~-12 ~18 ~-9 ~-6 cobblestone-granite
+fill ~-17 ~-9 ~-11 ~-17 ~-9 ~-5 cobblestone-granite
+fill ~16 ~-9 ~-11 ~16 ~-9 ~-5 cobblestone-granite
+fill ~-16 ~-9 ~-10 ~-15 ~-9 ~-5 cobblestone-granite
+fill ~14 ~-9 ~-10 ~15 ~-9 ~-5 cobblestone-granite
+fill ~-14 ~-9 ~-9 ~-13 ~-9 ~-4 cobblestone-granite
+fill ~12 ~-9 ~-9 ~13 ~-9 ~-4 cobblestone-granite
+fill ~-12 ~-9 ~-8 ~-10 ~-9 ~-3 cobblestone-granite
+fill ~9 ~-9 ~-8 ~11 ~-9 ~-3 cobblestone-granite
+fill ~-9 ~-9 ~-7 ~-6 ~-9 ~-2 cobblestone-granite
+fill ~5 ~-9 ~-7 ~8 ~-9 ~-2 cobblestone-granite
+fill ~-5 ~-9 ~-6 ~4 ~-9 ~-1 cobblestone-granite
+setblock ~-15 ~-9 ~-4 cobblestone-granite
+setblock ~14 ~-9 ~-4 cobblestone-granite
+setblock ~-13 ~-9 ~-3 cobblestone-granite
+setblock ~12 ~-9 ~-3 cobblestone-granite
+setblock ~-10 ~-9 ~-2 cobblestone-granite
+setblock ~9 ~-9 ~-2 cobblestone-granite
+fill ~-7 ~-9 ~-1 ~-6 ~-9 ~-1 cobblestone-granite
+setblock ~5 ~-9 ~-1 cobblestone-granite
+fill ~-6 ~-9 ~ ~-4 ~-1 ~ cobblestone-granite
+fill ~-2 ~-9 ~12 ~2 ~-9 ~12 stonebricks-granite
+fill ~-3 ~-9 ~13 ~-3 ~-9 ~16 cobblestone-granite
+fill ~3 ~-9 ~13 ~3 ~-9 ~16 cobblestone-granite
+fill ~-2 ~-9 ~17 ~2 ~-9 ~17 cobblestone-granite
+fill ~-31 ~-8 ~-36 ~-31 ~-8 ~-18 stonebricks-slate
+fill ~30 ~-8 ~-36 ~30 ~-8 ~-18 stonebricks-slate
+fill ~-32 ~-8 ~-36 ~-32 ~-8 ~-20 stonebricks-slate
+fill ~31 ~-8 ~-36 ~31 ~-8 ~-20 stonebricks-slate
+fill ~-33 ~-8 ~-36 ~-33 ~-8 ~-22 stonebricks-slate
+fill ~32 ~-8 ~-36 ~32 ~-8 ~-22 stonebricks-slate
+fill ~-34 ~-8 ~-36 ~-34 ~-8 ~-24 stonebricks-slate
+fill ~33 ~-8 ~-36 ~33 ~-8 ~-24 stonebricks-slate
+fill ~-35 ~-8 ~-36 ~-35 ~-8 ~-27 stonebricks-slate
+fill ~34 ~-8 ~-36 ~34 ~-8 ~-27 stonebricks-slate
+fill ~-36 ~-8 ~-36 ~-36 ~-8 ~-31 stonebricks-slate
+fill ~35 ~-8 ~-36 ~35 ~-8 ~-31 stonebricks-slate
+fill ~-30 ~-8 ~-31 ~-30 ~-8 ~-16 stonebricks-slate
+fill ~29 ~-8 ~-31 ~29 ~-8 ~-16 stonebricks-slate
+fill ~-29 ~-8 ~-27 ~-29 ~-8 ~-15 stonebricks-slate
+fill ~28 ~-8 ~-27 ~28 ~-8 ~-15 stonebricks-slate
+fill ~-28 ~-8 ~-24 ~-28 ~-8 ~-14 stonebricks-slate
+fill ~27 ~-8 ~-24 ~27 ~-8 ~-14 stonebricks-slate
+fill ~-27 ~-8 ~-22 ~-27 ~-8 ~-13 stonebricks-slate
+fill ~26 ~-8 ~-22 ~26 ~-8 ~-13 stonebricks-slate
+fill ~-26 ~-8 ~-20 ~-26 ~-8 ~-12 stonebricks-slate
+fill ~25 ~-8 ~-20 ~25 ~-8 ~-12 stonebricks-slate
+fill ~-25 ~-8 ~-19 ~-25 ~-8 ~-11 stonebricks-slate
+fill ~24 ~-8 ~-19 ~24 ~-8 ~-11 stonebricks-slate
+fill ~-24 ~-8 ~-17 ~-24 ~-8 ~-10 stonebricks-slate
+fill ~23 ~-8 ~-17 ~23 ~-8 ~-10 stonebricks-slate
+fill ~-23 ~-8 ~-16 ~-23 ~-8 ~-9 stonebricks-slate
+fill ~22 ~-8 ~-16 ~22 ~-8 ~-9 stonebricks-slate
+fill ~-22 ~-8 ~-15 ~-22 ~-8 ~-8 stonebricks-slate
+fill ~21 ~-8 ~-15 ~21 ~-8 ~-8 stonebricks-slate
+fill ~-21 ~-8 ~-14 ~-21 ~-8 ~-7 stonebricks-slate
+fill ~20 ~-8 ~-14 ~20 ~-8 ~-7 stonebricks-slate
+fill ~-20 ~-8 ~-13 ~-20 ~-8 ~-7 stonebricks-slate
+fill ~19 ~-8 ~-13 ~19 ~-8 ~-7 stonebricks-slate
+fill ~-19 ~-8 ~-12 ~-18 ~-8 ~-6 stonebricks-slate
+fill ~17 ~-8 ~-12 ~18 ~-8 ~-6 stonebricks-slate
+fill ~-17 ~-8 ~-11 ~-17 ~-8 ~-5 stonebricks-slate
+fill ~16 ~-8 ~-11 ~16 ~-8 ~-5 stonebricks-slate
+fill ~-16 ~-8 ~-10 ~-15 ~-8 ~-5 stonebricks-slate
+fill ~14 ~-8 ~-10 ~15 ~-8 ~-5 stonebricks-slate
+fill ~-14 ~-8 ~-9 ~-13 ~-8 ~-4 stonebricks-slate
+fill ~12 ~-8 ~-9 ~13 ~-8 ~-4 stonebricks-slate
+fill ~-12 ~-8 ~-8 ~-10 ~-8 ~-3 stonebricks-slate
+fill ~9 ~-8 ~-8 ~11 ~-8 ~-3 stonebricks-slate
+fill ~-9 ~-8 ~-7 ~-6 ~-8 ~-2 stonebricks-slate
+fill ~5 ~-8 ~-7 ~8 ~-8 ~-4 stonebricks-slate
+fill ~-5 ~-8 ~-6 ~4 ~-8 ~-4 stonebricks-slate
+setblock ~-15 ~-8 ~-4 stonebricks-slate
+setblock ~14 ~-8 ~-4 stonebricks-slate
+setblock ~-13 ~-8 ~-3 stonebricks-slate
+fill ~-5 ~-8 ~-3 ~3 ~-8 ~-1 stonebricks-slate
+fill ~4 ~-8 ~-3 ~7 ~-8 ~12 stonebricks-granite
+fill ~8 ~-8 ~-3 ~8 ~-8 ~-2 stonebricks-slate
+setblock ~12 ~-8 ~-3 stonebricks-slate
+setblock ~-10 ~-8 ~-2 stonebricks-slate
+setblock ~9 ~-8 ~-2 stonebricks-slate
+fill ~-7 ~-8 ~-1 ~-7 ~-1 ~-1 cobblestone-granite
+setblock ~-6 ~-8 ~-1 stonebricks-slate
+fill ~3 ~-8 ~10 ~3 ~-8 ~12 stonebricks-granite
+fill ~-2 ~-8 ~11 ~2 ~-8 ~11 stonebricks-granite
+fill ~-3 ~-8 ~12 ~-3 ~-8 ~15 cobblestone-granite
+fill ~3 ~-8 ~13 ~3 ~-8 ~15 cobblestone-granite
+setblock ~-2 ~-8 ~15 stonebrickslab-granite-down-free
+fill ~-2 ~-8 ~16 ~2 ~-8 ~16 cobblestone-granite
+fill ~8 ~-7 ~ ~8 ~-4 ~12 cobblestone-granite
+fill ~3 ~-7 ~1 ~3 ~-4 ~9 cobblestone-granite
+fill ~-2 ~-7 ~10 ~2 ~-7 ~10 stonebricks-granite
+fill ~-3 ~-7 ~11 ~-3 ~-7 ~14 cobblestone-granite
+fill ~3 ~-7 ~13 ~7 ~-4 ~13 cobblestone-granite
+setblock ~3 ~-7 ~14 cobblestone-granite
+fill ~-2 ~-7 ~15 ~2 ~-7 ~15 cobblestone-granite
+fill ~-2 ~-6 ~9 ~2 ~-6 ~9 stonebricks-granite
+fill ~-3 ~-6 ~10 ~-3 ~-6 ~13 cobblestone-granite
+fill ~-2 ~-6 ~14 ~2 ~-6 ~14 cobblestone-granite
+fill ~-2 ~-5 ~8 ~2 ~-5 ~8 stonebricks-granite
+fill ~-3 ~-5 ~9 ~-3 ~-5 ~12 cobblestone-granite
+fill ~-2 ~-5 ~13 ~2 ~-5 ~13 cobblestone-granite
+setblock ~-36 ~-4 ~-36 stonebrickslab-granite-down-free
+setblock ~35 ~-4 ~-36 stonebrickslab-granite-down-free
+setblock ~-35 ~-4 ~-27 stonebrickslab-granite-down-free
+setblock ~34 ~-4 ~-27 stonebrickslab-granite-down-free
+setblock ~-31 ~-4 ~-19 stonebrickslab-granite-down-free
+setblock ~30 ~-4 ~-19 stonebrickslab-granite-down-free
+setblock ~-18 ~-4 ~-6 stonebrickslab-granite-down-free
+setblock ~17 ~-4 ~-6 stonebrickslab-granite-down-free
+setblock ~-10 ~-4 ~-2 stonebrickslab-granite-down-free
+setblock ~4 ~-4 ~-2 stonebrickslab-granite-down-free
+setblock ~9 ~-4 ~-2 stonebrickslab-granite-down-free
+setblock ~ ~-4 ~-1 stonebrickslab-granite-down-free
+setblock ~4 ~-4 ~4 stonebrickslab-granite-down-free
+fill ~-2 ~-4 ~7 ~2 ~-4 ~7 stonebricks-granite
+fill ~-3 ~-4 ~8 ~-3 ~-4 ~11 cobblestone-granite
+setblock ~4 ~-4 ~10 stonebrickslab-granite-down-free
+fill ~-2 ~-4 ~12 ~2 ~-4 ~12 cobblestone-granite
+fill ~-31 ~-3 ~-36 ~-31 ~-3 ~-18 stonebricks-granite
+fill ~30 ~-3 ~-36 ~30 ~-3 ~-18 stonebricks-granite
+fill ~-32 ~-3 ~-36 ~-32 ~-3 ~-20 stonebricks-granite
+fill ~31 ~-3 ~-36 ~31 ~-3 ~-20 stonebricks-granite
+fill ~-33 ~-3 ~-36 ~-33 ~-3 ~-22 stonebricks-granite
+fill ~32 ~-3 ~-36 ~32 ~-3 ~-22 stonebricks-granite
+fill ~-34 ~-3 ~-36 ~-34 ~-3 ~-24 stonebricks-granite
+fill ~33 ~-3 ~-36 ~33 ~-3 ~-24 stonebricks-granite
+fill ~-35 ~-3 ~-36 ~-35 ~-3 ~-27 stonebricks-granite
+fill ~34 ~-3 ~-36 ~34 ~-3 ~-27 stonebricks-granite
+fill ~-36 ~-3 ~-36 ~-36 ~-3 ~-31 stonebricks-granite
+fill ~35 ~-3 ~-36 ~35 ~-3 ~-31 stonebricks-granite
+fill ~-30 ~-3 ~-31 ~-30 ~-3 ~-16 stonebricks-granite
+fill ~29 ~-3 ~-31 ~29 ~-3 ~-16 stonebricks-granite
+fill ~-29 ~-3 ~-27 ~-29 ~-3 ~-15 stonebricks-granite
+fill ~28 ~-3 ~-27 ~28 ~-3 ~-15 stonebricks-granite
+fill ~-28 ~-3 ~-24 ~-28 ~-3 ~-14 stonebricks-granite
+fill ~27 ~-3 ~-24 ~27 ~-3 ~-14 stonebricks-granite
+fill ~-27 ~-3 ~-22 ~-27 ~-3 ~-13 stonebricks-granite
+fill ~26 ~-3 ~-22 ~26 ~-3 ~-13 stonebricks-granite
+fill ~-26 ~-3 ~-20 ~-26 ~-3 ~-12 stonebricks-granite
+fill ~25 ~-3 ~-20 ~25 ~-3 ~-12 stonebricks-granite
+fill ~-25 ~-3 ~-19 ~-25 ~-3 ~-11 stonebricks-granite
+fill ~24 ~-3 ~-19 ~24 ~-3 ~-11 stonebricks-granite
+fill ~-24 ~-3 ~-17 ~-24 ~-3 ~-10 stonebricks-granite
+fill ~23 ~-3 ~-17 ~23 ~-3 ~-10 stonebricks-granite
+fill ~-23 ~-3 ~-16 ~-23 ~-3 ~-9 stonebricks-granite
+fill ~22 ~-3 ~-16 ~22 ~-3 ~-9 stonebricks-granite
+fill ~-22 ~-3 ~-15 ~-22 ~-3 ~-8 stonebricks-granite
+fill ~21 ~-3 ~-15 ~21 ~-3 ~-8 stonebricks-granite
+fill ~-21 ~-3 ~-14 ~-21 ~-3 ~-7 stonebricks-granite
+fill ~20 ~-3 ~-14 ~20 ~-3 ~-7 stonebricks-granite
+fill ~-20 ~-3 ~-13 ~-20 ~-3 ~-7 stonebricks-granite
+fill ~19 ~-3 ~-13 ~19 ~-3 ~-7 stonebricks-granite
+fill ~-19 ~-3 ~-12 ~-18 ~-3 ~-6 stonebricks-granite
+fill ~17 ~-3 ~-12 ~18 ~-3 ~-6 stonebricks-granite
+fill ~-17 ~-3 ~-11 ~-17 ~-3 ~-5 stonebricks-granite
+fill ~16 ~-3 ~-11 ~16 ~-3 ~-5 stonebricks-granite
+fill ~-16 ~-3 ~-10 ~-15 ~-3 ~-5 stonebricks-granite
+fill ~14 ~-3 ~-10 ~15 ~-3 ~-5 stonebricks-granite
+fill ~-14 ~-3 ~-9 ~-13 ~-3 ~-4 stonebricks-granite
+fill ~12 ~-3 ~-9 ~13 ~-3 ~-4 stonebricks-granite
+fill ~-12 ~-3 ~-8 ~-10 ~-3 ~-3 stonebricks-granite
+fill ~9 ~-3 ~-8 ~11 ~-3 ~-3 stonebricks-granite
+fill ~-9 ~-3 ~-7 ~-6 ~-3 ~-2 stonebricks-granite
+fill ~5 ~-3 ~-7 ~8 ~-3 ~-2 stonebricks-granite
+fill ~-5 ~-3 ~-6 ~4 ~-3 ~-1 stonebricks-granite
+setblock ~-15 ~-3 ~-4 stonebricks-granite
+setblock ~14 ~-3 ~-4 stonebricks-granite
+setblock ~-13 ~-3 ~-3 stonebricks-granite
+setblock ~12 ~-3 ~-3 stonebricks-granite
+setblock ~-10 ~-3 ~-2 stonebricks-granite
+setblock ~9 ~-3 ~-2 stonebricks-granite
+setblock ~-6 ~-3 ~-1 stonebricks-granite
+setblock ~5 ~-3 ~-1 stonebricks-granite
+fill ~6 ~-3 ~-1 ~7 ~-3 ~12 cobblestone-granite
+fill ~4 ~-3 ~ ~5 ~-3 ~12 cobblestone-granite
+fill ~-2 ~-3 ~6 ~2 ~-3 ~6 stonebricks-granite
+fill ~-3 ~-3 ~7 ~-3 ~-3 ~10 cobblestone-granite
+fill ~3 ~-3 ~7 ~3 ~-3 ~12 cobblestone-granite
+setblock ~-2 ~-3 ~10 stonebrickslab-granite-down-free
+fill ~-2 ~-3 ~11 ~2 ~-3 ~11 cobblestone-granite
+fill ~-31 ~-2 ~-36 ~-31 ~-1 ~-18 cobblestone-granite
+fill ~30 ~-2 ~-36 ~30 ~-1 ~-18 cobblestone-granite
+fill ~-32 ~-2 ~-36 ~-32 ~-1 ~-20 cobblestone-granite
+fill ~31 ~-2 ~-36 ~31 ~-1 ~-20 cobblestone-granite
+fill ~-33 ~-2 ~-36 ~-33 ~-1 ~-22 cobblestone-granite
+fill ~32 ~-2 ~-36 ~32 ~-1 ~-22 cobblestone-granite
+fill ~-34 ~-2 ~-36 ~-34 ~-1 ~-24 cobblestone-granite
+fill ~33 ~-2 ~-36 ~33 ~-1 ~-24 cobblestone-granite
+fill ~-35 ~-2 ~-36 ~-35 ~-1 ~-27 cobblestone-granite
+fill ~34 ~-2 ~-36 ~34 ~-1 ~-27 cobblestone-granite
+fill ~-36 ~-2 ~-36 ~-36 ~-1 ~-31 cobblestone-granite
+fill ~35 ~-2 ~-36 ~35 ~-1 ~-31 cobblestone-granite
+fill ~-30 ~-2 ~-31 ~-30 ~-1 ~-16 cobblestone-granite
+fill ~29 ~-2 ~-31 ~29 ~-1 ~-16 cobblestone-granite
+fill ~-29 ~-2 ~-27 ~-29 ~-1 ~-15 cobblestone-granite
+fill ~28 ~-2 ~-27 ~28 ~-1 ~-15 cobblestone-granite
+fill ~-28 ~-2 ~-24 ~-28 ~-1 ~-14 cobblestone-granite
+fill ~27 ~-2 ~-24 ~27 ~-1 ~-14 cobblestone-granite
+fill ~-27 ~-2 ~-22 ~-27 ~-1 ~-13 cobblestone-granite
+fill ~26 ~-2 ~-22 ~26 ~-1 ~-13 cobblestone-granite
+fill ~-26 ~-2 ~-20 ~-26 ~-1 ~-12 cobblestone-granite
+fill ~25 ~-2 ~-20 ~25 ~-1 ~-12 cobblestone-granite
+fill ~-25 ~-2 ~-19 ~-25 ~-1 ~-11 cobblestone-granite
+fill ~24 ~-2 ~-19 ~24 ~-1 ~-11 cobblestone-granite
+fill ~-24 ~-2 ~-17 ~-24 ~-1 ~-10 cobblestone-granite
+fill ~23 ~-2 ~-17 ~23 ~-1 ~-10 cobblestone-granite
+fill ~-23 ~-2 ~-16 ~-23 ~-1 ~-9 cobblestone-granite
+fill ~22 ~-2 ~-16 ~22 ~-1 ~-9 cobblestone-granite
+fill ~-22 ~-2 ~-15 ~-22 ~-1 ~-8 cobblestone-granite
+fill ~21 ~-2 ~-15 ~21 ~-1 ~-8 cobblestone-granite
+fill ~-21 ~-2 ~-14 ~-21 ~-1 ~-7 cobblestone-granite
+fill ~20 ~-2 ~-14 ~20 ~-1 ~-7 cobblestone-granite
+fill ~-20 ~-2 ~-13 ~-20 ~-1 ~-7 cobblestone-granite
+fill ~19 ~-2 ~-13 ~19 ~-1 ~-7 cobblestone-granite
+fill ~-19 ~-2 ~-12 ~-18 ~-1 ~-6 cobblestone-granite
+fill ~17 ~-2 ~-12 ~18 ~-1 ~-6 cobblestone-granite
+fill ~-17 ~-2 ~-11 ~-17 ~-1 ~-5 cobblestone-granite
+fill ~16 ~-2 ~-11 ~16 ~-1 ~-5 cobblestone-granite
+fill ~-16 ~-2 ~-10 ~-15 ~-1 ~-5 cobblestone-granite
+fill ~14 ~-2 ~-10 ~15 ~-1 ~-5 cobblestone-granite
+fill ~-14 ~-2 ~-9 ~-13 ~-1 ~-4 cobblestone-granite
+fill ~12 ~-2 ~-9 ~13 ~-1 ~-4 cobblestone-granite
+fill ~-12 ~-2 ~-8 ~-10 ~-1 ~-3 cobblestone-granite
+fill ~9 ~-2 ~-8 ~11 ~-1 ~-3 cobblestone-granite
+fill ~-9 ~-2 ~-7 ~-6 ~-1 ~-2 cobblestone-granite
+fill ~5 ~-2 ~-7 ~8 ~-1 ~-2 cobblestone-granite
+fill ~-5 ~-2 ~-6 ~4 ~-1 ~-1 cobblestone-granite
+fill ~-15 ~-2 ~-4 ~-15 ~-1 ~-4 cobblestone-granite
+fill ~14 ~-2 ~-4 ~14 ~-1 ~-4 cobblestone-granite
+fill ~-13 ~-2 ~-3 ~-13 ~-1 ~-3 cobblestone-granite
+fill ~12 ~-2 ~-3 ~12 ~-1 ~-3 cobblestone-granite
+fill ~-10 ~-2 ~-2 ~-10 ~-1 ~-2 cobblestone-granite
+fill ~9 ~-2 ~-2 ~9 ~-1 ~-2 cobblestone-granite
+fill ~-6 ~-2 ~-1 ~-6 ~-1 ~-1 cobblestone-granite
+fill ~5 ~-2 ~-1 ~7 ~-1 ~-1 cobblestone-granite
+fill ~4 ~-2 ~ ~5 ~-1 ~ cobblestone-granite
+fill ~-2 ~-2 ~5 ~2 ~-2 ~5 stonebricks-granite
+fill ~-3 ~-2 ~6 ~-3 ~-2 ~9 cobblestone-granite
+fill ~3 ~-2 ~6 ~3 ~-2 ~9 cobblestone-granite
+fill ~-2 ~-2 ~10 ~2 ~-2 ~10 cobblestone-granite
+fill ~-30 ~-1 ~-36 ~-30 ~ ~-32 soil-medium-normal
+fill ~29 ~-1 ~-36 ~29 ~ ~-32 soil-medium-normal
+fill ~-29 ~-1 ~-31 ~-29 ~ ~-28 soil-medium-normal
+fill ~28 ~-1 ~-31 ~28 ~ ~-28 soil-medium-normal
+fill ~-28 ~-1 ~-27 ~-28 ~ ~-25 soil-medium-normal
+fill ~27 ~-1 ~-27 ~27 ~ ~-25 soil-medium-normal
+fill ~-27 ~-1 ~-24 ~-27 ~ ~-23 soil-medium-normal
+fill ~26 ~-1 ~-24 ~26 ~ ~-23 soil-medium-normal
+fill ~-26 ~-1 ~-22 ~-26 ~ ~-21 soil-medium-normal
+fill ~25 ~-1 ~-22 ~25 ~ ~-21 soil-medium-normal
+fill ~-25 ~-1 ~-20 ~-25 ~ ~-20 soil-medium-normal
+fill ~24 ~-1 ~-20 ~24 ~ ~-20 soil-medium-normal
+fill ~-24 ~-1 ~-19 ~-24 ~ ~-18 soil-medium-normal
+fill ~23 ~-1 ~-19 ~23 ~ ~-18 soil-medium-normal
+fill ~-23 ~-1 ~-18 ~-23 ~ ~-17 soil-medium-normal
+fill ~22 ~-1 ~-18 ~22 ~ ~-17 soil-medium-normal
+fill ~-22 ~-1 ~-17 ~-22 ~ ~-16 soil-medium-normal
+fill ~21 ~-1 ~-17 ~21 ~ ~-16 soil-medium-normal
+fill ~-21 ~-1 ~-15 ~-20 ~ ~-15 soil-medium-normal
+fill ~19 ~-1 ~-15 ~20 ~ ~-15 soil-medium-normal
+fill ~-20 ~-1 ~-14 ~-19 ~ ~-14 soil-medium-normal
+fill ~18 ~-1 ~-14 ~19 ~ ~-14 soil-medium-normal
+fill ~-19 ~-1 ~-13 ~-18 ~ ~-13 soil-medium-normal
+fill ~17 ~-1 ~-13 ~18 ~ ~-13 soil-medium-normal
+fill ~-17 ~-1 ~-12 ~-17 ~ ~-12 soil-medium-normal
+fill ~16 ~-1 ~-12 ~16 ~ ~-12 soil-medium-normal
+fill ~-16 ~-1 ~-11 ~-15 ~ ~-11 soil-medium-normal
+fill ~14 ~-1 ~-11 ~15 ~ ~-11 soil-medium-normal
+fill ~-14 ~-1 ~-10 ~-13 ~ ~-10 soil-medium-normal
+fill ~12 ~-1 ~-10 ~13 ~ ~-10 soil-medium-normal
+fill ~-12 ~-1 ~-9 ~-10 ~ ~-9 soil-medium-normal
+fill ~9 ~-1 ~-9 ~11 ~ ~-9 soil-medium-normal
+fill ~-9 ~-1 ~-8 ~-6 ~ ~-8 soil-medium-normal
+fill ~5 ~-1 ~-8 ~8 ~ ~-8 soil-medium-normal
+fill ~-5 ~-1 ~-7 ~4 ~ ~-7 soil-medium-normal
+fill ~-2 ~-1 ~4 ~2 ~-1 ~4 stonebricks-granite
+fill ~-3 ~-1 ~5 ~-3 ~-1 ~8 cobblestone-granite
+fill ~3 ~-1 ~5 ~3 ~-1 ~8 cobblestone-granite
+fill ~-2 ~-1 ~9 ~2 ~-1 ~9 cobblestone-granite
+fill ~-5 ~ ~-36 ~4 ~ ~-21 soil-medium-normal
+fill ~-9 ~ ~-36 ~-6 ~ ~-9 soil-medium-normal
+fill ~5 ~ ~-36 ~8 ~ ~-9 soil-medium-normal
+fill ~-12 ~ ~-36 ~-10 ~ ~-10 soil-medium-normal
+fill ~9 ~ ~-36 ~11 ~ ~-10 soil-medium-normal
+fill ~-14 ~ ~-36 ~-13 ~ ~-11 soil-medium-normal
+fill ~12 ~ ~-36 ~13 ~ ~-11 soil-medium-normal
+fill ~-16 ~ ~-36 ~-15 ~ ~-12 soil-medium-normal
+fill ~14 ~ ~-36 ~15 ~ ~-12 soil-medium-normal
+fill ~-17 ~ ~-36 ~-17 ~ ~-13 soil-medium-normal
+fill ~16 ~ ~-36 ~16 ~ ~-13 soil-medium-normal
+fill ~-18 ~ ~-36 ~-18 ~ ~-14 soil-medium-normal
+fill ~17 ~ ~-36 ~17 ~ ~-14 soil-medium-normal
+fill ~-19 ~ ~-36 ~-19 ~ ~-15 soil-medium-normal
+fill ~18 ~ ~-36 ~18 ~ ~-15 soil-medium-normal
+fill ~-31 ~ ~-36 ~-31 ~ ~-16 soil-medium-normal
+fill ~-21 ~ ~-36 ~-20 ~ ~-16 soil-medium-normal
+fill ~19 ~ ~-36 ~20 ~ ~-16 soil-medium-normal
+fill ~30 ~ ~-36 ~30 ~ ~-16 soil-medium-normal
+fill ~-32 ~ ~-36 ~-32 ~ ~-18 soil-medium-normal
+fill ~-22 ~ ~-36 ~-22 ~ ~-18 soil-medium-normal
+fill ~21 ~ ~-36 ~21 ~ ~-18 soil-medium-normal
+fill ~31 ~ ~-36 ~31 ~ ~-18 soil-medium-normal
+fill ~-33 ~ ~-36 ~-33 ~ ~-19 soil-medium-normal
+fill ~-23 ~ ~-36 ~-23 ~ ~-19 soil-medium-normal
+fill ~22 ~ ~-36 ~22 ~ ~-19 soil-medium-normal
+fill ~32 ~ ~-36 ~32 ~ ~-19 soil-medium-normal
+fill ~-24 ~ ~-36 ~-24 ~ ~-20 soil-medium-normal
+fill ~23 ~ ~-36 ~23 ~ ~-20 soil-medium-normal
+fill ~-34 ~ ~-36 ~-34 ~ ~-21 soil-medium-normal
+fill ~-25 ~ ~-36 ~-25 ~ ~-21 soil-medium-normal
+fill ~24 ~ ~-36 ~24 ~ ~-21 soil-medium-normal
+fill ~33 ~ ~-36 ~33 ~ ~-21 soil-medium-normal
+fill ~-26 ~ ~-36 ~-26 ~ ~-23 soil-medium-normal
+fill ~25 ~ ~-36 ~25 ~ ~-23 soil-medium-normal
+fill ~-35 ~ ~-36 ~-35 ~ ~-24 soil-medium-normal
+fill ~34 ~ ~-36 ~34 ~ ~-24 soil-medium-normal
+fill ~-27 ~ ~-36 ~-27 ~ ~-25 soil-medium-normal
+fill ~26 ~ ~-36 ~26 ~ ~-25 soil-medium-normal
+fill ~-36 ~ ~-36 ~-36 ~ ~-27 soil-medium-normal
+fill ~35 ~ ~-36 ~35 ~ ~-27 soil-medium-normal
+fill ~-28 ~ ~-36 ~-28 ~ ~-28 soil-medium-normal
+fill ~27 ~ ~-36 ~27 ~ ~-28 soil-medium-normal
+fill ~-37 ~ ~-36 ~-37 ~ ~-31 soil-medium-normal
+fill ~36 ~ ~-36 ~36 ~ ~-31 soil-medium-normal
+fill ~-29 ~ ~-36 ~-29 ~ ~-32 soil-medium-normal
+fill ~28 ~ ~-36 ~28 ~ ~-32 soil-medium-normal
+fill ~-30 ~ ~-31 ~-30 ~ ~-15 soil-medium-normal
+fill ~29 ~ ~-31 ~29 ~ ~-15 soil-medium-normal
+fill ~-29 ~ ~-27 ~-29 ~ ~-13 soil-medium-normal
+fill ~28 ~ ~-27 ~28 ~ ~-13 soil-medium-normal
+fill ~-28 ~ ~-24 ~-28 ~ ~-12 soil-medium-normal
+fill ~27 ~ ~-24 ~27 ~ ~-12 soil-medium-normal
+fill ~-27 ~ ~-22 ~-27 ~ ~-11 soil-medium-normal
+fill ~26 ~ ~-22 ~26 ~ ~-11 soil-medium-normal
+fill ~-26 ~ ~-20 ~-26 ~ ~-10 soil-medium-normal
+fill ~-5 ~ ~-20 ~-3 ~ ~-8 soil-medium-normal
+fill ~3 ~ ~-20 ~4 ~ ~-8 soil-medium-normal
+fill ~25 ~ ~-20 ~25 ~ ~-10 soil-medium-normal
+fill ~-25 ~ ~-19 ~-25 ~ ~-9 soil-medium-normal
+fill ~24 ~ ~-19 ~24 ~ ~-9 soil-medium-normal
+fill ~-24 ~ ~-17 ~-24 ~ ~-8 soil-medium-normal
+fill ~23 ~ ~-17 ~23 ~ ~-8 soil-medium-normal
+fill ~-23 ~ ~-16 ~-23 ~ ~-8 soil-medium-normal
+fill ~22 ~ ~-16 ~22 ~ ~-8 soil-medium-normal
+fill ~-22 ~ ~-15 ~-22 ~ ~-7 soil-medium-normal
+fill ~21 ~ ~-15 ~21 ~ ~-7 soil-medium-normal
+fill ~-21 ~ ~-14 ~-21 ~ ~-6 soil-medium-normal
+fill ~20 ~ ~-14 ~20 ~ ~-6 soil-medium-normal
+fill ~-20 ~ ~-13 ~-20 ~ ~-6 soil-medium-normal
+fill ~19 ~ ~-13 ~19 ~ ~-6 soil-medium-normal
+fill ~-19 ~ ~-12 ~-18 ~ ~-5 soil-medium-normal
+fill ~17 ~ ~-12 ~18 ~ ~-5 soil-medium-normal
+fill ~-17 ~ ~-11 ~-17 ~ ~-4 soil-medium-normal
+fill ~16 ~ ~-11 ~16 ~ ~-4 soil-medium-normal
+fill ~-16 ~ ~-10 ~-15 ~ ~-3 soil-medium-normal
+fill ~14 ~ ~-10 ~15 ~ ~-3 soil-medium-normal
+fill ~-14 ~ ~-9 ~-13 ~ ~-3 soil-medium-normal
+fill ~12 ~ ~-9 ~13 ~ ~-3 soil-medium-normal
+fill ~-12 ~ ~-8 ~-10 ~ ~-2 soil-medium-normal
+fill ~9 ~ ~-8 ~11 ~ ~-2 soil-medium-normal
+fill ~-9 ~ ~-7 ~-6 ~ ~-1 soil-medium-normal
+fill ~5 ~ ~-7 ~8 ~ ~-1 soil-medium-normal
+fill ~-5 ~ ~-6 ~4 ~ ~ soil-medium-normal
+setblock ~-18 ~ ~-4 soil-medium-normal
+setblock ~17 ~ ~-4 soil-medium-normal
+setblock ~-13 ~ ~-2 soil-medium-normal
+setblock ~12 ~ ~-2 soil-medium-normal
+setblock ~-10 ~ ~-1 soil-medium-normal
+setblock ~9 ~ ~-1 soil-medium-normal
+setblock ~-6 ~ ~ soil-medium-normal
+setblock ~5 ~ ~ soil-medium-normal
+fill ~-4 ~ ~1 ~-4 ~ ~8 soil-medium-normal
+fill ~-3 ~ ~1 ~3 ~ ~3 stonebricks-granite
+fill ~4 ~ ~1 ~4 ~ ~8 soil-medium-normal
+fill ~-3 ~ ~4 ~-3 ~ ~8 soil-medium-normal
+fill ~3 ~ ~4 ~3 ~ ~8 soil-medium-normal
+fill ~-2 ~ ~8 ~2 ~ ~8 soil-medium-normal
+fill ~-2 ~1 ~-20 ~2 ~1 ~-2 planks-oak-we
+fill ~-4 ~1 ~1 ~-2 ~5 ~1 stonebricks-granite
+fill ~2 ~1 ~1 ~4 ~5 ~1 stonebricks-granite
+fill ~-4 ~1 ~2 ~-4 ~5 ~7 stonebricks-granite
+fill ~4 ~1 ~2 ~4 ~5 ~7 stonebricks-granite
+fill ~-3 ~1 ~7 ~3 ~5 ~7 stonebricks-granite
+setblock ~-2 ~2 ~5 stonebrickslab-granite-down-free
+setblock ~-2 ~3 ~-20 stonebrickslab-granite-down-free
+setblock ~2 ~3 ~-20 stonebrickslab-granite-down-free
+setblock ~-2 ~3 ~-16 stonebrickslab-granite-down-free
+setblock ~2 ~3 ~-16 stonebrickslab-granite-down-free
+setblock ~-2 ~3 ~-12 stonebrickslab-granite-down-free
+setblock ~2 ~3 ~-12 stonebrickslab-granite-down-free
+setblock ~-2 ~3 ~-8 stonebrickslab-granite-down-free
+setblock ~2 ~3 ~-8 stonebrickslab-granite-down-free
+fill ~-1 ~4 ~1 ~1 ~5 ~1 stonebricks-granite
+fill ~-3 ~5 ~2 ~3 ~5 ~6 stonebricks-granite
+fill ~-5 ~-24 ~-36 ~4 ~ ~-21 water-still-7
+fill ~-9 ~-24 ~-36 ~-6 ~ ~-9 water-still-7
+fill ~5 ~-24 ~-36 ~8 ~ ~-9 water-still-7
+fill ~-12 ~-24 ~-36 ~-10 ~ ~-10 water-still-7
+fill ~9 ~-24 ~-36 ~11 ~ ~-10 water-still-7
+fill ~-14 ~-24 ~-36 ~-13 ~ ~-11 water-still-7
+fill ~12 ~-24 ~-36 ~13 ~ ~-11 water-still-7
+fill ~-16 ~-24 ~-36 ~-15 ~ ~-12 water-still-7
+fill ~14 ~-24 ~-36 ~15 ~ ~-12 water-still-7
+fill ~-17 ~-24 ~-36 ~-17 ~ ~-13 water-still-7
+fill ~16 ~-24 ~-36 ~16 ~ ~-13 water-still-7
+fill ~-18 ~-24 ~-36 ~-18 ~ ~-14 water-still-7
+fill ~17 ~-24 ~-36 ~17 ~ ~-14 water-still-7
+fill ~-19 ~-24 ~-36 ~-19 ~ ~-15 water-still-7
+fill ~18 ~-24 ~-36 ~18 ~ ~-15 water-still-7
+fill ~-21 ~-24 ~-36 ~-20 ~ ~-16 water-still-7
+fill ~19 ~-24 ~-36 ~20 ~ ~-16 water-still-7
+fill ~-22 ~-24 ~-36 ~-22 ~ ~-18 water-still-7
+fill ~21 ~-24 ~-36 ~21 ~ ~-18 water-still-7
+fill ~-23 ~-24 ~-36 ~-23 ~ ~-19 water-still-7
+fill ~22 ~-24 ~-36 ~22 ~ ~-19 water-still-7
+fill ~-24 ~-24 ~-36 ~-24 ~ ~-20 water-still-7
+fill ~23 ~-24 ~-36 ~23 ~ ~-20 water-still-7
+fill ~-25 ~-24 ~-36 ~-25 ~ ~-21 water-still-7
+fill ~24 ~-24 ~-36 ~24 ~ ~-21 water-still-7
+fill ~-26 ~-24 ~-36 ~-26 ~ ~-23 water-still-7
+fill ~25 ~-24 ~-36 ~25 ~ ~-23 water-still-7
+fill ~-27 ~-24 ~-36 ~-27 ~ ~-25 water-still-7
+fill ~26 ~-24 ~-36 ~26 ~ ~-25 water-still-7
+fill ~-28 ~-24 ~-36 ~-28 ~ ~-28 water-still-7
+fill ~27 ~-24 ~-36 ~27 ~ ~-28 water-still-7
+fill ~-29 ~-24 ~-36 ~-29 ~ ~-32 water-still-7
+fill ~28 ~-24 ~-36 ~28 ~ ~-32 water-still-7
+fill ~-5 ~-24 ~-20 ~-3 ~ ~-8 water-still-7
+fill ~-1 ~-24 ~-20 ~1 ~ ~-8 water-still-7
+fill ~3 ~-24 ~-20 ~4 ~ ~-8 water-still-7
+fill ~-2 ~-24 ~-19 ~-2 ~ ~-17 water-still-7
+fill ~2 ~-24 ~-19 ~2 ~ ~-17 water-still-7
+fill ~-2 ~-24 ~-15 ~-2 ~ ~-13 water-still-7
+fill ~2 ~-24 ~-15 ~2 ~ ~-13 water-still-7
+fill ~-2 ~-24 ~-11 ~-2 ~ ~-9 water-still-7
+fill ~2 ~-24 ~-11 ~2 ~ ~-9 water-still-7
+setblock ~31 ~-21 ~-25 chair-brown
+setblock ~-31 ~-21 ~-22 chair-brown
+setblock ~14 ~-21 ~-6 chair-brown
+setblock ~-12 ~-21 ~-5 chair-brown
+setblock ~-36 ~-19 ~-36 lantern-small-down
+setblock ~35 ~-19 ~-36 lantern-small-down
+setblock ~-35 ~-19 ~-27 lantern-small-down
+setblock ~34 ~-19 ~-27 lantern-small-down
+setblock ~-31 ~-19 ~-19 lantern-small-down
+setblock ~30 ~-19 ~-19 lantern-small-down
+setblock ~-18 ~-19 ~-6 lantern-small-down
+setblock ~17 ~-19 ~-6 lantern-small-down
+setblock ~-10 ~-19 ~-2 lantern-small-down
+setblock ~4 ~-19 ~-2 lantern-small-down
+setblock ~9 ~-19 ~-2 lantern-small-down
+setblock ~ ~-19 ~-1 lantern-small-down
+setblock ~4 ~-19 ~4 lantern-small-down
+setblock ~4 ~-19 ~10 lantern-small-down
+setblock ~4 ~-19 ~16 lantern-small-down
+setblock ~4 ~-19 ~22 lantern-small-down
+setblock ~-2 ~-19 ~25 lantern-small-down
+setblock ~31 ~-14 ~-25 chair-brown
+setblock ~-31 ~-14 ~-22 chair-brown
+setblock ~14 ~-14 ~-6 chair-brown
+setblock ~-12 ~-14 ~-5 chair-brown
+setblock ~-2 ~-14 ~20 lantern-small-down
+setblock ~-36 ~-12 ~-36 lantern-small-down
+setblock ~35 ~-12 ~-36 lantern-small-down
+setblock ~-35 ~-12 ~-27 lantern-small-down
+setblock ~34 ~-12 ~-27 lantern-small-down
+setblock ~-31 ~-12 ~-19 lantern-small-down
+setblock ~30 ~-12 ~-19 lantern-small-down
+setblock ~-18 ~-12 ~-6 lantern-small-down
+setblock ~17 ~-12 ~-6 lantern-small-down
+setblock ~-10 ~-12 ~-2 lantern-small-down
+setblock ~-7 ~-12 ~-2 lantern-small-down
+setblock ~9 ~-12 ~-2 lantern-small-down
+setblock ~ ~-12 ~-1 lantern-small-down
+setblock ~-7 ~-12 ~4 lantern-small-down
+setblock ~-7 ~-12 ~10 lantern-small-down
+setblock ~-7 ~-12 ~16 lantern-small-down
+setblock ~-2 ~-9 ~15 lantern-small-down
+setblock ~31 ~-7 ~-25 chair-brown
+setblock ~-31 ~-7 ~-22 chair-brown
+setblock ~14 ~-7 ~-6 chair-brown
+setblock ~-12 ~-7 ~-5 chair-brown
+setblock ~-36 ~-5 ~-36 lantern-small-down
+setblock ~35 ~-5 ~-36 lantern-small-down
+setblock ~-35 ~-5 ~-27 lantern-small-down
+setblock ~34 ~-5 ~-27 lantern-small-down
+setblock ~-31 ~-5 ~-19 lantern-small-down
+setblock ~30 ~-5 ~-19 lantern-small-down
+setblock ~-18 ~-5 ~-6 lantern-small-down
+setblock ~17 ~-5 ~-6 lantern-small-down
+setblock ~-10 ~-5 ~-2 lantern-small-down
+setblock ~4 ~-5 ~-2 lantern-small-down
+setblock ~9 ~-5 ~-2 lantern-small-down
+setblock ~ ~-5 ~-1 lantern-small-down
+setblock ~4 ~-5 ~4 lantern-small-down
+setblock ~4 ~-5 ~10 lantern-small-down
+setblock ~-2 ~-4 ~10 lantern-small-down
+setblock ~-2 ~1 ~5 lantern-small-down
+setblock ~-2 ~2 ~-20 woodenfence-oak-es-free
+fill ~-1 ~2 ~-20 ~1 ~2 ~-20 woodenfence-oak-ew-free
+setblock ~2 ~2 ~-20 woodenfence-oak-sw-free
+fill ~-2 ~2 ~-19 ~-2 ~2 ~-8 woodenfence-oak-ns-free
+fill ~2 ~2 ~-19 ~2 ~2 ~-8 woodenfence-oak-ns-free
+setblock ~-2 ~2 ~-7 woodenfence-oak-n-free
+setblock ~2 ~2 ~-7 woodenfence-oak-n-free
