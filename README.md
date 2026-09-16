@@ -29,9 +29,19 @@ Runs an entire script of commands at once, so you never paste hundreds of lines 
 - `/build <name>` runs a plain-text `<name>.txt` file from the scripts folder (see Batch building below).
 - `/build <name> <direction>` turns the whole build so it faces `north`, `east`, `south` or `west`. You can also give a plain angle: `/build myhouse 90`.
 - `/build` with no name opens an in-game window where you paste a command list and press Run. Handy when the commands come from somewhere you cannot save to a file.
+- `/build undo` puts the world back exactly as it stood before the last build you ran.
 - `/build list` shows the available scripts.
 
 Either way, tilde coordinates are measured from where you stand when you run it, so the whole structure lands around you.
+
+### Undoing a build
+`/build undo` reverses the last build you ran, including everything it destroyed.
+
+Every write records the block that was already at that spot, and, when that block had one, the block entity's own data. So a chest the build paved over comes back with its contents, not just as an empty chest. A position is recorded the **first** time a build touches it, which matters because a script usually clears a volume to air and then builds into it; what comes back is the world as it stood before any of that.
+
+- Run it again to step further back. The last 5 builds per player are kept, for as long as the server runs; they are not saved to disk.
+- A build that changes more than a million blocks is not recorded, and the summary line says so at the time rather than letting you find out when you try to undo.
+- The summary after every build tells you how many blocks `/build undo` would put back.
 
 ### Turning a build
 A script says which way it faces as written with a `facing` line near the top:

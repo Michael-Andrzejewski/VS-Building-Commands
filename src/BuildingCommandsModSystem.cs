@@ -6,6 +6,7 @@ using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
@@ -140,7 +141,7 @@ public class BuildingCommandsModSystem : ModSystem
 
         RegisterCmd(api, "build", name =>
             api.ChatCommands.Create(name)
-                .WithDescription("With a name, runs that .txt script from the BuildingCommands folder. With no name, opens a window to paste commands into. ~relative coords are measured from where you stand. Add a direction to turn the whole build, as in /build myhouse north; the script says which way it faces with a `facing` line, north if it says nothing. /build list shows available scripts.")
+                .WithDescription("With a name, runs that .txt script from the BuildingCommands folder. With no name, opens a window to paste commands into. ~relative coords are measured from where you stand. Add a direction to turn the whole build, as in /build myhouse north; the script says which way it faces with a `facing` line, north if it says nothing. /build undo puts the world back exactly as it was before the last build, contents of replaced chests included. /build list shows available scripts.")
                 .RequiresPrivilege(Privilege.controlserver)
                 .WithArgs(p.OptionalWord("name"), p.OptionalWord("facing"))
                 .HandleWith(OnBuild));
@@ -251,6 +252,7 @@ public class BuildingCommandsModSystem : ModSystem
         }
 
         if (string.Equals(name, "list", StringComparison.OrdinalIgnoreCase)) return ListScripts();
+        if (string.Equals(name, "undo", StringComparison.OrdinalIgnoreCase)) return UndoLast(args.Caller);
         return RunScript(name, args.Caller, args.Parsers[1].GetValue() as string);
     }
 
@@ -273,11 +275,12 @@ public class BuildingCommandsModSystem : ModSystem
 
         string text = packet?.Text ?? "";
         string[] lines = text.Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
-        (int ran, int errors, string firstError) = RunLines(lines, caller);
+        (int ran, int errors, string firstError) = RunLines(lines, caller, 0, "a pasted build");
 
         string summary = $"Ran {ran} command(s) from paste";
         if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
         summary += ".";
+        summary += _undoNote;
         fromPlayer.SendMessage(GlobalConstants.GeneralChatGroup, summary, EnumChatType.Notification);
     }
 
@@ -317,7 +320,7 @@ public class BuildingCommandsModSystem : ModSystem
             return TextCommandResult.Error("Aim at a block so the ghost has a spot, then /confirm.");
 
         originOverride = pend.Anchor;
-        (int ran, int errors, string firstError) = RunLines(pend.Lines, args.Caller, pend.Rotation);
+        (int ran, int errors, string firstError) = RunLines(pend.Lines, args.Caller, pend.Rotation, "a previewed build");
         originOverride = null;
 
         pending.Remove(sp.PlayerUID);
@@ -328,6 +331,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
         summary += ".";
         summary += StuckNote();
+        summary += _undoNote;
         return TextCommandResult.Success(summary);
     }
 
@@ -501,6 +505,148 @@ public class BuildingCommandsModSystem : ModSystem
         return $" {names.Count} block type(s) could not be turned and were placed unrotated: {shown}.";
     }
 
+    // ─────────────────────────────────────────────────────────────────────
+    //  Undo
+    //
+    //  Every write goes through Rec first, which remembers the block that was
+    //  already there, and the block entity's own data when it had one, so a
+    //  chest the build paved over comes back with its contents. A position is
+    //  recorded once, the FIRST time the build touches it, because a script
+    //  usually clears a volume to air and then builds into it, and what we want
+    //  back is the world as it stood before any of that.
+    // ─────────────────────────────────────────────────────────────────────
+
+    private const int MaxUndoCells = 1000000;   // about 12 MB of record
+    private const int UndoDepth = 5;            // builds remembered per player
+
+    private class BuildUndo
+    {
+        public string Label;
+        public int Dim;
+        public bool Truncated;
+        public readonly Dictionary<long, int> Before = new Dictionary<long, int>();
+        public readonly Dictionary<long, byte[]> Entities = new Dictionary<long, byte[]>();
+    }
+
+    private readonly Dictionary<string, List<BuildUndo>> undoHistory = new Dictionary<string, List<BuildUndo>>();
+    private BuildUndo _recording;
+    private string _undoNote = "";
+
+    private static string UndoKey(Caller caller)
+    {
+        return caller?.Player?.PlayerUID ?? "console";
+    }
+
+    private void Rec(BlockPos pos)
+    {
+        if (_recording == null) return;
+
+        long k = Pack(pos.X, pos.Y, pos.Z);
+        if (_recording.Before.ContainsKey(k)) return;
+        if (_recording.Before.Count >= MaxUndoCells) { _recording.Truncated = true; return; }
+
+        if (_recording.Before.Count == 0) _recording.Dim = pos.dimension;
+
+        Block cur = sapi.World.BlockAccessor.GetBlock(pos);
+        _recording.Before[k] = cur?.BlockId ?? 0;
+
+        // A block entity holds what a bare block id cannot: a chest's contents,
+        // a sign's text, a translocator's repair state.
+        BlockEntity be = sapi.World.BlockAccessor.GetBlockEntity(pos);
+        if (be == null) return;
+        try
+        {
+            var tree = new TreeAttribute();
+            be.ToTreeAttributes(tree);
+            _recording.Entities[k] = tree.ToBytes();
+        }
+        catch { }
+    }
+
+    private void FinishRecording(Caller caller)
+    {
+        BuildUndo rec = _recording;
+        _recording = null;
+        _undoNote = "";
+        if (rec == null || rec.Before.Count == 0) return;
+
+        if (rec.Truncated)
+        {
+            _undoNote = $" This build changed more than {MaxUndoCells} blocks, so it was not recorded and /build undo cannot reverse it.";
+            return;
+        }
+
+        string key = UndoKey(caller);
+        if (!undoHistory.TryGetValue(key, out List<BuildUndo> hist))
+        {
+            hist = new List<BuildUndo>();
+            undoHistory[key] = hist;
+        }
+        hist.Add(rec);
+        while (hist.Count > UndoDepth) hist.RemoveAt(0);
+        _undoNote = $" /build undo will put back {rec.Before.Count} block(s).";
+    }
+
+    private TextCommandResult UndoLast(Caller caller)
+    {
+        string key = UndoKey(caller);
+        if (!undoHistory.TryGetValue(key, out List<BuildUndo> hist) || hist.Count == 0)
+            return TextCommandResult.Error("Nothing to undo. /build undo only reverses builds run since the server started, and keeps the last " + UndoDepth + ".");
+
+        BuildUndo rec = hist[hist.Count - 1];
+        hist.RemoveAt(hist.Count - 1);
+
+        // Lowest first, so a block is back before anything that leans on it.
+        var cells = new List<int[]>(rec.Before.Count);
+        foreach (var kv in rec.Before)
+        {
+            UnpackPos(kv.Key, out int x, out int y, out int z);
+            cells.Add(new[] { y, x, z, kv.Value });
+        }
+        cells.Sort((a, b) => a[0].CompareTo(b[0]));
+
+        var ba = sapi.World.GetBlockAccessorBulkUpdate(true, true);
+        var pos = new BlockPos(0, 0, 0, rec.Dim);
+        foreach (int[] c in cells)
+        {
+            pos.Set(c[1], c[0], c[2]);
+            ba.SetBlock(c[3], pos);
+        }
+        ba.Commit();
+
+        // Now the blocks are back, refill the ones that carried their own data.
+        int entities = 0;
+        foreach (var kv in rec.Entities)
+        {
+            UnpackPos(kv.Key, out int x, out int y, out int z);
+            pos.Set(x, y, z);
+            BlockEntity be = sapi.World.BlockAccessor.GetBlockEntity(pos);
+            if (be == null) continue;
+            try
+            {
+                ITreeAttribute tree = TreeAttribute.CreateFromBytes(kv.Value);
+                // The game's own schematic loader stamps the position into the
+                // tree before loading it, because the saved copy carries the
+                // position it was written at. Same here.
+                tree.SetInt("posx", pos.X);
+                tree.SetInt("posy", pos.InternalY);
+                tree.SetInt("posz", pos.Z);
+                be.FromTreeAttributes(tree, sapi.World);
+                be.MarkDirty(true);
+                entities++;
+            }
+            catch { }
+        }
+
+        string summary = $"Undid {rec.Label}: put back {cells.Count} block(s)";
+        if (entities > 0) summary += $", including {entities} with their own contents";
+        summary += ".";
+        summary += hist.Count > 0
+            ? $" {hist.Count} earlier build(s) can still be undone."
+            : " That was the last one on record.";
+        return TextCommandResult.Success(summary);
+    }
+
     private TextCommandResult ListScripts()
     {
         try
@@ -537,13 +683,14 @@ public class BuildingCommandsModSystem : ModSystem
         if (!TryParseRotation(facing, ScriptFacing(lines), out int angle, out string ferr))
             return TextCommandResult.Error(ferr);
 
-        (int ran, int errors, string firstError) = RunLines(lines, caller, angle);
+        (int ran, int errors, string firstError) = RunLines(lines, caller, angle, file);
 
         string summary = $"Ran {ran} command(s) from {file}";
         if (angle != 0) summary += $", turned {angle} degrees to face {FacingOrder[Mod4(ScriptFacing(lines) - angle / 90)]}";
         if (errors > 0) summary += $"; {errors} error(s), first at {firstError}";
         summary += ".";
         summary += StuckNote();
+        summary += _undoNote;
         return TextCommandResult.Success(summary);
     }
 
@@ -564,13 +711,14 @@ public class BuildingCommandsModSystem : ModSystem
     private int _runRotation;
     private readonly HashSet<string> _rotStuck = new HashSet<string>();
 
-    private (int ran, int errors, string firstError) RunLines(IEnumerable<string> lines, Caller caller, int rotation = 0)
+    private (int ran, int errors, string firstError) RunLines(IEnumerable<string> lines, Caller caller, int rotation = 0, string label = "a build")
     {
         int ran = 0, errors = 0, lineNo = 0;
         string firstError = null;
         _runKrakenMode = sapi.World.Rand.NextDouble() < 0.05;
         _runRotation = rotation;
         _rotStuck.Clear();
+        _recording = new BuildUndo { Label = label };
 
         foreach (string raw in lines)
         {
@@ -615,6 +763,7 @@ public class BuildingCommandsModSystem : ModSystem
         }
 
         _runRotation = 0;
+        FinishRecording(caller);
         return (ran, errors, firstError);
     }
 
@@ -679,6 +828,7 @@ public class BuildingCommandsModSystem : ModSystem
                                 break;
                             }
                         case "hollow":
+                            Rec(pos);
                             ba.SetBlock(shell ? block.BlockId : airId, pos);
                             changed++;
                             continue;
@@ -695,6 +845,7 @@ public class BuildingCommandsModSystem : ModSystem
                         // "destroy" behaves like replace here (no item drops).
                     }
 
+                    Rec(pos);
                     ba.SetBlock(block.BlockId, pos);
                     changed++;
                 }
@@ -732,6 +883,7 @@ public class BuildingCommandsModSystem : ModSystem
                 return TextCommandResult.Success($"Kept existing {cur.Code} at ({x},{y},{z}).");
         }
 
+        Rec(pos);
         acc.SetBlock(block.BlockId, pos);
         acc.MarkBlockDirty(pos);
         return TextCommandResult.Success($"Set {block.Code} at ({x},{y},{z}).");
@@ -796,6 +948,7 @@ public class BuildingCommandsModSystem : ModSystem
                     int id = buf[i++];
                     if (mode == "masked" && id == 0) continue;
                     wp.Set(dx + x, dy + y, dz + z);
+                    Rec(wp);
                     ba.SetBlock(id, wp);
                     changed++;
                 }
@@ -880,6 +1033,7 @@ public class BuildingCommandsModSystem : ModSystem
         // its type from the placing item stack's attributes.
         var chestStack = new ItemStack(chest);
         chestStack.Attributes.SetString("type", collapsedType);
+        Rec(pos);
         accessor.SetBlock(chest.BlockId, pos, chestStack);
 
         // Belt-and-suspenders: force the block entity's "type" field too, so it
@@ -962,6 +1116,7 @@ public class BuildingCommandsModSystem : ModSystem
         if (tl == null) return TextCommandResult.Error("Block game:statictranslocator-normal-" + side + " not found.");
 
         var pos = new BlockPos(x, y, z, dim);
+        Rec(pos);
         sapi.World.BlockAccessor.SetBlock(tl.BlockId, pos);
 
         var be = sapi.World.BlockAccessor.GetBlockEntity(pos);
@@ -1022,6 +1177,7 @@ public class BuildingCommandsModSystem : ModSystem
             return TextCommandResult.Error($"Spawner block underwaterhorrors:{code} not found (is Underwater Horrors installed?).");
 
         var pos = new BlockPos(x, y, z, dim);
+        Rec(pos);
         sapi.World.BlockAccessor.SetBlock(spawner.BlockId, pos);
         sapi.World.BlockAccessor.MarkBlockDirty(pos);
         return TextCommandResult.Success($"Placed a {code} at ({x},{y},{z}).");
@@ -1069,6 +1225,7 @@ public class BuildingCommandsModSystem : ModSystem
         var pos = new BlockPos(x, y, z, dim);
         var accessor = sapi.World.BlockAccessor;
         SettleOntoSupport(accessor, pos);
+        Rec(pos);
         accessor.SetBlock(storage.BlockId, pos);
 
         if (accessor.GetBlockEntity(pos) is not Vintagestory.GameContent.BlockEntityGroundStorage be)
@@ -1119,6 +1276,7 @@ public class BuildingCommandsModSystem : ModSystem
         for (int i = 0; i < count; i++)
         {
             p.Y = baseY + i;
+            Rec(p);
             accessor.SetBlock(block.BlockId, p);
         }
         return TextCommandResult.Success($"Scattered {count} block(s) at ({x},{baseY},{z}).");
